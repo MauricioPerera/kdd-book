@@ -151,6 +151,55 @@ Prueba de que el cableado es lo que hace el trabajo: si se borra el enlace de
 `index.md` a la carpeta del libro, el validador pasa de 0 errores a **67
 ORPHAN** sobre los mismos archivos.
 
+## Dos libros en un grafo
+
+| Libro | nodos | contractable | instrumented |
+|---|---|---|---|
+| Codigo Limpio | 67 | 48% | 48% |
+| Scrum y eXtreme Programming | 154 | 25,5% | 14,4% |
+
+El 14,4% del segundo **no es un valor intermedio**: es el promedio ponderado de
+dos poblaciones. Medido por seccion:
+
+| Seccion | instrumented |
+|---|---|
+| Refactoring | 55% |
+| TDD | 40% |
+| Integracion continua | 29% |
+| Programacion extrema y Coding Dojo | 13% |
+| Introduccion y agilismo | 3% |
+| Scrum | 0% |
+| Combinar Scrum y XP | 0% |
+| Kanban | 0% |
+
+Ninguna seccion cae en el medio. Por eso **el ruteo se decide por seccion, no
+por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
+el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
+Limpio.
+
+### El enlace que justifica que esto sea un grafo
+
+`scrum-xp/142-expresiones-extensas` enlaza a
+`codigo-limpio/g19-usar-variables-explicativas`. **Son la misma refactorizacion
+y quedan en pilas distintas.**
+
+Martin la deja fuera de lo contractable: dice que conviene siempre mas y que es
+dificil excederse — o sea sin umbral — y ademas le exige nombres descriptivos,
+que es la mitad no medible. Bahit la deja contractable, y de un modo casi
+provocador: su ejemplo extrae las subexpresiones a variables llamadas `$a`,
+`$b`, `$c`, `$d`. Al no reclamar nada del nombre, lo unico que queda de la
+tecnica es la reduccion de complejidad de la expresion, que es lo que un parser
+cuenta.
+
+**La contractabilidad no la decide la tecnica ni el dominio: la decide si el
+autor la operacionalizo.** Eso solo se puede afirmar con los dos nodos a la
+vista, y por eso el grafo tiene enlaces entre libros y no es una tabla por
+libro.
+
+Dos instrumentos ya se reusan entre libros sin cambios: `checks.py --rule g5`
+sirve a las tres formas de duplicacion que enumera Bahit, y
+`repo_checks.py --rule g24` a su practica de codigo estandar.
+
 ## Licencia
 
 MIT, ver [LICENSE](LICENSE).

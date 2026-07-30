@@ -1,0 +1,161 @@
+  1| L1 | Introducción a la gestión de proyectos de desarrollo de Software | p13
+  2| L2 | ¿Qué es el Desarrollo Ágil? | p13
+  3| L2 | Un pantallazo general sobre la gestión de proyectos | p13
+  4| L3 | Diferenciando las metodologías de gestión | p15
+  5| L2 | Tipos de Proyecto | p17
+  6| L3 | Desarrollo de un nuevo sistema informático | p17
+  7| L3 | Desarrollo de nuevas funcionalidades | p18
+  8| L3 | Reingeniería de un sistema | p18
+  9| L3 | Mantenimiento evolutivo | p18
+ 10| L3 | Mantenimiento adaptativo | p19
+ 11| L3 | Mantenimiento preventivo | p19
+ 12| L3 | Mantenimiento correctivo | p20
+ 13| L3 | La octava clasificación | p20
+ 14| L2 | Abordaje de un proyecto de construcción de Software | p20
+ 15| L2 | El agilismo y su Manifiesto | p22
+ 16| L3 | Los valores del agilismo | p22
+ 17| L4 | Individuos e interacciones sobre procesos y herramientas | p22
+ 18| L4 | Software funcionando sobre documentación extensiva | p23
+ 19| L4 | Colaboración con el cliente sobre negociación contractual | p23
+ 20| L4 | Respuesta ante el cambio sobre seguir un plan | p23
+ 21| L3 | Los doce principios del agilismo | p24
+ 22| L4 | Principio #1: Satisfacer al cliente mediante la entrega temprana y continua de software con valor. | p24
+ 23| L4 | Principio #2: Aceptamos que los requisitos cambien, incluso en etapas tardías del desarrollo. Los procesos Ágiles aprovechan el cambio para proporcionar ventaja competitiva al cliente. | p25
+ 24| L4 | Principio #3: Entregamos software funcional frecuentemente, entre dos semanas y dos meses, con preferencia al periodo de tiempo más corto posible. | p25
+ 25| L4 | Principio #5: Los proyectos se desarrollan en torno a individuos motivados. Hay que darles el entorno y el apoyo que necesitan, y confiarles la ejecución del trabajo. | p26
+ 26| L4 | Principio #6: Conversación cara a cara. | p26
+ 27| L4 | Principio #7: El software funcionando es la medida principal de progreso. | p27
+ 28| L4 | Principio #8: Los promotores, desarrolladores y usuarios debemos ser capaces de mantener un ritmo constante de forma indefinida. | p27
+ 29| L4 | Principio #9: La atención continua a la excelencia técnica y al buen diseño mejora la Agilidad. | p27
+ 30| L4 | Principio #10: La simplicidad, o el arte de maximizar la cantidad de trabajo no realizado, es esencial. | p28
+ 31| L4 | Principio #11: Las mejores arquitecturas, requisitos y diseños emergen de equipos auto-organizados. | p28
+ 32| L4 | Principio #12: A intervalos regulares el equipo reflexiona sobre cómo ser más efectivo para a continuación ajustar y perfeccionar su comportamiento en consecuencia. | p29
+ 33| L1 | Conociendo Scrum | p30
+ 34| L2 | El Marco de Trabajo de Scrum | p31
+ 35| L3 | Los Roles en Scrum | p33
+ 36| L4 | El Dueño de Producto (Product Owner) en Scrum | p33
+ 37| L5 | Funciones y responsabilidades | p34
+ 38| L5 | Aptitudes que debe tener un Dueño de Producto | p34
+ 39| L4 | El Scrum Master | p34
+ 40| L5 | Funciones y responsabilidades | p35
+ 41| L5 | Aptitudes que debe tener un Scrum Master | p35
+ 42| L5 | Actitudes que un buen Scrum Master debe evitar indefectiblemente | p36
+ 43| L4 | El Equipo de Desarrollo (Scrum Team o Equipo Scrum) | p37
+ 44| L5 | Funciones y responsabilidades | p37
+ 45| L5 | Un buen Scrum Team, actúa como un verdadero equipo | p38
+ 46| L3 | Artefactos y Herramientas | p39
+ 47| L4 | Backlog de Producto | p39
+ 48| L4 | Formato del Backlog de Producto | p40
+ 49| L5 | Priorización de los ítems del Backlog de Producto | p40
+ 50| L5 | Estimación de esfuerzo | p41
+ 51| L5 | Granulidad de los ítems | p42
+ 52| L5 | Criterios de Aceptación | p43
+ 53| L3 | Backlog de Sprint | p45
+ 54| L4 | Dividiendo Historias de Usuario en Tareas | p46
+ 55| L3 | Incremento de Funcionalidad | p49
+ 56| L2 | Ceremonias en Scrum | p50
+ 57| L3 | Ceremonia de Planificación del Sprint | p50
+ 58| L3 | Reunión diaria | p52
+ 59| L3 | Ceremonia de Revisión | p53
+ 60| L3 | Ceremonia de Retrospectiva: la búsqueda de la perfección | p55
+ 61| L2 | Estimando esfuerzos | p56
+ 62| L3 | Estimando con T-Shirt Sizing | p58
+ 63| L4 | ¿Cómo se juega? | p60
+ 64| L3 | Estimación por Poker | p60
+ 65| L4 | Reglas del Juego | p61
+ 66| L4 | ¿Cómo jugar Scrum Poker? | p62
+ 67| L3 | Estimando por Columnas | p65
+ 68| L3 | Estimación por Columnas y Poker | p68
+ 69| L2 | Scrum Kit | p69
+ 70| L1 | Introducción a la Programación eXtrema | p70
+ 71| L2 | Bases de la programación eXtrema | p70
+ 72| L3 | Comunicación | p70
+ 73| L3 | Simplicidad | p71
+ 74| L3 | Retroalimentación | p71
+ 75| L3 | Respeto | p71
+ 76| L3 | Coraje | p71
+ 77| L2 | Prácticas técnicas | p72
+ 78| L3 | PRÁCTICA #1: CLIENTE IN-SITU (ON-SITE CUSTOMER) | p72
+ 79| L3 | PRÁCTICA #2: SEMANA DE 40 HORAS (40 HOUR WEEK) | p73
+ 80| L3 | PRÁCTICA #3: METÁFORA (METAPHOR) | p74
+ 81| L3 | PRÁCTICA #4: DISEÑO SIMPLE (SIMPLE DESIGN) | p75
+ 82| L3 | PRÁCTICA #5: REFACTORIZACIÓN (REFACTORING) | p76
+ 83| L3 | PRÁCTICA #6: PROGRAMACIÓN DE A PARES (PAIR PROGRAMMING) | p77
+ 84| L3 | PRÁCTICA #7: ENTREGAS CORTAS (SHORT RELEASES) | p78
+ 85| L3 | PRÁCTICA #8: TESTING | p78
+ 86| L3 | PRÁCTICA #9: CÓDIGO ESTÁNDAR (CODING STANDARDS) | p79
+ 87| L3 | PRÁCTICA #10: PROPIEDAD COLECTIVA (COLLECTIVE OWNERSHIP) | p80
+ 88| L3 | PRÁCTICA #11: INTEGRACIÓN CONTINUA (CONTINUOUS INTEGRACIÓN) | p80
+ 89| L3 | PRÁCTICA #12: JUEGO DE PLANIFICACIÓN (PLANNING GAME) | p81
+ 90| L2 | Programación de a pares y Coding Dojo: ¿quién dijo que el trabajo es aburrido? | p82
+ 91| L3 | ¿Por qué "Dojo"? | p82
+ 92| L3 | ¿Para qué hacer en un Coding Dojo? ¿Cuál es la finalidad? | p83
+ 93| L3 | Duración de un Coding Dojo | p84
+ 94| L3 | ¿Qué se hace en un Coding Dojo? | p84
+ 95| L3 | Codekata en el Coding Dojo | p84
+ 96| L4 | El Kata en el Coding Dojo | p84
+ 97| L3 | Un Randori Coding Dojo | p85
+ 98| L4 | El Randori en el Coding Dojo | p85
+ 99| L3 | Ventajas de implementar un Coding Dojo en el lugar de trabajo de forma periódica | p86
+100| L3 | Cuándo y cómo implementar el Coding Dojo en la empresa | p87
+101| L1 | TDD – Test-Driven Development | p88
+102| L2 | ¿Qué es el desarrollo -o programación- guiado por pruebas? | p88
+103| L2 | Test Unitarios | p91
+104| L3 | Características de los Test Unitarios | p91
+105| L3 | Anatomía | p93
+106| L3 | Algoritmo para escribir pruebas unitarias | p98
+107| L4 | PRIMER PASO: Escribir el Test y hacer que falle | p98
+108| L4 | SEGUNDO PASO: Escribir la mínima cantidad de código para que el test pase. | p100
+109| L4 | TERCER PASO: Escribir un nuevo test y hacer que falle | p101
+110| L4 | CUARTO PASO: Escribir el algoritmo necesario para hacer pasar el test | p102
+111| L2 | Unit Testing con PHPUnit | p105
+112| L3 | Métodos Assert de PHPUnit | p105
+113| L2 | Ejercicio | p108
+114| L2 | Unit Testing con PyUnit | p109
+115| L3 | Métodos Assert de PyUnit | p109
+116| L3 | Corriendo test por línea de comandos | p112
+117| L1 | Integración continua | p114
+118| L2 | Generación de Test de Integración | p115
+119| L3 | Test de Aceptación | p115
+120| L3 | Test Funcionales | p118
+121| L3 | Test de Sistema | p119
+122| L2 | Unificación del código en Repositorios | p120
+123| L3 | Sobre los Sistemas de Control de Versiones | p121
+124| L3 | Integración continua con Bazaar | p122
+125| L4 | Instalación de Bazaar | p124
+126| L4 | Bazaar por línea de comandos | p124
+127| L4 | Presentarse ante Bazaar | p125
+128| L4 | Iniciar un nuevo proyecto | p125
+129| L4 | Clonar el repositorio central: crear los repositorios locales | p126
+130| L4 | Nociones básicas para integrar código de forma continua | p127
+131| L4 | Guardando el path del repo central | p129
+132| L3 | Integración continua avanzada con Bazaar | p130
+133| L4 | Resumen de comandos de uso frecuente | p131
+134| L2 | Resumen para uso diario de Bazaar | p133
+135| L1 | Refactoring | p135
+136| L2 | El problema | p135
+137| L2 | La solución | p136
+138| L3 | Cuándo y cómo tomar la desición de refactorizar | p137
+139| L3 | Una solución a cada problema | p138
+140| L4 | Variables de uso temporal mal implementadas | p138
+141| L4 | Métodos que reciben parámetros | p141
+142| L4 | Expresiones extensas | p142
+143| L4 | Métodos extensos | p142
+144| L4 | Código duplicado en una misma clase | p144
+145| L4 | Código duplicado en varias clases con la misma herencia | p145
+146| L4 | Código duplicado en varias clases sin la misma herencia | p146
+147| L1 | Combinando Scrum y eXtreme Programming | p148
+148| L2 | Compatibilizando ambas metodologías | p148
+149| L3 | Compatibilidad de Scrum con los valores de XP | p148
+150| L3 | Compatibilidad con las prácticas técnicas de XP | p150
+151| L2 | Combinando ambas metodologías | p152
+152| L3 | Combinar Scrum con eXtreme Programming | p152
+153| L3 | Combinar Scrum con eXtreme Programming | p153
+154| L2 | Material de lectura complementario | p154
+155| L1 | Kanban: la metodología ágil que menor resistencia ofrece | p155
+156| L2 | De TOYOTA™ al Desarrollo de Software | p155
+157| L2 | Las tres reglas de Kanban | p157
+158| L3 | Mostrar el proceso | p157
+159| L4 | Los tableros Kanban | p158
+160| L3 | Limitar el trabajo en curso: WIP | p159
+161| L3 | Optimizar el flujo de trabajo | p161
