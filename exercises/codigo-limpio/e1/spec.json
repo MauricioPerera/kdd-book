@@ -1,0 +1,49 @@
+{
+  "id": "e1-generar-en-un-paso",
+  "node": "e1-la-generacion-requiere-mas-de-un-paso",
+  "title": "E1: generar el proyecto con un solo comando",
+  "description": "Dar al proyecto un punto de entrada que genere todo en un solo paso.",
+  "intent": "Reducir a un solo paso la generacion del proyecto.",
+  "signature": "def build() -> int:",
+  "target": "proyecto/tareas.py",
+  "oracle": "proyecto/test_tarifas.py",
+  "seed": "seed_tareas.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 3,
+    "lines_max": 90,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": [
+      "--rule",
+      "e1"
+    ],
+    "threshold": "`tareas.py build` termina en 0"
+  },
+  "invariants": [
+    "La funcionalidad de `tarifas.py` no cambia: el oraculo pasa igual antes y despues.",
+    "`python tareas.py build` termina en 0.",
+    "Las tareas que ya existian siguen funcionando."
+  ],
+  "examples": [
+    "Compilar a mano modulo por modulo -> quien llega nuevo no sabe por donde empezar, en rojo.",
+    "`python tareas.py build` -> un solo paso, en verde.",
+    "Un `build` que no compila nada y devuelve 0 pasaria este instrumento: por eso el contrato tambien exige que el resto siga en verde."
+  ],
+  "do": [
+    "Recorrer los modulos del proyecto desde el propio punto de entrada.",
+    "Devolver un codigo distinto de 0 si la compilacion falla."
+  ],
+  "dont": [
+    "Enumerar los modulos a mano: al agregar uno nuevo dejaria de compilarse en silencio."
+  ],
+  "stop_if": [
+    "generar en un paso exige una dependencia externa"
+  ]
+}

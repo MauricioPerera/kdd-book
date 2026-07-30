@@ -1,0 +1,39 @@
+{
+  "id": "g25-numeros-magicos",
+  "node": "g25-sustituir-numeros-magicos-por-constantes-con-nombre",
+  "title": "G25: precio_con_recargo sin numeros magicos",
+  "description": "Reemplazar los literales numericos por constantes con nombre.",
+  "intent": "Sustituir los numeros magicos de precio_con_recargo por constantes con nombre.",
+  "signature": "def precio_con_recargo(base, dias_de_anticipacion) -> float:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g25",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero literales numericos sin nombre en el cuerpo"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El limite de 15 dias no lleva recargo tardio.",
+    "Ningun literal numerico queda dentro del cuerpo de una funcion."
+  ],
+  "examples": [
+    "`base * 1.35` -> quien lee no sabe que es 1.35, en rojo.",
+    "`base * FACTOR_RECARGO_TARDIO` -> el nombre dice la regla, en verde.",
+    "`round(x, 2)` -> el 2 tambien es un numero magico, aunque parezca inocente."
+  ],
+  "do": [
+    "Nombrar cada numero por la regla de negocio que representa, no por su valor.",
+    "Declarar las constantes a nivel de modulo."
+  ],
+  "dont": [
+    "Nombrar la constante `UNO_PUNTO_TRES_CINCO`: repite el numero en vez de explicarlo."
+  ],
+  "stop_if": [
+    "algun numero no tiene un significado de negocio que se pueda nombrar"
+  ],
+  "kind": "refactor"
+}

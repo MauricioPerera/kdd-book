@@ -1,0 +1,52 @@
+{
+  "id": "f1-demasiados-argumentos",
+  "book": "codigo-limpio",
+  "node": "f1-demasiados-argumentos",
+  "task": "f1_reducir_argumentos",
+  "title": "F1: crear_evento con no mas de tres argumentos",
+  "description": "Agrupar los cinco argumentos posicionales de crear_evento respetando el umbral que da el propio autor.",
+  "intent": "Reducir a tres o menos los argumentos de crear_evento agrupandolos en un objeto de parametros.",
+  "signature": "def crear_evento(datos: dict) -> dict:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "cambio-de-interfaz",
+  "instrument": {
+    "script": "params_max.py",
+    "args": ["--max", "3"],
+    "threshold": "params_max: 3"
+  },
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 20,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "deps_allowed": [],
+  "invariants": [
+    "El evento devuelto tiene exactamente las claves de entrada mas `agotado`.",
+    "`agotado` es verdadero solo cuando la capacidad es exactamente cero; una capacidad negativa no cuenta como agotado.",
+    "La entrada no se muta.",
+    "Ninguna funcion del archivo declara mas de tres parametros."
+  ],
+  "examples": [
+    "`crear_evento(nombre, fecha, ciudad, capacidad, precio)` -> 5 parametros, en rojo.",
+    "`crear_evento(datos)` -> 1 parametro, en verde.",
+    "`crear_evento(datos, opciones, contexto, extra)` -> 4 parametros, en rojo aunque el oraculo pasara."
+  ],
+  "do": [
+    "Agrupar los datos del evento en una sola estructura.",
+    "Copiar la entrada antes de agregarle `agotado`, para no mutarla."
+  ],
+  "dont": [
+    "Tocar `oracle_test.py`: es el oraculo congelado y su sha256 esta en el contrato.",
+    "Usar `*args` o `**kwargs` para esquivar el conteo: el instrumento los cuenta como un parametro cada uno.",
+    "Poner valores por defecto para claves ausentes; el oraculo fija el contrato de entrada."
+  ],
+  "stop_if": [
+    "el oraculo exige una firma incompatible con el umbral de tres parametros",
+    "hace falta cambiar el comportamiento de `agotado` para que pase el oraculo",
+    "el instrumento reporta NO-VERIFICABLE (exit 2)"
+  ]
+}

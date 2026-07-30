@@ -1,0 +1,52 @@
+{
+  "id": "e2-probar-en-un-paso",
+  "book": "codigo-limpio",
+  "node": "e2-las-pruebas-requieren-mas-de-un-paso",
+  "task": "e2_probar_en_un_paso",
+  "title": "E2: correr toda la suite con un solo comando",
+  "description": "Dar al proyecto un punto de entrada unico que descubra y corra todas las pruebas.",
+  "intent": "Reducir a un solo paso la ejecucion de las pruebas del proyecto.",
+  "signature": "def test() -> int:",
+  "target": "proyecto/tareas.py",
+  "oracle": "proyecto/test_tarifas.py",
+  "seed": "seed_tareas.py",
+  "kind": "nivel-repo",
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": ["--rule", "e2", "--min-tests", "10"],
+    "threshold": "un comando, >= 10 pruebas corridas"
+  },
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 60,
+    "params_max": 3
+  },
+  "forbids": ["network"],
+  "deps_allowed": [],
+  "invariants": [
+    "La funcionalidad de `tarifas.py` no cambia: el oraculo pasa igual antes y despues.",
+    "`python tareas.py test` termina en 0 y reporta al menos 10 pruebas corridas.",
+    "`python tareas.py build` sigue funcionando: agregar un paso no puede romper el otro."
+  ],
+  "examples": [
+    "`cd proyecto && python -m unittest discover -p 'test_*.py'` -> hay que recordar directorio y patron, en rojo.",
+    "`python tareas.py test` -> un solo paso, en verde.",
+    "Un `test()` que no corre nada y devuelve 0 -> en rojo: el instrumento exige que reporte cuantas pruebas corrio."
+  ],
+  "do": [
+    "Descubrir la suite desde el propio punto de entrada, sin rutas escritas a mano.",
+    "Devolver un codigo de salida distinto de 0 si alguna prueba falla.",
+    "Dejar intacta la tarea `build`."
+  ],
+  "dont": [
+    "Tocar `proyecto/test_tarifas.py`: es el oraculo congelado y su sha256 esta en el contrato.",
+    "Enumerar los modulos de prueba a mano: al agregar uno nuevo el paso unico dejaria de correrlo en silencio.",
+    "Hacer que `test` devuelva 0 sin correr nada."
+  ],
+  "stop_if": [
+    "el oraculo se pone en rojo (rompiste la funcionalidad, no el flujo de trabajo)",
+    "correr las pruebas en un paso exige instalar una dependencia externa",
+    "el instrumento reporta NO-VERIFICABLE (exit 2)"
+  ]
+}

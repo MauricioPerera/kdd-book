@@ -1,0 +1,38 @@
+{
+  "id": "g12-desorden",
+  "node": "g12-desorden",
+  "title": "G12: cupos_libres sin desorden",
+  "description": "Borrar el import sin usar y la variable que nadie lee.",
+  "intent": "Eliminar el import sin usar y la variable asignada que nadie lee.",
+  "signature": "def cupos_libres(capacidad, inscriptos) -> int:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g12",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero imports sin usar y cero variables sin leer"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "No queda ningun import que el modulo no use.",
+    "No queda ninguna variable asignada que nadie lea."
+  ],
+  "examples": [
+    "`import json` sin usarlo -> en rojo.",
+    "`margen = capacidad * 2` sin leerlo nunca -> en rojo.",
+    "Una variable leida una sola vez esta bien: el instrumento mide si se lee, no cuantas veces."
+  ],
+  "do": [
+    "Borrar lo que no se usa en vez de dejarlo por las dudas.",
+    "Confiar en el historial de versiones para recuperar lo que haga falta."
+  ],
+  "dont": [
+    "Silenciar el aviso con un comentario en vez de borrar el codigo."
+  ],
+  "stop_if": [
+    "el import sin usar es un efecto secundario necesario al importarse"
+  ]
+}

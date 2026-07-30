@@ -1,0 +1,38 @@
+{
+  "id": "n6-evitar-codificaciones",
+  "node": "n6-evitar-codificaciones",
+  "title": "N6: nombres sin prefijos de tipo ni de ambito",
+  "description": "Quitar las codificaciones hungaras y de miembro de los identificadores.",
+  "intent": "Eliminar los prefijos de tipo y de ambito de los identificadores.",
+  "signature": "def resumen_inscripcion(nombre, cupos) -> str:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "n6",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero identificadores codificados"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Los parametros mantienen su orden: el oraculo los pasa por posicion.",
+    "Ningun identificador lleva prefijo de tipo (`str`, `int`) ni de ambito (`m_`, `s_`, `g_`)."
+  ],
+  "examples": [
+    "`strNombre` -> el prefijo repite lo que ya dice el tipo, en rojo.",
+    "`m_cupos` -> el prefijo marca un ambito que el lenguaje ya conoce, en rojo.",
+    "`nombre`, `cupos` -> en verde."
+  ],
+  "do": [
+    "Nombrar por lo que la variable significa, no por su tipo.",
+    "Dejar que el ambito lo indique el lugar donde se declara."
+  ],
+  "dont": [
+    "Cambiar el orden de los parametros: el oraculo los pasa por posicion."
+  ],
+  "stop_if": [
+    "quitar el prefijo genera una colision de nombres en el mismo ambito"
+  ]
+}

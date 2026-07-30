@@ -1,0 +1,52 @@
+{
+  "id": "g23-polimorfismo-antes-que-if-else",
+  "book": "codigo-limpio",
+  "node": "g23-polimorfismo-antes-que-if-else-o-switch-case",
+  "task": "g23_polimorfismo",
+  "title": "G23: area sin cadena if/elif sobre el tipo",
+  "description": "Reemplazar la discriminacion por tipo de crear_figura y area por polimorfismo.",
+  "intent": "Eliminar las cadenas if/elif que discriminan sobre el tipo de figura.",
+  "signature": "def area(figura) -> float:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "instrument": {
+    "script": "checks.py",
+    "args": ["--rule", "g23", "--max", "2"],
+    "threshold": "cadena de discriminacion <= 2 ramas"
+  },
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 60,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "deps_allowed": [],
+  "invariants": [
+    "El comportamiento observable de `crear_figura` y `area` no cambia: el oraculo pasa igual antes y despues.",
+    "Un tipo desconocido sigue levantando `KeyError`.",
+    "Ninguna cadena if/elif discrimina sobre la misma expresion en mas de dos ramas."
+  ],
+  "examples": [
+    "`if f.tipo == 'rectangulo': ... elif f.tipo == 'triangulo': ... elif f.tipo == 'cuadrado': ...` -> 3 ramas sobre la misma expresion, en rojo.",
+    "`figura.area()` -> cada clase responde por si misma, en verde.",
+    "`_FIGURAS[tipo](a, b)` -> la eleccion es una busqueda, no una discriminacion escrita a mano, en verde."
+  ],
+  "do": [
+    "Dar a cada figura su propio metodo `area()`.",
+    "Reemplazar la eleccion de `crear_figura` por un registro de tipo a clase.",
+    "Correr el gate completo: el oraculo esta verde antes de empezar."
+  ],
+  "dont": [
+    "Tocar `oracle_test.py`: es el oraculo congelado y su sha256 esta en el contrato.",
+    "Mover la cadena if/elif a otra funcion del mismo archivo: el instrumento mide todo el modulo.",
+    "Cambiar la firma de `crear_figura` ni la de `area`."
+  ],
+  "stop_if": [
+    "el oraculo se pone en rojo (cambiaste comportamiento, no refactorizaste)",
+    "quitar la cadena obliga a cambiar la firma publica de `crear_figura` o `area`",
+    "el instrumento reporta NO-VERIFICABLE (exit 2)"
+  ]
+}

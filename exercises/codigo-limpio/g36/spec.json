@@ -1,0 +1,52 @@
+{
+  "id": "g36-ley-de-demeter",
+  "book": "codigo-limpio",
+  "node": "g36-evitar-desplazamientos-transitivos",
+  "task": "g36_ley_de_demeter",
+  "title": "G36: etiqueta de envio sin navegar el grafo de objetos",
+  "description": "Refactorizar etiqueta_envio para que ningun modulo conozca mas alla de su colaborador inmediato.",
+  "intent": "Eliminar los desplazamientos transitivos de etiqueta_envio delegando la etiqueta hacia abajo.",
+  "signature": "def etiqueta_envio(pedido) -> str:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "instrument": {
+    "script": "chain_depth.py",
+    "args": ["--max", "1"],
+    "threshold": "chain_depth_max: 1"
+  },
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "deps_allowed": [],
+  "invariants": [
+    "El comportamiento observable de `etiqueta_envio` no cambia: el oraculo pasa igual antes y despues.",
+    "Ninguna expresion del archivo hace mas de un salto de propiedad, salvo el eslabon gratuito de `self` (Demeter permite llamar metodos de los campos propios).",
+    "Los constructores `Direccion`, `Cliente` y `Pedido` conservan su firma: el oraculo los usa."
+  ],
+  "examples": [
+    "`pedido.cliente.direccion.ciudad` -> profundidad 3, en rojo.",
+    "`pedido.etiqueta_destino()` -> profundidad 1, en verde.",
+    "`self.direccion.etiqueta()` -> profundidad 1 (el salto sobre `self` no cuenta), en verde."
+  ],
+  "do": [
+    "Dar a cada clase un metodo que responda por su propio dato.",
+    "Delegar hacia abajo un nivel por vez.",
+    "Correr el gate completo, no solo el oraculo: el oraculo esta verde antes de empezar."
+  ],
+  "dont": [
+    "Tocar `oracle_test.py`: es el oraculo congelado y su sha256 esta en el contrato.",
+    "Guardar la direccion en el pedido para acortar la cadena: eso esconde el acoplamiento en vez de quitarlo.",
+    "Cambiar la firma de los constructores."
+  ],
+  "stop_if": [
+    "el oraculo se pone en rojo (cambiaste comportamiento, no refactorizaste)",
+    "para bajar la profundidad hace falta cambiar la firma publica de `etiqueta_envio`",
+    "el instrumento reporta NO-VERIFICABLE (exit 2)"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "g5-duplicacion",
+  "node": "g5-duplicacion",
+  "title": "G5: totales sin el calculo duplicado",
+  "description": "Unificar en un solo lugar el calculo repetido en dos funciones.",
+  "intent": "Eliminar la duplicacion del calculo de total con IVA.",
+  "signature": "def total_evento(precio, cantidad) -> float:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g5",
+      "--max",
+      "0"
+    ],
+    "threshold": "ningun bloque de dos sentencias repetido"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Las dos funciones publicas conservan su nombre y su firma.",
+    "El calculo del total con IVA aparece una sola vez."
+  ],
+  "examples": [
+    "El mismo par `subtotal = ...` / `iva = ...` en dos funciones -> en rojo.",
+    "Las dos funciones delegando en `_total_con_iva` -> en verde.",
+    "Cambiar la alicuota en un solo lugar y olvidarse del otro es el defecto que esta duplicacion habilita."
+  ],
+  "do": [
+    "Extraer el calculo compartido a una funcion con nombre.",
+    "Dejar las dos funciones publicas como puntos de entrada delgados."
+  ],
+  "dont": [
+    "Borrar una de las dos funciones publicas: el oraculo usa las dos."
+  ],
+  "stop_if": [
+    "las dos copias no son en realidad el mismo calculo"
+  ]
+}

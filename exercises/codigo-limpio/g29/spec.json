@@ -1,0 +1,38 @@
+{
+  "id": "g29-condicionales-negativas",
+  "node": "g29-evitar-condicionales-negativas",
+  "title": "G29: puede_inscribirse sin condiciones negadas",
+  "description": "Reescribir las condiciones para que se lean en positivo.",
+  "intent": "Eliminar las condiciones negadas de puede_inscribirse.",
+  "signature": "def puede_inscribirse(cupos, bloqueado) -> bool:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g29",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero condiciones negadas"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Cupos negativos siguen sin habilitar la inscripcion.",
+    "Ninguna condicion usa `not`, `!=`, `not in` ni `is not`."
+  ],
+  "examples": [
+    "`if not bloqueado:` -> en rojo.",
+    "`if bloqueado: return False` -> la misma decision leida en positivo, en verde.",
+    "`if not cupos <= 0:` -> doble negacion que dice `cupos > 0`, en rojo."
+  ],
+  "do": [
+    "Invertir la guarda y salir temprano.",
+    "Devolver la comparacion directamente cuando ya es un booleano."
+  ],
+  "dont": [
+    "Dejar `!=` disfrazado: el instrumento tambien lo cuenta como negacion."
+  ],
+  "stop_if": [
+    "quitar la negacion obliga a cambiar el resultado en algun caso del oraculo"
+  ]
+}

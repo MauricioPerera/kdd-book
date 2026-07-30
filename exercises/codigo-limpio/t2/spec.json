@@ -1,0 +1,49 @@
+{
+  "id": "t2-herramienta-de-cobertura",
+  "node": "t2-usar-una-herramienta-de-cobertura",
+  "title": "T2: la cobertura como tarea del proyecto",
+  "description": "Exponer la medicion de cobertura como una tarea del punto de entrada.",
+  "intent": "Agregar al proyecto una tarea que mida e informe la cobertura.",
+  "signature": "def coverage() -> int:",
+  "target": "proyecto/tareas.py",
+  "oracle": "proyecto/test_tarifas.py",
+  "seed": "seed_tareas.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 3,
+    "lines_max": 90,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": [
+      "--rule",
+      "t2"
+    ],
+    "threshold": "`tareas.py coverage` termina en 0 e informa un porcentaje"
+  },
+  "invariants": [
+    "La funcionalidad de `tarifas.py` no cambia: el oraculo pasa igual antes y despues.",
+    "`python tareas.py coverage` termina en 0 e imprime un porcentaje.",
+    "Las tareas `build` y `test` siguen funcionando."
+  ],
+  "examples": [
+    "Medir cobertura a mano cuando alguien se acuerda -> la herramienta vive en la cabeza de una persona, en rojo.",
+    "`python tareas.py coverage` imprimiendo `cobertura: 92.3%` -> en verde.",
+    "Una tarea `coverage` que sale 0 sin imprimir ningun numero -> en rojo: no informa nada."
+  ],
+  "do": [
+    "Medir con `trace`, que viene en la biblioteca estandar.",
+    "Imprimir el porcentaje: una medicion que no informa no sirve."
+  ],
+  "dont": [
+    "Hacer que la tarea falle cuando la cobertura es baja: eso es T1, que es otro contrato."
+  ],
+  "stop_if": [
+    "medir cobertura exige una dependencia externa"
+  ]
+}

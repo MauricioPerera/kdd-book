@@ -1,0 +1,38 @@
+{
+  "id": "g14-envidia-de-caracteristicas",
+  "node": "g14-envidia-de-las-caracteristicas",
+  "title": "G14: el pago lo calcula quien tiene los datos",
+  "description": "Mover el calculo del pago a la clase duena de los datos que usa.",
+  "intent": "Eliminar la envidia de caracteristicas moviendo el calculo del pago a Empleado.",
+  "signature": "def pago(self) -> float:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g14",
+      "--max",
+      "1"
+    ],
+    "threshold": "ningun metodo con mas accesos ajenos que propios"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "`liquidar` conserva su firma: es el punto de entrada del oraculo.",
+    "Ningun metodo usa mas miembros de otro objeto que propios."
+  ],
+  "examples": [
+    "`empleado.tarifa`, `empleado.horas`, `empleado.extra` en un metodo de Liquidacion -> tres accesos ajenos y cero propios, en rojo.",
+    "`empleado.pago()` -> un solo acceso ajeno, en verde.",
+    "`self.tarifa * self.horas` dentro de Empleado -> son propios, no cuentan como envidia."
+  ],
+  "do": [
+    "Mover el calculo a la clase que ya tiene los datos.",
+    "Dejar a Liquidacion delegando en una sola llamada."
+  ],
+  "dont": [
+    "Agregar getters a Empleado y seguir calculando afuera: la envidia sigue igual."
+  ],
+  "stop_if": [
+    "la clase con los datos no puede hacer el calculo sin conocer a la otra"
+  ]
+}

@@ -1,0 +1,12 @@
+# Fin de linea LF en el repositorio y en el checkout, en todas las plataformas.
+#
+# No es cosmetico. Dos cosas de este proyecto dependen de los bytes exactos:
+#
+#   - los sellos `tests_sha256` de cada contrato, que congelan el oraculo;
+#   - el seed de G24, que trae tabuladores, espacios al final y ausencia de
+#     salto de linea final a proposito, porque son justo las violaciones que el
+#     instrumento tiene que detectar.
+#
+# Con la conversion automatica de Windows, un clon en otra maquina veria un
+# ejercicio que ya viene resuelto.
+* text=auto eol=lf

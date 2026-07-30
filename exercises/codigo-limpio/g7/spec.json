@@ -1,0 +1,38 @@
+{
+  "id": "g7-base-que-depende-de-su-variante",
+  "node": "g7-clases-base-que-dependen-de-sus-variantes",
+  "title": "G7: Notificacion sin nombrar a su variante",
+  "description": "Sacar de la clase base la referencia a una de sus subclases.",
+  "intent": "Eliminar la referencia de la clase base a su variante Email.",
+  "signature": "def preferida(self) -> 'Notificacion':",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g7",
+      "--max",
+      "0"
+    ],
+    "threshold": "la base no nombra a ninguna variante"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El canal preferido sigue siendo el email y conserva el destino.",
+    "El cuerpo de `Notificacion` no menciona el nombre de ninguna subclase."
+  ],
+  "examples": [
+    "`return Email(self.destino)` dentro de `Notificacion` -> la base conoce a su hija, en rojo.",
+    "`return CANAL_PREFERIDO(self.destino)` con la constante definida despues de las clases -> en verde.",
+    "Importar Email desde otro modulo y usarlo igual dentro de la base -> sigue en rojo si el nombre aparece en el cuerpo de la clase."
+  ],
+  "do": [
+    "Configurar la variante preferida a nivel de modulo, despues de declararlas.",
+    "Dejar que la base delegue sin saber en quien."
+  ],
+  "dont": [
+    "Mover la referencia a un metodo distinto de la misma clase: sigue estando en la base."
+  ],
+  "stop_if": [
+    "sacar la referencia obliga a cambiar que canal devuelve `preferida`"
+  ]
+}

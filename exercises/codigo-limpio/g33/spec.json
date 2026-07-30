@@ -1,0 +1,38 @@
+{
+  "id": "g33-condiciones-de-limite",
+  "node": "g33-encapsular-condiciones-de-limite",
+  "title": "G33: rango_de_nivel con el limite calculado una sola vez",
+  "description": "Encapsular la expresion de limite repetida en una variable con nombre.",
+  "intent": "Encapsular la expresion de limite `nivel + 1` en un solo lugar con nombre.",
+  "signature": "def rango_de_nivel(nivel) -> tuple:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g33",
+      "--max",
+      "0"
+    ],
+    "threshold": "ninguna expresion de limite repetida"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Se sigue devolviendo una tupla de tres elementos en el mismo orden.",
+    "La expresion `nivel + 1` aparece una sola vez en el archivo."
+  ],
+  "examples": [
+    "`nivel + 1` escrito tres veces -> tres lugares donde equivocarse al cambiar el limite, en rojo.",
+    "`siguiente = nivel + 1` y despues usar `siguiente` -> en verde.",
+    "Repetir `nivel + 1` en dos funciones distintas tambien cuenta: el instrumento mira todo el modulo."
+  ],
+  "do": [
+    "Calcular el limite una vez y darle un nombre que diga que representa.",
+    "Reusar ese nombre en cada lugar donde antes estaba la expresion."
+  ],
+  "dont": [
+    "Dejar una de las tres apariciones porque 'es la original'."
+  ],
+  "stop_if": [
+    "las apariciones repetidas no son en realidad el mismo limite"
+  ]
+}

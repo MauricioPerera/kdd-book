@@ -1,0 +1,38 @@
+{
+  "id": "c5-codigo-comentado",
+  "node": "c5-codigo-comentado",
+  "title": "C5: total_con_iva sin codigo comentado",
+  "description": "Borrar el codigo guardado en comentarios.",
+  "intent": "Eliminar el codigo comentado de total_con_iva.",
+  "signature": "def total_con_iva(neto) -> float:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "c5",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero comentarios que parseen como codigo"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el codigo comentado no se ejecutaba.",
+    "Ningun comentario del archivo parsea como una sentencia de Python.",
+    "Los comentarios que quedan explican por que, no repiten el como."
+  ],
+  "examples": [
+    "`# total = neto * 1.21` -> parsea como asignacion, en rojo.",
+    "`# la alicuota general es del 21 por ciento` -> prosa, en verde.",
+    "`# return x` -> tambien en rojo: es una sentencia, no una explicacion."
+  ],
+  "do": [
+    "Borrar el codigo comentado: el historial de versiones ya lo guarda.",
+    "Dejar el comentario que explica la regla de negocio."
+  ],
+  "dont": [
+    "Convertir el codigo comentado en un docstring: sigue siendo codigo muerto."
+  ],
+  "stop_if": [
+    "el codigo comentado documenta un caso que ningun test cubre"
+  ]
+}

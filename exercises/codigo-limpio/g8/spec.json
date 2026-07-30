@@ -1,0 +1,38 @@
+{
+  "id": "g8-exceso-de-informacion",
+  "node": "g8-exceso-de-informacion",
+  "title": "G8: Inscripcion con una superficie publica angosta",
+  "description": "Reducir a uno los metodos publicos de Inscripcion.",
+  "intent": "Achicar la interfaz publica de Inscripcion dejando solo lo que se usa desde afuera.",
+  "signature": "def total(self) -> float:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g8",
+      "--max",
+      "1"
+    ],
+    "threshold": "como mucho un metodo publico por clase"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "`total` sigue siendo publico y devuelve lo mismo.",
+    "Ninguna clase expone mas de un metodo publico."
+  ],
+  "examples": [
+    "`subtotal`, `iva`, `redondear` y `total` publicos -> cuatro cosas que mantener, en rojo.",
+    "Solo `total` publico y el resto con guion bajo -> en verde.",
+    "Los atributos `precio` y `cantidad` no cuentan: el instrumento mide metodos, y el oraculo los sigue leyendo."
+  ],
+  "do": [
+    "Marcar con guion bajo lo que es detalle interno.",
+    "Actualizar las llamadas internas al nuevo nombre."
+  ],
+  "dont": [
+    "Borrar los metodos internos: siguen haciendo falta, lo que sobra es que sean publicos."
+  ],
+  "stop_if": [
+    "algun metodo que parece interno lo usa el oraculo desde afuera"
+  ]
+}

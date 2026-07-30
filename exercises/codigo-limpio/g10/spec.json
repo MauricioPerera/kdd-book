@@ -1,0 +1,44 @@
+{
+  "id": "g10-separacion-vertical",
+  "node": "g10-separacion-vertical",
+  "title": "G10: resumen_evento con la variable cerca de su uso",
+  "description": "Mover la declaracion de la etiqueta junto al lugar donde se usa.",
+  "intent": "Acercar la declaracion de `etiqueta` a su unico uso.",
+  "signature": "def resumen_evento(nombre, capacidad, inscriptos, activo) -> str:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g10",
+      "--max",
+      "2"
+    ],
+    "threshold": "como mucho dos lineas entre declarar y usar"
+  },
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 4
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El orden de las guardas se mantiene: inactivo gana sobre sin capacidad.",
+    "Ninguna variable se declara mas de dos lineas antes de su primer uso."
+  ],
+  "examples": [
+    "`etiqueta` declarada arriba y usada nueve lineas despues -> quien lee tiene que recordarla todo el camino, en rojo.",
+    "`etiqueta` declarada justo antes del `return` -> en verde.",
+    "Si el calculo tuviera efectos, moverlo si cambiaria el comportamiento: por eso el oraculo tambien corre."
+  ],
+  "do": [
+    "Declarar la variable en el punto donde hace falta.",
+    "Aprovechar que las guardas salen temprano y muchas veces ni se llega al calculo."
+  ],
+  "dont": [
+    "Reordenar las guardas: el oraculo fija su precedencia."
+  ],
+  "stop_if": [
+    "mover la declaracion cambia algun resultado del oraculo"
+  ]
+}

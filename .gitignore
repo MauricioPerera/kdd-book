@@ -1,0 +1,9 @@
+# Salida del pipeline. Se regenera entera con lo que si esta versionado:
+#   python okf_emit.py books/codigo-limpio.json --out out/knowledge
+#   python contract_emit.py exercises --out out --book codigo-limpio
+# No hace falta el PDF del libro: books/codigo-limpio.json ya trae los titulos,
+# las citas y el triaje.
+out/
+
+__pycache__/
+*.py[cod]

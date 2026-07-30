@@ -1,0 +1,38 @@
+{
+  "id": "g4-medidas-de-seguridad-canceladas",
+  "node": "g4-medidas-de-seguridad-canceladas",
+  "title": "G4: cupos_libres sin avisos silenciados",
+  "description": "Quitar las supresiones de linter atendiendo lo que tapaban.",
+  "intent": "Eliminar las supresiones de aviso de cupos_libres resolviendo su causa.",
+  "signature": "def cupos_libres(capacidad, inscriptos) -> int:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g4",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero supresiones de aviso"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El tope de cupos se sigue respetando.",
+    "No queda ningun `noqa`, `type: ignore` ni equivalente en el archivo."
+  ],
+  "examples": [
+    "`import json  # noqa: F401` -> apaga el aviso en vez de borrar el import, en rojo.",
+    "Borrar el import y con el la supresion -> en verde.",
+    "`# type: ignore` sobre una linea correcta -> en rojo igual: la supresion sobrevive al problema que la justificaba."
+  ],
+  "do": [
+    "Resolver la causa del aviso y despues borrar la supresion.",
+    "Borrar el import que la primera supresion estaba tapando."
+  ],
+  "dont": [
+    "Mover la supresion al inicio del archivo: apagarla en bloque es peor, no mejor."
+  ],
+  "stop_if": [
+    "algun aviso no se puede resolver sin cambiar el comportamiento que fija el oraculo"
+  ]
+}

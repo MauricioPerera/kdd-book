@@ -1,0 +1,38 @@
+{
+  "id": "g9-codigo-muerto",
+  "node": "g9-codigo-muerto",
+  "title": "G9: borrar la funcion que nadie llama",
+  "description": "Eliminar la funcion de modulo que ninguna referencia usa.",
+  "intent": "Borrar la funcion muerta del modulo.",
+  "signature": "def cupos_libres(capacidad, inscriptos) -> int:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g9",
+      "--max",
+      "0"
+    ],
+    "threshold": "ninguna funcion de modulo sin referencias"
+  },
+  "invariants": [
+    "El comportamiento no cambia: la funcion borrada no la llamaba nadie.",
+    "`__all__` sigue declarando `cupos_libres` como la API del modulo.",
+    "No queda ninguna funcion que no este exportada ni referenciada."
+  ],
+  "examples": [
+    "`cupos_libres_viejo`, fuera de `__all__` y sin una sola llamada -> en rojo.",
+    "El modulo con una sola funcion, la exportada -> en verde.",
+    "Sin `__all__` el instrumento sale 2 (no verificable): no puede distinguir una funcion publica de una muerta."
+  ],
+  "do": [
+    "Borrarla: el historial de versiones ya la guarda.",
+    "Mantener `__all__` al dia: es lo que declara cual es la API."
+  ],
+  "dont": [
+    "Dejarla comentada, que ademas cae en C5."
+  ],
+  "stop_if": [
+    "la funcion la usa algo fuera de este modulo pese a no estar en `__all__`"
+  ]
+}

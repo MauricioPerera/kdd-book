@@ -1,0 +1,44 @@
+{
+  "id": "g28-encapsular-condicionales",
+  "node": "g28-encapsular-condicionales",
+  "title": "G28: estado_inscripcion con la condicion encapsulada",
+  "description": "Extraer la condicion compuesta a una funcion con nombre.",
+  "intent": "Encapsular la condicion compuesta de estado_inscripcion en una funcion con nombre.",
+  "signature": "def estado_inscripcion(inscripto, pagado, vencido, cupos) -> str:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "g28",
+      "--max",
+      "1"
+    ],
+    "threshold": "como mucho un operador booleano por condicion"
+  },
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 2,
+    "lines_max": 60,
+    "params_max": 4
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Ningun `if` acumula mas de un operador booleano en su condicion.",
+    "La condicion extraida sigue siendo una sola expresion, no una cadena de `if`."
+  ],
+  "examples": [
+    "`if a and b and c and d:` -> tres operadores en el test, en rojo.",
+    "`if esta_confirmada(...):` -> el test tiene cero operadores, en verde.",
+    "El `return a and b and c` de la funcion extraida no cuenta: el instrumento mide condiciones de `if`, no expresiones sueltas."
+  ],
+  "do": [
+    "Dar a la condicion un nombre que diga que significa, no como esta hecha.",
+    "Dejar la expresion completa en el cuerpo de la funcion extraida."
+  ],
+  "dont": [
+    "Partir el `if` en varios `if` anidados: mueve el problema, no lo resuelve."
+  ],
+  "stop_if": [
+    "la condicion no tiene un nombre de negocio que la describa"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "f3-argumentos-de-indicador",
+  "node": "f3-argumentos-de-indicador",
+  "title": "F3: formatear_titulo sin argumento de indicador",
+  "description": "Partir la funcion en dos con nombre en vez de un booleano que elige camino.",
+  "intent": "Eliminar el argumento de indicador partiendo la funcion en dos con nombre propio.",
+  "signature": "def formatear_titulo(nombre: str) -> str:",
+  "kind": "cambio-de-interfaz",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "f3",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero parametros que eligen camino"
+  },
+  "invariants": [
+    "Ambas funciones recortan los espacios de los extremos.",
+    "La destacada devuelve el titulo en mayusculas.",
+    "Ninguna funcion recibe un parametro que decida su comportamiento."
+  ],
+  "examples": [
+    "`formatear_titulo(n, en_mayusculas=True)` -> el llamador no sabe que hace sin leer la firma, en rojo.",
+    "`formatear_titulo_destacado(n)` -> el nombre dice que hace, en verde.",
+    "`def f(n, modo: bool)` -> en rojo aunque se llame `modo` y no `flag`."
+  ],
+  "do": [
+    "Dar a cada camino una funcion con nombre propio.",
+    "Reusar la version simple desde la destacada para no repetir el recorte."
+  ],
+  "dont": [
+    "Cambiar el booleano por un string que igual elige el camino: sigue siendo un selector."
+  ],
+  "stop_if": [
+    "el oraculo exige una unica funcion con parametro de modo"
+  ]
+}

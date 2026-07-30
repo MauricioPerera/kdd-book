@@ -1,0 +1,39 @@
+{
+  "id": "f2-argumentos-de-salida",
+  "node": "f2-argumentos-de-salida",
+  "title": "F2: agregar_inscripto sin mutar lo que recibe",
+  "description": "Eliminar el argumento de salida devolviendo una coleccion nueva.",
+  "intent": "Quitar la mutacion del parametro `inscriptos` devolviendo una coleccion nueva.",
+  "signature": "def agregar_inscripto(inscriptos: tuple, nombre: str) -> tuple:",
+  "kind": "cambio-de-interfaz",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "f2",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero parametros mutados"
+  },
+  "invariants": [
+    "La entrada no se modifica.",
+    "El resultado contiene los previos mas el nuevo, en ese orden.",
+    "Se devuelve un objeto distinto del recibido."
+  ],
+  "examples": [
+    "`inscriptos.append(nombre)` -> muta el parametro, en rojo.",
+    "`return tuple(inscriptos) + (nombre,)` -> en verde.",
+    "Rebindear el nombre local antes de mutar ya no afecta al llamador, en verde."
+  ],
+  "do": [
+    "Construir una coleccion nueva a partir de la recibida.",
+    "Devolver el resultado en vez de comunicarlo por el parametro."
+  ],
+  "dont": [
+    "Copiar la lista y despues mutar la copia dentro del mismo parametro."
+  ],
+  "stop_if": [
+    "el oraculo exige mutar la entrada"
+  ]
+}

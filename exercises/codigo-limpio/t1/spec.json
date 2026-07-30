@@ -1,0 +1,48 @@
+{
+  "id": "t1-pruebas-insuficientes",
+  "node": "t1-pruebas-insuficientes",
+  "title": "T1: cubrir los caminos que ninguna prueba recorre",
+  "description": "Agregar las pruebas que faltan hasta alcanzar la cobertura minima.",
+  "intent": "Llevar la cobertura de linea del proyecto al minimo exigido.",
+  "signature": "class CoberturaTest(unittest.TestCase):",
+  "target": "proyecto/test_cobertura.py",
+  "oracle": "proyecto/test_cupos.py",
+  "seed": "seed_cobertura.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 3,
+    "lines_max": 90,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": [
+      "--rule",
+      "t1",
+      "--min-coverage",
+      "100"
+    ],
+    "threshold": "cobertura de linea del 100%"
+  },
+  "invariants": [
+    "El comportamiento de `cupos.py` no cambia: este contrato agrega pruebas, no toca el codigo.",
+    "El oraculo `test_cupos.py` sigue sellado y en verde.",
+    "La cobertura de linea del proyecto llega al 100%."
+  ],
+  "examples": [
+    "Dos de los cinco caminos cubiertos -> en rojo.",
+    "Los cinco caminos cubiertos -> en verde.",
+    "Una prueba que no ejerce el codigo (`assertTrue(True)`) sube el conteo de pruebas pero no la cobertura: el instrumento mide lineas, no cantidad."
+  ],
+  "do": [
+    "Leer que caminos quedan sin recorrer y escribir una prueba por cada uno.",
+    "Probar tambien los limites, no solo el caso feliz de cada rama."
+  ],
+  "dont": [
+    "Tocar `cupos.py` para que tenga menos ramas: eso sube la cobertura sin probar mas."
+  ],
+  "stop_if": [
+    "algun camino no se puede alcanzar desde la interfaz publica"
+  ]
+}

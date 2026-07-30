@@ -1,0 +1,1176 @@
+{
+  "source": {
+    "slug": "codigo-limpio",
+    "title": "Codigo Limpio",
+    "author": "Robert C. Martin",
+    "file": "Codigo_Limpio__PDFDrive_.pdf",
+    "pages": 561,
+    "extracted_with": "pymupdf",
+    "tags": [
+      "fuente",
+      "libro",
+      "codigo-limpio"
+    ],
+    "corpus": "Las 66 heuristicas enumeradas por el autor en el capitulo 17 (\"Olores y heuristica\"): C1-C5, E1-E2, F1-F4, G1-G36, J1-J3, N1-N7, T1-T9."
+  },
+  "nodes": [
+    {
+      "id": "c1-informacion-inapropiada",
+      "title": "C1: Información inapropiada",
+      "description": "Información inapropiada (heuristica C1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "comentarios",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, C1",
+      "links": []
+    },
+    {
+      "id": "c2-comentario-obsoleto",
+      "title": "C2: Comentario obsoleto",
+      "description": "Comentario obsoleto (heuristica C2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "comentarios",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, C2",
+      "links": [
+        "c3-comentario-redundante"
+      ],
+      "why_not": "detectar que un comentario quedo obsoleto exige entender el codigo que describe"
+    },
+    {
+      "id": "c3-comentario-redundante",
+      "title": "C3: Comentario redundante",
+      "description": "Comentario redundante (heuristica C3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "comentarios",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, C3",
+      "links": [
+        "c2-comentario-obsoleto"
+      ]
+    },
+    {
+      "id": "c4-comentario-mal-escrito",
+      "title": "C4: Comentario mal escrito",
+      "description": "Comentario mal escrito (heuristica C4 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "comentarios",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, C4",
+      "links": []
+    },
+    {
+      "id": "c5-codigo-comentado",
+      "title": "C5: Código comentado",
+      "description": "Código comentado (heuristica C5 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "comentarios",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, C5",
+      "links": [
+        "g9-codigo-muerto"
+      ],
+      "instrument": "linter: regla ERA (codigo comentado)",
+      "threshold": "comentarios_con_codigo: 0"
+    },
+    {
+      "id": "e1-la-generacion-requiere-mas-de-un-paso",
+      "title": "E1: La generación requiere más de un paso",
+      "description": "La generación requiere más de un paso (heuristica E1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "entorno",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, E1",
+      "links": [
+        "e2-las-pruebas-requieren-mas-de-un-paso"
+      ],
+      "instrument": "un solo comando de build; exit code",
+      "threshold": "pasos_build_max: 1"
+    },
+    {
+      "id": "e2-las-pruebas-requieren-mas-de-un-paso",
+      "title": "E2: Las pruebas requieren más de un paso",
+      "description": "Las pruebas requieren más de un paso (heuristica E2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "entorno",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, E2",
+      "links": [
+        "e1-la-generacion-requiere-mas-de-un-paso"
+      ],
+      "instrument": "test_command; exit code",
+      "threshold": "pasos_test_max: 1"
+    },
+    {
+      "id": "f1-demasiados-argumentos",
+      "title": "F1: Demasiados argumentos",
+      "description": "Demasiados argumentos (heuristica F1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "funciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, F1",
+      "links": [
+        "g30-las-funciones-solo-deben-hacer-una-cosa"
+      ],
+      "instrument": "measure_complexity.params",
+      "threshold": "params_max: 3"
+    },
+    {
+      "id": "f2-argumentos-de-salida",
+      "title": "F2: Argumentos de salida",
+      "description": "Argumentos de salida (heuristica F2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "funciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, F2",
+      "links": [
+        "f1-demasiados-argumentos"
+      ],
+      "instrument": "AST: parametro mutado en el cuerpo",
+      "threshold": "args_de_salida: 0"
+    },
+    {
+      "id": "f3-argumentos-de-indicador",
+      "title": "F3: Argumentos de indicador",
+      "description": "Argumentos de indicador (heuristica F3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "funciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, F3",
+      "links": [
+        "g15-argumentos-de-selector"
+      ],
+      "instrument": "AST: parametro booleano usado en condicional",
+      "threshold": "args_indicador: 0"
+    },
+    {
+      "id": "f4-funcion-muerta",
+      "title": "F4: Función muerta",
+      "description": "Función muerta (heuristica F4 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "funciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, F4",
+      "links": [
+        "g9-codigo-muerto"
+      ],
+      "instrument": "analisis de alcanzabilidad (vulture/ruff)",
+      "threshold": "funciones_muertas: 0"
+    },
+    {
+      "id": "g1-varios-lenguajes-en-un-archivo-de-codigo",
+      "title": "G1: Varios lenguajes en un archivo de código",
+      "description": "Varios lenguajes en un archivo de código (heuristica G1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G1",
+      "links": []
+    },
+    {
+      "id": "g2-comportamiento-evidente-no-implementado",
+      "title": "G2: Comportamiento evidente no implementado",
+      "description": "Comportamiento evidente no implementado (heuristica G2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G2",
+      "links": []
+    },
+    {
+      "id": "g3-comportamiento-incorrecto-en-los-limites",
+      "title": "G3: Comportamiento incorrecto en los límites",
+      "description": "Comportamiento incorrecto en los límites (heuristica G3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G3",
+      "links": [
+        "t5-probar-condiciones-de-limite"
+      ],
+      "instrument": "mutation_audit sobre mutantes de limite",
+      "threshold": "mutantes_limite_vivos: 0"
+    },
+    {
+      "id": "g4-medidas-de-seguridad-canceladas",
+      "title": "G4: Medidas de seguridad canceladas",
+      "description": "Medidas de seguridad canceladas (heuristica G4 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G4",
+      "links": [],
+      "instrument": "grep de supresiones (noqa, SuppressWarnings, skip)",
+      "threshold": "supresiones: 0"
+    },
+    {
+      "id": "g5-duplicacion",
+      "title": "G5: Duplicación",
+      "description": "Duplicación (heuristica G5 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G5",
+      "links": [
+        "g33-encapsular-condiciones-de-limite",
+        "g12-desorden"
+      ],
+      "instrument": "deteccion de clones (jscpd/CPD)",
+      "threshold": "bloques_duplicados: 0"
+    },
+    {
+      "id": "g6-codigo-en-un-nivel-de-abstraccion-incorrecto",
+      "title": "G6: Código en un nivel de abstracción incorrecto",
+      "description": "Código en un nivel de abstracción incorrecto (heuristica G6 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G6",
+      "links": []
+    },
+    {
+      "id": "g7-clases-base-que-dependen-de-sus-variantes",
+      "title": "G7: Clases base que dependen de sus variantes",
+      "description": "Clases base que dependen de sus variantes (heuristica G7 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G7",
+      "links": [],
+      "instrument": "grafo de referencias: la base nombra a su variante",
+      "threshold": "refs_base_a_variante: 0"
+    },
+    {
+      "id": "g8-exceso-de-informacion",
+      "title": "G8: Exceso de información",
+      "description": "Exceso de información (heuristica G8 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G8",
+      "links": [],
+      "instrument": "conteo de miembros publicos por clase o modulo",
+      "threshold": "api_publica_max"
+    },
+    {
+      "id": "g9-codigo-muerto",
+      "title": "G9: Código muerto",
+      "description": "Código muerto (heuristica G9 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G9",
+      "links": [
+        "f4-funcion-muerta"
+      ],
+      "instrument": "linter: codigo inalcanzable",
+      "threshold": "codigo_muerto: 0"
+    },
+    {
+      "id": "g10-separacion-vertical",
+      "title": "G10: Separación vertical",
+      "description": "Separación vertical (heuristica G10 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G10",
+      "links": [],
+      "instrument": "AST: distancia en lineas entre declaracion y primer uso",
+      "threshold": "distancia_declaracion_max"
+    },
+    {
+      "id": "g11-incoherencia",
+      "title": "G11: Incoherencia",
+      "description": "Incoherencia (heuristica G11 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G11",
+      "links": []
+    },
+    {
+      "id": "g12-desorden",
+      "title": "G12: Desorden",
+      "description": "Desorden (heuristica G12 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G12",
+      "links": [],
+      "instrument": "linter: imports y variables sin usar, constructores vacios",
+      "threshold": "desorden: 0"
+    },
+    {
+      "id": "g13-conexiones-artificiales",
+      "title": "G13: Conexiones artificiales",
+      "description": "Conexiones artificiales (heuristica G13 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G13",
+      "links": []
+    },
+    {
+      "id": "g14-envidia-de-las-caracteristicas",
+      "title": "G14: Envidia de las características",
+      "description": "Envidia de las características (heuristica G14 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G14",
+      "links": [],
+      "instrument": "AST: accesos a miembros ajenos vs propios por metodo",
+      "threshold": "accesos_ajenos_max"
+    },
+    {
+      "id": "g15-argumentos-de-selector",
+      "title": "G15: Argumentos de selector",
+      "description": "Argumentos de selector (heuristica G15 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G15",
+      "links": [
+        "f3-argumentos-de-indicador"
+      ],
+      "instrument": "AST: parametro que selecciona comportamiento",
+      "threshold": "args_selector: 0"
+    },
+    {
+      "id": "g16-intencion-desconocida",
+      "title": "G16: Intención desconocida",
+      "description": "Intención desconocida (heuristica G16 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G16",
+      "links": []
+    },
+    {
+      "id": "g17-responsabilidad-desubicada",
+      "title": "G17: Responsabilidad desubicada",
+      "description": "Responsabilidad desubicada (heuristica G17 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G17",
+      "links": []
+    },
+    {
+      "id": "g18-elementos-estaticos-incorrectos",
+      "title": "G18: Elementos estáticos incorrectos",
+      "description": "Elementos estáticos incorrectos (heuristica G18 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G18",
+      "links": []
+    },
+    {
+      "id": "g19-usar-variables-explicativas",
+      "title": "G19: Usar variables explicativas",
+      "description": "Usar variables explicativas (heuristica G19 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G19",
+      "links": [
+        "g28-encapsular-condicionales",
+        "n1-elegir-nombres-descriptivos"
+      ],
+      "why_not": "el autor la describe como monotona y sin umbral (siempre conviene mas y es dificil excederse), y ademas exige nombres descriptivos, que es la mitad no medible"
+    },
+    {
+      "id": "g20-los-nombres-de-funcion-deben-indicar-lo-que-hacen",
+      "title": "G20: Los nombres de función deben indicar lo que hacen",
+      "description": "Los nombres de función deben indicar lo que hacen (heuristica G20 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G20",
+      "links": []
+    },
+    {
+      "id": "g21-comprender-el-algoritmo",
+      "title": "G21: Comprender el algoritmo",
+      "description": "Comprender el algoritmo (heuristica G21 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G21",
+      "links": []
+    },
+    {
+      "id": "g22-convertir-dependencias-logicas-en-fisicas",
+      "title": "G22: Convertir dependencias lógicas en físicas",
+      "description": "Convertir dependencias lógicas en físicas (heuristica G22 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G22",
+      "links": []
+    },
+    {
+      "id": "g23-polimorfismo-antes-que-if-else-o-switch-case",
+      "title": "G23: Polimorfismo antes que If/Else o Switch/Case",
+      "description": "Polimorfismo antes que If/Else o Switch/Case (heuristica G23 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G23",
+      "links": [
+        "g30-las-funciones-solo-deben-hacer-una-cosa"
+      ],
+      "instrument": "AST: cadenas if/else o switch sobre discriminante de tipo",
+      "threshold": "switch_sobre_tipo: 0"
+    },
+    {
+      "id": "g24-seguir-las-convenciones-estandar",
+      "title": "G24: Seguir las convenciones estándar",
+      "description": "Seguir las convenciones estándar (heuristica G24 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G24",
+      "links": [],
+      "instrument": "run_linter_gate",
+      "threshold": "linter exit 0"
+    },
+    {
+      "id": "g25-sustituir-numeros-magicos-por-constantes-con-nombre",
+      "title": "G25: Sustituir números mágicos por constantes con nombre",
+      "description": "Sustituir números mágicos por constantes con nombre (heuristica G25 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G25",
+      "links": [],
+      "instrument": "linter: literales numericos fuera de constante (PLR2004)",
+      "threshold": "numeros_magicos: 0"
+    },
+    {
+      "id": "g26-precision",
+      "title": "G26: Precisión",
+      "description": "Precisión (heuristica G26 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G26",
+      "links": []
+    },
+    {
+      "id": "g27-estructura-sobre-convencion",
+      "title": "G27: Estructura sobre convención",
+      "description": "Estructura sobre convención (heuristica G27 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G27",
+      "links": []
+    },
+    {
+      "id": "g28-encapsular-condicionales",
+      "title": "G28: Encapsular condicionales",
+      "description": "Encapsular condicionales (heuristica G28 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G28",
+      "links": [
+        "g19-usar-variables-explicativas",
+        "g29-evitar-condicionales-negativas"
+      ],
+      "instrument": "AST: operadores booleanos por condicional",
+      "threshold": "operadores_por_condicion_max"
+    },
+    {
+      "id": "g29-evitar-condicionales-negativas",
+      "title": "G29: Evitar condicionales negativas",
+      "description": "Evitar condicionales negativas (heuristica G29 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G29",
+      "links": [],
+      "instrument": "AST: condicionales negadas",
+      "threshold": "condicionales_negadas_max"
+    },
+    {
+      "id": "g30-las-funciones-solo-deben-hacer-una-cosa",
+      "title": "G30: Las funciones sólo deben hacer una cosa",
+      "description": "Las funciones sólo deben hacer una cosa (heuristica G30 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G30",
+      "links": [
+        "f1-demasiados-argumentos",
+        "g34-las-funciones-solo-deben-descender-un-nivel-de-abstraccion"
+      ],
+      "why_not": "el autor cuenta operaciones semanticas y nunca da un numero; longitud y ciclomatica son proxies, no la propiedad"
+    },
+    {
+      "id": "g31-conexiones-temporales-ocultas",
+      "title": "G31: Conexiones temporales ocultas",
+      "description": "Conexiones temporales ocultas (heuristica G31 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G31",
+      "links": []
+    },
+    {
+      "id": "g32-evitar-la-arbitrariedad",
+      "title": "G32: Evitar la arbitrariedad",
+      "description": "Evitar la arbitrariedad (heuristica G32 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G32",
+      "links": []
+    },
+    {
+      "id": "g33-encapsular-condiciones-de-limite",
+      "title": "G33: Encapsular condiciones de límite",
+      "description": "Encapsular condiciones de límite (heuristica G33 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G33",
+      "links": [
+        "g5-duplicacion"
+      ],
+      "instrument": "AST: subexpresion de limite repetida",
+      "threshold": "subexpr_limite_duplicada: 0"
+    },
+    {
+      "id": "g34-las-funciones-solo-deben-descender-un-nivel-de-abstraccion",
+      "title": "G34: Las funciones sólo deben descender un nivel de abstracción",
+      "description": "Las funciones sólo deben descender un nivel de abstracción (heuristica G34 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G34",
+      "links": [
+        "g30-las-funciones-solo-deben-hacer-una-cosa"
+      ]
+    },
+    {
+      "id": "g35-mantener-los-datos-configurables-en-los-niveles-superiores",
+      "title": "G35: Mantener los datos configurables en los niveles superiores",
+      "description": "Mantener los datos configurables en los niveles superiores (heuristica G35 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, G35",
+      "links": []
+    },
+    {
+      "id": "g36-evitar-desplazamientos-transitivos",
+      "title": "G36: Evitar desplazamientos transitivos",
+      "description": "Evitar desplazamientos transitivos (heuristica G36 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, G36",
+      "links": [
+        "g14-envidia-de-las-caracteristicas"
+      ],
+      "instrument": "AST: profundidad de cadena de llamadas",
+      "threshold": "chain_depth_max: 1"
+    },
+    {
+      "id": "j1-evitar-extensas-listas-de-importacion-mediante-el-uso-de",
+      "title": "J1: Evitar extensas listas de importación mediante el uso de",
+      "description": "Evitar extensas listas de importación mediante el uso de (heuristica J1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "java",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, J1",
+      "links": [],
+      "instrument": "linter: imports con comodin y conteo de imports",
+      "threshold": "imports_comodin: 0"
+    },
+    {
+      "id": "j2-no-heredar-constantes",
+      "title": "J2: No heredar constantes",
+      "description": "No heredar constantes (heuristica J2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "java",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, J2",
+      "links": [],
+      "instrument": "AST: interfaz solo-constantes implementada",
+      "threshold": "herencia_de_constantes: 0"
+    },
+    {
+      "id": "j3-constantes-frente-a-enumeraciones",
+      "title": "J3: Constantes frente a enumeraciones",
+      "description": "Constantes frente a enumeraciones (heuristica J3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "java",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, J3",
+      "links": []
+    },
+    {
+      "id": "n1-elegir-nombres-descriptivos",
+      "title": "N1: Elegir nombres descriptivos",
+      "description": "Elegir nombres descriptivos (heuristica N1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, N1",
+      "links": [
+        "n2-elegir-nombres-en-el-nivel-correcto-de-abstraccion",
+        "n4-nombres-inequivocos",
+        "n5-usar-nombres-extensos-para-ambitos-extensos"
+      ],
+      "why_not": "lo descriptivo de un nombre es correspondencia semantica con el cuerpo"
+    },
+    {
+      "id": "n2-elegir-nombres-en-el-nivel-correcto-de-abstraccion",
+      "title": "N2: Elegir nombres en el nivel correcto de abstracción",
+      "description": "Elegir nombres en el nivel correcto de abstracción (heuristica N2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, N2",
+      "links": [
+        "n1-elegir-nombres-descriptivos"
+      ]
+    },
+    {
+      "id": "n3-usar-nomenclatura-estandar-siempre-que-sea-posible",
+      "title": "N3: Usar nomenclatura estándar siempre que sea posible",
+      "description": "Usar nomenclatura estándar siempre que sea posible (heuristica N3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, N3",
+      "links": []
+    },
+    {
+      "id": "n4-nombres-inequivocos",
+      "title": "N4: Nombres inequívocos",
+      "description": "Nombres inequívocos (heuristica N4 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, N4",
+      "links": [
+        "n1-elegir-nombres-descriptivos"
+      ]
+    },
+    {
+      "id": "n5-usar-nombres-extensos-para-ambitos-extensos",
+      "title": "N5: Usar nombres extensos para ámbitos extensos",
+      "description": "Usar nombres extensos para ámbitos extensos (heuristica N5 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, N5",
+      "links": [
+        "n1-elegir-nombres-descriptivos"
+      ],
+      "instrument": "AST: longitud de identificador vs lineas del ambito",
+      "threshold": "len(nombre) >= f(lineas_ambito)"
+    },
+    {
+      "id": "n6-evitar-codificaciones",
+      "title": "N6: Evitar codificaciones",
+      "description": "Evitar codificaciones (heuristica N6 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, N6",
+      "links": [],
+      "instrument": "linter: prefijos hungaros y codificaciones en identificadores",
+      "threshold": "codificaciones: 0"
+    },
+    {
+      "id": "n7-los-nombres-deben-describir-efectos-secundarios",
+      "title": "N7: Los nombres deben describir efectos secundarios",
+      "description": "Los nombres deben describir efectos secundarios (heuristica N7 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, N7",
+      "links": [
+        "n1-elegir-nombres-descriptivos"
+      ]
+    },
+    {
+      "id": "t1-pruebas-insuficientes",
+      "title": "T1: Pruebas insuficientes",
+      "description": "Pruebas insuficientes (heuristica T1 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, T1",
+      "links": [
+        "t2-usar-una-herramienta-de-cobertura"
+      ],
+      "instrument": "cobertura",
+      "threshold": "cobertura_min"
+    },
+    {
+      "id": "t2-usar-una-herramienta-de-cobertura",
+      "title": "T2: Usar una herramienta de cobertura",
+      "description": "Usar una herramienta de cobertura (heuristica T2 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, T2",
+      "links": [
+        "t1-pruebas-insuficientes"
+      ],
+      "instrument": "presencia del gate de cobertura en CI",
+      "threshold": "gate_cobertura: presente"
+    },
+    {
+      "id": "t3-no-ignorar-pruebas-triviales",
+      "title": "T3: No ignorar pruebas triviales",
+      "description": "No ignorar pruebas triviales (heuristica T3 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, T3",
+      "links": []
+    },
+    {
+      "id": "t4-una-prueba-ignorada-es-una-pregunta-sobre-una-ambiguedad",
+      "title": "T4: Una prueba ignorada es una pregunta sobre una ambigüedad",
+      "description": "Una prueba ignorada es una pregunta sobre una ambigüedad (heuristica T4 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "capitulo 17, T4",
+      "links": [
+        "g4-medidas-de-seguridad-canceladas"
+      ]
+    },
+    {
+      "id": "t5-probar-condiciones-de-limite",
+      "title": "T5: Probar condiciones de límite",
+      "description": "Probar condiciones de límite (heuristica T5 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, T5",
+      "links": [
+        "g3-comportamiento-incorrecto-en-los-limites"
+      ],
+      "instrument": "mutation_audit sobre mutantes de limite",
+      "threshold": "mutantes_limite_vivos: 0"
+    },
+    {
+      "id": "t6-probar-de-forma-exhaustiva-junto-a-los-errores",
+      "title": "T6: Probar de forma exhaustiva junto a los errores",
+      "description": "Probar de forma exhaustiva junto a los errores (heuristica T6 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "capitulo 17, T6",
+      "links": []
+    },
+    {
+      "id": "t7-los-patrones-de-fallo-son-reveladores",
+      "title": "T7: Los patrones de fallo son reveladores",
+      "description": "Los patrones de fallo son reveladores (heuristica T7 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "capitulo 17, T7",
+      "links": [
+        "t8-los-patrones-de-cobertura-de-pruebas-pueden-ser-reveladores"
+      ]
+    },
+    {
+      "id": "t8-los-patrones-de-cobertura-de-pruebas-pueden-ser-reveladores",
+      "title": "T8: Los patrones de cobertura de pruebas pueden ser reveladores",
+      "description": "Los patrones de cobertura de pruebas pueden ser reveladores (heuristica T8 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "capitulo 17, T8",
+      "links": [
+        "t7-los-patrones-de-fallo-son-reveladores"
+      ]
+    },
+    {
+      "id": "t9-las-pruebas-deben-ser-rapidas",
+      "title": "T9: Las pruebas deben ser rápidas",
+      "description": "Las pruebas deben ser rápidas (heuristica T9 del catalogo del capitulo 17).",
+      "type": "Concept",
+      "tags": [
+        "codigo-limpio",
+        "pruebas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "capitulo 17, T9",
+      "links": [],
+      "instrument": "wall time de la suite",
+      "threshold": "test_seconds_max"
+    }
+  ]
+}

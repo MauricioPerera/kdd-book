@@ -1,0 +1,38 @@
+{
+  "id": "n5-nombres-extensos-para-ambitos-extensos",
+  "node": "n5-usar-nombres-extensos-para-ambitos-extensos",
+  "title": "N5: nombres a la altura del ambito que abarcan",
+  "description": "Alargar los nombres de una letra que viven a lo largo de toda la funcion.",
+  "intent": "Ajustar el largo de los nombres locales al largo de su ambito.",
+  "signature": "def resumen_de_cupos(eventos) -> int:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "n5",
+      "--max",
+      "0"
+    ],
+    "threshold": "un nombre de L caracteres admite un ambito de L*5 lineas"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral sale del propio autor: `i` y `j` estan bien en un ambito de cinco lineas.",
+    "Ningun nombre local vive en un ambito mas largo de lo que su largo admite."
+  ],
+  "examples": [
+    "`t` (1 caracter) en una funcion de once lineas -> admite hasta cinco, en rojo.",
+    "`libres` (6 caracteres) en la misma funcion -> admite hasta treinta, en verde.",
+    "`i` como indice de un `for` de tres lineas -> en verde: el ambito es corto y el nombre alcanza."
+  ],
+  "do": [
+    "Elegir el nombre segun cuanto tiene que recordarlo quien lee.",
+    "Renombrar tambien la variable del `for`, que vive todo el bucle."
+  ],
+  "dont": [
+    "Alargar por alargar: `variable_de_cupos_libres_totales` no explica mas que `libres`."
+  ],
+  "stop_if": [
+    "el nombre largo colisiona con otro del mismo ambito"
+  ]
+}

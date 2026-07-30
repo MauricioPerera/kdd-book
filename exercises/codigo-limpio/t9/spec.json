@@ -1,0 +1,51 @@
+{
+  "id": "t9-pruebas-rapidas",
+  "node": "t9-las-pruebas-deben-ser-rapidas",
+  "title": "T9: sacar la espera fija del camino de las pruebas",
+  "description": "Quitar la espera heredada que hace lenta a la suite.",
+  "intent": "Eliminar la espera fija del camino de ejecucion de las pruebas.",
+  "signature": "def test() -> int:",
+  "target": "proyecto/tareas.py",
+  "oracle": "proyecto/test_tarifas.py",
+  "seed": "seed_tareas.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 6,
+    "nesting_max": 3,
+    "lines_max": 90,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": [
+      "--rule",
+      "t9",
+      "--max-seconds",
+      "1.0"
+    ],
+    "threshold": "la suite completa termina en menos de 1 segundo"
+  },
+  "invariants": [
+    "La funcionalidad de `tarifas.py` no cambia: el oraculo pasa igual antes y despues.",
+    "La suite sigue corriendo todas las pruebas.",
+    "`python tareas.py test` termina en menos de un segundo."
+  ],
+  "examples": [
+    "Una espera fija de 1,2 s antes de correr la suite -> el costo lo paga cada corrida para siempre, en rojo.",
+    "La suite sin la espera -> en verde.",
+    "Una suite rapida porque dejo de correr pruebas seria peor: por eso el oraculo tambien corre."
+  ],
+  "do": [
+    "Borrar la espera y comprobar que la suite sigue en verde.",
+    "Cronometrar antes y despues para saber cuanto costaba."
+  ],
+  "dont": [
+    "Bajar la espera a la mitad: sigue siendo un costo fijo que nadie va a revisar."
+  ],
+  "stop_if": [
+    "sin la espera alguna prueba se vuelve inestable"
+  ]
+}
