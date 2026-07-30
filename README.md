@@ -151,12 +151,22 @@ Prueba de que el cableado es lo que hace el trabajo: si se borra el enlace de
 `index.md` a la carpeta del libro, el validador pasa de 0 errores a **67
 ORPHAN** sobre los mismos archivos.
 
-## Dos libros en un grafo
+## Tres libros en un grafo
 
 | Libro | nodos | contractable | instrumented |
 |---|---|---|---|
 | Codigo Limpio | 67 | 48% | 48% |
+| Arquitectura Java solida | 34 | 45,5% | 45,5% |
 | Scrum y eXtreme Programming | 154 | 25,5% | 14,4% |
+
+Arquitectura Java tiene **corpus mas debil que los otros dos** y conviene
+saberlo antes de leer su numero: es un tutorial progresivo, no tiene lista
+cerrada de conclusiones del autor, y sus 33 items salieron de titulos de
+capitulo identificados por el triaje. n es menor y las barras de error mas
+anchas. Aun asi el resultado es claro: sus 15 tecnicas contractables son las 15
+`instrumented`, porque los principios de arquitectura son propiedades del grafo
+de imports y de instanciacion, que es lo que el analisis estatico lee de forma
+nativa. "Semantico" para un humano no implica "no medible" para un parser.
 
 El 14,4% del segundo **no es un valor intermedio**: es el promedio ponderado de
 dos poblaciones. Medido por seccion:
@@ -195,6 +205,19 @@ cuenta.
 autor la operacionalizo.** Eso solo se puede afirmar con los dos nodos a la
 vista, y por eso el grafo tiene enlaces entre libros y no es una tabla por
 libro.
+
+El tercer libro trae el mismo caso otra vez, y en el sentido contrario.
+`arquitectura-java/08-el-principio-srp` enlaza a
+`codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa`: **mismo principio,
+pilas distintas**. Martin nunca lo aterriza — cuenta operaciones semanticas y no
+da un numero — asi que su nodo queda en pila B. Caules lo aplica como separacion
+de capas, la JSP no contiene codigo de persistencia, y eso es una regla de
+imports. Que el caso aparezca dos veces con los papeles cambiados es lo que lo
+vuelve un patron y no una anecdota.
+
+`arquitectura-java/04-el-principio-dry` es la primera tecnica que aparece en los
+**tres** libros, y los tres autores la operacionalizan: los tres nodos son
+contractables y comparten instrumento.
 
 De las 39 tecnicas contractables del segundo libro:
 
