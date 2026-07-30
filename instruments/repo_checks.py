@@ -255,7 +255,37 @@ def check_g24(target, opts):
     return out
 
 
+def check_aislamiento(target, opts):
+    """Las pruebas unitarias deben ser independientes entre si.
+
+    Se corre cada modulo de prueba por separado. Si alguno solo pasa cuando lo
+    acompanan los demas, no es una prueba unitaria: es una que depende del
+    estado que dejaron otras, y el dia que cambie el orden va a fallar sin que
+    nadie entienda por que.
+    """
+    project, _ = _entry(target)
+    modulos = [n[:-3] for n in sorted(os.listdir(project))
+               if n.startswith('test_') and n.endswith('.py')]
+    if not modulos:
+        return [('no hay modulos de prueba que aislar', True)]
+
+    out = []
+    for modulo in modulos:
+        try:
+            proc = subprocess.run([sys.executable, '-m', 'unittest', modulo],
+                                  cwd=project, capture_output=True, text=True,
+                                  timeout=TIMEOUT)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            return [('no se pudo correr {} por separado: {}'.format(modulo, exc), True)]
+        if proc.returncode != 0:
+            out.append(('{} no pasa corrido solo: depende de otras pruebas\n{}'
+                        .format(modulo, (proc.stderr or proc.stdout).strip()[:300]),
+                        False))
+    return out
+
+
 RULES = {
+    'aislamiento': (check_aislamiento, 'Pruebas unitarias independientes entre si'),
     'e1': (check_e1, 'E1 generar en un solo paso'),
     'e2': (check_e2, 'E2 probar en un solo paso'),
     'g24': (check_g24, 'G24 seguir las convenciones estandar (subconjunto declarado)'),

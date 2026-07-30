@@ -48,7 +48,7 @@ SECCIONES = [
 # instrumento lee el artefacto del que trata la tecnica (codigo, build, git);
 # `proxy` que lee un registro que llena una persona (el tablero).
 A_NODES = {
-    24: ('git: fechas de los tags de entrega', 'cadencia <= 2 meses', 'instrumented'),
+    24: ('git_checks.py --rule cadencia', 'hueco entre entregas <= 60 dias', 'instrumented'),
     32: ('tablero: retrospectiva registrada por sprint', 'una por sprint', 'proxy'),
 
     47: ('tablero: el backlog existe y esta ordenado', 'orden total definido', 'proxy'),
@@ -65,27 +65,27 @@ A_NODES = {
     60: ('calendario: la retrospectiva ocurrio al cerrar el sprint', 'una por sprint', 'proxy'),
     62: ('tablero: la estimacion pertenece a la escala', 'valor en la escala declarada', 'proxy'),
 
-    84: ('git: fechas de los tags de entrega', 'cadencia corta y constante', 'instrumented'),
+    84: ('git_checks.py --rule cadencia', 'hueco entre entregas <= 30 dias', 'instrumented'),
     85: ('repo_checks.py --rule e2', 'un comando corre toda la suite', 'instrumented'),
     86: ('repo_checks.py --rule g24', 'convenciones declaradas en verde', 'instrumented'),
     88: ('CI: corrida por commit con exit 0', 'sin commits sin integrar', 'instrumented'),
 
-    104: ('repo_checks.py --rule t9 y aislamiento entre pruebas', 'rapidas e independientes', 'instrumented'),
-    105: ('AST: el test tiene preparacion, accion y asercion', 'las tres partes presentes', 'instrumented'),
-    107: ('correr el test antes de que exista la implementacion', 'exit distinto de 0', 'instrumented'),
-    108: ('correr el test contra la implementacion minima', 'exit 0', 'instrumented'),
-    109: ('correr el test nuevo antes de implementarlo', 'exit distinto de 0', 'instrumented'),
-    110: ('correr la suite completa', 'exit 0', 'instrumented'),
+    104: ('repo_checks.py --rule t9 y --rule aislamiento', 'rapidas e independientes', 'instrumented'),
+    105: ('checks.py --rule anatomia', 'al menos una asercion por prueba', 'instrumented'),
+    107: ('git_checks.py --rule tddorden', 'el test entra antes que el codigo', 'instrumented'),
+    108: ('repo_checks.py --rule e2', 'la suite completa en verde', 'instrumented'),
+    109: ('git_checks.py --rule tddorden', 'el test entra antes que el codigo', 'instrumented'),
+    110: ('repo_checks.py --rule e2', 'la suite completa en verde', 'instrumented'),
 
     118: ('test_command de integracion', 'exit 0', 'instrumented'),
     119: ('test_command de aceptacion', 'exit 0', 'instrumented'),
     120: ('test_command funcional', 'exit 0', 'instrumented'),
     121: ('test_command de sistema', 'exit 0', 'instrumented'),
-    122: ('git: un solo repositorio y sin ramas sin integrar', 'sin divergencia pendiente', 'instrumented'),
+    122: ('git_checks.py --rule repounico', 'ninguna rama con commits sin integrar', 'instrumented'),
 
     140: ('checks.py --rule g12', 'cero variables asignadas y nunca leidas', 'instrumented'),
-    142: ('AST: operadores por expresion', 'operadores_por_expresion_max', 'instrumented'),
-    143: ('AST: lineas por metodo', 'lines_max', 'instrumented'),
+    142: ('checks.py --rule exprops', 'operadores por expresion <= 3', 'instrumented'),
+    143: ('checks.py --rule metlineas', 'lineas por metodo <= 15', 'instrumented'),
     144: ('checks.py --rule g5', 'cero bloques duplicados', 'instrumented'),
     145: ('checks.py --rule g5', 'cero bloques duplicados entre clases hermanas', 'instrumented'),
     146: ('checks.py --rule g5', 'cero bloques duplicados entre clases sin parentesco', 'instrumented'),

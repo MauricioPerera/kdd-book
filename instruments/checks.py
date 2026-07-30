@@ -471,6 +471,88 @@ def check_c5(tree, src, limit):
     return out
 
 
+def _operadores(expr):
+    """Operadores de una expresion, contando el arbol entero."""
+    total = 0
+    for node in ast.walk(expr):
+        if isinstance(node, ast.BoolOp):
+            total += len(node.values) - 1
+        elif isinstance(node, ast.Compare):
+            total += len(node.ops)
+        elif isinstance(node, (ast.BinOp, ast.UnaryOp)):
+            total += 1
+        elif isinstance(node, ast.IfExp):
+            total += 1
+    return total
+
+
+def check_exprops(tree, src, limit):
+    """Expresiones extensas (Bahit): operadores acumulados en una expresion.
+
+    Es la misma refactorizacion que G19 de Codigo Limpio, que alli quedo en
+    pila B. Aca es medible porque la autora no reclama nada de los nombres: su
+    ejemplo extrae a `$a`, `$b`, `$c`, `$d`, asi que lo unico que queda de la
+    tecnica es bajar la complejidad de la expresion, que es contable.
+    """
+    out = []
+    for node in ast.walk(tree):
+        expr = None
+        if isinstance(node, ast.Return) and node.value is not None:
+            expr = node.value
+        elif isinstance(node, ast.Assign):
+            expr = node.value
+        elif isinstance(node, (ast.If, ast.While)):
+            expr = node.test
+        if expr is None:
+            continue
+        cantidad = _operadores(expr)
+        if cantidad > limit:
+            out.append((node.lineno,
+                        'expresion con {} operadores'.format(cantidad)))
+    return out
+
+
+def check_metlineas(tree, src, limit):
+    """Metodos extensos (Bahit): lineas del cuerpo de una funcion."""
+    out = []
+    for func in _functions(tree):
+        lineas = _scope_lines(func)
+        if lineas > limit:
+            out.append((func.lineno, '{}() ocupa {} lineas'.format(func.name, lineas)))
+    return out
+
+
+def check_anatomia(tree, src, limit):
+    """Anatomia del test (Bahit): un test sin asercion no prueba nada.
+
+    Una prueba que corre y no afirma nada sale 0 igual, y esa es justo la forma
+    silenciosa de no tener pruebas. El limite no aplica: se exige al menos una
+    asercion por metodo `test_*`.
+    """
+    del limit
+    out = []
+    for func in _functions(tree):
+        if not func.name.startswith('test'):
+            continue
+        aserciones = 0
+        for node in ast.walk(func):
+            if isinstance(node, ast.Assert):
+                aserciones += 1
+            elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) \
+                    and node.func.attr.startswith('assert'):
+                aserciones += 1
+            elif isinstance(node, ast.With):
+                for item in node.items:
+                    if isinstance(item.context_expr, ast.Call) and \
+                            isinstance(item.context_expr.func, ast.Attribute) and \
+                            item.context_expr.func.attr.startswith('assertRaises'):
+                        aserciones += 1
+        if aserciones == 0:
+            out.append((func.lineno,
+                        '{}() no contiene ninguna asercion'.format(func.name)))
+    return out
+
+
 _SUPPRESSIONS = re.compile(
     r'#\s*(noqa|type:\s*ignore|pylint:\s*disable|mypy:\s*ignore)'
     r'|@SuppressWarnings|@unittest\.skip|@pytest\.mark\.skip')
@@ -492,7 +574,10 @@ def check_g4(tree, src, limit):
 # ---------------------------------------------------------------------------
 
 RULES = {
+    'anatomia': (check_anatomia, 0, 'Anatomia del test: sin asercion no prueba nada'),
     'c5': (check_c5, 0, 'C5 codigo comentado'),
+    'exprops': (check_exprops, 3, 'Expresiones extensas: operadores por expresion'),
+    'metlineas': (check_metlineas, 15, 'Metodos extensos: lineas por funcion'),
     'f2': (check_f2, 0, 'F2 argumentos de salida'),
     'f3': (check_f3, 0, 'F3/G15 argumento de indicador o selector'),
     'g4': (check_g4, 0, 'G4 medidas de seguridad canceladas'),

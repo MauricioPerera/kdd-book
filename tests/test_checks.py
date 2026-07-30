@@ -19,6 +19,22 @@ import checks  # noqa: E402
 
 # (regla, limite, fuente_roja, fuente_verde)
 CASOS = [
+    ('anatomia', 0,
+     'import unittest\n\n\nclass T(unittest.TestCase):\n'
+     '    def test_nada(self):\n        resultado = 1 + 1\n        print(resultado)\n',
+     'import unittest\n\n\nclass T(unittest.TestCase):\n'
+     '    def test_suma(self):\n        self.assertEqual(1 + 1, 2)\n'),
+
+    ('exprops', 3,
+     'def decidir(a, b, c, d):\n'
+     '    return (a and b) or (c and d) or (a > b) or (c < d)\n',
+     'def decidir(a, b):\n    return a and b\n'),
+
+    ('metlineas', 5,
+     'def larga(n):\n' + ''.join('    n += {}\n'.format(i) for i in range(8)) +
+     '    return n\n',
+     'def corta(n):\n    return n + 1\n'),
+
     ('c5', 0,
      '# resultado = calcular(3, 4)\nvalor = 1\n',
      '# el impuesto se aplica sobre el neto\nvalor = 1\n'),

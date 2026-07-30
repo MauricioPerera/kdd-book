@@ -116,6 +116,33 @@ class RepoChecksTest(unittest.TestCase):
         self.assertEqual(probadas, set(repo_checks.RULES),
                          'hay reglas de nivel repo sin prueba')
 
+    def test_aislamiento_detecta_y_acepta(self):
+        verde = self._proyecto('aisv', TAREAS_COMPLETO)
+        self.assertEqual(repo_checks.check_aislamiento(verde, _opts()), [])
+
+        # Una prueba que solo pasa si otra corrio antes y le dejo el estado.
+        raiz = os.path.join(self.raiz, 'aisr')
+        self._proyecto('aisr', TAREAS_COMPLETO)
+        for archivo, contenido in (
+                ('estado.py', 'VISTOS = []\n'),
+                ('test_a_deja.py',
+                 'import unittest\nfrom estado import VISTOS\n\n\n'
+                 'class A(unittest.TestCase):\n'
+                 '    def test_deja(self):\n'
+                 "        VISTOS.append('a')\n"
+                 '        self.assertTrue(VISTOS)\n'),
+                ('test_b_depende.py',
+                 'import unittest\nfrom estado import VISTOS\n\n\n'
+                 'class B(unittest.TestCase):\n'
+                 '    def test_depende(self):\n'
+                 '        self.assertTrue(VISTOS)\n')):
+            with open(os.path.join(raiz, archivo), 'w', encoding='utf-8',
+                      newline='\n') as fh:
+                fh.write(contenido)
+        rojo = os.path.join(raiz, 'tareas.py')
+        self.assertTrue(repo_checks.check_aislamiento(rojo, _opts()),
+                        'no detecto la prueba que depende de otra')
+
     def test_e1_detecta_y_acepta(self):
         verde = self._proyecto('e1v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_e1(verde, _opts()), [])

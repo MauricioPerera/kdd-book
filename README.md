@@ -196,9 +196,34 @@ autor la operacionalizo.** Eso solo se puede afirmar con los dos nodos a la
 vista, y por eso el grafo tiene enlaces entre libros y no es una tabla por
 libro.
 
-Dos instrumentos ya se reusan entre libros sin cambios: `checks.py --rule g5`
-sirve a las tres formas de duplicacion que enumera Bahit, y
-`repo_checks.py --rule g24` a su practica de codigo estandar.
+De las 39 tecnicas contractables del segundo libro:
+
+| | n | |
+|---|---|---|
+| `instrumented` con script corriendo | 17 | |
+| `instrumented` sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, y el proyecto la prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria e2 |
+| `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
+
+Cuatro instrumentos se reusan entre libros sin tocar una linea:
+`checks.py --rule g5` para las tres formas de duplicacion que enumera Bahit,
+`checks.py --rule g12` para sus variables temporales mal usadas, y
+`repo_checks.py --rule g24` y `--rule e2` para codigo estandar y para testing.
+
+### Instrumentos que leen git
+
+Tres heuristicas hablan de propiedades que no viven en un archivo ni en el
+tablero sino en el historial: cada cuanto se entrega, si el codigo esta
+integrado en un solo lugar, y si el test se escribio antes que la
+implementacion. Estan en `instruments/git_checks.py` y **siguen siendo
+`instrumented`, no `proxy`: git no lo llena nadie a mano.** Las fechas de
+commits y tags las pone la herramienta. Es la diferencia con el tablero, que
+tiene timestamps automaticos pero contenido escrito por personas.
+
+El caso del ciclo TDD merece decirse con cuidado. "Escribir el test y hacer que
+falle" es una propiedad del **proceso**, y el estado final del codigo no la
+conserva. El historial si: si el archivo de pruebas entro en un commit anterior
+al de la implementacion, el orden se cumplio. Es lo unico verificable despues
+de los hechos, y no hay que confundirlo con haber visto el test en rojo.
 
 ## Licencia
 

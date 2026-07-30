@@ -361,8 +361,8 @@
       "links": [
         "084-practica-7-entregas-cortas-short-releases"
       ],
-      "instrument": "git: fechas de los tags de entrega",
-      "threshold": "cadencia <= 2 meses"
+      "instrument": "git_checks.py --rule cadencia",
+      "threshold": "hueco entre entregas <= 60 dias"
     },
     {
       "id": "025-principio-5-los-proyectos-se-desarrollan-en-torno-a-individu",
@@ -1281,8 +1281,8 @@
       "links": [
         "024-principio-3-entregamos-software-funcional-frecuentemente-ent"
       ],
-      "instrument": "git: fechas de los tags de entrega",
-      "threshold": "cadencia corta y constante"
+      "instrument": "git_checks.py --rule cadencia",
+      "threshold": "hueco entre entregas <= 30 dias"
     },
     {
       "id": "085-practica-8-testing",
@@ -1589,7 +1589,7 @@
       "links": [
         "codigo-limpio/t9-las-pruebas-deben-ser-rapidas"
       ],
-      "instrument": "repo_checks.py --rule t9 y aislamiento entre pruebas",
+      "instrument": "repo_checks.py --rule t9 y --rule aislamiento",
       "threshold": "rapidas e independientes"
     },
     {
@@ -1607,8 +1607,8 @@
       "verification": "instrumented",
       "locator": "pagina 93",
       "links": [],
-      "instrument": "AST: el test tiene preparacion, accion y asercion",
-      "threshold": "las tres partes presentes"
+      "instrument": "checks.py --rule anatomia",
+      "threshold": "al menos una asercion por prueba"
     },
     {
       "id": "106-algoritmo-para-escribir-pruebas-unitarias",
@@ -1644,8 +1644,8 @@
         "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle",
         "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar"
       ],
-      "instrument": "correr el test antes de que exista la implementacion",
-      "threshold": "exit distinto de 0"
+      "instrument": "git_checks.py --rule tddorden",
+      "threshold": "el test entra antes que el codigo"
     },
     {
       "id": "108-segundo-paso-escribir-la-minima-cantidad-de-codigo-para-que",
@@ -1664,8 +1664,8 @@
       "links": [
         "107-primer-paso-escribir-el-test-y-hacer-que-falle"
       ],
-      "instrument": "correr el test contra la implementacion minima",
-      "threshold": "exit 0"
+      "instrument": "repo_checks.py --rule e2",
+      "threshold": "la suite completa en verde"
     },
     {
       "id": "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle",
@@ -1685,8 +1685,8 @@
         "107-primer-paso-escribir-el-test-y-hacer-que-falle",
         "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar"
       ],
-      "instrument": "correr el test nuevo antes de implementarlo",
-      "threshold": "exit distinto de 0"
+      "instrument": "git_checks.py --rule tddorden",
+      "threshold": "el test entra antes que el codigo"
     },
     {
       "id": "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar",
@@ -1705,8 +1705,8 @@
       "links": [
         "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle"
       ],
-      "instrument": "correr la suite completa",
-      "threshold": "exit 0"
+      "instrument": "repo_checks.py --rule e2",
+      "threshold": "la suite completa en verde"
     },
     {
       "id": "111-unit-testing-con-phpunit",
@@ -1887,8 +1887,8 @@
       "links": [
         "088-practica-11-integracion-continua-continuous-integracion"
       ],
-      "instrument": "git: un solo repositorio y sin ramas sin integrar",
-      "threshold": "sin divergencia pendiente"
+      "instrument": "git_checks.py --rule repounico",
+      "threshold": "ninguna rama con commits sin integrar"
     },
     {
       "id": "123-sobre-los-sistemas-de-control-de-versiones",
@@ -2191,8 +2191,8 @@
         "codigo-limpio/g19-usar-variables-explicativas",
         "140-variables-de-uso-temporal-mal-implementadas"
       ],
-      "instrument": "AST: operadores por expresion",
-      "threshold": "operadores_por_expresion_max",
+      "instrument": "checks.py --rule exprops",
+      "threshold": "operadores por expresion <= 3",
       "body": "Martin describe esta misma refactorizacion en G19 y la deja fuera de lo contractable: dice que conviene siempre mas y que es dificil excederse, o sea sin umbral, y ademas le exige nombres descriptivos. Bahit la deja contractable porque su ejemplo extrae las subexpresiones a variables llamadas `$a`, `$b`, `$c`, `$d`: al no reclamar nada del nombre, lo unico que queda de la tecnica es la reduccion de complejidad de la expresion, que es lo que un parser cuenta. La tecnica es la misma; lo que cambia es si el autor la aterrizo."
     },
     {
@@ -2212,8 +2212,8 @@
       "links": [
         "codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa"
       ],
-      "instrument": "AST: lineas por metodo",
-      "threshold": "lines_max",
+      "instrument": "checks.py --rule metlineas",
+      "threshold": "lineas por metodo <= 15",
       "body": "El equivalente de Martin es G30 (\"las funciones solo deben hacer una cosa\"), que queda en pila B porque el cuenta operaciones semanticas y nunca da un numero. Bahit lo plantea como extension del metodo, que si tiene umbral."
     },
     {
