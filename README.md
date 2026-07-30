@@ -151,6 +151,15 @@ Prueba de que el cableado es lo que hace el trabajo: si se borra el enlace de
 `index.md` a la carpeta del libro, el validador pasa de 0 errores a **67
 ORPHAN** sobre los mismos archivos.
 
+## Licencia
+
+MIT, ver [LICENSE](LICENSE).
+
+Cubre el codigo de este repositorio: los emisores, los instrumentos, las
+pruebas y los ejercicios. **No cubre el libro del que sale el grafo.** Los
+nombres de las heuristicas son de su autor; este repositorio los referencia
+para poder apuntar a donde esta cada tecnica, y no reproduce su texto.
+
 ## Que se toma del libro y que no
 
 El grafo **no reproduce el texto del autor**. Cada nodo lleva el nombre de la
