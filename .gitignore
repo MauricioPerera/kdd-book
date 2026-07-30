@@ -10,3 +10,6 @@ __pycache__/
 
 # Se regenera con: python memoria.py exportar
 memoria.json
+memoria-fusionada.json
+otra-memoria.json
+fusionada.json

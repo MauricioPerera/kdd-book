@@ -21,6 +21,9 @@ Subcomandos:
     medibles          las tecnicas con instrumento, con el comando para correrlo
     aplicar <archivo> corre sobre ese archivo todo instrumento de archivo unico
                       y dice que tecnica senala cada rojo
+    fusionar a.json b.json [-o c.json]
+                      une dos memorias por id de tecnica y reporta los
+                      conflictos de triaje sin resolverlos
 
 `aplicar` es la prueba de que la memoria sirve: responde "de todo lo que se,
 que aplica a este codigo" sin haber leido ningun libro.
@@ -174,6 +177,104 @@ def medibles(memoria):
             and t.get('instrumento')]
 
 
+# ---------------------------------------------------------------------------
+# Fusion
+# ---------------------------------------------------------------------------
+
+# Campos donde una discrepancia entre dos memorias es una DISCREPANCIA DE
+# TRIAJE, no un detalle: dos personas clasificaron la misma tecnica distinto.
+# No se resuelve sola — se reporta.
+EN_CONFLICTO = ('pila', 'verification', 'instrumento', 'umbral')
+
+
+def _unir(a, b):
+    """Union preservando orden y sin repetir, ignorando caja y acentos.
+
+    Comparar cadenas exactas no alcanza: al fusionar con otra edicion aparecen
+    `ley de Demeter` y `Ley De Demeter` como si fueran alias distintos. Se
+    conserva la primera grafia y se descartan sus variantes — un alias
+    duplicado por una mayuscula ensucia la busqueda sin agregar nada.
+    """
+    out, vistos = [], set()
+    for x in list(a) + list(b):
+        clave = _plegar(x) if isinstance(x, str) else x
+        if clave in vistos:
+            continue
+        vistos.add(clave)
+        out.append(x)
+    return out
+
+
+def fusionar(memorias):
+    """Fusiona varias memorias por id de tecnica.
+
+    Esto es lo que los ids estables habilitan. Si el id fuera un resumen del
+    titulo, la misma tecnica de dos ediciones tendria dos ids distintos y la
+    fusion produciria duplicados en vez de una entrada mas rica.
+
+    Que hace con cada campo:
+
+      - `titulo` de la primera memoria gana, y el de las demas se guarda como
+        alias: un titulo en otro idioma es exactamente un nombre alternativo.
+      - `alias`, `enlaces`, `tags` se unen.
+      - `instrumento` y `contrato` se completan si a una le falta y a otra no.
+      - una discrepancia en pila, verification, instrumento o umbral **no se
+        resuelve**: se reporta. Son juicios de triaje distintos, y elegir uno
+        en silencio seria inventar un consenso que no existe.
+
+    Devuelve (memoria_fusionada, conflictos).
+    """
+    fusion, orden, conflictos = {}, [], []
+    for memoria in memorias:
+        for t in memoria['tecnicas']:
+            clave = t['id']
+            if clave not in fusion:
+                fusion[clave] = dict(t)
+                orden.append(clave)
+                continue
+            previo = fusion[clave]
+            for campo in EN_CONFLICTO:
+                si, no = previo.get(campo), t.get(campo)
+                if si and no and si != no:
+                    conflictos.append({'id': clave, 'campo': campo,
+                                       'valores': [si, no]})
+                elif no and not si:
+                    previo[campo] = no
+            if t.get('titulo') and t['titulo'] != previo['titulo']:
+                previo['alias'] = _unir(previo.get('alias', []), [t['titulo']])
+            for campo in ('alias', 'enlaces', 'tags'):
+                previo[campo] = _unir(previo.get(campo, []), t.get(campo, []))
+            for campo in ('contrato', 'por_que_no', 'locator'):
+                if t.get(campo) and not previo.get(campo):
+                    previo[campo] = t[campo]
+
+    libros, vistos = [], set()
+    for memoria in memorias:
+        for libro in memoria.get('libros', []):
+            if libro['slug'] not in vistos:
+                vistos.add(libro['slug'])
+                libros.append(libro)
+
+    instrumentos, claves = [], set()
+    for memoria in memorias:
+        for i in memoria.get('instrumentos', []):
+            clave = (i['script'], i.get('regla'))
+            if clave not in claves:
+                claves.add(clave)
+                instrumentos.append(i)
+
+    return {
+        'formato': 'kdd-book/memoria',
+        'version': 1,
+        'fusionada_de': len(memorias),
+        'nota_de_identidad': memorias[0].get('nota_de_identidad'),
+        'nota_de_uso': memorias[0].get('nota_de_uso'),
+        'libros': libros,
+        'instrumentos': instrumentos,
+        'tecnicas': [fusion[k] for k in orden],
+    }, conflictos
+
+
 def aplicar(memoria, archivo):
     """Corre sobre `archivo` todo instrumento de archivo unico y reporta.
 
@@ -201,13 +302,41 @@ def aplicar(memoria, archivo):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
-    parser.add_argument('accion', choices=('exportar', 'buscar', 'medibles', 'aplicar'))
-    parser.add_argument('argumento', nargs='?')
+    parser.add_argument('accion', choices=('exportar', 'buscar', 'medibles',
+                                          'aplicar', 'fusionar'))
+    parser.add_argument('argumento', nargs='*')
     parser.add_argument('-m', '--memoria', default=POR_DEFECTO)
+    parser.add_argument('-o', '--salida', default='memoria-fusionada.json')
     args = parser.parse_args(argv)
 
+    if args.accion == 'fusionar':
+        if len(args.argumento) < 2:
+            print('NO-VERIFICABLE: fusionar necesita al menos dos memorias')
+            return 2
+        faltan = [r for r in args.argumento if not os.path.isfile(r)]
+        if faltan:
+            print('NO-VERIFICABLE: no existen: {}'.format(', '.join(faltan)))
+            return 2
+        partes = [_cargar(r) for r in args.argumento]
+        resultado, conflictos = fusionar(partes)
+        with open(args.salida, 'w', encoding='utf-8', newline='\n') as fh:
+            json.dump(resultado, fh, ensure_ascii=False, indent=2)
+            fh.write('\n')
+        entradas = sum(len(p['tecnicas']) for p in partes)
+        print('{} memoria(s), {} entradas -> {} tecnicas ({} fusionadas) en {}'.format(
+            len(partes), entradas, len(resultado['tecnicas']),
+            entradas - len(resultado['tecnicas']), args.salida))
+        if conflictos:
+            print('\n{} conflicto(s) de triaje, sin resolver a proposito:'.format(
+                len(conflictos)))
+            for c in conflictos:
+                print('  {:<26} {:<14} {!r} contra {!r}'.format(
+                    c['id'], c['campo'], c['valores'][0], c['valores'][1]))
+            return 1
+        return 0
+
     if args.accion == 'exportar':
-        destino = args.argumento or args.memoria
+        destino = (args.argumento[0] if args.argumento else args.memoria)
         memoria = exportar(destino)
         print('OK: {} tecnicas de {} libro(s), {} instrumentos -> {}'.format(
             len(memoria['tecnicas']), len(memoria['libros']),
@@ -224,8 +353,9 @@ def main(argv=None):
         if not args.argumento:
             print('NO-VERIFICABLE: buscar necesita un texto')
             return 2
-        encontradas = buscar(memoria, args.argumento)
-        print('{} tecnica(s) para {!r}:'.format(len(encontradas), args.argumento))
+        consulta = ' '.join(args.argumento)
+        encontradas = buscar(memoria, consulta)
+        print('{} tecnica(s) para {!r}:'.format(len(encontradas), consulta))
         for t in encontradas:
             marca = {'A': 'medible', 'B': 'no medible', 'C': 'conocimiento'}[t['pila']]
             print('  {:<26} {:<11} {}'.format(t['id'], marca, t['titulo'][:44]))
@@ -240,10 +370,11 @@ def main(argv=None):
                 t['id'], t['titulo'][:44], t['instrumento'], contrato))
         return 0
 
-    if not args.argumento or not os.path.isfile(args.argumento):
+    objetivo = args.argumento[0] if args.argumento else None
+    if not objetivo or not os.path.isfile(objetivo):
         print('NO-VERIFICABLE: aplicar necesita un archivo existente')
         return 2
-    resultados = aplicar(memoria, args.argumento)
+    resultados = aplicar(memoria, objetivo)
     rojos = [r for r in resultados if r[1] == 1]
     print('{}: {} instrumento(s) corridos, {} en rojo\n'.format(
         args.argumento, len(resultados), len(rojos)))

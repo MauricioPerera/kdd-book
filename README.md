@@ -173,6 +173,7 @@ python memoria.py exportar          # -> memoria.json: 252 tecnicas, 41 instrume
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
+python memoria.py fusionar a.json b.json -o c.json
 ```
 
 El bundle son **364 KB**: `memoria.json` + `memoria.py` + `instruments/`.
@@ -188,6 +189,48 @@ Lo que la hace portable es lo de la seccion anterior: **ids estables entre
 idiomas** para que dos memorias se fusionen en vez de duplicarse, **exit codes**
 en vez de mensajes como interfaz, y **alias** para que se pueda consultar sin
 saber como la tradujo cada edicion.
+
+### Fusionar dos memorias
+
+Es lo que los ids estables habilitan, y lo mas facil de probar. Escenario: otra
+persona triaja la **edicion inglesa** de Codigo Limpio — mismos codigos del
+autor, titulos en ingles, todavia sin instrumentos escritos, y con un
+desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
+
+```
+$ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
+2 memoria(s), 318 entradas -> 252 tecnicas (66 fusionadas) en fusionada.json
+
+2 conflicto(s) de triaje, sin resolver a proposito:
+  codigo-limpio/g30          pila           'B' contra 'A'
+  codigo-limpio/g30          verification   'none' contra 'instrumented'
+```
+
+Las 66 tecnicas de la edicion inglesa se fusionaron con las que ya estaban en
+vez de duplicarse. `g36` quedo con el titulo espanol, el ingles sumado a sus
+alias, y el instrumento que solo una de las dos memorias tenia.
+
+**El mismo ejercicio con los ids viejos:**
+
+| | entradas | resultado | conflictos |
+|---|---|---|---|
+| ids estables (`g36`) | 252 + 66 | **252 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 252 + 66 | 318 tecnicas | 0 |
+
+Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
+lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
+ve nadie**, porque nada esta comparando las dos entradas.
+
+Que hace la fusion con cada campo:
+
+- el `titulo` de la primera memoria gana, y el de las demas **se guarda como
+  alias**: un titulo en otro idioma es exactamente un nombre alternativo;
+- `alias`, `enlaces` y `tags` se unen, ignorando caja y acentos para que
+  `ley de Demeter` y `Ley De Demeter` no queden como dos;
+- `instrumento` y `contrato` se completan si a una le falta y a otra no;
+- una discrepancia en pila, verification, instrumento o umbral **no se
+  resuelve**: se reporta y el comando sale con 1. Son juicios de triaje
+  distintos, y elegir uno en silencio seria inventar un consenso que no existe.
 
 ## Uso
 
@@ -308,12 +351,13 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Siete suites de prueba, y cada una existe por un error concreto que ya paso.
+Ocho suites de prueba, y cada una existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
 Los errores que las hicieron nacer:
