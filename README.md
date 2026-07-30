@@ -78,13 +78,13 @@ Limpio.
 No la decide la tecnica ni el dominio. El grafo lo demuestra con dos casos, y en
 sentidos opuestos:
 
-- `scrum-xp/142-expresiones-extensas` -> `codigo-limpio/g19-usar-variables-explicativas`.
+- `scrum-xp/142` (expresiones extensas) -> `codigo-limpio/g19` (usar variables explicativas).
   **Misma refactorizacion, pilas distintas.** Martin la deja sin umbral —dice que
   conviene siempre mas y que es dificil excederse— y ademas exige nombres
   descriptivos, que es la mitad no medible. Bahit la deja medible porque su
   ejemplo extrae a `$a`, `$b`, `$c`, `$d`: al no reclamar nada del nombre, solo
   queda la reduccion de complejidad, que un parser cuenta.
-- `arquitectura-java/08-el-principio-srp` -> `codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa`.
+- `arquitectura-java/08` (el principio SRP) -> `codigo-limpio/g30` (las funciones solo deben hacer una cosa).
   Otra vez el mismo principio en pilas distintas, ahora con los papeles
   cambiados: Martin cuenta operaciones semanticas y nunca da un numero; Caules lo
   aplica como separacion de capas, que es una regla de imports.
