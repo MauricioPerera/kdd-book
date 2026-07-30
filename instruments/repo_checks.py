@@ -255,32 +255,53 @@ def check_g24(target, opts):
     return out
 
 
+def _ids_de_prueba(project):
+    """Identificadores `modulo.Clase.metodo` de cada prueba del proyecto."""
+    ids = []
+    for nombre in sorted(os.listdir(project)):
+        if not (nombre.startswith('test_') and nombre.endswith('.py')):
+            continue
+        with open(os.path.join(project, nombre), 'r', encoding='utf-8') as fh:
+            arbol = ast.parse(fh.read(), filename=nombre)
+        modulo = nombre[:-3]
+        for clase in arbol.body:
+            if not isinstance(clase, ast.ClassDef):
+                continue
+            for metodo in clase.body:
+                if isinstance(metodo, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                        and metodo.name.startswith('test'):
+                    ids.append('{}.{}.{}'.format(modulo, clase.name, metodo.name))
+    return ids
+
+
 def check_aislamiento(target, opts):
     """Las pruebas unitarias deben ser independientes entre si.
 
-    Se corre cada modulo de prueba por separado. Si alguno solo pasa cuando lo
-    acompanan los demas, no es una prueba unitaria: es una que depende del
-    estado que dejaron otras, y el dia que cambie el orden va a fallar sin que
-    nadie entienda por que.
+    Se corre **cada prueba por separado**, no cada modulo. La primera version
+    aislaba modulos y no detectaba nada: una prueba que depende del estado que
+    dejo su vecina de arriba pasa igual cuando el modulo corre entero, porque la
+    vecina corre igual. Aislar de a modulo mide el acoplamiento entre archivos y
+    deja pasar el que esta adentro, que es el mas comun.
+
+    Si una prueba solo pasa acompanada, no es unitaria: el dia que cambie el
+    orden va a fallar sin que nadie entienda por que.
     """
     project, _ = _entry(target)
-    modulos = [n[:-3] for n in sorted(os.listdir(project))
-               if n.startswith('test_') and n.endswith('.py')]
-    if not modulos:
-        return [('no hay modulos de prueba que aislar', True)]
+    ids = _ids_de_prueba(project)
+    if not ids:
+        return [('no hay pruebas que aislar', True)]
 
     out = []
-    for modulo in modulos:
+    for identificador in ids:
         try:
-            proc = subprocess.run([sys.executable, '-m', 'unittest', modulo],
+            proc = subprocess.run([sys.executable, '-m', 'unittest', identificador],
                                   cwd=project, capture_output=True, text=True,
                                   timeout=TIMEOUT)
         except (OSError, subprocess.TimeoutExpired) as exc:
-            return [('no se pudo correr {} por separado: {}'.format(modulo, exc), True)]
+            return [('no se pudo correr {} por separado: {}'.format(identificador, exc), True)]
         if proc.returncode != 0:
-            out.append(('{} no pasa corrido solo: depende de otras pruebas\n{}'
-                        .format(modulo, (proc.stderr or proc.stdout).strip()[:300]),
-                        False))
+            out.append(('{} no pasa corrida sola: depende de otra prueba'
+                        .format(identificador), False))
     return out
 
 

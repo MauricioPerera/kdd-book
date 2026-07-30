@@ -1,0 +1,50 @@
+{
+  "id": "104-aislamiento-de-las-pruebas",
+  "node": "104-caracteristicas-de-los-test-unitarios",
+  "title": "104: pruebas que se sostienen solas",
+  "description": "Quitar la dependencia de orden entre las pruebas del carrito.",
+  "intent": "Hacer que cada prueba de test_orden.py pase corrida por separado.",
+  "signature": "def setUp(self) -> None:",
+  "target": "proyecto/test_orden.py",
+  "oracle": "proyecto/test_carrito.py",
+  "seed": "seed_orden.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 40,
+    "params_max": 2
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "repo_checks.py",
+    "args": [
+      "--rule",
+      "aislamiento"
+    ],
+    "threshold": "cada modulo de prueba pasa corrido solo"
+  },
+  "invariants": [
+    "`carrito.py` no se toca: el defecto esta en las pruebas, no en el codigo.",
+    "El oraculo `test_carrito.py` sigue sellado y en verde.",
+    "Cada modulo de prueba pasa corrido por separado."
+  ],
+  "examples": [
+    "`test_hay_dos` afirmando que hay dos elementos que cargo otra prueba -> pasa acompanada y falla sola, en rojo.",
+    "Cada prueba preparando su propio estado -> en verde.",
+    "El instrumento corre cada modulo solo: una suite que solo pasa entera esconde el problema hasta que cambia el orden."
+  ],
+  "do": [
+    "Limpiar el estado compartido antes de cada prueba.",
+    "Dejar que cada prueba arme lo que necesita."
+  ],
+  "dont": [
+    "Tocar `proyecto/test_carrito.py`: es el oraculo congelado.",
+    "Renombrar las pruebas para forzar un orden: el orden alfabetico no es un contrato."
+  ],
+  "stop_if": [
+    "el estado compartido no se puede limpiar desde la prueba"
+  ]
+}

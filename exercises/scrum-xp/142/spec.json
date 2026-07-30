@@ -1,0 +1,44 @@
+{
+  "id": "142-expresiones-extensas",
+  "node": "142-expresiones-extensas",
+  "title": "142: admite_inscripcion sin expresiones extensas",
+  "description": "Partir la condicion compuesta en valores intermedios con nombre.",
+  "intent": "Bajar la cantidad de operadores por expresion en admite_inscripcion.",
+  "signature": "def admite_inscripcion(cupos, abierto, pagado, bloqueado) -> bool:",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 4
+  },
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "exprops",
+      "--max",
+      "2"
+    ],
+    "threshold": "como mucho dos operadores por expresion"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "La firma se mantiene: el oraculo pasa los cuatro argumentos por posicion.",
+    "Ninguna expresion acumula mas de dos operadores."
+  ],
+  "examples": [
+    "`(cupos > 0 and abierto) and (pagado or not bloqueado)` -> cinco operadores en una expresion, en rojo.",
+    "`disponible and habilitado` -> un operador, en verde.",
+    "Los nombres intermedios no necesitan ser elocuentes: el instrumento cuenta operadores, no juzga nombres. Esa es justo la diferencia con G19 de Codigo Limpio, que si exige nombres descriptivos y por eso no es contractable."
+  ],
+  "do": [
+    "Nombrar cada parte de la condicion antes de combinarlas.",
+    "Combinar de a dos, no de a cinco."
+  ],
+  "dont": [
+    "Partir en varios `if` anidados: mueve el problema al anidamiento."
+  ],
+  "stop_if": [
+    "partir la expresion cambia el resultado en algun caso del oraculo"
+  ]
+}

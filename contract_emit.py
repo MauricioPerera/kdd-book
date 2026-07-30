@@ -41,8 +41,11 @@ import sys
 
 BUDGET_KEYS = ('cyclomatic_max', 'nesting_max', 'lines_max', 'params_max')
 
-INDEX_BEGIN = '<!-- contract-emit:begin -->'
-INDEX_END = '<!-- contract-emit:end -->'
+# Un bloque POR LIBRO, igual que en okf_emit y por el mismo motivo: con un
+# bloque compartido, emitir los contratos de un segundo libro borraba del
+# indice los del primero y sus 26 contratos quedaban huerfanos.
+INDEX_BEGIN = '<!-- contract-emit:libro:{} -->'
+INDEX_END = '<!-- /contract-emit:libro:{} -->'
 
 STOP_MARKER = 'PARAR y reportar si'
 
@@ -247,10 +250,12 @@ def _render(spec, book, rel_target, rel_tests, seal, exercise_rel):
     return '\n'.join(lines).rstrip() + '\n'
 
 
-def _merge_index(existing, block):
-    if INDEX_BEGIN in existing and INDEX_END in existing:
-        head = existing.split(INDEX_BEGIN)[0]
-        tail = existing.split(INDEX_END, 1)[1]
+def _merge_index(existing, block, book):
+    """Inserta o reemplaza el bloque de ESTE libro, sin tocar el de los demas."""
+    begin, end = INDEX_BEGIN.format(book), INDEX_END.format(book)
+    if begin in existing and end in existing:
+        head = existing.split(begin)[0]
+        tail = existing.split(end, 1)[1]
         return head + block + tail
     return (existing.rstrip() or '# Indice de conocimiento') + '\n\n' + block + '\n'
 
@@ -291,11 +296,11 @@ def emit(specs, exercises_root, out_dir, book):
             fh.write(_render(spec, book, rel_target, rel_tests, seal, exercise_rel))
         written.append(os.path.relpath(path, out_dir).replace(os.sep, '/'))
 
-    block = [INDEX_BEGIN, '', '## Contratos', '']
+    block = [INDEX_BEGIN.format(book), '', '## Contratos de {}'.format(book), '']
     for spec in sorted(specs, key=lambda s: s['id']):
         block.append('- [{}](contracts/{}.md) - {}'.format(
             spec['id'], spec['id'], spec['description']))
-    block += ['', INDEX_END]
+    block += ['', INDEX_END.format(book)]
 
     index_path = os.path.join(knowledge, 'index.md')
     existing = ''
@@ -303,7 +308,7 @@ def emit(specs, exercises_root, out_dir, book):
         with open(index_path, 'r', encoding='utf-8') as fh:
             existing = fh.read()
     with open(index_path, 'w', encoding='utf-8', newline='\n') as fh:
-        fh.write(_merge_index(existing, '\n'.join(block)))
+        fh.write(_merge_index(existing, '\n'.join(block), book))
     written.append('knowledge/index.md')
     return written
 

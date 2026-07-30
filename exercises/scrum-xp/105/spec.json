@@ -1,0 +1,49 @@
+{
+  "id": "105-anatomia-del-test",
+  "node": "105-anatomia",
+  "title": "105: pruebas que afirmen algo",
+  "description": "Agregar aserciones a las pruebas que corren sin verificar nada.",
+  "intent": "Dar al menos una asercion a cada prueba de test_reglas.py.",
+  "signature": "class ReglasTest(unittest.TestCase):",
+  "target": "proyecto/test_reglas.py",
+  "oracle": "proyecto/test_negocio.py",
+  "seed": "seed_reglas.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 40,
+    "params_max": 2
+  },
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "anatomia",
+      "--max",
+      "0"
+    ],
+    "threshold": "al menos una asercion por prueba"
+  },
+  "invariants": [
+    "`negocio.py` no se toca: este contrato agrega aserciones, no cambia el codigo.",
+    "El oraculo `test_negocio.py` sigue sellado y en verde.",
+    "Cada metodo `test_*` de `test_reglas.py` contiene al menos una asercion."
+  ],
+  "examples": [
+    "`def test_socio(self): descuento(100, True, False)` -> corre, sale 0 y no verifica nada, en rojo.",
+    "`self.assertEqual(descuento(100, True, False), 15)` -> en verde.",
+    "`print(resultado)` no es una asercion: mirar la salida a mano no es verificar."
+  ],
+  "do": [
+    "Afirmar el valor que la regla debe devolver, no solo que no explota.",
+    "Cubrir la rama que cada prueba dice estar probando."
+  ],
+  "dont": [
+    "Tocar `proyecto/test_negocio.py`: es el oraculo congelado.",
+    "Poner `self.assertTrue(True)` para callar al instrumento: afirma algo que no depende del codigo."
+  ],
+  "stop_if": [
+    "alguna prueba no tiene un valor esperado que se pueda afirmar"
+  ]
+}

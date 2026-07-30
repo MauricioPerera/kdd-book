@@ -36,7 +36,7 @@ import unittest
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-EJERCICIOS = os.path.join(RAIZ, 'exercises', 'codigo-limpio')
+EJERCICIOS = os.path.join(RAIZ, 'exercises')
 INSTRUMENTOS = os.path.join(RAIZ, 'instruments')
 
 # Formas de ejercicio segun que se espera del oraculo sobre el seed.
@@ -45,11 +45,16 @@ ORACULO_ROJO = {'cambio-de-interfaz'}
 
 
 def _specs():
-    for nombre in sorted(os.listdir(EJERCICIOS)):
-        ruta = os.path.join(EJERCICIOS, nombre, 'spec.json')
-        if os.path.isfile(ruta):
-            with open(ruta, 'r', encoding='utf-8') as fh:
-                yield nombre, json.load(fh)
+    """Todos los ejercicios de todos los libros, no solo los del primero."""
+    for libro in sorted(os.listdir(EJERCICIOS)):
+        raiz_libro = os.path.join(EJERCICIOS, libro)
+        if not os.path.isdir(raiz_libro):
+            continue
+        for nombre in sorted(os.listdir(raiz_libro)):
+            ruta = os.path.join(raiz_libro, nombre, 'spec.json')
+            if os.path.isfile(ruta):
+                with open(ruta, 'r', encoding='utf-8') as fh:
+                    yield '{}/{}'.format(libro, nombre), json.load(fh)
 
 
 def _nativo(ruta):
@@ -63,8 +68,8 @@ class CoherenciaTest(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp, True)
 
     def _copiar(self, nombre):
-        destino = os.path.join(self.tmp, nombre)
-        shutil.copytree(os.path.join(EJERCICIOS, nombre), destino,
+        destino = os.path.join(self.tmp, nombre.replace('/', '_'))
+        shutil.copytree(os.path.join(EJERCICIOS, _nativo(nombre)), destino,
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
         return destino
 

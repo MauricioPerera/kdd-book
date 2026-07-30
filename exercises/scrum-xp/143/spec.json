@@ -1,0 +1,38 @@
+{
+  "id": "143-metodos-extensos",
+  "node": "143-metodos-extensos",
+  "title": "143: informe_de_evento partido en pasos cortos",
+  "description": "Partir el metodo largo en metodos cortos con nombre.",
+  "intent": "Bajar la cantidad de lineas por metodo en informe_de_evento.",
+  "signature": "def informe_de_evento(evento) -> str:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "metlineas",
+      "--max",
+      "5"
+    ],
+    "threshold": "como mucho cinco lineas por metodo"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "`informe_de_evento` conserva su nombre y su firma.",
+    "Ningun metodo del archivo pasa de cinco lineas, tampoco los extraidos."
+  ],
+  "examples": [
+    "Un metodo de quince lineas que arma, calcula y formatea -> en rojo.",
+    "Cuatro metodos de tres o cuatro lineas cada uno -> en verde.",
+    "Extraer un metodo que a su vez queda largo no alcanza: el instrumento mide todos."
+  ],
+  "do": [
+    "Extraer cada paso con un nombre que diga que calcula.",
+    "Dejar el metodo publico como composicion de los pasos."
+  ],
+  "dont": [
+    "Comprimir las lineas en una sola larguisima: baja el conteo y empeora la lectura."
+  ],
+  "stop_if": [
+    "algun paso no se puede extraer sin cambiar el resultado del oraculo"
+  ]
+}
