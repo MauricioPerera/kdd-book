@@ -266,8 +266,8 @@
       "links": [
         "t5-probar-condiciones-de-limite"
       ],
-      "instrument": "mutation_audit sobre mutantes de limite (sin implementar)",
-      "threshold": "mutantes_limite_vivos: 0"
+      "instrument": "mutation_checks.py --rule limites",
+      "threshold": "cero mutantes de limite vivos"
     },
     {
       "id": "g4-medidas-de-seguridad-canceladas",
@@ -853,7 +853,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, J1",
       "links": [],
-      "instrument": "linter Java: imports con comodin (sin implementar, es Java)",
+      "instrument": "sin instrumento: su consejo es usar comodines, que en Python el estilo prohibe",
       "threshold": "imports_comodin: 0"
     },
     {
@@ -871,8 +871,8 @@
       "verification": "instrumented",
       "locator": "capitulo 17, J2",
       "links": [],
-      "instrument": "AST Java: interfaz solo-constantes (sin implementar, es Java)",
-      "threshold": "herencia_de_constantes: 0"
+      "instrument": "checks.py --rule j2",
+      "threshold": "cero herencias solo por constantes"
     },
     {
       "id": "j3-constantes-frente-a-enumeraciones",
@@ -1102,8 +1102,8 @@
       "links": [
         "g3-comportamiento-incorrecto-en-los-limites"
       ],
-      "instrument": "mutation_audit sobre mutantes de limite (sin implementar)",
-      "threshold": "mutantes_limite_vivos: 0"
+      "instrument": "mutation_checks.py --rule limites",
+      "threshold": "cero mutantes de limite vivos"
     },
     {
       "id": "t6-probar-de-forma-exhaustiva-junto-a-los-errores",

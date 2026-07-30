@@ -100,15 +100,31 @@ Dos decisiones que conviene tener explicitas:
   pruebas corrio. Un `test` que no prueba nada tambien sale 0, y ese es
   justamente el fallo silencioso que la heuristica quiere evitar.
 
-### Las 4 que faltan, y por que
+### Mutacion de limites
 
-| Heuristicas | Por que no estan |
-|---|---|
-| J1, J2 | son construcciones de Java (imports comodin, interfaz de constantes) y los ejercicios son Python |
-| G3, T5 | condiciones de limite: se verifican con mutantes, o sea un motor de mutacion |
+G3 ("comportamiento incorrecto en los limites") y T5 ("probar condiciones de
+limite") son la misma exigencia mirada desde lados opuestos: que la suite se
+entere si un limite se corre un lugar. Eso no se verifica leyendo el codigo ni
+leyendo los tests: hay que **romper el limite a proposito y ver si la suite lo
+nota**.
 
-Ninguna razon es "no se puede medir": son formas de contrato que este pipeline
-todavia no emite.
+`instruments/mutation_checks.py` genera un mutante por cada limite (`<` <-> `<=`,
+`>` <-> `>=`, `==` <-> `!=`, enteros +-1), corre la suite con cada uno y exige que
+todos mueran. Un mutante que sobrevive es una condicion de limite que nadie
+prueba. Solo stdlib.
+
+Dos cosas que este instrumento tiene que hacer bien porque **escribe sobre el
+archivo que mide**: restaurarlo siempre (hay un test que lo fija, verificado
+saboteando el `finally`), y salir con exit 2 si la suite ya venia en rojo — con
+la suite rota no se puede saber si mata mutantes o si falla sola.
+
+### La unica que falta, y por que
+
+**J1** ("evitar extensas listas de importacion mediante el uso de comodines") se
+queda afuera, y la razon es mas filosa que "es de Java": su consejo es *usar
+imports con comodin*, que en Python es justo lo que el estilo prohibe.
+Implementarla invirtiendo el consejo seria tergiversar al autor. La propiedad
+medible (cantidad de imports) existe, pero medir eso seria otra regla, no esta.
 
 ### Ejercicios
 

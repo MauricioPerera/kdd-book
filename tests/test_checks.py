@@ -30,6 +30,12 @@ CASOS = [
      '    return (a and b) or (c and d) or (a > b) or (c < d)\n',
      'def decidir(a, b):\n    return a and b\n'),
 
+    ('j2', 0,
+     'class Config:\n    TOPE = 100\n    MINIMO = 1\n\n\n'
+     'class Servicio(Config):\n    def usar(self):\n        return self.TOPE\n',
+     'class Config:\n    TOPE = 100\n    MINIMO = 1\n\n\n'
+     'class Servicio:\n    def usar(self):\n        return Config.TOPE\n'),
+
     ('metlineas', 5,
      'def larga(n):\n' + ''.join('    n += {}\n'.format(i) for i in range(8)) +
      '    return n\n',

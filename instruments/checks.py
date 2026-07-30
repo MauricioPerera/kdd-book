@@ -553,6 +553,38 @@ def check_anatomia(tree, src, limit):
     return out
 
 
+def check_j2(tree, src, limit):
+    """J2 no heredar constantes: heredar de una clase que solo aporta valores.
+
+    La heuristica es de Java (implementar una interfaz para quedarse con sus
+    constantes) pero la maniobra existe igual en Python: heredar de una clase
+    que no tiene comportamiento, solo constantes, para escribirlas sin
+    calificar. Eso usa la herencia como atajo de sintaxis y ata la jerarquia a
+    algo que no es un tipo.
+    """
+    solo_constantes = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ClassDef):
+            continue
+        tiene_metodos = any(isinstance(m, (ast.FunctionDef, ast.AsyncFunctionDef))
+                            for m in node.body)
+        constantes = [m for m in node.body
+                      if isinstance(m, (ast.Assign, ast.AnnAssign))]
+        if constantes and not tiene_metodos:
+            solo_constantes.add(node.name)
+
+    out = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ClassDef):
+            continue
+        for base in node.bases:
+            if isinstance(base, ast.Name) and base.id in solo_constantes:
+                out.append((node.lineno,
+                            '{} hereda de {}, que solo aporta constantes'
+                            .format(node.name, base.id)))
+    return out
+
+
 _SUPPRESSIONS = re.compile(
     r'#\s*(noqa|type:\s*ignore|pylint:\s*disable|mypy:\s*ignore)'
     r'|@SuppressWarnings|@unittest\.skip|@pytest\.mark\.skip')
@@ -577,6 +609,7 @@ RULES = {
     'anatomia': (check_anatomia, 0, 'Anatomia del test: sin asercion no prueba nada'),
     'c5': (check_c5, 0, 'C5 codigo comentado'),
     'exprops': (check_exprops, 3, 'Expresiones extensas: operadores por expresion'),
+    'j2': (check_j2, 0, 'J2 no heredar constantes'),
     'metlineas': (check_metlineas, 15, 'Metodos extensos: lineas por funcion'),
     'f2': (check_f2, 0, 'F2 argumentos de salida'),
     'f3': (check_f3, 0, 'F3/G15 argumento de indicador o selector'),
