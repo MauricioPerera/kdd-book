@@ -65,6 +65,39 @@ A_NODES = {
     'T9': ('repo_checks.py --rule t9', 'test_seconds_max'),
 }
 
+# Nombre canonico de la tecnica, cuando tiene uno. Es metadato del triaje, no
+# texto del autor: es el handle que permite encontrar la misma tecnica en
+# libros distintos y en idiomas distintos. Sin esto, la memoria solo responde a
+# las palabras que eligio el traductor — buscar "Demeter" no encontraba a G36,
+# que en esta edicion se llama "Evitar desplazamientos transitivos".
+ALIAS = {
+    'C5': ['codigo comentado', 'commented-out code'],
+    'F1': ['demasiados argumentos', 'too many arguments'],
+    'F2': ['argumento de salida', 'output argument'],
+    'F3': ['argumento de indicador', 'flag argument', 'boolean parameter'],
+    'G3': ['condiciones de limite', 'boundary conditions'],
+    'G5': ['DRY', 'no te repitas', 'duplicated code'],
+    'G9': ['codigo muerto', 'dead code'],
+    'G14': ['envidia de caracteristicas', 'feature envy'],
+    'G15': ['argumento selector', 'selector argument'],
+    'G19': ['variable explicativa', 'explaining variable', 'extract variable'],
+    'G23': ['reemplazar condicional con polimorfismo', 'replace conditional with polymorphism'],
+    'G25': ['numeros magicos', 'magic numbers'],
+    'G28': ['encapsular condicional', 'encapsulate conditional'],
+    'G30': ['una sola responsabilidad', 'single responsibility', 'do one thing'],
+    'G33': ['encapsular condicion de limite', 'encapsulate boundary condition'],
+    'G36': ['ley de Demeter', 'law of Demeter', 'train wreck'],
+    'J2': ['interfaz de constantes', 'constant interface'],
+    'N5': ['largo del nombre segun el ambito', 'name length scope'],
+    'N6': ['notacion hungara', 'hungarian notation', 'encodings'],
+    'T1': ['cobertura', 'coverage'],
+    'T5': ['condiciones de limite', 'boundary conditions'],
+    'T9': ['pruebas rapidas', 'fast tests'],
+    'E1': ['build en un paso', 'one-step build'],
+    'E2': ['pruebas en un paso', 'one-step test'],
+    'G24': ['convenciones de codigo', 'coding standards'],
+}
+
 # Pila C: afirmaciones interpretativas sobre diagnostico. No son tecnicas con
 # artefacto, asi que no llegan siquiera a preguntarse si son medibles.
 C_NODES = {'T4', 'T7', 'T8'}
@@ -176,6 +209,7 @@ def build(text):
             'pile': pile,
             'verification': verification,
             'locator': 'capitulo 17, {}'.format(code),
+            'alias': ALIAS.get(code, []),
             'links': [id_by_code[t] for t in LINKS.get(code, []) if t in id_by_code],
         }
         if instrument:

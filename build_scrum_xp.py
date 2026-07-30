@@ -95,6 +95,28 @@ A_NODES = {
     160: ('tablero: items simultaneos por columna', 'limite WIP declarado por columna', 'proxy'),
 }
 
+# Nombre canonico de la tecnica. Ver la nota en build_codigo_limpio.py.
+ALIAS = {
+    24: ['entregas frecuentes', 'frequent delivery'],
+    84: ['entregas cortas', 'short releases'],
+    85: ['testing', 'automated testing'],
+    86: ['convenciones de codigo', 'coding standards'],
+    87: ['propiedad colectiva', 'collective ownership'],
+    83: ['programacion de a pares', 'pair programming'],
+    88: ['integracion continua', 'continuous integration'],
+    104: ['pruebas unitarias', 'unit tests', 'FIRST'],
+    105: ['anatomia del test', 'arrange act assert'],
+    107: ['red green refactor', 'test first'],
+    109: ['red green refactor', 'test first'],
+    140: ['variable temporal', 'temporary variable'],
+    142: ['variable explicativa', 'extract variable', 'expresiones extensas'],
+    143: ['metodo extenso', 'long method', 'extract method'],
+    144: ['DRY', 'duplicated code'],
+    145: ['DRY', 'duplicated code', 'pull up method'],
+    146: ['DRY', 'duplicated code'],
+    160: ['limite WIP', 'work in progress limit'],
+}
+
 # Pila B: tecnica real cuya propiedad definitoria no es medible.
 B_NODES = {
     22, 23, 26, 27, 28, 30,
@@ -237,6 +259,7 @@ def build(texto):
             'pile': pila,
             'verification': verification,
             'locator': 'pagina {}'.format(pagina),
+            'alias': ALIAS.get(indice, []),
             'links': [d for d in (destino(t) for t in LINKS.get(indice, [])) if d],
         }
         if instrumento:

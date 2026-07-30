@@ -26,6 +26,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 1",
+      "alias": [],
       "links": []
     },
     {
@@ -40,6 +41,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 2",
+      "alias": [],
       "links": []
     },
     {
@@ -54,6 +56,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 3",
+      "alias": [],
       "links": []
     },
     {
@@ -69,6 +72,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 4",
+      "alias": [
+        "DRY",
+        "no te repitas",
+        "duplicated code"
+      ],
       "links": [
         "codigo-limpio/g5",
         "scrum-xp/144",
@@ -90,6 +98,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 5",
+      "alias": [],
       "links": []
     },
     {
@@ -105,6 +114,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 6",
+      "alias": [
+        "manejo de excepciones",
+        "exception handling"
+      ],
       "links": [],
       "instrument": "arch_checks.py --rule excepciones",
       "threshold": "cero catch mudos, vacios o amplios"
@@ -121,6 +134,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 7",
+      "alias": [],
       "links": []
     },
     {
@@ -136,6 +150,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 8",
+      "alias": [
+        "SRP",
+        "single responsibility",
+        "separacion de capas"
+      ],
       "links": [
         "codigo-limpio/g30",
         "09",
@@ -158,6 +177,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 9",
+      "alias": [
+        "MVC",
+        "modelo vista controlador"
+      ],
       "links": [
         "08",
         "12",
@@ -178,6 +201,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 10",
+      "alias": [],
       "links": []
     },
     {
@@ -193,6 +217,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 11",
+      "alias": [
+        "OCP",
+        "open closed principle",
+        "abierto cerrado"
+      ],
       "links": [
         "codigo-limpio/g23",
         "13"
@@ -214,6 +243,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 12",
+      "alias": [
+        "MVC",
+        "front controller"
+      ],
       "links": [
         "09"
       ],
@@ -232,6 +265,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 13",
+      "alias": [
+        "patron Command",
+        "command pattern"
+      ],
       "links": [
         "11"
       ],
@@ -249,6 +286,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 14",
+      "alias": [],
       "links": []
     },
     {
@@ -263,6 +301,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 15",
+      "alias": [],
       "links": []
     },
     {
@@ -278,6 +317,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 16",
+      "alias": [
+        "ISP",
+        "interface segregation"
+      ],
       "links": [
         "codigo-limpio/g8",
         "17"
@@ -298,6 +341,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17",
+      "alias": [
+        "DAO",
+        "data access object"
+      ],
       "links": [
         "16",
         "18",
@@ -319,6 +366,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 18",
+      "alias": [
+        "DAO generico",
+        "generic DAO"
+      ],
       "links": [
         "04",
         "17"
@@ -339,6 +390,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 19",
+      "alias": [
+        "IoC",
+        "inversion de control",
+        "inversion of control"
+      ],
       "links": [
         "20",
         "23"
@@ -359,6 +415,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 20",
+      "alias": [
+        "patron Factory",
+        "factory pattern"
+      ],
       "links": [
         "19",
         "21"
@@ -378,6 +438,9 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 21",
+      "alias": [
+        "Abstract Factory"
+      ],
       "links": [
         "20"
       ],
@@ -396,6 +459,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 22",
+      "alias": [
+        "capa de servicio",
+        "service layer"
+      ],
       "links": [
         "08",
         "17"
@@ -416,6 +483,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 23",
+      "alias": [
+        "inyeccion de dependencia",
+        "dependency injection",
+        "DI"
+      ],
       "links": [
         "19"
       ],
@@ -434,6 +506,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 24",
+      "alias": [
+        "patron Template",
+        "template method"
+      ],
       "links": [
         "26"
       ],
@@ -451,6 +527,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 25",
+      "alias": [],
       "links": []
     },
     {
@@ -466,6 +543,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 26",
+      "alias": [
+        "AOP",
+        "programacion orientada a aspectos",
+        "aspect oriented"
+      ],
       "links": [
         "24"
       ],
@@ -484,6 +566,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 27",
+      "alias": [],
       "links": []
     },
     {
@@ -499,6 +582,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 28",
+      "alias": [
+        "COC",
+        "convention over configuration",
+        "convencion sobre configuracion"
+      ],
       "links": [],
       "instrument": "arch_checks.py --rule coc",
       "threshold": "los campos coinciden con las columnas"
@@ -515,6 +603,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 29",
+      "alias": [],
       "links": []
     },
     {
@@ -529,6 +618,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 30",
+      "alias": [],
       "links": []
     },
     {
@@ -543,6 +633,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 31",
+      "alias": [],
       "links": []
     },
     {
@@ -557,6 +648,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 32",
+      "alias": [],
       "links": []
     },
     {
@@ -571,6 +663,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 33",
+      "alias": [],
       "links": []
     }
   ]

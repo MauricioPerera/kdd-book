@@ -104,6 +104,41 @@ igual. La razon no es obvia: **son propiedades del grafo de dependencias e
 instanciacion**, que es lo que el analisis estatico lee de forma nativa.
 "Semantico" para un humano no implica "no medible" para un parser.
 
+## La memoria portable
+
+`memoria.py` exporta todo lo extraido a **un solo archivo** y lo hace
+consultable. Es lo que otro agente necesita para usar este conocimiento **sin
+tener los libros**.
+
+```bash
+python memoria.py exportar          # -> memoria.json: 252 tecnicas, 41 instrumentos
+python memoria.py buscar DRY        # la misma tecnica en los tres libros
+python memoria.py medibles          # las que tienen instrumento, con su comando
+python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
+```
+
+El bundle son **364 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
+PDF y sin el repo, `aplicar` corre 26 instrumentos sobre un archivo cualquiera y
+reporta 4 en rojo con la tecnica que senala cada uno.
+
+Tres propiedades la hacen portable, y las tres costaron trabajo:
+
+- **Los ids son estables entre idiomas.** `g36`, no
+  `g36-evitar-desplazamientos-transitivos`. Dos memorias de fuentes distintas se
+  pueden fusionar por id en vez de duplicarse.
+- **El contrato con el instrumento es el exit code**, no el mensaje. Los
+  mensajes estan en espanol; un agente en cualquier idioma consume 0/1/2 sin
+  traducir nada.
+- **Cada tecnica lleva su nombre canonico** en `alias`. Sin eso la memoria solo
+  responde a las palabras que eligio el traductor: buscar "Demeter" no
+  encontraba a G36, que en esta edicion se llama "Evitar desplazamientos
+  transitivos". `buscar DRY` devuelve ahora las cinco entradas de los tres
+  libros, todas apuntando al mismo instrumento.
+
+El alias es metadato del triaje, no texto del autor: es el handle que cruza
+idiomas y libros.
+
 ## Uso
 
 ```bash

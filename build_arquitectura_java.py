@@ -97,6 +97,28 @@ INSTRUMENTOS = {
     28: ('arch_checks.py --rule coc', 'los campos coinciden con las columnas'),
 }
 
+# Nombre canonico de la tecnica. Ver la nota en build_codigo_limpio.py.
+ALIAS = {
+    4: ['DRY', 'no te repitas', 'duplicated code'],
+    6: ['manejo de excepciones', 'exception handling'],
+    8: ['SRP', 'single responsibility', 'separacion de capas'],
+    9: ['MVC', 'modelo vista controlador'],
+    11: ['OCP', 'open closed principle', 'abierto cerrado'],
+    12: ['MVC', 'front controller'],
+    13: ['patron Command', 'command pattern'],
+    16: ['ISP', 'interface segregation'],
+    17: ['DAO', 'data access object'],
+    18: ['DAO generico', 'generic DAO'],
+    19: ['IoC', 'inversion de control', 'inversion of control'],
+    20: ['patron Factory', 'factory pattern'],
+    21: ['Abstract Factory'],
+    22: ['capa de servicio', 'service layer'],
+    23: ['inyeccion de dependencia', 'dependency injection', 'DI'],
+    24: ['patron Template', 'template method'],
+    26: ['AOP', 'programacion orientada a aspectos', 'aspect oriented'],
+    28: ['COC', 'convention over configuration', 'convencion sobre configuracion'],
+}
+
 WHY_NOT = {
     13: ('la presencia de un patron no se detecta de forma robusta: una jerarquia '
          'con despacho puede ser Command o cualquier otra cosa'),
@@ -176,6 +198,7 @@ def build():
             'pile': pila,
             'verification': verification,
             'locator': 'capitulo {}'.format(indice),
+            'alias': ALIAS.get(indice, []),
             'links': [d for d in (destino(t) for t in LINKS.get(indice, [])) if d],
         }
         if indice in INSTRUMENTOS:

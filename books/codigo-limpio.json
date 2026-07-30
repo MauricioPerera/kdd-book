@@ -27,6 +27,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C1",
+      "alias": [],
       "links": []
     },
     {
@@ -42,6 +43,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C2",
+      "alias": [],
       "links": [
         "c3"
       ],
@@ -60,6 +62,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C3",
+      "alias": [],
       "links": [
         "c2"
       ]
@@ -77,6 +80,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C4",
+      "alias": [],
       "links": []
     },
     {
@@ -93,6 +97,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, C5",
+      "alias": [
+        "codigo comentado",
+        "commented-out code"
+      ],
       "links": [
         "g9"
       ],
@@ -113,6 +121,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, E1",
+      "alias": [
+        "build en un paso",
+        "one-step build"
+      ],
       "links": [
         "e2"
       ],
@@ -133,6 +145,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, E2",
+      "alias": [
+        "pruebas en un paso",
+        "one-step test"
+      ],
       "links": [
         "e1"
       ],
@@ -153,6 +169,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, F1",
+      "alias": [
+        "demasiados argumentos",
+        "too many arguments"
+      ],
       "links": [
         "g30"
       ],
@@ -173,6 +193,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, F2",
+      "alias": [
+        "argumento de salida",
+        "output argument"
+      ],
       "links": [
         "f1"
       ],
@@ -193,6 +217,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, F3",
+      "alias": [
+        "argumento de indicador",
+        "flag argument",
+        "boolean parameter"
+      ],
       "links": [
         "g15"
       ],
@@ -213,6 +242,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, F4",
+      "alias": [],
       "links": [
         "g9"
       ],
@@ -232,6 +262,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G1",
+      "alias": [],
       "links": []
     },
     {
@@ -247,6 +278,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G2",
+      "alias": [],
       "links": []
     },
     {
@@ -263,6 +295,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G3",
+      "alias": [
+        "condiciones de limite",
+        "boundary conditions"
+      ],
       "links": [
         "t5"
       ],
@@ -283,6 +319,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G4",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g4",
       "threshold": "supresiones: 0"
@@ -301,6 +338,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G5",
+      "alias": [
+        "DRY",
+        "no te repitas",
+        "duplicated code"
+      ],
       "links": [
         "g33",
         "g12"
@@ -321,6 +363,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G6",
+      "alias": [],
       "links": []
     },
     {
@@ -337,6 +380,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G7",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g7",
       "threshold": "refs_base_a_variante: 0"
@@ -355,6 +399,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G8",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g8",
       "threshold": "api_publica_max"
@@ -373,6 +418,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G9",
+      "alias": [
+        "codigo muerto",
+        "dead code"
+      ],
       "links": [
         "f4"
       ],
@@ -393,6 +442,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G10",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g10",
       "threshold": "distancia_declaracion_max"
@@ -410,6 +460,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G11",
+      "alias": [],
       "links": []
     },
     {
@@ -426,6 +477,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G12",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g12",
       "threshold": "desorden: 0"
@@ -443,6 +495,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G13",
+      "alias": [],
       "links": []
     },
     {
@@ -459,6 +512,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G14",
+      "alias": [
+        "envidia de caracteristicas",
+        "feature envy"
+      ],
       "links": [],
       "instrument": "checks.py --rule g14",
       "threshold": "accesos_ajenos_max"
@@ -477,6 +534,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G15",
+      "alias": [
+        "argumento selector",
+        "selector argument"
+      ],
       "links": [
         "f3"
       ],
@@ -496,6 +557,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G16",
+      "alias": [],
       "links": []
     },
     {
@@ -511,6 +573,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G17",
+      "alias": [],
       "links": []
     },
     {
@@ -526,6 +589,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G18",
+      "alias": [],
       "links": []
     },
     {
@@ -541,6 +605,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G19",
+      "alias": [
+        "variable explicativa",
+        "explaining variable",
+        "extract variable"
+      ],
       "links": [
         "g28",
         "n1"
@@ -560,6 +629,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G20",
+      "alias": [],
       "links": []
     },
     {
@@ -575,6 +645,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G21",
+      "alias": [],
       "links": []
     },
     {
@@ -590,6 +661,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G22",
+      "alias": [],
       "links": []
     },
     {
@@ -606,6 +678,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G23",
+      "alias": [
+        "reemplazar condicional con polimorfismo",
+        "replace conditional with polymorphism"
+      ],
       "links": [
         "g30"
       ],
@@ -626,6 +702,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G24",
+      "alias": [
+        "convenciones de codigo",
+        "coding standards"
+      ],
       "links": [],
       "instrument": "repo_checks.py --rule g24",
       "threshold": "convenciones declaradas en verde"
@@ -644,6 +724,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G25",
+      "alias": [
+        "numeros magicos",
+        "magic numbers"
+      ],
       "links": [],
       "instrument": "checks.py --rule g25",
       "threshold": "numeros_magicos: 0"
@@ -661,6 +745,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G26",
+      "alias": [],
       "links": []
     },
     {
@@ -676,6 +761,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G27",
+      "alias": [],
       "links": []
     },
     {
@@ -692,6 +778,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G28",
+      "alias": [
+        "encapsular condicional",
+        "encapsulate conditional"
+      ],
       "links": [
         "g19",
         "g29"
@@ -713,6 +803,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G29",
+      "alias": [],
       "links": [],
       "instrument": "checks.py --rule g29",
       "threshold": "condicionales_negadas_max"
@@ -730,6 +821,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G30",
+      "alias": [
+        "una sola responsabilidad",
+        "single responsibility",
+        "do one thing"
+      ],
       "links": [
         "f1",
         "g34"
@@ -749,6 +845,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G31",
+      "alias": [],
       "links": []
     },
     {
@@ -764,6 +861,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G32",
+      "alias": [],
       "links": []
     },
     {
@@ -780,6 +878,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G33",
+      "alias": [
+        "encapsular condicion de limite",
+        "encapsulate boundary condition"
+      ],
       "links": [
         "g5"
       ],
@@ -799,6 +901,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G34",
+      "alias": [],
       "links": [
         "g30"
       ]
@@ -816,6 +919,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G35",
+      "alias": [],
       "links": []
     },
     {
@@ -832,6 +936,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G36",
+      "alias": [
+        "ley de Demeter",
+        "law of Demeter",
+        "train wreck"
+      ],
       "links": [
         "g14"
       ],
@@ -852,6 +961,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, J1",
+      "alias": [],
       "links": [],
       "instrument": "sin instrumento: su consejo es usar comodines, que en Python el estilo prohibe",
       "threshold": "imports_comodin: 0"
@@ -870,6 +980,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, J2",
+      "alias": [
+        "interfaz de constantes",
+        "constant interface"
+      ],
       "links": [],
       "instrument": "checks.py --rule j2",
       "threshold": "cero herencias solo por constantes"
@@ -887,6 +1001,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, J3",
+      "alias": [],
       "links": []
     },
     {
@@ -902,6 +1017,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N1",
+      "alias": [],
       "links": [
         "n2",
         "n4",
@@ -922,6 +1038,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N2",
+      "alias": [],
       "links": [
         "n1"
       ]
@@ -939,6 +1056,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N3",
+      "alias": [],
       "links": []
     },
     {
@@ -954,6 +1072,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N4",
+      "alias": [],
       "links": [
         "n1"
       ]
@@ -972,6 +1091,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, N5",
+      "alias": [
+        "largo del nombre segun el ambito",
+        "name length scope"
+      ],
       "links": [
         "n1"
       ],
@@ -992,6 +1115,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, N6",
+      "alias": [
+        "notacion hungara",
+        "hungarian notation",
+        "encodings"
+      ],
       "links": [],
       "instrument": "checks.py --rule n6",
       "threshold": "codificaciones: 0"
@@ -1009,6 +1137,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N7",
+      "alias": [],
       "links": [
         "n1"
       ]
@@ -1027,6 +1156,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, T1",
+      "alias": [
+        "cobertura",
+        "coverage"
+      ],
       "links": [
         "t2"
       ],
@@ -1047,6 +1180,7 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, T2",
+      "alias": [],
       "links": [
         "t1"
       ],
@@ -1066,6 +1200,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, T3",
+      "alias": [],
       "links": []
     },
     {
@@ -1081,6 +1216,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T4",
+      "alias": [],
       "links": [
         "g4"
       ]
@@ -1099,6 +1235,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, T5",
+      "alias": [
+        "condiciones de limite",
+        "boundary conditions"
+      ],
       "links": [
         "g3"
       ],
@@ -1118,6 +1258,7 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, T6",
+      "alias": [],
       "links": []
     },
     {
@@ -1133,6 +1274,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T7",
+      "alias": [],
       "links": [
         "t8"
       ]
@@ -1150,6 +1292,7 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T8",
+      "alias": [],
       "links": [
         "t7"
       ]
@@ -1168,6 +1311,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, T9",
+      "alias": [
+        "pruebas rapidas",
+        "fast tests"
+      ],
       "links": [],
       "instrument": "repo_checks.py --rule t9",
       "threshold": "test_seconds_max"

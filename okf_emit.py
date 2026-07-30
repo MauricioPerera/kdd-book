@@ -170,6 +170,11 @@ def _render_node(node, source):
         out.append(node['body'].strip())
         out.append('')
 
+    if node.get('alias'):
+        out.append('Tambien conocida como: {}.'.format(
+            ', '.join(node['alias'])))
+        out.append('')
+
     if node.get('defining_property'):
         out.append('## Propiedad definitoria')
         out.append('')
