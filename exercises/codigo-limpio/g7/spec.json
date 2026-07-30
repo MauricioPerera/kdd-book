@@ -1,6 +1,6 @@
 {
   "id": "g7-base-que-depende-de-su-variante",
-  "node": "g7-clases-base-que-dependen-de-sus-variantes",
+  "node": "g7",
   "title": "G7: Notificacion sin nombrar a su variante",
   "description": "Sacar de la clase base la referencia a una de sus subclases.",
   "intent": "Eliminar la referencia de la clase base a su variante Email.",

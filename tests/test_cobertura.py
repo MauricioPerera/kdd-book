@@ -11,6 +11,7 @@ inventario.
 """
 
 import glob
+import re
 import json
 import os
 import unittest
@@ -93,6 +94,68 @@ def _tecnicas_con_script():
                 continue
             out.append((libro, node['id'], script, _regla(partes, script)))
     return out
+
+
+class IdentidadTest(unittest.TestCase):
+    """Los ids de nodo no pueden depender del idioma del libro.
+
+    Existe por un defecto real. Los ids eran el codigo del autor pegado a un
+    slug del titulo: `g36-evitar-desplazamientos-transitivos`. Con eso, el
+    mismo nodo de la edicion inglesa habria sido
+    `g36-avoid-transitive-navigation`, o sea otro nodo. Tres consecuencias, y
+    ninguna la detectaba nadie porque cada grafo validaba perfecto por
+    separado:
+
+      - los enlaces entre libros dejan de resolver;
+      - dos grafos del mismo libro en idiomas distintos no se fusionan, se
+        duplican;
+      - la memoria exportada no se puede juntar con la de otro.
+
+    Ahora el id es solo el identificador del autor (`g36`, `142`, `08`) y el
+    titulo es una etiqueta que cambia con la edicion.
+    """
+
+    # Codigo del autor: letras opcionales seguidas de numero. Nada de prosa.
+    ID_ESTABLE = re.compile(r'^[a-z]{0,4}\d{1,3}$')
+
+    def test_los_ids_no_llevan_prosa(self):
+        for libro in LIBROS:
+            with open(os.path.join(RAIZ, 'books', libro + '.json'),
+                      encoding='utf-8') as fh:
+                nodes = json.load(fh)['nodes']
+            for node in nodes:
+                with self.subTest(libro=libro, nodo=node['id']):
+                    self.assertRegex(
+                        node['id'], self.ID_ESTABLE,
+                        'el id lleva texto del titulo: cambiaria con la traduccion')
+
+    def test_los_ids_no_dependen_del_titulo(self):
+        """Comprobacion directa: cambiar el titulo no puede cambiar el id."""
+        for libro in LIBROS:
+            with open(os.path.join(RAIZ, 'books', libro + '.json'),
+                      encoding='utf-8') as fh:
+                nodes = json.load(fh)['nodes']
+            for node in nodes:
+                palabras = [p for p in re.split(r'[^a-z]+', node['title'].lower())
+                            if len(p) > 3]
+                with self.subTest(libro=libro, nodo=node['id']):
+                    for palabra in palabras:
+                        self.assertNotIn(
+                            palabra, node['id'],
+                            'el id contiene una palabra del titulo')
+
+    def test_los_enlaces_cruzados_usan_ids_estables(self):
+        for libro in LIBROS:
+            with open(os.path.join(RAIZ, 'books', libro + '.json'),
+                      encoding='utf-8') as fh:
+                nodes = json.load(fh)['nodes']
+            for node in nodes:
+                for destino in node.get('links', []):
+                    objetivo = destino.split('/')[-1]
+                    with self.subTest(origen=node['id'], destino=destino):
+                        self.assertRegex(
+                            objetivo, self.ID_ESTABLE,
+                            'el enlace apunta a un id con prosa')
 
 
 class CoberturaTest(unittest.TestCase):

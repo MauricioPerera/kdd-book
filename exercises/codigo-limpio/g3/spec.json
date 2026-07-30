@@ -1,6 +1,6 @@
 {
   "id": "g3-condiciones-de-limite",
-  "node": "g3-comportamiento-incorrecto-en-los-limites",
+  "node": "g3",
   "task": "g3_condiciones_de_limite",
   "title": "G3/T5: probar los limites hasta que ningun mutante sobreviva",
   "description": "Agregar las pruebas de borde que faltan para que la suite detecte un limite corrido.",

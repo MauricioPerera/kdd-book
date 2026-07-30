@@ -1,6 +1,6 @@
 {
   "id": "105-anatomia-del-test",
-  "node": "105-anatomia",
+  "node": "105",
   "title": "105: pruebas que afirmen algo",
   "description": "Agregar aserciones a las pruebas que corren sin verificar nada.",
   "intent": "Dar al menos una asercion a cada prueba de test_reglas.py.",

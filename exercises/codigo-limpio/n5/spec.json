@@ -1,6 +1,6 @@
 {
   "id": "n5-nombres-extensos-para-ambitos-extensos",
-  "node": "n5-usar-nombres-extensos-para-ambitos-extensos",
+  "node": "n5",
   "title": "N5: nombres a la altura del ambito que abarcan",
   "description": "Alargar los nombres de una letra que viven a lo largo de toda la funcion.",
   "intent": "Ajustar el largo de los nombres locales al largo de su ambito.",

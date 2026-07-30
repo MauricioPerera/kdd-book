@@ -1,7 +1,7 @@
 {
   "id": "f1-demasiados-argumentos",
   "book": "codigo-limpio",
-  "node": "f1-demasiados-argumentos",
+  "node": "f1",
   "task": "f1_reducir_argumentos",
   "title": "F1: crear_evento con no mas de tres argumentos",
   "description": "Agrupar los cinco argumentos posicionales de crear_evento respetando el umbral que da el propio autor.",
@@ -13,7 +13,10 @@
   "kind": "cambio-de-interfaz",
   "instrument": {
     "script": "params_max.py",
-    "args": ["--max", "3"],
+    "args": [
+      "--max",
+      "3"
+    ],
     "threshold": "params_max: 3"
   },
   "budget": {
@@ -22,7 +25,10 @@
     "lines_max": 20,
     "params_max": 3
   },
-  "forbids": ["network", "subprocess"],
+  "forbids": [
+    "network",
+    "subprocess"
+  ],
   "deps_allowed": [],
   "invariants": [
     "El evento devuelto tiene exactamente las claves de entrada mas `agotado`.",

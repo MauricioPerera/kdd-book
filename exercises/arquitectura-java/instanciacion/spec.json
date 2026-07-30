@@ -1,6 +1,6 @@
 {
   "id": "instanciacion-inversion-de-control",
-  "node": "19-el-principio-de-inversion-de-control",
+  "node": "19",
   "title": "Inversion de control: el servicio recibe su dependencia",
   "description": "Quitar del servicio la creacion de su propio DAO.",
   "intent": "Hacer que ServicioTarifas reciba su dependencia en vez de fabricarsela.",

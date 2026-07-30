@@ -1,6 +1,6 @@
 {
   "id": "t2-herramienta-de-cobertura",
-  "node": "t2-usar-una-herramienta-de-cobertura",
+  "node": "t2",
   "title": "T2: la cobertura como tarea del proyecto",
   "description": "Exponer la medicion de cobertura como una tarea del punto de entrada.",
   "intent": "Agregar al proyecto una tarea que mida e informe la cobertura.",

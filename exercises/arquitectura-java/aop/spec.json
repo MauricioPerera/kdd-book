@@ -1,6 +1,6 @@
 {
   "id": "aop-negocio-sin-transversales",
-  "node": "26-programacion-orientada-a-aspectos",
+  "node": "26",
   "title": "AOP: el negocio sin codigo transversal",
   "description": "Sacar el registro de actividad de la funcion de negocio.",
   "intent": "Eliminar el codigo transversal de la funcion de negocio.",

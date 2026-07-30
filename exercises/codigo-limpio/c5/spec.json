@@ -1,6 +1,6 @@
 {
   "id": "c5-codigo-comentado",
-  "node": "c5-codigo-comentado",
+  "node": "c5",
   "title": "C5: total_con_iva sin codigo comentado",
   "description": "Borrar el codigo guardado en comentarios.",
   "intent": "Eliminar el codigo comentado de total_con_iva.",

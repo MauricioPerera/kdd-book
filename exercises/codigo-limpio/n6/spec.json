@@ -1,6 +1,6 @@
 {
   "id": "n6-evitar-codificaciones",
-  "node": "n6-evitar-codificaciones",
+  "node": "n6",
   "title": "N6: nombres sin prefijos de tipo ni de ambito",
   "description": "Quitar las codificaciones hungaras y de miembro de los identificadores.",
   "intent": "Eliminar los prefijos de tipo y de ambito de los identificadores.",

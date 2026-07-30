@@ -1,6 +1,6 @@
 {
   "id": "excepciones-sin-catch-mudos",
-  "node": "06-manejo-de-excepciones",
+  "node": "06",
   "title": "Excepciones: cada catch dice que atrapa",
   "description": "Reemplazar los except mudos y vacios por tipos concretos.",
   "intent": "Eliminar los except sin tipo y los bloques except vacios.",

@@ -1,6 +1,6 @@
 {
   "id": "g8-exceso-de-informacion",
-  "node": "g8-exceso-de-informacion",
+  "node": "g8",
   "title": "G8: Inscripcion con una superficie publica angosta",
   "description": "Reducir a uno los metodos publicos de Inscripcion.",
   "intent": "Achicar la interfaz publica de Inscripcion dejando solo lo que se usa desde afuera.",

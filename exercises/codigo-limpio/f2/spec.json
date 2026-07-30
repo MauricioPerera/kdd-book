@@ -1,6 +1,6 @@
 {
   "id": "f2-argumentos-de-salida",
-  "node": "f2-argumentos-de-salida",
+  "node": "f2",
   "title": "F2: agregar_inscripto sin mutar lo que recibe",
   "description": "Eliminar el argumento de salida devolviendo una coleccion nueva.",
   "intent": "Quitar la mutacion del parametro `inscriptos` devolviendo una coleccion nueva.",

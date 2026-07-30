@@ -1,6 +1,6 @@
 {
   "id": "t9-pruebas-rapidas",
-  "node": "t9-las-pruebas-deben-ser-rapidas",
+  "node": "t9",
   "title": "T9: sacar la espera fija del camino de las pruebas",
   "description": "Quitar la espera heredada que hace lenta a la suite.",
   "intent": "Eliminar la espera fija del camino de ejecucion de las pruebas.",

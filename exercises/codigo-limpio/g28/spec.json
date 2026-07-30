@@ -1,6 +1,6 @@
 {
   "id": "g28-encapsular-condicionales",
-  "node": "g28-encapsular-condicionales",
+  "node": "g28",
   "title": "G28: estado_inscripcion con la condicion encapsulada",
   "description": "Extraer la condicion compuesta a una funcion con nombre.",
   "intent": "Encapsular la condicion compuesta de estado_inscripcion en una funcion con nombre.",

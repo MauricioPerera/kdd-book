@@ -1,7 +1,7 @@
 {
   "id": "g36-ley-de-demeter",
   "book": "codigo-limpio",
-  "node": "g36-evitar-desplazamientos-transitivos",
+  "node": "g36",
   "task": "g36_ley_de_demeter",
   "title": "G36: etiqueta de envio sin navegar el grafo de objetos",
   "description": "Refactorizar etiqueta_envio para que ningun modulo conozca mas alla de su colaborador inmediato.",
@@ -13,7 +13,10 @@
   "kind": "refactor",
   "instrument": {
     "script": "chain_depth.py",
-    "args": ["--max", "1"],
+    "args": [
+      "--max",
+      "1"
+    ],
     "threshold": "chain_depth_max: 1"
   },
   "budget": {
@@ -22,7 +25,10 @@
     "lines_max": 40,
     "params_max": 3
   },
-  "forbids": ["network", "subprocess"],
+  "forbids": [
+    "network",
+    "subprocess"
+  ],
   "deps_allowed": [],
   "invariants": [
     "El comportamiento observable de `etiqueta_envio` no cambia: el oraculo pasa igual antes y despues.",

@@ -279,6 +279,24 @@ def _render_source(source, nodes):
     out.append('mide si el instrumento lee el artefacto del que trata la tecnica, o')
     out.append('un registro que llena una persona.')
     out.append('')
+
+    # Indice de titulos. El id de un nodo es el identificador del autor y nada
+    # mas (`g36`, `142`, `08`) para que sea estable entre idiomas; el titulo es
+    # una etiqueta que cambia con la edicion. Este listado es donde se recupera
+    # la navegabilidad que el id ya no da.
+    out.append('## Indice')
+    out.append('')
+    out.append('El id de cada nodo es el identificador del autor, no un resumen del')
+    out.append('titulo: asi el mismo nodo tiene el mismo id en cualquier edicion o')
+    out.append('traduccion, y los enlaces entre libros siguen resolviendo. El titulo')
+    out.append('cambia con la edicion; el id no.')
+    out.append('')
+    out.append('| id | tecnica | pila |')
+    out.append('|---|---|---|')
+    for node in nodes:
+        out.append('| [{}]({}.md) | {} | {} |'.format(
+            node['id'], node['id'], node['title'], node.get('pile', '-')))
+    out.append('')
     return '\n'.join(out).rstrip() + '\n'
 
 

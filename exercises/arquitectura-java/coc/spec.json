@@ -1,6 +1,6 @@
 {
   "id": "coc-campos-segun-la-tabla",
-  "node": "28-el-principio-coc",
+  "node": "28",
   "title": "COC: los campos se llaman como las columnas",
   "description": "Renombrar los campos del modelo para que sigan la convencion de la tabla.",
   "intent": "Hacer que los campos de Libro coincidan con las columnas de su tabla.",

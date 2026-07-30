@@ -1,6 +1,6 @@
 {
   "id": "capas-presentacion-sin-persistencia",
-  "node": "08-el-principio-srp",
+  "node": "08",
   "title": "Capas: la presentacion no toca la persistencia",
   "description": "Hacer que la vista pase por la capa de servicio en vez de ir directo al DAO.",
   "intent": "Eliminar el import que salta de presentacion a persistencia.",

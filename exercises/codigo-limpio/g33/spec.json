@@ -1,6 +1,6 @@
 {
   "id": "g33-condiciones-de-limite",
-  "node": "g33-encapsular-condiciones-de-limite",
+  "node": "g33",
   "title": "G33: rango_de_nivel con el limite calculado una sola vez",
   "description": "Encapsular la expresion de limite repetida en una variable con nombre.",
   "intent": "Encapsular la expresion de limite `nivel + 1` en un solo lugar con nombre.",

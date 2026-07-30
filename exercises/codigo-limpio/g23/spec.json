@@ -1,7 +1,7 @@
 {
   "id": "g23-polimorfismo-antes-que-if-else",
   "book": "codigo-limpio",
-  "node": "g23-polimorfismo-antes-que-if-else-o-switch-case",
+  "node": "g23",
   "task": "g23_polimorfismo",
   "title": "G23: area sin cadena if/elif sobre el tipo",
   "description": "Reemplazar la discriminacion por tipo de crear_figura y area por polimorfismo.",
@@ -13,7 +13,12 @@
   "kind": "refactor",
   "instrument": {
     "script": "checks.py",
-    "args": ["--rule", "g23", "--max", "2"],
+    "args": [
+      "--rule",
+      "g23",
+      "--max",
+      "2"
+    ],
     "threshold": "cadena de discriminacion <= 2 ramas"
   },
   "budget": {
@@ -22,7 +27,10 @@
     "lines_max": 60,
     "params_max": 3
   },
-  "forbids": ["network", "subprocess"],
+  "forbids": [
+    "network",
+    "subprocess"
+  ],
   "deps_allowed": [],
   "invariants": [
     "El comportamiento observable de `crear_figura` y `area` no cambia: el oraculo pasa igual antes y despues.",

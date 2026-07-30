@@ -144,7 +144,8 @@ def build(text):
     id_by_code = {}
     for code in sorted(catalogue, key=sort_key):
         title = catalogue[code][0]
-        id_by_code[code] = '{}-{}'.format(code.lower(), slugify(title))
+        # El id es el codigo del autor y nada mas. Ver ADR abajo.
+        id_by_code[code] = code.lower()
 
     nodes = []
     for code in sorted(catalogue, key=sort_key):

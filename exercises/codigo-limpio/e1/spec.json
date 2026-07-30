@@ -1,6 +1,6 @@
 {
   "id": "e1-generar-en-un-paso",
-  "node": "e1-la-generacion-requiere-mas-de-un-paso",
+  "node": "e1",
   "title": "E1: generar el proyecto con un solo comando",
   "description": "Dar al proyecto un punto de entrada que genere todo en un solo paso.",
   "intent": "Reducir a un solo paso la generacion del proyecto.",

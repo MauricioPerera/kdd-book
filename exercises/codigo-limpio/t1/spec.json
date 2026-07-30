@@ -1,6 +1,6 @@
 {
   "id": "t1-pruebas-insuficientes",
-  "node": "t1-pruebas-insuficientes",
+  "node": "t1",
   "title": "T1: cubrir los caminos que ninguna prueba recorre",
   "description": "Agregar las pruebas que faltan hasta alcanzar la cobertura minima.",
   "intent": "Llevar la cobertura de linea del proyecto al minimo exigido.",

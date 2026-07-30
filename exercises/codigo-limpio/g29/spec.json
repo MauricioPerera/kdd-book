@@ -1,6 +1,6 @@
 {
   "id": "g29-condicionales-negativas",
-  "node": "g29-evitar-condicionales-negativas",
+  "node": "g29",
   "title": "G29: puede_inscribirse sin condiciones negadas",
   "description": "Reescribir las condiciones para que se lean en positivo.",
   "intent": "Eliminar las condiciones negadas de puede_inscribirse.",

@@ -1,6 +1,6 @@
 {
   "id": "g5-duplicacion",
-  "node": "g5-duplicacion",
+  "node": "g5",
   "title": "G5: totales sin el calculo duplicado",
   "description": "Unificar en un solo lugar el calculo repetido en dos funciones.",
   "intent": "Eliminar la duplicacion del calculo de total con IVA.",

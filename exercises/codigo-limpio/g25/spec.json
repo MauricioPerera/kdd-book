@@ -1,6 +1,6 @@
 {
   "id": "g25-numeros-magicos",
-  "node": "g25-sustituir-numeros-magicos-por-constantes-con-nombre",
+  "node": "g25",
   "title": "G25: precio_con_recargo sin numeros magicos",
   "description": "Reemplazar los literales numericos por constantes con nombre.",
   "intent": "Sustituir los numeros magicos de precio_con_recargo por constantes con nombre.",

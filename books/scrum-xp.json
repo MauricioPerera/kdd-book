@@ -15,7 +15,7 @@
   },
   "nodes": [
     {
-      "id": "002-que-es-el-desarrollo-agil",
+      "id": "002",
       "title": "¿Qué es el Desarrollo Ágil?",
       "description": "¿Qué es el Desarrollo Ágil? (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -30,7 +30,7 @@
       "links": []
     },
     {
-      "id": "003-un-pantallazo-general-sobre-la-gestion-de-proyectos",
+      "id": "003",
       "title": "Un pantallazo general sobre la gestión de proyectos",
       "description": "Un pantallazo general sobre la gestión de proyectos (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -45,7 +45,7 @@
       "links": []
     },
     {
-      "id": "004-diferenciando-las-metodologias-de-gestion",
+      "id": "004",
       "title": "Diferenciando las metodologías de gestión",
       "description": "Diferenciando las metodologías de gestión (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -60,7 +60,7 @@
       "links": []
     },
     {
-      "id": "005-tipos-de-proyecto",
+      "id": "005",
       "title": "Tipos de Proyecto",
       "description": "Tipos de Proyecto (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -75,7 +75,7 @@
       "links": []
     },
     {
-      "id": "006-desarrollo-de-un-nuevo-sistema-informatico",
+      "id": "006",
       "title": "Desarrollo de un nuevo sistema informático",
       "description": "Desarrollo de un nuevo sistema informático (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -90,7 +90,7 @@
       "links": []
     },
     {
-      "id": "007-desarrollo-de-nuevas-funcionalidades",
+      "id": "007",
       "title": "Desarrollo de nuevas funcionalidades",
       "description": "Desarrollo de nuevas funcionalidades (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -105,7 +105,7 @@
       "links": []
     },
     {
-      "id": "008-reingenieria-de-un-sistema",
+      "id": "008",
       "title": "Reingeniería de un sistema",
       "description": "Reingeniería de un sistema (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -120,7 +120,7 @@
       "links": []
     },
     {
-      "id": "009-mantenimiento-evolutivo",
+      "id": "009",
       "title": "Mantenimiento evolutivo",
       "description": "Mantenimiento evolutivo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -135,7 +135,7 @@
       "links": []
     },
     {
-      "id": "010-mantenimiento-adaptativo",
+      "id": "010",
       "title": "Mantenimiento adaptativo",
       "description": "Mantenimiento adaptativo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -150,7 +150,7 @@
       "links": []
     },
     {
-      "id": "011-mantenimiento-preventivo",
+      "id": "011",
       "title": "Mantenimiento preventivo",
       "description": "Mantenimiento preventivo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -165,7 +165,7 @@
       "links": []
     },
     {
-      "id": "012-mantenimiento-correctivo",
+      "id": "012",
       "title": "Mantenimiento correctivo",
       "description": "Mantenimiento correctivo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -180,7 +180,7 @@
       "links": []
     },
     {
-      "id": "013-la-octava-clasificacion",
+      "id": "013",
       "title": "La octava clasificación",
       "description": "La octava clasificación (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -195,7 +195,7 @@
       "links": []
     },
     {
-      "id": "014-abordaje-de-un-proyecto-de-construccion-de-software",
+      "id": "014",
       "title": "Abordaje de un proyecto de construcción de Software",
       "description": "Abordaje de un proyecto de construcción de Software (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -210,7 +210,7 @@
       "links": []
     },
     {
-      "id": "015-el-agilismo-y-su-manifiesto",
+      "id": "015",
       "title": "El agilismo y su Manifiesto",
       "description": "El agilismo y su Manifiesto (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -225,7 +225,7 @@
       "links": []
     },
     {
-      "id": "016-los-valores-del-agilismo",
+      "id": "016",
       "title": "Los valores del agilismo",
       "description": "Los valores del agilismo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -240,7 +240,7 @@
       "links": []
     },
     {
-      "id": "017-individuos-e-interacciones-sobre-procesos-y-herramientas",
+      "id": "017",
       "title": "Individuos e interacciones sobre procesos y herramientas",
       "description": "Individuos e interacciones sobre procesos y herramientas (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -255,7 +255,7 @@
       "links": []
     },
     {
-      "id": "018-software-funcionando-sobre-documentacion-extensiva",
+      "id": "018",
       "title": "Software funcionando sobre documentación extensiva",
       "description": "Software funcionando sobre documentación extensiva (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -270,7 +270,7 @@
       "links": []
     },
     {
-      "id": "019-colaboracion-con-el-cliente-sobre-negociacion-contractual",
+      "id": "019",
       "title": "Colaboración con el cliente sobre negociación contractual",
       "description": "Colaboración con el cliente sobre negociación contractual (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -285,7 +285,7 @@
       "links": []
     },
     {
-      "id": "020-respuesta-ante-el-cambio-sobre-seguir-un-plan",
+      "id": "020",
       "title": "Respuesta ante el cambio sobre seguir un plan",
       "description": "Respuesta ante el cambio sobre seguir un plan (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -300,7 +300,7 @@
       "links": []
     },
     {
-      "id": "021-los-doce-principios-del-agilismo",
+      "id": "021",
       "title": "Los doce principios del agilismo",
       "description": "Los doce principios del agilismo (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -315,7 +315,7 @@
       "links": []
     },
     {
-      "id": "022-principio-1-satisfacer-al-cliente-mediante-la-entrega-tempra",
+      "id": "022",
       "title": "Principio #1: Satisfacer al cliente mediante la entrega temprana y continua de software con valor.",
       "description": "Principio #1: Satisfacer al cliente mediante la entrega temprana y continua de software con valor. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -330,7 +330,7 @@
       "links": []
     },
     {
-      "id": "023-principio-2-aceptamos-que-los-requisitos-cambien-incluso-en",
+      "id": "023",
       "title": "Principio #2: Aceptamos que los requisitos cambien, incluso en etapas tardías del desarrollo. Los procesos Ágiles aprovechan el cambio para proporcionar ventaja competitiva al cliente.",
       "description": "Principio #2: Aceptamos que los requisitos cambien, incluso en etapas tardías del desarrollo. Los procesos Ágiles aprovechan el cambio para proporcionar ventaja competitiva al cliente. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -345,7 +345,7 @@
       "links": []
     },
     {
-      "id": "024-principio-3-entregamos-software-funcional-frecuentemente-ent",
+      "id": "024",
       "title": "Principio #3: Entregamos software funcional frecuentemente, entre dos semanas y dos meses, con preferencia al periodo de tiempo más corto posible.",
       "description": "Principio #3: Entregamos software funcional frecuentemente, entre dos semanas y dos meses, con preferencia al periodo de tiempo más corto posible. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -359,13 +359,13 @@
       "verification": "instrumented",
       "locator": "pagina 25",
       "links": [
-        "084-practica-7-entregas-cortas-short-releases"
+        "084"
       ],
       "instrument": "git_checks.py --rule cadencia",
       "threshold": "hueco entre entregas <= 60 dias"
     },
     {
-      "id": "025-principio-5-los-proyectos-se-desarrollan-en-torno-a-individu",
+      "id": "025",
       "title": "Principio #5: Los proyectos se desarrollan en torno a individuos motivados. Hay que darles el entorno y el apoyo que necesitan, y confiarles la ejecución del trabajo.",
       "description": "Principio #5: Los proyectos se desarrollan en torno a individuos motivados. Hay que darles el entorno y el apoyo que necesitan, y confiarles la ejecución del trabajo. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -380,7 +380,7 @@
       "links": []
     },
     {
-      "id": "026-principio-6-conversacion-cara-a-cara",
+      "id": "026",
       "title": "Principio #6: Conversación cara a cara.",
       "description": "Principio #6: Conversación cara a cara. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -395,7 +395,7 @@
       "links": []
     },
     {
-      "id": "027-principio-7-el-software-funcionando-es-la-medida-principal-d",
+      "id": "027",
       "title": "Principio #7: El software funcionando es la medida principal de progreso.",
       "description": "Principio #7: El software funcionando es la medida principal de progreso. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -410,7 +410,7 @@
       "links": []
     },
     {
-      "id": "028-principio-8-los-promotores-desarrolladores-y-usuarios-debemo",
+      "id": "028",
       "title": "Principio #8: Los promotores, desarrolladores y usuarios debemos ser capaces de mantener un ritmo constante de forma indefinida.",
       "description": "Principio #8: Los promotores, desarrolladores y usuarios debemos ser capaces de mantener un ritmo constante de forma indefinida. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -425,7 +425,7 @@
       "links": []
     },
     {
-      "id": "029-principio-9-la-atencion-continua-a-la-excelencia-tecnica-y-a",
+      "id": "029",
       "title": "Principio #9: La atención continua a la excelencia técnica y al buen diseño mejora la Agilidad.",
       "description": "Principio #9: La atención continua a la excelencia técnica y al buen diseño mejora la Agilidad. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -440,7 +440,7 @@
       "links": []
     },
     {
-      "id": "030-principio-10-la-simplicidad-o-el-arte-de-maximizar-la-cantid",
+      "id": "030",
       "title": "Principio #10: La simplicidad, o el arte de maximizar la cantidad de trabajo no realizado, es esencial.",
       "description": "Principio #10: La simplicidad, o el arte de maximizar la cantidad de trabajo no realizado, es esencial. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -455,7 +455,7 @@
       "links": []
     },
     {
-      "id": "031-principio-11-las-mejores-arquitecturas-requisitos-y-disenos",
+      "id": "031",
       "title": "Principio #11: Las mejores arquitecturas, requisitos y diseños emergen de equipos auto-organizados.",
       "description": "Principio #11: Las mejores arquitecturas, requisitos y diseños emergen de equipos auto-organizados. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -470,7 +470,7 @@
       "links": []
     },
     {
-      "id": "032-principio-12-a-intervalos-regulares-el-equipo-reflexiona-sob",
+      "id": "032",
       "title": "Principio #12: A intervalos regulares el equipo reflexiona sobre cómo ser más efectivo para a continuación ajustar y perfeccionar su comportamiento en consecuencia.",
       "description": "Principio #12: A intervalos regulares el equipo reflexiona sobre cómo ser más efectivo para a continuación ajustar y perfeccionar su comportamiento en consecuencia. (seccion: introduccion y agilismo).",
       "type": "Concept",
@@ -488,7 +488,7 @@
       "threshold": "una por sprint"
     },
     {
-      "id": "034-el-marco-de-trabajo-de-scrum",
+      "id": "034",
       "title": "El Marco de Trabajo de Scrum",
       "description": "El Marco de Trabajo de Scrum (seccion: scrum).",
       "type": "Concept",
@@ -503,7 +503,7 @@
       "links": []
     },
     {
-      "id": "035-los-roles-en-scrum",
+      "id": "035",
       "title": "Los Roles en Scrum",
       "description": "Los Roles en Scrum (seccion: scrum).",
       "type": "Concept",
@@ -518,7 +518,7 @@
       "links": []
     },
     {
-      "id": "036-el-dueno-de-producto-product-owner-en-scrum",
+      "id": "036",
       "title": "El Dueño de Producto (Product Owner) en Scrum",
       "description": "El Dueño de Producto (Product Owner) en Scrum (seccion: scrum).",
       "type": "Concept",
@@ -533,7 +533,7 @@
       "links": []
     },
     {
-      "id": "037-funciones-y-responsabilidades",
+      "id": "037",
       "title": "Funciones y responsabilidades",
       "description": "Funciones y responsabilidades (seccion: scrum).",
       "type": "Concept",
@@ -548,7 +548,7 @@
       "links": []
     },
     {
-      "id": "038-aptitudes-que-debe-tener-un-dueno-de-producto",
+      "id": "038",
       "title": "Aptitudes que debe tener un Dueño de Producto",
       "description": "Aptitudes que debe tener un Dueño de Producto (seccion: scrum).",
       "type": "Concept",
@@ -563,7 +563,7 @@
       "links": []
     },
     {
-      "id": "039-el-scrum-master",
+      "id": "039",
       "title": "El Scrum Master",
       "description": "El Scrum Master (seccion: scrum).",
       "type": "Concept",
@@ -578,7 +578,7 @@
       "links": []
     },
     {
-      "id": "040-funciones-y-responsabilidades",
+      "id": "040",
       "title": "Funciones y responsabilidades",
       "description": "Funciones y responsabilidades (seccion: scrum).",
       "type": "Concept",
@@ -593,7 +593,7 @@
       "links": []
     },
     {
-      "id": "041-aptitudes-que-debe-tener-un-scrum-master",
+      "id": "041",
       "title": "Aptitudes que debe tener un Scrum Master",
       "description": "Aptitudes que debe tener un Scrum Master (seccion: scrum).",
       "type": "Concept",
@@ -608,7 +608,7 @@
       "links": []
     },
     {
-      "id": "042-actitudes-que-un-buen-scrum-master-debe-evitar-indefectiblem",
+      "id": "042",
       "title": "Actitudes que un buen Scrum Master debe evitar indefectiblemente",
       "description": "Actitudes que un buen Scrum Master debe evitar indefectiblemente (seccion: scrum).",
       "type": "Concept",
@@ -623,7 +623,7 @@
       "links": []
     },
     {
-      "id": "043-el-equipo-de-desarrollo-scrum-team-o-equipo-scrum",
+      "id": "043",
       "title": "El Equipo de Desarrollo (Scrum Team o Equipo Scrum)",
       "description": "El Equipo de Desarrollo (Scrum Team o Equipo Scrum) (seccion: scrum).",
       "type": "Concept",
@@ -638,7 +638,7 @@
       "links": []
     },
     {
-      "id": "044-funciones-y-responsabilidades",
+      "id": "044",
       "title": "Funciones y responsabilidades",
       "description": "Funciones y responsabilidades (seccion: scrum).",
       "type": "Concept",
@@ -653,7 +653,7 @@
       "links": []
     },
     {
-      "id": "045-un-buen-scrum-team-actua-como-un-verdadero-equipo",
+      "id": "045",
       "title": "Un buen Scrum Team, actúa como un verdadero equipo",
       "description": "Un buen Scrum Team, actúa como un verdadero equipo (seccion: scrum).",
       "type": "Concept",
@@ -668,7 +668,7 @@
       "links": []
     },
     {
-      "id": "046-artefactos-y-herramientas",
+      "id": "046",
       "title": "Artefactos y Herramientas",
       "description": "Artefactos y Herramientas (seccion: scrum).",
       "type": "Concept",
@@ -683,7 +683,7 @@
       "links": []
     },
     {
-      "id": "047-backlog-de-producto",
+      "id": "047",
       "title": "Backlog de Producto",
       "description": "Backlog de Producto (seccion: scrum).",
       "type": "Concept",
@@ -701,7 +701,7 @@
       "threshold": "orden total definido"
     },
     {
-      "id": "048-formato-del-backlog-de-producto",
+      "id": "048",
       "title": "Formato del Backlog de Producto",
       "description": "Formato del Backlog de Producto (seccion: scrum).",
       "type": "Concept",
@@ -719,7 +719,7 @@
       "threshold": "sin campos vacios"
     },
     {
-      "id": "049-priorizacion-de-los-items-del-backlog-de-producto",
+      "id": "049",
       "title": "Priorización de los ítems del Backlog de Producto",
       "description": "Priorización de los ítems del Backlog de Producto (seccion: scrum).",
       "type": "Concept",
@@ -737,7 +737,7 @@
       "threshold": "sin items sin prioridad"
     },
     {
-      "id": "050-estimacion-de-esfuerzo",
+      "id": "050",
       "title": "Estimación de esfuerzo",
       "description": "Estimación de esfuerzo (seccion: scrum).",
       "type": "Concept",
@@ -755,7 +755,7 @@
       "threshold": "sin items sin estimar"
     },
     {
-      "id": "051-granulidad-de-los-items",
+      "id": "051",
       "title": "Granulidad de los ítems",
       "description": "Granulidad de los ítems (seccion: scrum).",
       "type": "Concept",
@@ -771,7 +771,7 @@
       "why_not": "la granularidad correcta de un item depende del equipo y del contexto"
     },
     {
-      "id": "052-criterios-de-aceptacion",
+      "id": "052",
       "title": "Criterios de Aceptación",
       "description": "Criterios de Aceptación (seccion: scrum).",
       "type": "Concept",
@@ -789,7 +789,7 @@
       "threshold": "sin historias sin criterios"
     },
     {
-      "id": "053-backlog-de-sprint",
+      "id": "053",
       "title": "Backlog de Sprint",
       "description": "Backlog de Sprint (seccion: scrum).",
       "type": "Concept",
@@ -807,7 +807,7 @@
       "threshold": "subconjunto del tope"
     },
     {
-      "id": "054-dividiendo-historias-de-usuario-en-tareas",
+      "id": "054",
       "title": "Dividiendo Historias de Usuario en Tareas",
       "description": "Dividiendo Historias de Usuario en Tareas (seccion: scrum).",
       "type": "Concept",
@@ -825,7 +825,7 @@
       "threshold": "sin historias sin descomponer"
     },
     {
-      "id": "055-incremento-de-funcionalidad",
+      "id": "055",
       "title": "Incremento de Funcionalidad",
       "description": "Incremento de Funcionalidad (seccion: scrum).",
       "type": "Concept",
@@ -843,7 +843,7 @@
       "threshold": "exit 0"
     },
     {
-      "id": "056-ceremonias-en-scrum",
+      "id": "056",
       "title": "Ceremonias en Scrum",
       "description": "Ceremonias en Scrum (seccion: scrum).",
       "type": "Concept",
@@ -858,7 +858,7 @@
       "links": []
     },
     {
-      "id": "057-ceremonia-de-planificacion-del-sprint",
+      "id": "057",
       "title": "Ceremonia de Planificación del Sprint",
       "description": "Ceremonia de Planificación del Sprint (seccion: scrum).",
       "type": "Concept",
@@ -876,7 +876,7 @@
       "threshold": "una por sprint"
     },
     {
-      "id": "058-reunion-diaria",
+      "id": "058",
       "title": "Reunión diaria",
       "description": "Reunión diaria (seccion: scrum).",
       "type": "Concept",
@@ -894,7 +894,7 @@
       "threshold": "una por dia habil"
     },
     {
-      "id": "059-ceremonia-de-revision",
+      "id": "059",
       "title": "Ceremonia de Revisión",
       "description": "Ceremonia de Revisión (seccion: scrum).",
       "type": "Concept",
@@ -912,7 +912,7 @@
       "threshold": "una por sprint"
     },
     {
-      "id": "060-ceremonia-de-retrospectiva-la-busqueda-de-la-perfeccion",
+      "id": "060",
       "title": "Ceremonia de Retrospectiva: la búsqueda de la perfección",
       "description": "Ceremonia de Retrospectiva: la búsqueda de la perfección (seccion: scrum).",
       "type": "Concept",
@@ -930,7 +930,7 @@
       "threshold": "una por sprint"
     },
     {
-      "id": "061-estimando-esfuerzos",
+      "id": "061",
       "title": "Estimando esfuerzos",
       "description": "Estimando esfuerzos (seccion: scrum).",
       "type": "Concept",
@@ -945,7 +945,7 @@
       "links": []
     },
     {
-      "id": "062-estimando-con-t-shirt-sizing",
+      "id": "062",
       "title": "Estimando con T-Shirt Sizing",
       "description": "Estimando con T-Shirt Sizing (seccion: scrum).",
       "type": "Concept",
@@ -963,7 +963,7 @@
       "threshold": "valor en la escala declarada"
     },
     {
-      "id": "063-como-se-juega",
+      "id": "063",
       "title": "¿Cómo se juega?",
       "description": "¿Cómo se juega? (seccion: scrum).",
       "type": "Concept",
@@ -978,7 +978,7 @@
       "links": []
     },
     {
-      "id": "064-estimacion-por-poker",
+      "id": "064",
       "title": "Estimación por Poker",
       "description": "Estimación por Poker (seccion: scrum).",
       "type": "Concept",
@@ -993,7 +993,7 @@
       "links": []
     },
     {
-      "id": "065-reglas-del-juego",
+      "id": "065",
       "title": "Reglas del Juego",
       "description": "Reglas del Juego (seccion: scrum).",
       "type": "Concept",
@@ -1008,7 +1008,7 @@
       "links": []
     },
     {
-      "id": "066-como-jugar-scrum-poker",
+      "id": "066",
       "title": "¿Cómo jugar Scrum Poker?",
       "description": "¿Cómo jugar Scrum Poker? (seccion: scrum).",
       "type": "Concept",
@@ -1023,7 +1023,7 @@
       "links": []
     },
     {
-      "id": "067-estimando-por-columnas",
+      "id": "067",
       "title": "Estimando por Columnas",
       "description": "Estimando por Columnas (seccion: scrum).",
       "type": "Concept",
@@ -1038,7 +1038,7 @@
       "links": []
     },
     {
-      "id": "068-estimacion-por-columnas-y-poker",
+      "id": "068",
       "title": "Estimación por Columnas y Poker",
       "description": "Estimación por Columnas y Poker (seccion: scrum).",
       "type": "Concept",
@@ -1053,7 +1053,7 @@
       "links": []
     },
     {
-      "id": "069-scrum-kit",
+      "id": "069",
       "title": "Scrum Kit",
       "description": "Scrum Kit (seccion: scrum).",
       "type": "Concept",
@@ -1068,7 +1068,7 @@
       "links": []
     },
     {
-      "id": "071-bases-de-la-programacion-extrema",
+      "id": "071",
       "title": "Bases de la programación eXtrema",
       "description": "Bases de la programación eXtrema (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1083,7 +1083,7 @@
       "links": []
     },
     {
-      "id": "072-comunicacion",
+      "id": "072",
       "title": "Comunicación",
       "description": "Comunicación (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1098,7 +1098,7 @@
       "links": []
     },
     {
-      "id": "073-simplicidad",
+      "id": "073",
       "title": "Simplicidad",
       "description": "Simplicidad (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1113,7 +1113,7 @@
       "links": []
     },
     {
-      "id": "074-retroalimentacion",
+      "id": "074",
       "title": "Retroalimentación",
       "description": "Retroalimentación (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1128,7 +1128,7 @@
       "links": []
     },
     {
-      "id": "075-respeto",
+      "id": "075",
       "title": "Respeto",
       "description": "Respeto (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1143,7 +1143,7 @@
       "links": []
     },
     {
-      "id": "076-coraje",
+      "id": "076",
       "title": "Coraje",
       "description": "Coraje (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1158,7 +1158,7 @@
       "links": []
     },
     {
-      "id": "077-practicas-tecnicas",
+      "id": "077",
       "title": "Prácticas técnicas",
       "description": "Prácticas técnicas (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1173,7 +1173,7 @@
       "links": []
     },
     {
-      "id": "078-practica-1-cliente-in-situ-on-site-customer",
+      "id": "078",
       "title": "PRÁCTICA #1: CLIENTE IN-SITU (ON-SITE CUSTOMER)",
       "description": "PRÁCTICA #1: CLIENTE IN-SITU (ON-SITE CUSTOMER) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1188,7 +1188,7 @@
       "links": []
     },
     {
-      "id": "079-practica-2-semana-de-40-horas-40-hour-week",
+      "id": "079",
       "title": "PRÁCTICA #2: SEMANA DE 40 HORAS (40 HOUR WEEK)",
       "description": "PRÁCTICA #2: SEMANA DE 40 HORAS (40 HOUR WEEK) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1204,7 +1204,7 @@
       "why_not": "pese al titulo, la autora no fija el numero: habla de no exigir mas esfuerzo del humanamente disponible, que es un juicio"
     },
     {
-      "id": "080-practica-3-metafora-metaphor",
+      "id": "080",
       "title": "PRÁCTICA #3: METÁFORA (METAPHOR)",
       "description": "PRÁCTICA #3: METÁFORA (METAPHOR) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1219,7 +1219,7 @@
       "links": []
     },
     {
-      "id": "081-practica-4-diseno-simple-simple-design",
+      "id": "081",
       "title": "PRÁCTICA #4: DISEÑO SIMPLE (SIMPLE DESIGN)",
       "description": "PRÁCTICA #4: DISEÑO SIMPLE (SIMPLE DESIGN) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1235,7 +1235,7 @@
       "why_not": "que un diseno sea \"simple\" es exactamente lo que no se puede medir"
     },
     {
-      "id": "082-practica-5-refactorizacion-refactoring",
+      "id": "082",
       "title": "PRÁCTICA #5: REFACTORIZACIÓN (REFACTORING)",
       "description": "PRÁCTICA #5: REFACTORIZACIÓN (REFACTORING) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1250,7 +1250,7 @@
       "links": []
     },
     {
-      "id": "083-practica-6-programacion-de-a-pares-pair-programming",
+      "id": "083",
       "title": "PRÁCTICA #6: PROGRAMACIÓN DE A PARES (PAIR PROGRAMMING)",
       "description": "PRÁCTICA #6: PROGRAMACIÓN DE A PARES (PAIR PROGRAMMING) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1265,7 +1265,7 @@
       "links": []
     },
     {
-      "id": "084-practica-7-entregas-cortas-short-releases",
+      "id": "084",
       "title": "PRÁCTICA #7: ENTREGAS CORTAS (SHORT RELEASES)",
       "description": "PRÁCTICA #7: ENTREGAS CORTAS (SHORT RELEASES) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1279,13 +1279,13 @@
       "verification": "instrumented",
       "locator": "pagina 78",
       "links": [
-        "024-principio-3-entregamos-software-funcional-frecuentemente-ent"
+        "024"
       ],
       "instrument": "git_checks.py --rule cadencia",
       "threshold": "hueco entre entregas <= 30 dias"
     },
     {
-      "id": "085-practica-8-testing",
+      "id": "085",
       "title": "PRÁCTICA #8: TESTING",
       "description": "PRÁCTICA #8: TESTING (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1299,14 +1299,14 @@
       "verification": "instrumented",
       "locator": "pagina 78",
       "links": [
-        "codigo-limpio/t1-pruebas-insuficientes",
-        "codigo-limpio/e2-las-pruebas-requieren-mas-de-un-paso"
+        "codigo-limpio/t1",
+        "codigo-limpio/e2"
       ],
       "instrument": "repo_checks.py --rule e2",
       "threshold": "un comando corre toda la suite"
     },
     {
-      "id": "086-practica-9-codigo-estandar-coding-standards",
+      "id": "086",
       "title": "PRÁCTICA #9: CÓDIGO ESTÁNDAR (CODING STANDARDS)",
       "description": "PRÁCTICA #9: CÓDIGO ESTÁNDAR (CODING STANDARDS) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1320,13 +1320,13 @@
       "verification": "instrumented",
       "locator": "pagina 79",
       "links": [
-        "codigo-limpio/g24-seguir-las-convenciones-estandar"
+        "codigo-limpio/g24"
       ],
       "instrument": "repo_checks.py --rule g24",
       "threshold": "convenciones declaradas en verde"
     },
     {
-      "id": "087-practica-10-propiedad-colectiva-collective-ownership",
+      "id": "087",
       "title": "PRÁCTICA #10: PROPIEDAD COLECTIVA (COLLECTIVE OWNERSHIP)",
       "description": "PRÁCTICA #10: PROPIEDAD COLECTIVA (COLLECTIVE OWNERSHIP) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1342,7 +1342,7 @@
       "why_not": "la autora la define como conocimiento compartido del equipo, no como reparto de autoria; el reparto se medira en git, el conocimiento no"
     },
     {
-      "id": "088-practica-11-integracion-continua-continuous-integracion",
+      "id": "088",
       "title": "PRÁCTICA #11: INTEGRACIÓN CONTINUA (CONTINUOUS INTEGRACIÓN)",
       "description": "PRÁCTICA #11: INTEGRACIÓN CONTINUA (CONTINUOUS INTEGRACIÓN) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1356,14 +1356,14 @@
       "verification": "instrumented",
       "locator": "pagina 80",
       "links": [
-        "codigo-limpio/e2-las-pruebas-requieren-mas-de-un-paso",
-        "122-unificacion-del-codigo-en-repositorios"
+        "codigo-limpio/e2",
+        "122"
       ],
       "instrument": "CI: corrida por commit con exit 0",
       "threshold": "sin commits sin integrar"
     },
     {
-      "id": "089-practica-12-juego-de-planificacion-planning-game",
+      "id": "089",
       "title": "PRÁCTICA #12: JUEGO DE PLANIFICACIÓN (PLANNING GAME)",
       "description": "PRÁCTICA #12: JUEGO DE PLANIFICACIÓN (PLANNING GAME) (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1378,7 +1378,7 @@
       "links": []
     },
     {
-      "id": "090-programacion-de-a-pares-y-coding-dojo-quien-dijo-que-el-trab",
+      "id": "090",
       "title": "Programación de a pares y Coding Dojo: ¿quién dijo que el trabajo es aburrido?",
       "description": "Programación de a pares y Coding Dojo: ¿quién dijo que el trabajo es aburrido? (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1393,7 +1393,7 @@
       "links": []
     },
     {
-      "id": "091-por-que-dojo",
+      "id": "091",
       "title": "¿Por qué \"Dojo\"?",
       "description": "¿Por qué \"Dojo\"? (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1408,7 +1408,7 @@
       "links": []
     },
     {
-      "id": "092-para-que-hacer-en-un-coding-dojo-cual-es-la-finalidad",
+      "id": "092",
       "title": "¿Para qué hacer en un Coding Dojo? ¿Cuál es la finalidad?",
       "description": "¿Para qué hacer en un Coding Dojo? ¿Cuál es la finalidad? (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1423,7 +1423,7 @@
       "links": []
     },
     {
-      "id": "093-duracion-de-un-coding-dojo",
+      "id": "093",
       "title": "Duración de un Coding Dojo",
       "description": "Duración de un Coding Dojo (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1438,7 +1438,7 @@
       "links": []
     },
     {
-      "id": "094-que-se-hace-en-un-coding-dojo",
+      "id": "094",
       "title": "¿Qué se hace en un Coding Dojo?",
       "description": "¿Qué se hace en un Coding Dojo? (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1453,7 +1453,7 @@
       "links": []
     },
     {
-      "id": "095-codekata-en-el-coding-dojo",
+      "id": "095",
       "title": "Codekata en el Coding Dojo",
       "description": "Codekata en el Coding Dojo (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1468,7 +1468,7 @@
       "links": []
     },
     {
-      "id": "096-el-kata-en-el-coding-dojo",
+      "id": "096",
       "title": "El Kata en el Coding Dojo",
       "description": "El Kata en el Coding Dojo (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1483,7 +1483,7 @@
       "links": []
     },
     {
-      "id": "097-un-randori-coding-dojo",
+      "id": "097",
       "title": "Un Randori Coding Dojo",
       "description": "Un Randori Coding Dojo (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1498,7 +1498,7 @@
       "links": []
     },
     {
-      "id": "098-el-randori-en-el-coding-dojo",
+      "id": "098",
       "title": "El Randori en el Coding Dojo",
       "description": "El Randori en el Coding Dojo (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1513,7 +1513,7 @@
       "links": []
     },
     {
-      "id": "099-ventajas-de-implementar-un-coding-dojo-en-el-lugar-de-trabaj",
+      "id": "099",
       "title": "Ventajas de implementar un Coding Dojo en el lugar de trabajo de forma periódica",
       "description": "Ventajas de implementar un Coding Dojo en el lugar de trabajo de forma periódica (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1528,7 +1528,7 @@
       "links": []
     },
     {
-      "id": "100-cuando-y-como-implementar-el-coding-dojo-en-la-empresa",
+      "id": "100",
       "title": "Cuándo y cómo implementar el Coding Dojo en la empresa",
       "description": "Cuándo y cómo implementar el Coding Dojo en la empresa (seccion: programacion extrema y coding dojo).",
       "type": "Concept",
@@ -1543,7 +1543,7 @@
       "links": []
     },
     {
-      "id": "102-que-es-el-desarrollo-o-programacion-guiado-por-pruebas",
+      "id": "102",
       "title": "¿Qué es el desarrollo -o programación- guiado por pruebas?",
       "description": "¿Qué es el desarrollo -o programación- guiado por pruebas? (seccion: tdd).",
       "type": "Concept",
@@ -1558,7 +1558,7 @@
       "links": []
     },
     {
-      "id": "103-test-unitarios",
+      "id": "103",
       "title": "Test Unitarios",
       "description": "Test Unitarios (seccion: tdd).",
       "type": "Concept",
@@ -1573,7 +1573,7 @@
       "links": []
     },
     {
-      "id": "104-caracteristicas-de-los-test-unitarios",
+      "id": "104",
       "title": "Características de los Test Unitarios",
       "description": "Características de los Test Unitarios (seccion: tdd).",
       "type": "Concept",
@@ -1587,13 +1587,13 @@
       "verification": "instrumented",
       "locator": "pagina 91",
       "links": [
-        "codigo-limpio/t9-las-pruebas-deben-ser-rapidas"
+        "codigo-limpio/t9"
       ],
       "instrument": "repo_checks.py --rule t9 y --rule aislamiento",
       "threshold": "rapidas e independientes"
     },
     {
-      "id": "105-anatomia",
+      "id": "105",
       "title": "Anatomía",
       "description": "Anatomía (seccion: tdd).",
       "type": "Concept",
@@ -1611,7 +1611,7 @@
       "threshold": "al menos una asercion por prueba"
     },
     {
-      "id": "106-algoritmo-para-escribir-pruebas-unitarias",
+      "id": "106",
       "title": "Algoritmo para escribir pruebas unitarias",
       "description": "Algoritmo para escribir pruebas unitarias (seccion: tdd).",
       "type": "Concept",
@@ -1626,7 +1626,7 @@
       "links": []
     },
     {
-      "id": "107-primer-paso-escribir-el-test-y-hacer-que-falle",
+      "id": "107",
       "title": "PRIMER PASO: Escribir el Test y hacer que falle",
       "description": "PRIMER PASO: Escribir el Test y hacer que falle (seccion: tdd).",
       "type": "Concept",
@@ -1640,15 +1640,15 @@
       "verification": "instrumented",
       "locator": "pagina 98",
       "links": [
-        "108-segundo-paso-escribir-la-minima-cantidad-de-codigo-para-que",
-        "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle",
-        "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar"
+        "108",
+        "109",
+        "110"
       ],
       "instrument": "git_checks.py --rule tddorden",
       "threshold": "el test entra antes que el codigo"
     },
     {
-      "id": "108-segundo-paso-escribir-la-minima-cantidad-de-codigo-para-que",
+      "id": "108",
       "title": "SEGUNDO PASO: Escribir la mínima cantidad de código para que el test pase.",
       "description": "SEGUNDO PASO: Escribir la mínima cantidad de código para que el test pase. (seccion: tdd).",
       "type": "Concept",
@@ -1662,13 +1662,13 @@
       "verification": "instrumented",
       "locator": "pagina 100",
       "links": [
-        "107-primer-paso-escribir-el-test-y-hacer-que-falle"
+        "107"
       ],
       "instrument": "repo_checks.py --rule e2",
       "threshold": "la suite completa en verde"
     },
     {
-      "id": "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle",
+      "id": "109",
       "title": "TERCER PASO: Escribir un nuevo test y hacer que falle",
       "description": "TERCER PASO: Escribir un nuevo test y hacer que falle (seccion: tdd).",
       "type": "Concept",
@@ -1682,14 +1682,14 @@
       "verification": "instrumented",
       "locator": "pagina 101",
       "links": [
-        "107-primer-paso-escribir-el-test-y-hacer-que-falle",
-        "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar"
+        "107",
+        "110"
       ],
       "instrument": "git_checks.py --rule tddorden",
       "threshold": "el test entra antes que el codigo"
     },
     {
-      "id": "110-cuarto-paso-escribir-el-algoritmo-necesario-para-hacer-pasar",
+      "id": "110",
       "title": "CUARTO PASO: Escribir el algoritmo necesario para hacer pasar el test",
       "description": "CUARTO PASO: Escribir el algoritmo necesario para hacer pasar el test (seccion: tdd).",
       "type": "Concept",
@@ -1703,13 +1703,13 @@
       "verification": "instrumented",
       "locator": "pagina 102",
       "links": [
-        "109-tercer-paso-escribir-un-nuevo-test-y-hacer-que-falle"
+        "109"
       ],
       "instrument": "repo_checks.py --rule e2",
       "threshold": "la suite completa en verde"
     },
     {
-      "id": "111-unit-testing-con-phpunit",
+      "id": "111",
       "title": "Unit Testing con PHPUnit",
       "description": "Unit Testing con PHPUnit (seccion: tdd).",
       "type": "Concept",
@@ -1724,7 +1724,7 @@
       "links": []
     },
     {
-      "id": "112-metodos-assert-de-phpunit",
+      "id": "112",
       "title": "Métodos Assert de PHPUnit",
       "description": "Métodos Assert de PHPUnit (seccion: tdd).",
       "type": "Concept",
@@ -1739,7 +1739,7 @@
       "links": []
     },
     {
-      "id": "113-ejercicio",
+      "id": "113",
       "title": "Ejercicio",
       "description": "Ejercicio (seccion: tdd).",
       "type": "Concept",
@@ -1754,7 +1754,7 @@
       "links": []
     },
     {
-      "id": "114-unit-testing-con-pyunit",
+      "id": "114",
       "title": "Unit Testing con PyUnit",
       "description": "Unit Testing con PyUnit (seccion: tdd).",
       "type": "Concept",
@@ -1769,7 +1769,7 @@
       "links": []
     },
     {
-      "id": "115-metodos-assert-de-pyunit",
+      "id": "115",
       "title": "Métodos Assert de PyUnit",
       "description": "Métodos Assert de PyUnit (seccion: tdd).",
       "type": "Concept",
@@ -1784,7 +1784,7 @@
       "links": []
     },
     {
-      "id": "116-corriendo-test-por-linea-de-comandos",
+      "id": "116",
       "title": "Corriendo test por línea de comandos",
       "description": "Corriendo test por línea de comandos (seccion: tdd).",
       "type": "Concept",
@@ -1799,7 +1799,7 @@
       "links": []
     },
     {
-      "id": "118-generacion-de-test-de-integracion",
+      "id": "118",
       "title": "Generación de Test de Integración",
       "description": "Generación de Test de Integración (seccion: integracion continua).",
       "type": "Concept",
@@ -1817,7 +1817,7 @@
       "threshold": "exit 0"
     },
     {
-      "id": "119-test-de-aceptacion",
+      "id": "119",
       "title": "Test de Aceptación",
       "description": "Test de Aceptación (seccion: integracion continua).",
       "type": "Concept",
@@ -1835,7 +1835,7 @@
       "threshold": "exit 0"
     },
     {
-      "id": "120-test-funcionales",
+      "id": "120",
       "title": "Test Funcionales",
       "description": "Test Funcionales (seccion: integracion continua).",
       "type": "Concept",
@@ -1853,7 +1853,7 @@
       "threshold": "exit 0"
     },
     {
-      "id": "121-test-de-sistema",
+      "id": "121",
       "title": "Test de Sistema",
       "description": "Test de Sistema (seccion: integracion continua).",
       "type": "Concept",
@@ -1871,7 +1871,7 @@
       "threshold": "exit 0"
     },
     {
-      "id": "122-unificacion-del-codigo-en-repositorios",
+      "id": "122",
       "title": "Unificación del código en Repositorios",
       "description": "Unificación del código en Repositorios (seccion: integracion continua).",
       "type": "Concept",
@@ -1885,13 +1885,13 @@
       "verification": "instrumented",
       "locator": "pagina 120",
       "links": [
-        "088-practica-11-integracion-continua-continuous-integracion"
+        "088"
       ],
       "instrument": "git_checks.py --rule repounico",
       "threshold": "ninguna rama con commits sin integrar"
     },
     {
-      "id": "123-sobre-los-sistemas-de-control-de-versiones",
+      "id": "123",
       "title": "Sobre los Sistemas de Control de Versiones",
       "description": "Sobre los Sistemas de Control de Versiones (seccion: integracion continua).",
       "type": "Concept",
@@ -1906,7 +1906,7 @@
       "links": []
     },
     {
-      "id": "124-integracion-continua-con-bazaar",
+      "id": "124",
       "title": "Integración continua con Bazaar",
       "description": "Integración continua con Bazaar (seccion: integracion continua).",
       "type": "Concept",
@@ -1921,7 +1921,7 @@
       "links": []
     },
     {
-      "id": "125-instalacion-de-bazaar",
+      "id": "125",
       "title": "Instalación de Bazaar",
       "description": "Instalación de Bazaar (seccion: integracion continua).",
       "type": "Concept",
@@ -1936,7 +1936,7 @@
       "links": []
     },
     {
-      "id": "126-bazaar-por-linea-de-comandos",
+      "id": "126",
       "title": "Bazaar por línea de comandos",
       "description": "Bazaar por línea de comandos (seccion: integracion continua).",
       "type": "Concept",
@@ -1951,7 +1951,7 @@
       "links": []
     },
     {
-      "id": "127-presentarse-ante-bazaar",
+      "id": "127",
       "title": "Presentarse ante Bazaar",
       "description": "Presentarse ante Bazaar (seccion: integracion continua).",
       "type": "Concept",
@@ -1966,7 +1966,7 @@
       "links": []
     },
     {
-      "id": "128-iniciar-un-nuevo-proyecto",
+      "id": "128",
       "title": "Iniciar un nuevo proyecto",
       "description": "Iniciar un nuevo proyecto (seccion: integracion continua).",
       "type": "Concept",
@@ -1981,7 +1981,7 @@
       "links": []
     },
     {
-      "id": "129-clonar-el-repositorio-central-crear-los-repositorios-locales",
+      "id": "129",
       "title": "Clonar el repositorio central: crear los repositorios locales",
       "description": "Clonar el repositorio central: crear los repositorios locales (seccion: integracion continua).",
       "type": "Concept",
@@ -1996,7 +1996,7 @@
       "links": []
     },
     {
-      "id": "130-nociones-basicas-para-integrar-codigo-de-forma-continua",
+      "id": "130",
       "title": "Nociones básicas para integrar código de forma continua",
       "description": "Nociones básicas para integrar código de forma continua (seccion: integracion continua).",
       "type": "Concept",
@@ -2011,7 +2011,7 @@
       "links": []
     },
     {
-      "id": "131-guardando-el-path-del-repo-central",
+      "id": "131",
       "title": "Guardando el path del repo central",
       "description": "Guardando el path del repo central (seccion: integracion continua).",
       "type": "Concept",
@@ -2026,7 +2026,7 @@
       "links": []
     },
     {
-      "id": "132-integracion-continua-avanzada-con-bazaar",
+      "id": "132",
       "title": "Integración continua avanzada con Bazaar",
       "description": "Integración continua avanzada con Bazaar (seccion: integracion continua).",
       "type": "Concept",
@@ -2041,7 +2041,7 @@
       "links": []
     },
     {
-      "id": "133-resumen-de-comandos-de-uso-frecuente",
+      "id": "133",
       "title": "Resumen de comandos de uso frecuente",
       "description": "Resumen de comandos de uso frecuente (seccion: integracion continua).",
       "type": "Concept",
@@ -2056,7 +2056,7 @@
       "links": []
     },
     {
-      "id": "134-resumen-para-uso-diario-de-bazaar",
+      "id": "134",
       "title": "Resumen para uso diario de Bazaar",
       "description": "Resumen para uso diario de Bazaar (seccion: integracion continua).",
       "type": "Concept",
@@ -2071,7 +2071,7 @@
       "links": []
     },
     {
-      "id": "136-el-problema",
+      "id": "136",
       "title": "El problema",
       "description": "El problema (seccion: refactoring).",
       "type": "Concept",
@@ -2086,7 +2086,7 @@
       "links": []
     },
     {
-      "id": "137-la-solucion",
+      "id": "137",
       "title": "La solución",
       "description": "La solución (seccion: refactoring).",
       "type": "Concept",
@@ -2101,7 +2101,7 @@
       "links": []
     },
     {
-      "id": "138-cuando-y-como-tomar-la-desicion-de-refactorizar",
+      "id": "138",
       "title": "Cuándo y cómo tomar la desición de refactorizar",
       "description": "Cuándo y cómo tomar la desición de refactorizar (seccion: refactoring).",
       "type": "Concept",
@@ -2114,13 +2114,13 @@
       "verification": "none",
       "locator": "pagina 137",
       "links": [
-        "140-variables-de-uso-temporal-mal-implementadas",
-        "142-expresiones-extensas",
-        "143-metodos-extensos"
+        "140",
+        "142",
+        "143"
       ]
     },
     {
-      "id": "139-una-solucion-a-cada-problema",
+      "id": "139",
       "title": "Una solución a cada problema",
       "description": "Una solución a cada problema (seccion: refactoring).",
       "type": "Concept",
@@ -2135,7 +2135,7 @@
       "links": []
     },
     {
-      "id": "140-variables-de-uso-temporal-mal-implementadas",
+      "id": "140",
       "title": "Variables de uso temporal mal implementadas",
       "description": "Variables de uso temporal mal implementadas (seccion: refactoring).",
       "type": "Concept",
@@ -2149,14 +2149,14 @@
       "verification": "instrumented",
       "locator": "pagina 138",
       "links": [
-        "codigo-limpio/g12-desorden",
-        "142-expresiones-extensas"
+        "codigo-limpio/g12",
+        "142"
       ],
       "instrument": "checks.py --rule g12",
       "threshold": "cero variables asignadas y nunca leidas"
     },
     {
-      "id": "141-metodos-que-reciben-parametros",
+      "id": "141",
       "title": "Métodos que reciben parámetros",
       "description": "Métodos que reciben parámetros (seccion: refactoring).",
       "type": "Concept",
@@ -2169,12 +2169,12 @@
       "verification": "none",
       "locator": "pagina 141",
       "links": [
-        "codigo-limpio/f1-demasiados-argumentos"
+        "codigo-limpio/f1"
       ],
       "why_not": "es una distincion de diseno entre parametro, variable temporal y propiedad de clase, no un umbral"
     },
     {
-      "id": "142-expresiones-extensas",
+      "id": "142",
       "title": "Expresiones extensas",
       "description": "Expresiones extensas (seccion: refactoring).",
       "type": "Concept",
@@ -2188,15 +2188,15 @@
       "verification": "instrumented",
       "locator": "pagina 142",
       "links": [
-        "codigo-limpio/g19-usar-variables-explicativas",
-        "140-variables-de-uso-temporal-mal-implementadas"
+        "codigo-limpio/g19",
+        "140"
       ],
       "instrument": "checks.py --rule exprops",
       "threshold": "operadores por expresion <= 3",
       "body": "Martin describe esta misma refactorizacion en G19 y la deja fuera de lo contractable: dice que conviene siempre mas y que es dificil excederse, o sea sin umbral, y ademas le exige nombres descriptivos. Bahit la deja contractable porque su ejemplo extrae las subexpresiones a variables llamadas `$a`, `$b`, `$c`, `$d`: al no reclamar nada del nombre, lo unico que queda de la tecnica es la reduccion de complejidad de la expresion, que es lo que un parser cuenta. La tecnica es la misma; lo que cambia es si el autor la aterrizo."
     },
     {
-      "id": "143-metodos-extensos",
+      "id": "143",
       "title": "Métodos extensos",
       "description": "Métodos extensos (seccion: refactoring).",
       "type": "Concept",
@@ -2210,14 +2210,14 @@
       "verification": "instrumented",
       "locator": "pagina 142",
       "links": [
-        "codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa"
+        "codigo-limpio/g30"
       ],
       "instrument": "checks.py --rule metlineas",
       "threshold": "lineas por metodo <= 15",
       "body": "El equivalente de Martin es G30 (\"las funciones solo deben hacer una cosa\"), que queda en pila B porque el cuenta operaciones semanticas y nunca da un numero. Bahit lo plantea como extension del metodo, que si tiene umbral."
     },
     {
-      "id": "144-codigo-duplicado-en-una-misma-clase",
+      "id": "144",
       "title": "Código duplicado en una misma clase",
       "description": "Código duplicado en una misma clase (seccion: refactoring).",
       "type": "Concept",
@@ -2231,15 +2231,15 @@
       "verification": "instrumented",
       "locator": "pagina 144",
       "links": [
-        "codigo-limpio/g5-duplicacion",
-        "145-codigo-duplicado-en-varias-clases-con-la-misma-herencia",
-        "146-codigo-duplicado-en-varias-clases-sin-la-misma-herencia"
+        "codigo-limpio/g5",
+        "145",
+        "146"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "cero bloques duplicados"
     },
     {
-      "id": "145-codigo-duplicado-en-varias-clases-con-la-misma-herencia",
+      "id": "145",
       "title": "Código duplicado en varias clases con la misma herencia",
       "description": "Código duplicado en varias clases con la misma herencia (seccion: refactoring).",
       "type": "Concept",
@@ -2253,14 +2253,14 @@
       "verification": "instrumented",
       "locator": "pagina 145",
       "links": [
-        "codigo-limpio/g5-duplicacion",
-        "144-codigo-duplicado-en-una-misma-clase"
+        "codigo-limpio/g5",
+        "144"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "cero bloques duplicados entre clases hermanas"
     },
     {
-      "id": "146-codigo-duplicado-en-varias-clases-sin-la-misma-herencia",
+      "id": "146",
       "title": "Código duplicado en varias clases sin la misma herencia",
       "description": "Código duplicado en varias clases sin la misma herencia (seccion: refactoring).",
       "type": "Concept",
@@ -2274,14 +2274,14 @@
       "verification": "instrumented",
       "locator": "pagina 146",
       "links": [
-        "codigo-limpio/g5-duplicacion",
-        "144-codigo-duplicado-en-una-misma-clase"
+        "codigo-limpio/g5",
+        "144"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "cero bloques duplicados entre clases sin parentesco"
     },
     {
-      "id": "148-compatibilizando-ambas-metodologias",
+      "id": "148",
       "title": "Compatibilizando ambas metodologías",
       "description": "Compatibilizando ambas metodologías (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2296,7 +2296,7 @@
       "links": []
     },
     {
-      "id": "149-compatibilidad-de-scrum-con-los-valores-de-xp",
+      "id": "149",
       "title": "Compatibilidad de Scrum con los valores de XP",
       "description": "Compatibilidad de Scrum con los valores de XP (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2311,7 +2311,7 @@
       "links": []
     },
     {
-      "id": "150-compatibilidad-con-las-practicas-tecnicas-de-xp",
+      "id": "150",
       "title": "Compatibilidad con las prácticas técnicas de XP",
       "description": "Compatibilidad con las prácticas técnicas de XP (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2326,7 +2326,7 @@
       "links": []
     },
     {
-      "id": "151-combinando-ambas-metodologias",
+      "id": "151",
       "title": "Combinando ambas metodologías",
       "description": "Combinando ambas metodologías (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2341,7 +2341,7 @@
       "links": []
     },
     {
-      "id": "152-combinar-scrum-con-extreme-programming",
+      "id": "152",
       "title": "Combinar Scrum con eXtreme Programming",
       "description": "Combinar Scrum con eXtreme Programming (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2356,7 +2356,7 @@
       "links": []
     },
     {
-      "id": "153-combinar-scrum-con-extreme-programming",
+      "id": "153",
       "title": "Combinar Scrum con eXtreme Programming",
       "description": "Combinar Scrum con eXtreme Programming (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2371,7 +2371,7 @@
       "links": []
     },
     {
-      "id": "154-material-de-lectura-complementario",
+      "id": "154",
       "title": "Material de lectura complementario",
       "description": "Material de lectura complementario (seccion: combinar scrum y xp).",
       "type": "Concept",
@@ -2386,7 +2386,7 @@
       "links": []
     },
     {
-      "id": "156-de-toyotatm-al-desarrollo-de-software",
+      "id": "156",
       "title": "De TOYOTA™ al Desarrollo de Software",
       "description": "De TOYOTA™ al Desarrollo de Software (seccion: kanban).",
       "type": "Concept",
@@ -2401,7 +2401,7 @@
       "links": []
     },
     {
-      "id": "157-las-tres-reglas-de-kanban",
+      "id": "157",
       "title": "Las tres reglas de Kanban",
       "description": "Las tres reglas de Kanban (seccion: kanban).",
       "type": "Concept",
@@ -2416,7 +2416,7 @@
       "links": []
     },
     {
-      "id": "158-mostrar-el-proceso",
+      "id": "158",
       "title": "Mostrar el proceso",
       "description": "Mostrar el proceso (seccion: kanban).",
       "type": "Concept",
@@ -2434,7 +2434,7 @@
       "threshold": "todas las etapas visibles"
     },
     {
-      "id": "159-los-tableros-kanban",
+      "id": "159",
       "title": "Los tableros Kanban",
       "description": "Los tableros Kanban (seccion: kanban).",
       "type": "Concept",
@@ -2452,7 +2452,7 @@
       "threshold": "una columna por etapa"
     },
     {
-      "id": "160-limitar-el-trabajo-en-curso-wip",
+      "id": "160",
       "title": "Limitar el trabajo en curso: WIP",
       "description": "Limitar el trabajo en curso: WIP (seccion: kanban).",
       "type": "Concept",
@@ -2466,13 +2466,13 @@
       "verification": "proxy",
       "locator": "pagina 159",
       "links": [
-        "159-los-tableros-kanban"
+        "159"
       ],
       "instrument": "tablero: items simultaneos por columna",
       "threshold": "limite WIP declarado por columna"
     },
     {
-      "id": "161-optimizar-el-flujo-de-trabajo",
+      "id": "161",
       "title": "Optimizar el flujo de trabajo",
       "description": "Optimizar el flujo de trabajo (seccion: kanban).",
       "type": "Concept",
@@ -2485,7 +2485,7 @@
       "verification": "none",
       "locator": "pagina 161",
       "links": [
-        "160-limitar-el-trabajo-en-curso-wip"
+        "160"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 {
   "id": "143-metodos-extensos",
-  "node": "143-metodos-extensos",
+  "node": "143",
   "title": "143: informe_de_evento partido en pasos cortos",
   "description": "Partir el metodo largo en metodos cortos con nombre.",
   "intent": "Bajar la cantidad de lineas por metodo en informe_de_evento.",

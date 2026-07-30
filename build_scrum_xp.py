@@ -122,23 +122,23 @@ WHY_NOT = {
 LINKS = {
     24: [84],
     84: [24],
-    85: ['{}/t1-pruebas-insuficientes'.format(CL), '{}/e2-las-pruebas-requieren-mas-de-un-paso'.format(CL)],
-    86: ['{}/g24-seguir-las-convenciones-estandar'.format(CL)],
-    88: ['{}/e2-las-pruebas-requieren-mas-de-un-paso'.format(CL), 122],
-    104: ['{}/t9-las-pruebas-deben-ser-rapidas'.format(CL)],
+    85: ['{}/t1'.format(CL), '{}/e2'.format(CL)],
+    86: ['{}/g24'.format(CL)],
+    88: ['{}/e2'.format(CL), 122],
+    104: ['{}/t9'.format(CL)],
     107: [108, 109, 110],
     108: [107],
     109: [107, 110],
     110: [109],
     122: [88],
     138: [140, 142, 143],
-    140: ['{}/g12-desorden'.format(CL), 142],
-    141: ['{}/f1-demasiados-argumentos'.format(CL)],
-    142: ['{}/g19-usar-variables-explicativas'.format(CL), 140],
-    143: ['{}/g30-las-funciones-solo-deben-hacer-una-cosa'.format(CL)],
-    144: ['{}/g5-duplicacion'.format(CL), 145, 146],
-    145: ['{}/g5-duplicacion'.format(CL), 144],
-    146: ['{}/g5-duplicacion'.format(CL), 144],
+    140: ['{}/g12'.format(CL), 142],
+    141: ['{}/f1'.format(CL)],
+    142: ['{}/g19'.format(CL), 140],
+    143: ['{}/g30'.format(CL)],
+    144: ['{}/g5'.format(CL), 145, 146],
+    145: ['{}/g5'.format(CL), 144],
+    146: ['{}/g5'.format(CL), 144],
     160: [159],
     161: [160],
 }
@@ -199,7 +199,8 @@ def build(texto):
     id_por_indice = {}
     for indice in indices:
         _nivel, titulo, _pagina = entradas[indice]
-        id_por_indice[indice] = '{:03d}-{}'.format(indice, slugify(titulo))
+        # El id es el indice del marcador y nada mas. Ver ADR abajo.
+        id_por_indice[indice] = '{:03d}'.format(indice)
 
     def destino(objetivo):
         if isinstance(objetivo, str):

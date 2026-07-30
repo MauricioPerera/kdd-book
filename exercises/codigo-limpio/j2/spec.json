@@ -1,6 +1,6 @@
 {
   "id": "j2-no-heredar-constantes",
-  "node": "j2-no-heredar-constantes",
+  "node": "j2",
   "title": "J2: citar las constantes en vez de heredarlas",
   "description": "Quitar la herencia que existe solo para escribir las constantes sin calificar.",
   "intent": "Eliminar la herencia usada como atajo para acceder a constantes.",

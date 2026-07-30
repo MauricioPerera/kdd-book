@@ -1,6 +1,6 @@
 {
   "id": "g4-medidas-de-seguridad-canceladas",
-  "node": "g4-medidas-de-seguridad-canceladas",
+  "node": "g4",
   "title": "G4: cupos_libres sin avisos silenciados",
   "description": "Quitar las supresiones de linter atendiendo lo que tapaban.",
   "intent": "Eliminar las supresiones de aviso de cupos_libres resolviendo su causa.",

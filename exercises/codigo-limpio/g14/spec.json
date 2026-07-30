@@ -1,6 +1,6 @@
 {
   "id": "g14-envidia-de-caracteristicas",
-  "node": "g14-envidia-de-las-caracteristicas",
+  "node": "g14",
   "title": "G14: el pago lo calcula quien tiene los datos",
   "description": "Mover el calculo del pago a la clase duena de los datos que usa.",
   "intent": "Eliminar la envidia de caracteristicas moviendo el calculo del pago a Empleado.",

@@ -106,13 +106,13 @@ WHY_NOT = {
 }
 
 LINKS = {
-    4: ['{}/g5-duplicacion'.format(CL), '{}/144-codigo-duplicado-en-una-misma-clase'.format(SXP), 18],
-    8: ['{}/g30-las-funciones-solo-deben-hacer-una-cosa'.format(CL), 9, 22],
+    4: ['{}/g5'.format(CL), '{}/144'.format(SXP), 18],
+    8: ['{}/g30'.format(CL), 9, 22],
     9: [8, 12, 22],
-    11: ['{}/g23-polimorfismo-antes-que-if-else-o-switch-case'.format(CL), 13],
+    11: ['{}/g23'.format(CL), 13],
     12: [9],
     13: [11],
-    16: ['{}/g8-exceso-de-informacion'.format(CL), 17],
+    16: ['{}/g8'.format(CL), 17],
     17: [16, 18, 22],
     18: [4, 17],
     19: [20, 23],
@@ -152,7 +152,8 @@ def slugify(text, maxlen=52):
 
 
 def build():
-    id_por_indice = {i: '{:02d}-{}'.format(i, slugify(t)) for i, t, _ in ITEMS}
+    # El id es el numero de capitulo y nada mas. Ver ADR abajo.
+    id_por_indice = {i: '{:02d}'.format(i) for i, _t, _ in ITEMS}
 
     def destino(objetivo):
         return objetivo if isinstance(objetivo, str) else id_por_indice.get(objetivo)

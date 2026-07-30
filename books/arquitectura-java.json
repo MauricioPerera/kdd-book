@@ -15,7 +15,7 @@
   },
   "nodes": [
     {
-      "id": "01-introduccion-y-entorno-de-desarrollo",
+      "id": "01",
       "title": "Introduccion y entorno de desarrollo",
       "description": "Introduccion y entorno de desarrollo (capitulo 1 del libro).",
       "type": "Concept",
@@ -29,7 +29,7 @@
       "links": []
     },
     {
-      "id": "02-html",
+      "id": "02",
       "title": "HTML",
       "description": "HTML (capitulo 2 del libro).",
       "type": "Concept",
@@ -43,7 +43,7 @@
       "links": []
     },
     {
-      "id": "03-java-server-pages",
+      "id": "03",
       "title": "Java Server Pages",
       "description": "Java Server Pages (capitulo 3 del libro).",
       "type": "Concept",
@@ -57,7 +57,7 @@
       "links": []
     },
     {
-      "id": "04-el-principio-dry",
+      "id": "04",
       "title": "El principio DRY",
       "description": "El principio DRY (capitulo 4 del libro).",
       "type": "Concept",
@@ -70,16 +70,16 @@
       "verification": "instrumented",
       "locator": "capitulo 4",
       "links": [
-        "codigo-limpio/g5-duplicacion",
-        "scrum-xp/144-codigo-duplicado-en-una-misma-clase",
-        "18-el-patron-genericdao"
+        "codigo-limpio/g5",
+        "scrum-xp/144",
+        "18"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "cero bloques duplicados",
       "body": "Tercera aparicion de la misma tecnica en el grafo. Los tres autores la operacionalizan, y por eso los tres nodos son contractables y comparten instrumento."
     },
     {
-      "id": "05-editar-borrar-y-filtrar",
+      "id": "05",
       "title": "Editar, borrar y filtrar",
       "description": "Editar, borrar y filtrar (capitulo 5 del libro).",
       "type": "Concept",
@@ -93,7 +93,7 @@
       "links": []
     },
     {
-      "id": "06-manejo-de-excepciones",
+      "id": "06",
       "title": "Manejo de excepciones",
       "description": "Manejo de excepciones (capitulo 6 del libro).",
       "type": "Concept",
@@ -110,7 +110,7 @@
       "threshold": "cero catch mudos, vacios o amplios"
     },
     {
-      "id": "07-log4j",
+      "id": "07",
       "title": "Log4J",
       "description": "Log4J (capitulo 7 del libro).",
       "type": "Concept",
@@ -124,7 +124,7 @@
       "links": []
     },
     {
-      "id": "08-el-principio-srp",
+      "id": "08",
       "title": "El principio SRP",
       "description": "El principio SRP (capitulo 8 del libro).",
       "type": "Concept",
@@ -137,16 +137,16 @@
       "verification": "instrumented",
       "locator": "capitulo 8",
       "links": [
-        "codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa",
-        "09-el-modelo-mvc",
-        "22-la-capa-de-servicio"
+        "codigo-limpio/g30",
+        "09",
+        "22"
       ],
       "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas",
       "body": "SRP y G30 de Codigo Limpio (\"las funciones solo deben hacer una cosa\") son el mismo principio, y quedan en pilas distintas. Martin nunca lo aterriza: cuenta operaciones semanticas y no da un numero, asi que su nodo queda en pila B. Caules lo aplica como separacion de capas — la JSP no contiene codigo de persistencia — y eso es una regla de imports que un checker de dependencias verifica. La contractabilidad no la decide la tecnica ni el dominio: la decide si el autor la operacionalizo."
     },
     {
-      "id": "09-el-modelo-mvc",
+      "id": "09",
       "title": "El modelo MVC",
       "description": "El modelo MVC (capitulo 9 del libro).",
       "type": "Concept",
@@ -159,15 +159,15 @@
       "verification": "instrumented",
       "locator": "capitulo 9",
       "links": [
-        "08-el-principio-srp",
-        "12-el-modelo-mvc-2",
-        "22-la-capa-de-servicio"
+        "08",
+        "12",
+        "22"
       ],
       "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas"
     },
     {
-      "id": "10-jstl",
+      "id": "10",
       "title": "JSTL",
       "description": "JSTL (capitulo 10 del libro).",
       "type": "Concept",
@@ -181,7 +181,7 @@
       "links": []
     },
     {
-      "id": "11-el-principio-ocp",
+      "id": "11",
       "title": "El principio OCP",
       "description": "El principio OCP (capitulo 11 del libro).",
       "type": "Concept",
@@ -194,15 +194,15 @@
       "verification": "instrumented",
       "locator": "capitulo 11",
       "links": [
-        "codigo-limpio/g23-polimorfismo-antes-que-if-else-o-switch-case",
-        "13-el-patron-command"
+        "codigo-limpio/g23",
+        "13"
       ],
       "instrument": "checks.py --rule g23",
       "threshold": "cero cadenas if/else sobre un discriminante",
       "body": "Caules no deja OCP en \"abierto a extension, cerrado a modificacion\": lo convierte en una prueba ejecutable — si agregar una funcionalidad obliga a tocar el controlador y sumarle un if/else, no se cumple. Eso es exactamente `touch_only` de un contrato KDD, y ademas coincide con la heuristica G23 de Martin."
     },
     {
-      "id": "12-el-modelo-mvc-2",
+      "id": "12",
       "title": "El modelo MVC 2",
       "description": "El modelo MVC 2 (capitulo 12 del libro).",
       "type": "Concept",
@@ -215,13 +215,13 @@
       "verification": "instrumented",
       "locator": "capitulo 12",
       "links": [
-        "09-el-modelo-mvc"
+        "09"
       ],
       "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas"
     },
     {
-      "id": "13-el-patron-command",
+      "id": "13",
       "title": "El patron Command",
       "description": "El patron Command (capitulo 13 del libro).",
       "type": "Concept",
@@ -233,12 +233,12 @@
       "verification": "none",
       "locator": "capitulo 13",
       "links": [
-        "11-el-principio-ocp"
+        "11"
       ],
       "why_not": "la presencia de un patron no se detecta de forma robusta: una jerarquia con despacho puede ser Command o cualquier otra cosa"
     },
     {
-      "id": "14-hibernate",
+      "id": "14",
       "title": "Hibernate",
       "description": "Hibernate (capitulo 14 del libro).",
       "type": "Concept",
@@ -252,7 +252,7 @@
       "links": []
     },
     {
-      "id": "15-java-persistence-api",
+      "id": "15",
       "title": "Java Persistence API",
       "description": "Java Persistence API (capitulo 15 del libro).",
       "type": "Concept",
@@ -266,7 +266,7 @@
       "links": []
     },
     {
-      "id": "16-el-principio-isp",
+      "id": "16",
       "title": "El principio ISP",
       "description": "El principio ISP (capitulo 16 del libro).",
       "type": "Concept",
@@ -279,14 +279,14 @@
       "verification": "instrumented",
       "locator": "capitulo 16",
       "links": [
-        "codigo-limpio/g8-exceso-de-informacion",
-        "17-el-patron-dao"
+        "codigo-limpio/g8",
+        "17"
       ],
       "instrument": "arch_checks.py --rule isp",
       "threshold": "cero metodos de los que se depende sin usar"
     },
     {
-      "id": "17-el-patron-dao",
+      "id": "17",
       "title": "El patron DAO",
       "description": "El patron DAO (capitulo 17 del libro).",
       "type": "Concept",
@@ -299,15 +299,15 @@
       "verification": "instrumented",
       "locator": "capitulo 17",
       "links": [
-        "16-el-principio-isp",
-        "18-el-patron-genericdao",
-        "22-la-capa-de-servicio"
+        "16",
+        "18",
+        "22"
       ],
       "instrument": "arch_checks.py --rule capas",
       "threshold": "cero accesos a persistencia fuera de la capa DAO"
     },
     {
-      "id": "18-el-patron-genericdao",
+      "id": "18",
       "title": "El patron GenericDAO",
       "description": "El patron GenericDAO (capitulo 18 del libro).",
       "type": "Concept",
@@ -320,14 +320,14 @@
       "verification": "instrumented",
       "locator": "capitulo 18",
       "links": [
-        "04-el-principio-dry",
-        "17-el-patron-dao"
+        "04",
+        "17"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "cero duplicacion entre los DAO"
     },
     {
-      "id": "19-el-principio-de-inversion-de-control",
+      "id": "19",
       "title": "El principio de inversion de control",
       "description": "El principio de inversion de control (capitulo 19 del libro).",
       "type": "Concept",
@@ -340,14 +340,14 @@
       "verification": "instrumented",
       "locator": "capitulo 19",
       "links": [
-        "20-el-patron-factory",
-        "23-la-inyeccion-de-dependencia"
+        "20",
+        "23"
       ],
       "instrument": "arch_checks.py --rule instanciacion",
       "threshold": "cero colaboradores creados por la clase"
     },
     {
-      "id": "20-el-patron-factory",
+      "id": "20",
       "title": "El patron Factory",
       "description": "El patron Factory (capitulo 20 del libro).",
       "type": "Concept",
@@ -360,14 +360,14 @@
       "verification": "instrumented",
       "locator": "capitulo 20",
       "links": [
-        "19-el-principio-de-inversion-de-control",
-        "21-el-patron-abstract-factory"
+        "19",
+        "21"
       ],
       "instrument": "arch_checks.py --rule instanciacion --permite-crear factoria",
       "threshold": "creacion solo dentro de la factoria"
     },
     {
-      "id": "21-el-patron-abstract-factory",
+      "id": "21",
       "title": "El patron Abstract Factory",
       "description": "El patron Abstract Factory (capitulo 21 del libro).",
       "type": "Concept",
@@ -379,12 +379,12 @@
       "verification": "none",
       "locator": "capitulo 21",
       "links": [
-        "20-el-patron-factory"
+        "20"
       ],
       "why_not": "lo mismo que Command, y ademas la capa extra sobre las factorias es un juicio"
     },
     {
-      "id": "22-la-capa-de-servicio",
+      "id": "22",
       "title": "La capa de servicio",
       "description": "La capa de servicio (capitulo 22 del libro).",
       "type": "Concept",
@@ -397,14 +397,14 @@
       "verification": "instrumented",
       "locator": "capitulo 22",
       "links": [
-        "08-el-principio-srp",
-        "17-el-patron-dao"
+        "08",
+        "17"
       ],
       "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que salteen la capa de servicio"
     },
     {
-      "id": "23-la-inyeccion-de-dependencia",
+      "id": "23",
       "title": "La inyeccion de dependencia",
       "description": "La inyeccion de dependencia (capitulo 23 del libro).",
       "type": "Concept",
@@ -417,13 +417,13 @@
       "verification": "instrumented",
       "locator": "capitulo 23",
       "links": [
-        "19-el-principio-de-inversion-de-control"
+        "19"
       ],
       "instrument": "arch_checks.py --rule instanciacion",
       "threshold": "cero dependencias asignadas por la propia clase"
     },
     {
-      "id": "24-el-patron-template",
+      "id": "24",
       "title": "El patron Template",
       "description": "El patron Template (capitulo 24 del libro).",
       "type": "Concept",
@@ -435,12 +435,12 @@
       "verification": "none",
       "locator": "capitulo 24",
       "links": [
-        "26-programacion-orientada-a-aspectos"
+        "26"
       ],
       "why_not": "que el paso variable este bien elegido es exactamente la parte que no se puede medir"
     },
     {
-      "id": "25-spring-templates-y-jdbcdaosupport",
+      "id": "25",
       "title": "Spring Templates y JDBCDAOSupport",
       "description": "Spring Templates y JDBCDAOSupport (capitulo 25 del libro).",
       "type": "Concept",
@@ -454,7 +454,7 @@
       "links": []
     },
     {
-      "id": "26-programacion-orientada-a-aspectos",
+      "id": "26",
       "title": "Programacion orientada a aspectos",
       "description": "Programacion orientada a aspectos (capitulo 26 del libro).",
       "type": "Concept",
@@ -467,13 +467,13 @@
       "verification": "instrumented",
       "locator": "capitulo 26",
       "links": [
-        "24-el-patron-template"
+        "24"
       ],
       "instrument": "arch_checks.py --rule aop",
       "threshold": "cero logging ni transacciones en el negocio"
     },
     {
-      "id": "27-proxies-con-spring",
+      "id": "27",
       "title": "Proxies con Spring",
       "description": "Proxies con Spring (capitulo 27 del libro).",
       "type": "Concept",
@@ -487,7 +487,7 @@
       "links": []
     },
     {
-      "id": "28-el-principio-coc",
+      "id": "28",
       "title": "El principio COC",
       "description": "El principio COC (capitulo 28 del libro).",
       "type": "Concept",
@@ -504,7 +504,7 @@
       "threshold": "los campos coinciden con las columnas"
     },
     {
-      "id": "29-java-server-faces",
+      "id": "29",
       "title": "Java Server Faces",
       "description": "Java Server Faces (capitulo 29 del libro).",
       "type": "Concept",
@@ -518,7 +518,7 @@
       "links": []
     },
     {
-      "id": "30-migracion-a-java-server-faces",
+      "id": "30",
       "title": "Migracion a Java Server Faces",
       "description": "Migracion a Java Server Faces (capitulo 30 del libro).",
       "type": "Concept",
@@ -532,7 +532,7 @@
       "links": []
     },
     {
-      "id": "31-servicios-web-y-jax-ws",
+      "id": "31",
       "title": "Servicios web y JAX-WS",
       "description": "Servicios web y JAX-WS (capitulo 31 del libro).",
       "type": "Concept",
@@ -546,7 +546,7 @@
       "links": []
     },
     {
-      "id": "32-administracion-y-pools-de-conexiones",
+      "id": "32",
       "title": "Administracion y pools de conexiones",
       "description": "Administracion y pools de conexiones (capitulo 32 del libro).",
       "type": "Concept",
@@ -560,7 +560,7 @@
       "links": []
     },
     {
-      "id": "33-conclusiones",
+      "id": "33",
       "title": "Conclusiones",
       "description": "Conclusiones (capitulo 33 del libro).",
       "type": "Concept",

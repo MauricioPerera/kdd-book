@@ -1,6 +1,6 @@
 {
   "id": "g9-codigo-muerto",
-  "node": "g9-codigo-muerto",
+  "node": "g9",
   "title": "G9: borrar la funcion que nadie llama",
   "description": "Eliminar la funcion de modulo que ninguna referencia usa.",
   "intent": "Borrar la funcion muerta del modulo.",

@@ -1,6 +1,6 @@
 {
   "id": "104-aislamiento-de-las-pruebas",
-  "node": "104-caracteristicas-de-los-test-unitarios",
+  "node": "104",
   "title": "104: pruebas que se sostienen solas",
   "description": "Quitar la dependencia de orden entre las pruebas del carrito.",
   "intent": "Hacer que cada prueba de test_orden.py pase corrida por separado.",

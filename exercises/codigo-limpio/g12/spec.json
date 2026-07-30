@@ -1,6 +1,6 @@
 {
   "id": "g12-desorden",
-  "node": "g12-desorden",
+  "node": "g12",
   "title": "G12: cupos_libres sin desorden",
   "description": "Borrar el import sin usar y la variable que nadie lee.",
   "intent": "Eliminar el import sin usar y la variable asignada que nadie lee.",

@@ -1,6 +1,6 @@
 {
   "id": "142-expresiones-extensas",
-  "node": "142-expresiones-extensas",
+  "node": "142",
   "title": "142: admite_inscripcion sin expresiones extensas",
   "description": "Partir la condicion compuesta en valores intermedios con nombre.",
   "intent": "Bajar la cantidad de operadores por expresion en admite_inscripcion.",

@@ -1,6 +1,6 @@
 {
   "id": "g10-separacion-vertical",
-  "node": "g10-separacion-vertical",
+  "node": "g10",
   "title": "G10: resumen_evento con la variable cerca de su uso",
   "description": "Mover la declaracion de la etiqueta junto al lugar donde se usa.",
   "intent": "Acercar la declaracion de `etiqueta` a su unico uso.",

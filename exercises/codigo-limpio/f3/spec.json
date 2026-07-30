@@ -1,6 +1,6 @@
 {
   "id": "f3-argumentos-de-indicador",
-  "node": "f3-argumentos-de-indicador",
+  "node": "f3",
   "title": "F3: formatear_titulo sin argumento de indicador",
   "description": "Partir la funcion en dos con nombre en vez de un booleano que elige camino.",
   "intent": "Eliminar el argumento de indicador partiendo la funcion en dos con nombre propio.",

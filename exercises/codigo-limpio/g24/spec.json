@@ -1,6 +1,6 @@
 {
   "id": "g24-convenciones-estandar",
-  "node": "g24-seguir-las-convenciones-estandar",
+  "node": "g24",
   "title": "G24: el modulo de etiquetas segun las convenciones declaradas",
   "description": "Ajustar el formato del modulo al subconjunto de convenciones declarado.",
   "intent": "Ajustar el formato de formato.py a las convenciones declaradas del proyecto.",

@@ -15,7 +15,7 @@
   },
   "nodes": [
     {
-      "id": "c1-informacion-inapropiada",
+      "id": "c1",
       "title": "C1: Información inapropiada",
       "description": "Información inapropiada (heuristica C1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -30,7 +30,7 @@
       "links": []
     },
     {
-      "id": "c2-comentario-obsoleto",
+      "id": "c2",
       "title": "C2: Comentario obsoleto",
       "description": "Comentario obsoleto (heuristica C2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -43,12 +43,12 @@
       "verification": "none",
       "locator": "capitulo 17, C2",
       "links": [
-        "c3-comentario-redundante"
+        "c3"
       ],
       "why_not": "detectar que un comentario quedo obsoleto exige entender el codigo que describe"
     },
     {
-      "id": "c3-comentario-redundante",
+      "id": "c3",
       "title": "C3: Comentario redundante",
       "description": "Comentario redundante (heuristica C3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -61,11 +61,11 @@
       "verification": "none",
       "locator": "capitulo 17, C3",
       "links": [
-        "c2-comentario-obsoleto"
+        "c2"
       ]
     },
     {
-      "id": "c4-comentario-mal-escrito",
+      "id": "c4",
       "title": "C4: Comentario mal escrito",
       "description": "Comentario mal escrito (heuristica C4 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -80,7 +80,7 @@
       "links": []
     },
     {
-      "id": "c5-codigo-comentado",
+      "id": "c5",
       "title": "C5: Código comentado",
       "description": "Código comentado (heuristica C5 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -94,13 +94,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, C5",
       "links": [
-        "g9-codigo-muerto"
+        "g9"
       ],
       "instrument": "checks.py --rule c5",
       "threshold": "comentarios_con_codigo: 0"
     },
     {
-      "id": "e1-la-generacion-requiere-mas-de-un-paso",
+      "id": "e1",
       "title": "E1: La generación requiere más de un paso",
       "description": "La generación requiere más de un paso (heuristica E1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -114,13 +114,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, E1",
       "links": [
-        "e2-las-pruebas-requieren-mas-de-un-paso"
+        "e2"
       ],
       "instrument": "repo_checks.py --rule e1",
       "threshold": "generar en un solo paso"
     },
     {
-      "id": "e2-las-pruebas-requieren-mas-de-un-paso",
+      "id": "e2",
       "title": "E2: Las pruebas requieren más de un paso",
       "description": "Las pruebas requieren más de un paso (heuristica E2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -134,13 +134,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, E2",
       "links": [
-        "e1-la-generacion-requiere-mas-de-un-paso"
+        "e1"
       ],
       "instrument": "repo_checks.py --rule e2",
       "threshold": "probar en un solo paso"
     },
     {
-      "id": "f1-demasiados-argumentos",
+      "id": "f1",
       "title": "F1: Demasiados argumentos",
       "description": "Demasiados argumentos (heuristica F1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -154,13 +154,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, F1",
       "links": [
-        "g30-las-funciones-solo-deben-hacer-una-cosa"
+        "g30"
       ],
       "instrument": "params_max.py --max 3",
       "threshold": "params_max: 3"
     },
     {
-      "id": "f2-argumentos-de-salida",
+      "id": "f2",
       "title": "F2: Argumentos de salida",
       "description": "Argumentos de salida (heuristica F2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -174,13 +174,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, F2",
       "links": [
-        "f1-demasiados-argumentos"
+        "f1"
       ],
       "instrument": "checks.py --rule f2",
       "threshold": "args_de_salida: 0"
     },
     {
-      "id": "f3-argumentos-de-indicador",
+      "id": "f3",
       "title": "F3: Argumentos de indicador",
       "description": "Argumentos de indicador (heuristica F3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -194,13 +194,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, F3",
       "links": [
-        "g15-argumentos-de-selector"
+        "g15"
       ],
       "instrument": "checks.py --rule f3",
       "threshold": "args_indicador: 0"
     },
     {
-      "id": "f4-funcion-muerta",
+      "id": "f4",
       "title": "F4: Función muerta",
       "description": "Función muerta (heuristica F4 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -214,13 +214,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, F4",
       "links": [
-        "g9-codigo-muerto"
+        "g9"
       ],
       "instrument": "checks.py --rule f4",
       "threshold": "funciones_muertas: 0"
     },
     {
-      "id": "g1-varios-lenguajes-en-un-archivo-de-codigo",
+      "id": "g1",
       "title": "G1: Varios lenguajes en un archivo de código",
       "description": "Varios lenguajes en un archivo de código (heuristica G1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -235,7 +235,7 @@
       "links": []
     },
     {
-      "id": "g2-comportamiento-evidente-no-implementado",
+      "id": "g2",
       "title": "G2: Comportamiento evidente no implementado",
       "description": "Comportamiento evidente no implementado (heuristica G2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -250,7 +250,7 @@
       "links": []
     },
     {
-      "id": "g3-comportamiento-incorrecto-en-los-limites",
+      "id": "g3",
       "title": "G3: Comportamiento incorrecto en los límites",
       "description": "Comportamiento incorrecto en los límites (heuristica G3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -264,13 +264,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G3",
       "links": [
-        "t5-probar-condiciones-de-limite"
+        "t5"
       ],
       "instrument": "mutation_checks.py --rule limites",
       "threshold": "cero mutantes de limite vivos"
     },
     {
-      "id": "g4-medidas-de-seguridad-canceladas",
+      "id": "g4",
       "title": "G4: Medidas de seguridad canceladas",
       "description": "Medidas de seguridad canceladas (heuristica G4 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -288,7 +288,7 @@
       "threshold": "supresiones: 0"
     },
     {
-      "id": "g5-duplicacion",
+      "id": "g5",
       "title": "G5: Duplicación",
       "description": "Duplicación (heuristica G5 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -302,14 +302,14 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G5",
       "links": [
-        "g33-encapsular-condiciones-de-limite",
-        "g12-desorden"
+        "g33",
+        "g12"
       ],
       "instrument": "checks.py --rule g5",
       "threshold": "bloques_duplicados: 0"
     },
     {
-      "id": "g6-codigo-en-un-nivel-de-abstraccion-incorrecto",
+      "id": "g6",
       "title": "G6: Código en un nivel de abstracción incorrecto",
       "description": "Código en un nivel de abstracción incorrecto (heuristica G6 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -324,7 +324,7 @@
       "links": []
     },
     {
-      "id": "g7-clases-base-que-dependen-de-sus-variantes",
+      "id": "g7",
       "title": "G7: Clases base que dependen de sus variantes",
       "description": "Clases base que dependen de sus variantes (heuristica G7 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -342,7 +342,7 @@
       "threshold": "refs_base_a_variante: 0"
     },
     {
-      "id": "g8-exceso-de-informacion",
+      "id": "g8",
       "title": "G8: Exceso de información",
       "description": "Exceso de información (heuristica G8 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -360,7 +360,7 @@
       "threshold": "api_publica_max"
     },
     {
-      "id": "g9-codigo-muerto",
+      "id": "g9",
       "title": "G9: Código muerto",
       "description": "Código muerto (heuristica G9 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -374,13 +374,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G9",
       "links": [
-        "f4-funcion-muerta"
+        "f4"
       ],
       "instrument": "checks.py --rule g9",
       "threshold": "codigo_muerto: 0"
     },
     {
-      "id": "g10-separacion-vertical",
+      "id": "g10",
       "title": "G10: Separación vertical",
       "description": "Separación vertical (heuristica G10 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -398,7 +398,7 @@
       "threshold": "distancia_declaracion_max"
     },
     {
-      "id": "g11-incoherencia",
+      "id": "g11",
       "title": "G11: Incoherencia",
       "description": "Incoherencia (heuristica G11 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -413,7 +413,7 @@
       "links": []
     },
     {
-      "id": "g12-desorden",
+      "id": "g12",
       "title": "G12: Desorden",
       "description": "Desorden (heuristica G12 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -431,7 +431,7 @@
       "threshold": "desorden: 0"
     },
     {
-      "id": "g13-conexiones-artificiales",
+      "id": "g13",
       "title": "G13: Conexiones artificiales",
       "description": "Conexiones artificiales (heuristica G13 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -446,7 +446,7 @@
       "links": []
     },
     {
-      "id": "g14-envidia-de-las-caracteristicas",
+      "id": "g14",
       "title": "G14: Envidia de las características",
       "description": "Envidia de las características (heuristica G14 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -464,7 +464,7 @@
       "threshold": "accesos_ajenos_max"
     },
     {
-      "id": "g15-argumentos-de-selector",
+      "id": "g15",
       "title": "G15: Argumentos de selector",
       "description": "Argumentos de selector (heuristica G15 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -478,13 +478,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G15",
       "links": [
-        "f3-argumentos-de-indicador"
+        "f3"
       ],
       "instrument": "checks.py --rule g15",
       "threshold": "args_selector: 0"
     },
     {
-      "id": "g16-intencion-desconocida",
+      "id": "g16",
       "title": "G16: Intención desconocida",
       "description": "Intención desconocida (heuristica G16 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -499,7 +499,7 @@
       "links": []
     },
     {
-      "id": "g17-responsabilidad-desubicada",
+      "id": "g17",
       "title": "G17: Responsabilidad desubicada",
       "description": "Responsabilidad desubicada (heuristica G17 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -514,7 +514,7 @@
       "links": []
     },
     {
-      "id": "g18-elementos-estaticos-incorrectos",
+      "id": "g18",
       "title": "G18: Elementos estáticos incorrectos",
       "description": "Elementos estáticos incorrectos (heuristica G18 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -529,7 +529,7 @@
       "links": []
     },
     {
-      "id": "g19-usar-variables-explicativas",
+      "id": "g19",
       "title": "G19: Usar variables explicativas",
       "description": "Usar variables explicativas (heuristica G19 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -542,13 +542,13 @@
       "verification": "none",
       "locator": "capitulo 17, G19",
       "links": [
-        "g28-encapsular-condicionales",
-        "n1-elegir-nombres-descriptivos"
+        "g28",
+        "n1"
       ],
       "why_not": "el autor la describe como monotona y sin umbral (siempre conviene mas y es dificil excederse), y ademas exige nombres descriptivos, que es la mitad no medible"
     },
     {
-      "id": "g20-los-nombres-de-funcion-deben-indicar-lo-que-hacen",
+      "id": "g20",
       "title": "G20: Los nombres de función deben indicar lo que hacen",
       "description": "Los nombres de función deben indicar lo que hacen (heuristica G20 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -563,7 +563,7 @@
       "links": []
     },
     {
-      "id": "g21-comprender-el-algoritmo",
+      "id": "g21",
       "title": "G21: Comprender el algoritmo",
       "description": "Comprender el algoritmo (heuristica G21 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -578,7 +578,7 @@
       "links": []
     },
     {
-      "id": "g22-convertir-dependencias-logicas-en-fisicas",
+      "id": "g22",
       "title": "G22: Convertir dependencias lógicas en físicas",
       "description": "Convertir dependencias lógicas en físicas (heuristica G22 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -593,7 +593,7 @@
       "links": []
     },
     {
-      "id": "g23-polimorfismo-antes-que-if-else-o-switch-case",
+      "id": "g23",
       "title": "G23: Polimorfismo antes que If/Else o Switch/Case",
       "description": "Polimorfismo antes que If/Else o Switch/Case (heuristica G23 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -607,13 +607,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G23",
       "links": [
-        "g30-las-funciones-solo-deben-hacer-una-cosa"
+        "g30"
       ],
       "instrument": "checks.py --rule g23",
       "threshold": "switch_sobre_tipo: 0"
     },
     {
-      "id": "g24-seguir-las-convenciones-estandar",
+      "id": "g24",
       "title": "G24: Seguir las convenciones estándar",
       "description": "Seguir las convenciones estándar (heuristica G24 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -631,7 +631,7 @@
       "threshold": "convenciones declaradas en verde"
     },
     {
-      "id": "g25-sustituir-numeros-magicos-por-constantes-con-nombre",
+      "id": "g25",
       "title": "G25: Sustituir números mágicos por constantes con nombre",
       "description": "Sustituir números mágicos por constantes con nombre (heuristica G25 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -649,7 +649,7 @@
       "threshold": "numeros_magicos: 0"
     },
     {
-      "id": "g26-precision",
+      "id": "g26",
       "title": "G26: Precisión",
       "description": "Precisión (heuristica G26 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -664,7 +664,7 @@
       "links": []
     },
     {
-      "id": "g27-estructura-sobre-convencion",
+      "id": "g27",
       "title": "G27: Estructura sobre convención",
       "description": "Estructura sobre convención (heuristica G27 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -679,7 +679,7 @@
       "links": []
     },
     {
-      "id": "g28-encapsular-condicionales",
+      "id": "g28",
       "title": "G28: Encapsular condicionales",
       "description": "Encapsular condicionales (heuristica G28 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -693,14 +693,14 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G28",
       "links": [
-        "g19-usar-variables-explicativas",
-        "g29-evitar-condicionales-negativas"
+        "g19",
+        "g29"
       ],
       "instrument": "checks.py --rule g28",
       "threshold": "operadores_por_condicion_max"
     },
     {
-      "id": "g29-evitar-condicionales-negativas",
+      "id": "g29",
       "title": "G29: Evitar condicionales negativas",
       "description": "Evitar condicionales negativas (heuristica G29 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -718,7 +718,7 @@
       "threshold": "condicionales_negadas_max"
     },
     {
-      "id": "g30-las-funciones-solo-deben-hacer-una-cosa",
+      "id": "g30",
       "title": "G30: Las funciones sólo deben hacer una cosa",
       "description": "Las funciones sólo deben hacer una cosa (heuristica G30 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -731,13 +731,13 @@
       "verification": "none",
       "locator": "capitulo 17, G30",
       "links": [
-        "f1-demasiados-argumentos",
-        "g34-las-funciones-solo-deben-descender-un-nivel-de-abstraccion"
+        "f1",
+        "g34"
       ],
       "why_not": "el autor cuenta operaciones semanticas y nunca da un numero; longitud y ciclomatica son proxies, no la propiedad"
     },
     {
-      "id": "g31-conexiones-temporales-ocultas",
+      "id": "g31",
       "title": "G31: Conexiones temporales ocultas",
       "description": "Conexiones temporales ocultas (heuristica G31 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -752,7 +752,7 @@
       "links": []
     },
     {
-      "id": "g32-evitar-la-arbitrariedad",
+      "id": "g32",
       "title": "G32: Evitar la arbitrariedad",
       "description": "Evitar la arbitrariedad (heuristica G32 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -767,7 +767,7 @@
       "links": []
     },
     {
-      "id": "g33-encapsular-condiciones-de-limite",
+      "id": "g33",
       "title": "G33: Encapsular condiciones de límite",
       "description": "Encapsular condiciones de límite (heuristica G33 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -781,13 +781,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G33",
       "links": [
-        "g5-duplicacion"
+        "g5"
       ],
       "instrument": "checks.py --rule g33",
       "threshold": "subexpr_limite_duplicada: 0"
     },
     {
-      "id": "g34-las-funciones-solo-deben-descender-un-nivel-de-abstraccion",
+      "id": "g34",
       "title": "G34: Las funciones sólo deben descender un nivel de abstracción",
       "description": "Las funciones sólo deben descender un nivel de abstracción (heuristica G34 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -800,11 +800,11 @@
       "verification": "none",
       "locator": "capitulo 17, G34",
       "links": [
-        "g30-las-funciones-solo-deben-hacer-una-cosa"
+        "g30"
       ]
     },
     {
-      "id": "g35-mantener-los-datos-configurables-en-los-niveles-superiores",
+      "id": "g35",
       "title": "G35: Mantener los datos configurables en los niveles superiores",
       "description": "Mantener los datos configurables en los niveles superiores (heuristica G35 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -819,7 +819,7 @@
       "links": []
     },
     {
-      "id": "g36-evitar-desplazamientos-transitivos",
+      "id": "g36",
       "title": "G36: Evitar desplazamientos transitivos",
       "description": "Evitar desplazamientos transitivos (heuristica G36 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -833,13 +833,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G36",
       "links": [
-        "g14-envidia-de-las-caracteristicas"
+        "g14"
       ],
       "instrument": "chain_depth.py --max 1",
       "threshold": "chain_depth_max: 1"
     },
     {
-      "id": "j1-evitar-extensas-listas-de-importacion-mediante-el-uso-de",
+      "id": "j1",
       "title": "J1: Evitar extensas listas de importación mediante el uso de",
       "description": "Evitar extensas listas de importación mediante el uso de (heuristica J1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -857,7 +857,7 @@
       "threshold": "imports_comodin: 0"
     },
     {
-      "id": "j2-no-heredar-constantes",
+      "id": "j2",
       "title": "J2: No heredar constantes",
       "description": "No heredar constantes (heuristica J2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -875,7 +875,7 @@
       "threshold": "cero herencias solo por constantes"
     },
     {
-      "id": "j3-constantes-frente-a-enumeraciones",
+      "id": "j3",
       "title": "J3: Constantes frente a enumeraciones",
       "description": "Constantes frente a enumeraciones (heuristica J3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -890,7 +890,7 @@
       "links": []
     },
     {
-      "id": "n1-elegir-nombres-descriptivos",
+      "id": "n1",
       "title": "N1: Elegir nombres descriptivos",
       "description": "Elegir nombres descriptivos (heuristica N1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -903,14 +903,14 @@
       "verification": "none",
       "locator": "capitulo 17, N1",
       "links": [
-        "n2-elegir-nombres-en-el-nivel-correcto-de-abstraccion",
-        "n4-nombres-inequivocos",
-        "n5-usar-nombres-extensos-para-ambitos-extensos"
+        "n2",
+        "n4",
+        "n5"
       ],
       "why_not": "lo descriptivo de un nombre es correspondencia semantica con el cuerpo"
     },
     {
-      "id": "n2-elegir-nombres-en-el-nivel-correcto-de-abstraccion",
+      "id": "n2",
       "title": "N2: Elegir nombres en el nivel correcto de abstracción",
       "description": "Elegir nombres en el nivel correcto de abstracción (heuristica N2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -923,11 +923,11 @@
       "verification": "none",
       "locator": "capitulo 17, N2",
       "links": [
-        "n1-elegir-nombres-descriptivos"
+        "n1"
       ]
     },
     {
-      "id": "n3-usar-nomenclatura-estandar-siempre-que-sea-posible",
+      "id": "n3",
       "title": "N3: Usar nomenclatura estándar siempre que sea posible",
       "description": "Usar nomenclatura estándar siempre que sea posible (heuristica N3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -942,7 +942,7 @@
       "links": []
     },
     {
-      "id": "n4-nombres-inequivocos",
+      "id": "n4",
       "title": "N4: Nombres inequívocos",
       "description": "Nombres inequívocos (heuristica N4 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -955,11 +955,11 @@
       "verification": "none",
       "locator": "capitulo 17, N4",
       "links": [
-        "n1-elegir-nombres-descriptivos"
+        "n1"
       ]
     },
     {
-      "id": "n5-usar-nombres-extensos-para-ambitos-extensos",
+      "id": "n5",
       "title": "N5: Usar nombres extensos para ámbitos extensos",
       "description": "Usar nombres extensos para ámbitos extensos (heuristica N5 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -973,13 +973,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, N5",
       "links": [
-        "n1-elegir-nombres-descriptivos"
+        "n1"
       ],
       "instrument": "checks.py --rule n5",
       "threshold": "len(nombre) >= f(lineas_ambito)"
     },
     {
-      "id": "n6-evitar-codificaciones",
+      "id": "n6",
       "title": "N6: Evitar codificaciones",
       "description": "Evitar codificaciones (heuristica N6 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -997,7 +997,7 @@
       "threshold": "codificaciones: 0"
     },
     {
-      "id": "n7-los-nombres-deben-describir-efectos-secundarios",
+      "id": "n7",
       "title": "N7: Los nombres deben describir efectos secundarios",
       "description": "Los nombres deben describir efectos secundarios (heuristica N7 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1010,11 +1010,11 @@
       "verification": "none",
       "locator": "capitulo 17, N7",
       "links": [
-        "n1-elegir-nombres-descriptivos"
+        "n1"
       ]
     },
     {
-      "id": "t1-pruebas-insuficientes",
+      "id": "t1",
       "title": "T1: Pruebas insuficientes",
       "description": "Pruebas insuficientes (heuristica T1 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1028,13 +1028,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, T1",
       "links": [
-        "t2-usar-una-herramienta-de-cobertura"
+        "t2"
       ],
       "instrument": "repo_checks.py --rule t1",
       "threshold": "cobertura_min"
     },
     {
-      "id": "t2-usar-una-herramienta-de-cobertura",
+      "id": "t2",
       "title": "T2: Usar una herramienta de cobertura",
       "description": "Usar una herramienta de cobertura (heuristica T2 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1048,13 +1048,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, T2",
       "links": [
-        "t1-pruebas-insuficientes"
+        "t1"
       ],
       "instrument": "repo_checks.py --rule t2",
       "threshold": "gate_cobertura: presente"
     },
     {
-      "id": "t3-no-ignorar-pruebas-triviales",
+      "id": "t3",
       "title": "T3: No ignorar pruebas triviales",
       "description": "No ignorar pruebas triviales (heuristica T3 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1069,7 +1069,7 @@
       "links": []
     },
     {
-      "id": "t4-una-prueba-ignorada-es-una-pregunta-sobre-una-ambiguedad",
+      "id": "t4",
       "title": "T4: Una prueba ignorada es una pregunta sobre una ambigüedad",
       "description": "Una prueba ignorada es una pregunta sobre una ambigüedad (heuristica T4 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1082,11 +1082,11 @@
       "verification": "none",
       "locator": "capitulo 17, T4",
       "links": [
-        "g4-medidas-de-seguridad-canceladas"
+        "g4"
       ]
     },
     {
-      "id": "t5-probar-condiciones-de-limite",
+      "id": "t5",
       "title": "T5: Probar condiciones de límite",
       "description": "Probar condiciones de límite (heuristica T5 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1100,13 +1100,13 @@
       "verification": "instrumented",
       "locator": "capitulo 17, T5",
       "links": [
-        "g3-comportamiento-incorrecto-en-los-limites"
+        "g3"
       ],
       "instrument": "mutation_checks.py --rule limites",
       "threshold": "cero mutantes de limite vivos"
     },
     {
-      "id": "t6-probar-de-forma-exhaustiva-junto-a-los-errores",
+      "id": "t6",
       "title": "T6: Probar de forma exhaustiva junto a los errores",
       "description": "Probar de forma exhaustiva junto a los errores (heuristica T6 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1121,7 +1121,7 @@
       "links": []
     },
     {
-      "id": "t7-los-patrones-de-fallo-son-reveladores",
+      "id": "t7",
       "title": "T7: Los patrones de fallo son reveladores",
       "description": "Los patrones de fallo son reveladores (heuristica T7 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1134,11 +1134,11 @@
       "verification": "none",
       "locator": "capitulo 17, T7",
       "links": [
-        "t8-los-patrones-de-cobertura-de-pruebas-pueden-ser-reveladores"
+        "t8"
       ]
     },
     {
-      "id": "t8-los-patrones-de-cobertura-de-pruebas-pueden-ser-reveladores",
+      "id": "t8",
       "title": "T8: Los patrones de cobertura de pruebas pueden ser reveladores",
       "description": "Los patrones de cobertura de pruebas pueden ser reveladores (heuristica T8 del catalogo del capitulo 17).",
       "type": "Concept",
@@ -1151,11 +1151,11 @@
       "verification": "none",
       "locator": "capitulo 17, T8",
       "links": [
-        "t7-los-patrones-de-fallo-son-reveladores"
+        "t7"
       ]
     },
     {
-      "id": "t9-las-pruebas-deben-ser-rapidas",
+      "id": "t9",
       "title": "T9: Las pruebas deben ser rápidas",
       "description": "Las pruebas deben ser rápidas (heuristica T9 del catalogo del capitulo 17).",
       "type": "Concept",

@@ -1,6 +1,6 @@
 {
   "id": "isp-dependencia-angosta",
-  "node": "16-el-principio-isp",
+  "node": "16",
   "title": "ISP: depender solo de lo que se usa",
   "description": "Angostar la dependencia del buscador a los metodos que realmente usa.",
   "intent": "Quitarle al Buscador la dependencia de metodos que nunca llama.",

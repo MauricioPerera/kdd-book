@@ -1,7 +1,7 @@
 {
   "id": "e2-probar-en-un-paso",
   "book": "codigo-limpio",
-  "node": "e2-las-pruebas-requieren-mas-de-un-paso",
+  "node": "e2",
   "task": "e2_probar_en_un_paso",
   "title": "E2: correr toda la suite con un solo comando",
   "description": "Dar al proyecto un punto de entrada unico que descubra y corra todas las pruebas.",
@@ -13,7 +13,12 @@
   "kind": "nivel-repo",
   "instrument": {
     "script": "repo_checks.py",
-    "args": ["--rule", "e2", "--min-tests", "10"],
+    "args": [
+      "--rule",
+      "e2",
+      "--min-tests",
+      "10"
+    ],
     "threshold": "un comando, >= 10 pruebas corridas"
   },
   "budget": {
@@ -22,7 +27,9 @@
     "lines_max": 60,
     "params_max": 3
   },
-  "forbids": ["network"],
+  "forbids": [
+    "network"
+  ],
   "deps_allowed": [],
   "invariants": [
     "La funcionalidad de `tarifas.py` no cambia: el oraculo pasa igual antes y despues.",
