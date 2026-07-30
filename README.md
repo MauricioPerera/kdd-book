@@ -156,6 +156,25 @@ el instrumento mide la propiedad. En T1 el reparto es explicito: el oraculo
 `test_cupos.py` esta sellado y cubre dos de los cinco caminos a proposito, y el
 `target` es **otro** archivo de pruebas, el unico que se puede tocar.
 
+### El inventario de lo que falta
+
+`tests/test_cobertura.py` obliga a que **toda tecnica con instrumento tenga
+ejercicio**, salvo excepciones declaradas con su motivo. Falla en las dos
+direcciones: si aparece un instrumento sin ejercicio que nadie declaro, y si
+queda declarada una excepcion que ya no hace falta.
+
+Existe porque la cobertura se venia comprobando a mano, y a mano no sobrevive al
+proximo libro. Sin esta prueba, un instrumento nuevo sin ejercicio no lo detecta
+nadie: los gates pasan igual, porque **un contrato que no existe no falla**.
+
+Las tres excepciones son de `git_checks`, y su motivo es el mismo: lo que hay
+que arreglar no es un archivo sino el historial. Integrar una rama, marcar una
+entrega o escribir el test antes que el codigo son operaciones de git, y
+`touch_only` cubre archivos, no commits. La tentacion seria darle al ejercicio
+un script que fabrique el historial y poner ese script como target — seria
+enseñar a fabricar un historial que se vea bien, que es lo contrario de la
+tecnica.
+
 ### Garantias de `contract_emit.py`
 
 Aborta con exit 1 antes de escribir si el `budget` usa una subclave que el gate
