@@ -37,10 +37,12 @@ VALID_VERIFICATION = {'instrumented', 'proxy', 'human_rubric', 'none'}
 SOURCE_NODE = 'fuente.md'
 INDEX_NAME = 'index.md'
 
-# Marcadores del bloque que gestiona el emisor dentro de index.md. Todo lo que
-# el usuario escriba fuera de estos marcadores se conserva intacto.
-INDEX_BEGIN = '<!-- okf-emit:begin -->'
-INDEX_END = '<!-- okf-emit:end -->'
+# Marcadores del bloque que gestiona el emisor dentro de index.md. Hay un
+# bloque POR LIBRO: con un solo bloque compartido, emitir un segundo libro
+# reemplazaba la entrada del primero y sus nodos quedaban huerfanos en masa.
+# Todo lo que se escriba fuera de estos marcadores se conserva intacto.
+INDEX_BEGIN = '<!-- okf-emit:libro:{} -->'
+INDEX_END = '<!-- /okf-emit:libro:{} -->'
 
 _SLUG_RE = re.compile(r'^[a-z0-9][a-z0-9-]*$')
 
@@ -112,14 +114,37 @@ def _check_node(node, seen):
             "{}: pila A sin 'verification' (declara instrumented o proxy)".format(node_id))
 
 
-def _resolve_links(nodes):
-    """§4: todo destino de `links` debe existir. Devuelve el conjunto de ids."""
+def _link_href(target, slug):
+    """Ruta relativa del enlace desde un nodo del libro `slug`.
+
+    Un destino puede ser `id` (nodo del mismo libro) o `otro-libro/id` (nodo de
+    otro libro ya emitido). Los enlaces entre libros son el punto del grafo: la
+    misma tecnica operacionalizada por un autor y no por otro solo se puede
+    decir si los nodos se pueden citar entre si.
+    """
+    if '/' in target:
+        return '../{}.md'.format(target)
+    del slug
+    return '{}.md'.format(target)
+
+
+def _resolve_links(nodes, out_dir, slug):
+    """§4: todo destino de `links` debe existir antes de escribir nada.
+
+    Dentro del libro se comprueba contra los ids del propio spec. Hacia otro
+    libro se comprueba contra el disco: el otro libro tiene que estar emitido,
+    y si no lo esta el emisor lo dice en vez de dejar un enlace roto.
+    """
     ids = {n['id'] for n in nodes}
     ids.add('fuente')
     broken = []
     for node in nodes:
         for target in node.get('links', []):
-            if target not in ids:
+            if '/' in target:
+                otro = os.path.join(out_dir, *target.split('/')) + '.md'
+                if not os.path.isfile(otro):
+                    broken.append((node['id'], target + ' (otro libro, no emitido)'))
+            elif target not in ids:
                 broken.append((node['id'], target))
     if broken:
         detail = '; '.join('{} -> {}'.format(src, dst) for src, dst in sorted(broken))
@@ -191,7 +216,10 @@ def _render_node(node, source):
         out.append('## Relacionados')
         out.append('')
         for target in links:
-            out.append('- [{}]({}.md)'.format(target, target))
+            etiqueta = target.split('/')[-1]
+            sufijo = ' (en {})'.format(target.split('/')[0]) if '/' in target else ''
+            out.append('- [{}]({}){}'.format(
+                etiqueta, _link_href(target, source['slug']), sufijo))
         out.append('')
 
     return '\n'.join(out).rstrip() + '\n'
@@ -255,30 +283,31 @@ def _render_source(source, nodes):
 
 
 def _render_index_block(source, nodes):
-    """Bloque gestionado dentro de index.md. Enlaza la carpeta: eso satisface §5."""
+    """Bloque gestionado de UN libro dentro de index.md.
+
+    Enlaza la carpeta, que es lo que satisface §5: los .md hijos directos de
+    una carpeta enlazada quedan alcanzables.
+    """
     slug = source['slug']
     out = []
-    out.append(INDEX_BEGIN)
-    out.append('')
-    out.append('## Libros')
-    out.append('')
+    out.append(INDEX_BEGIN.format(slug))
     out.append('- [{}]({}/) - {} nodos derivados del libro. Procedencia y medicion en'
                ' [fuente]({}/{}).'.format(source['title'], slug, len(nodes) + 1,
                                           slug, SOURCE_NODE))
-    out.append('')
-    out.append(INDEX_END)
+    out.append(INDEX_END.format(slug))
     return '\n'.join(out)
 
 
-def _merge_index(existing, block):
-    """Inserta o reemplaza el bloque gestionado, conservando el resto del index."""
-    if INDEX_BEGIN in existing and INDEX_END in existing:
-        head = existing.split(INDEX_BEGIN)[0]
-        tail = existing.split(INDEX_END, 1)[1]
+def _merge_index(existing, block, slug):
+    """Inserta o reemplaza el bloque de ESTE libro, sin tocar el de los demas."""
+    begin, end = INDEX_BEGIN.format(slug), INDEX_END.format(slug)
+    if begin in existing and end in existing:
+        head = existing.split(begin)[0]
+        tail = existing.split(end, 1)[1]
         return head + block + tail
     base = existing.rstrip()
     if not base:
-        base = '# Indice de conocimiento'
+        base = '# Indice de conocimiento\n\n## Libros'
     return base + '\n\n' + block + '\n'
 
 
@@ -297,7 +326,7 @@ def emit(spec, out_dir, dry_run=False):
         seen.add(node['id'])
 
     # §4 antes de tocar el disco: un grafo a medias es peor que ninguno.
-    _resolve_links(nodes)
+    _resolve_links(nodes, out_dir, slug)
 
     book_dir = os.path.join(out_dir, slug)
     index_path = os.path.join(out_dir, INDEX_NAME)
@@ -306,7 +335,8 @@ def emit(spec, out_dir, dry_run=False):
     if os.path.isfile(index_path):
         with open(index_path, 'r', encoding='utf-8') as fh:
             existing_index = fh.read()
-    new_index = _merge_index(existing_index, _render_index_block(source, nodes))
+    new_index = _merge_index(existing_index,
+                             _render_index_block(source, nodes), slug)
 
     files = {os.path.join(book_dir, SOURCE_NODE): _render_source(source, nodes)}
     for node in nodes:
