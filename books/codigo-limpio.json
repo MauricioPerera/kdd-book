@@ -27,7 +27,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C1",
-      "alias": [],
+      "alias": [
+        "informacion inapropiada",
+        "inappropriate information"
+      ],
       "links": []
     },
     {
@@ -43,7 +46,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C2",
-      "alias": [],
+      "alias": [
+        "comentario obsoleto",
+        "obsolete comment"
+      ],
       "links": [
         "c3"
       ],
@@ -62,7 +68,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C3",
-      "alias": [],
+      "alias": [
+        "comentario redundante",
+        "redundant comment"
+      ],
       "links": [
         "c2"
       ]
@@ -80,7 +89,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, C4",
-      "alias": [],
+      "alias": [
+        "comentario mal escrito",
+        "poorly written comment"
+      ],
       "links": []
     },
     {
@@ -242,7 +254,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, F4",
-      "alias": [],
+      "alias": [
+        "funcion muerta",
+        "dead function",
+        "dead code"
+      ],
       "links": [
         "g9"
       ],
@@ -262,7 +278,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G1",
-      "alias": [],
+      "alias": [
+        "varios lenguajes en un archivo",
+        "multiple languages in one file"
+      ],
       "links": []
     },
     {
@@ -278,7 +297,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G2",
-      "alias": [],
+      "alias": [
+        "comportamiento evidente no implementado",
+        "principle of least surprise"
+      ],
       "links": []
     },
     {
@@ -319,7 +341,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G4",
-      "alias": [],
+      "alias": [
+        "medidas de seguridad canceladas",
+        "disabled safeties",
+        "suppressed warnings"
+      ],
       "links": [],
       "instrument": "checks.py --rule g4",
       "threshold": "supresiones: 0"
@@ -363,7 +389,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G6",
-      "alias": [],
+      "alias": [
+        "nivel de abstraccion incorrecto",
+        "code at wrong level of abstraction"
+      ],
       "links": []
     },
     {
@@ -380,7 +409,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G7",
-      "alias": [],
+      "alias": [
+        "la base depende de su variante",
+        "base class depends on derivatives"
+      ],
       "links": [],
       "instrument": "checks.py --rule g7",
       "threshold": "refs_base_a_variante: 0"
@@ -399,7 +431,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G8",
-      "alias": [],
+      "alias": [
+        "exceso de informacion",
+        "too much information",
+        "wide interface"
+      ],
       "links": [],
       "instrument": "checks.py --rule g8",
       "threshold": "api_publica_max"
@@ -442,7 +478,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G10",
-      "alias": [],
+      "alias": [
+        "separacion vertical",
+        "vertical separation"
+      ],
       "links": [],
       "instrument": "checks.py --rule g10",
       "threshold": "distancia_declaracion_max"
@@ -460,7 +499,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G11",
-      "alias": [],
+      "alias": [
+        "incoherencia",
+        "inconsistency"
+      ],
       "links": []
     },
     {
@@ -477,7 +519,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G12",
-      "alias": [],
+      "alias": [
+        "desorden",
+        "clutter"
+      ],
       "links": [],
       "instrument": "checks.py --rule g12",
       "threshold": "desorden: 0"
@@ -495,7 +540,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G13",
-      "alias": [],
+      "alias": [
+        "conexiones artificiales",
+        "artificial coupling"
+      ],
       "links": []
     },
     {
@@ -557,7 +605,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G16",
-      "alias": [],
+      "alias": [
+        "intencion desconocida",
+        "obscured intent"
+      ],
       "links": []
     },
     {
@@ -573,7 +624,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G17",
-      "alias": [],
+      "alias": [
+        "responsabilidad desubicada",
+        "misplaced responsibility"
+      ],
       "links": []
     },
     {
@@ -589,7 +643,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G18",
-      "alias": [],
+      "alias": [
+        "elementos estaticos incorrectos",
+        "inappropriate static"
+      ],
       "links": []
     },
     {
@@ -629,7 +686,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G20",
-      "alias": [],
+      "alias": [
+        "el nombre debe decir que hace",
+        "function names should say what they do"
+      ],
       "links": []
     },
     {
@@ -645,7 +705,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G21",
-      "alias": [],
+      "alias": [
+        "comprender el algoritmo",
+        "understand the algorithm"
+      ],
       "links": []
     },
     {
@@ -661,7 +724,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G22",
-      "alias": [],
+      "alias": [
+        "dependencias logicas en fisicas",
+        "make logical dependencies physical"
+      ],
       "links": []
     },
     {
@@ -745,7 +811,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G26",
-      "alias": [],
+      "alias": [
+        "precision",
+        "be precise"
+      ],
       "links": []
     },
     {
@@ -761,7 +830,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G27",
-      "alias": [],
+      "alias": [
+        "estructura sobre convencion",
+        "structure over convention"
+      ],
       "links": []
     },
     {
@@ -803,7 +875,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, G29",
-      "alias": [],
+      "alias": [
+        "condicionales negativas",
+        "avoid negative conditionals"
+      ],
       "links": [],
       "instrument": "checks.py --rule g29",
       "threshold": "condicionales_negadas_max"
@@ -845,7 +920,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G31",
-      "alias": [],
+      "alias": [
+        "conexion temporal oculta",
+        "hidden temporal coupling"
+      ],
       "links": []
     },
     {
@@ -861,7 +939,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G32",
-      "alias": [],
+      "alias": [
+        "evitar la arbitrariedad",
+        "do not be arbitrary"
+      ],
       "links": []
     },
     {
@@ -901,7 +982,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G34",
-      "alias": [],
+      "alias": [
+        "descender un nivel de abstraccion",
+        "one level of abstraction"
+      ],
       "links": [
         "g30"
       ]
@@ -919,7 +1003,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, G35",
-      "alias": [],
+      "alias": [
+        "datos configurables arriba",
+        "keep configurable data at high levels"
+      ],
       "links": []
     },
     {
@@ -961,7 +1048,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, J1",
-      "alias": [],
+      "alias": [
+        "listas de importacion",
+        "wildcard imports",
+        "long import lists"
+      ],
       "links": [],
       "instrument": "sin instrumento: su consejo es usar comodines, que en Python el estilo prohibe",
       "threshold": "imports_comodin: 0"
@@ -1001,7 +1092,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, J3",
-      "alias": [],
+      "alias": [
+        "constantes frente a enumeraciones",
+        "constants versus enums"
+      ],
       "links": []
     },
     {
@@ -1017,7 +1111,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N1",
-      "alias": [],
+      "alias": [
+        "nombres descriptivos",
+        "descriptive names"
+      ],
       "links": [
         "n2",
         "n4",
@@ -1038,7 +1135,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N2",
-      "alias": [],
+      "alias": [
+        "nombre al nivel de abstraccion correcto",
+        "names at the right abstraction level"
+      ],
       "links": [
         "n1"
       ]
@@ -1056,7 +1156,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N3",
-      "alias": [],
+      "alias": [
+        "nomenclatura estandar",
+        "standard nomenclature"
+      ],
       "links": []
     },
     {
@@ -1072,7 +1175,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N4",
-      "alias": [],
+      "alias": [
+        "nombres inequivocos",
+        "unambiguous names"
+      ],
       "links": [
         "n1"
       ]
@@ -1137,7 +1243,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, N7",
-      "alias": [],
+      "alias": [
+        "el nombre describe efectos secundarios",
+        "names should describe side effects"
+      ],
       "links": [
         "n1"
       ]
@@ -1180,7 +1289,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "capitulo 17, T2",
-      "alias": [],
+      "alias": [
+        "herramienta de cobertura",
+        "coverage tool"
+      ],
       "links": [
         "t1"
       ],
@@ -1200,7 +1312,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, T3",
-      "alias": [],
+      "alias": [
+        "no ignorar pruebas triviales",
+        "do not skip trivial tests"
+      ],
       "links": []
     },
     {
@@ -1216,7 +1331,10 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T4",
-      "alias": [],
+      "alias": [
+        "prueba ignorada",
+        "ignored test"
+      ],
       "links": [
         "g4"
       ]
@@ -1258,7 +1376,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "capitulo 17, T6",
-      "alias": [],
+      "alias": [
+        "probar junto a los errores",
+        "test exhaustively near bugs"
+      ],
       "links": []
     },
     {
@@ -1274,7 +1395,10 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T7",
-      "alias": [],
+      "alias": [
+        "patrones de fallo",
+        "failure patterns"
+      ],
       "links": [
         "t8"
       ]
@@ -1292,7 +1416,10 @@
       "pile": "C",
       "verification": "none",
       "locator": "capitulo 17, T8",
-      "alias": [],
+      "alias": [
+        "patrones de cobertura",
+        "coverage patterns"
+      ],
       "links": [
         "t7"
       ]

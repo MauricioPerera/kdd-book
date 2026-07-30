@@ -347,7 +347,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 24",
-      "alias": [],
+      "alias": [
+        "entrega temprana y continua",
+        "early and continuous delivery"
+      ],
       "links": []
     },
     {
@@ -363,7 +366,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 25",
-      "alias": [],
+      "alias": [
+        "aceptar el cambio",
+        "welcome changing requirements"
+      ],
       "links": []
     },
     {
@@ -419,7 +425,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 26",
-      "alias": [],
+      "alias": [
+        "conversacion cara a cara",
+        "face to face conversation"
+      ],
       "links": []
     },
     {
@@ -435,7 +444,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 27",
-      "alias": [],
+      "alias": [
+        "software funcionando como medida",
+        "working software is the measure"
+      ],
       "links": []
     },
     {
@@ -451,7 +463,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 27",
-      "alias": [],
+      "alias": [
+        "ritmo sostenible",
+        "sustainable pace"
+      ],
       "links": []
     },
     {
@@ -483,7 +498,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 28",
-      "alias": [],
+      "alias": [
+        "simplicidad",
+        "simplicity",
+        "maximize work not done"
+      ],
       "links": []
     },
     {
@@ -516,7 +535,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 29",
-      "alias": [],
+      "alias": [
+        "inspeccionar y adaptar",
+        "inspect and adapt"
+      ],
       "links": [],
       "instrument": "tablero: retrospectiva registrada por sprint",
       "threshold": "una por sprint"
@@ -566,7 +588,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 33",
-      "alias": [],
+      "alias": [
+        "Product Owner",
+        "dueno de producto"
+      ],
       "links": []
     },
     {
@@ -614,7 +639,9 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 34",
-      "alias": [],
+      "alias": [
+        "Scrum Master"
+      ],
       "links": []
     },
     {
@@ -678,7 +705,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 37",
-      "alias": [],
+      "alias": [
+        "equipo de desarrollo",
+        "development team",
+        "Scrum Team"
+      ],
       "links": []
     },
     {
@@ -743,7 +774,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 39",
-      "alias": [],
+      "alias": [
+        "backlog de producto",
+        "product backlog"
+      ],
       "links": [],
       "instrument": "tablero: el backlog existe y esta ordenado",
       "threshold": "orden total definido"
@@ -762,7 +796,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 40",
-      "alias": [],
+      "alias": [
+        "formato del item",
+        "backlog item format"
+      ],
       "links": [],
       "instrument": "tablero: campos obligatorios del item",
       "threshold": "sin campos vacios"
@@ -781,7 +818,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 40",
-      "alias": [],
+      "alias": [
+        "priorizacion del backlog",
+        "backlog ordering"
+      ],
       "links": [],
       "instrument": "tablero: prioridad asignada a cada item",
       "threshold": "sin items sin prioridad"
@@ -800,7 +840,11 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 41",
-      "alias": [],
+      "alias": [
+        "estimacion de esfuerzo",
+        "effort estimation",
+        "story points"
+      ],
       "links": [],
       "instrument": "tablero: estimacion presente en cada item",
       "threshold": "sin items sin estimar"
@@ -818,7 +862,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 42",
-      "alias": [],
+      "alias": [
+        "granularidad del item",
+        "right sizing"
+      ],
       "links": [],
       "why_not": "la granularidad correcta de un item depende del equipo y del contexto"
     },
@@ -836,7 +883,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 43",
-      "alias": [],
+      "alias": [
+        "criterios de aceptacion",
+        "acceptance criteria"
+      ],
       "links": [],
       "instrument": "tablero: criterios de aceptacion no vacios",
       "threshold": "sin historias sin criterios"
@@ -855,7 +905,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 45",
-      "alias": [],
+      "alias": [
+        "backlog de sprint",
+        "sprint backlog"
+      ],
       "links": [],
       "instrument": "tablero: el sprint backlog sale del tope del backlog",
       "threshold": "subconjunto del tope"
@@ -874,7 +927,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 46",
-      "alias": [],
+      "alias": [
+        "descomposicion en tareas",
+        "task breakdown"
+      ],
       "links": [],
       "instrument": "tablero: cada historia tiene tareas",
       "threshold": "sin historias sin descomponer"
@@ -893,7 +949,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 49",
-      "alias": [],
+      "alias": [
+        "incremento potencialmente entregable",
+        "potentially shippable increment"
+      ],
       "links": [],
       "instrument": "build del incremento",
       "threshold": "exit 0"
@@ -928,7 +987,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 50",
-      "alias": [],
+      "alias": [
+        "planificacion de sprint",
+        "sprint planning"
+      ],
       "links": [],
       "instrument": "calendario: la planificacion ocurrio al abrir el sprint",
       "threshold": "una por sprint"
@@ -947,7 +1009,11 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 52",
-      "alias": [],
+      "alias": [
+        "reunion diaria",
+        "daily scrum",
+        "daily standup"
+      ],
       "links": [],
       "instrument": "calendario: la reunion diaria ocurrio",
       "threshold": "una por dia habil"
@@ -966,7 +1032,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 53",
-      "alias": [],
+      "alias": [
+        "revision de sprint",
+        "sprint review"
+      ],
       "links": [],
       "instrument": "calendario: la revision ocurrio al cerrar el sprint",
       "threshold": "una por sprint"
@@ -985,7 +1054,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 55",
-      "alias": [],
+      "alias": [
+        "retrospectiva",
+        "sprint retrospective"
+      ],
       "links": [],
       "instrument": "calendario: la retrospectiva ocurrio al cerrar el sprint",
       "threshold": "una por sprint"
@@ -1020,7 +1092,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 58",
-      "alias": [],
+      "alias": [
+        "T-shirt sizing",
+        "estimacion por tallas"
+      ],
       "links": [],
       "instrument": "tablero: la estimacion pertenece a la escala",
       "threshold": "valor en la escala declarada"
@@ -1054,7 +1129,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 60",
-      "alias": [],
+      "alias": [
+        "planning poker",
+        "scrum poker"
+      ],
       "links": []
     },
     {
@@ -1102,7 +1180,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 65",
-      "alias": [],
+      "alias": [
+        "estimacion por columnas",
+        "affinity estimation"
+      ],
       "links": []
     },
     {
@@ -1118,7 +1199,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 68",
-      "alias": [],
+      "alias": [
+        "estimacion por columnas y poker",
+        "affinity estimation"
+      ],
       "links": []
     },
     {
@@ -1262,7 +1346,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 72",
-      "alias": [],
+      "alias": [
+        "cliente in-situ",
+        "on-site customer"
+      ],
       "links": []
     },
     {
@@ -1278,7 +1365,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 73",
-      "alias": [],
+      "alias": [
+        "semana de 40 horas",
+        "40 hour week",
+        "sustainable pace"
+      ],
       "links": [],
       "why_not": "pese al titulo, la autora no fija el numero: habla de no exigir mas esfuerzo del humanamente disponible, que es un juicio"
     },
@@ -1295,7 +1386,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 74",
-      "alias": [],
+      "alias": [
+        "metafora",
+        "system metaphor"
+      ],
       "links": []
     },
     {
@@ -1311,7 +1405,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 75",
-      "alias": [],
+      "alias": [
+        "diseno simple",
+        "simple design"
+      ],
       "links": [],
       "why_not": "que un diseno sea \"simple\" es exactamente lo que no se puede medir"
     },
@@ -1328,7 +1425,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 76",
-      "alias": [],
+      "alias": [
+        "refactorizacion",
+        "refactoring"
+      ],
       "links": []
     },
     {
@@ -1481,7 +1581,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 81",
-      "alias": [],
+      "alias": [
+        "juego de planificacion",
+        "planning game"
+      ],
       "links": []
     },
     {
@@ -1577,7 +1680,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 84",
-      "alias": [],
+      "alias": [
+        "code kata",
+        "codekata"
+      ],
       "links": []
     },
     {
@@ -1593,7 +1699,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 84",
-      "alias": [],
+      "alias": [
+        "code kata",
+        "kata"
+      ],
       "links": []
     },
     {
@@ -1609,7 +1718,9 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 85",
-      "alias": [],
+      "alias": [
+        "randori"
+      ],
       "links": []
     },
     {
@@ -1625,7 +1736,9 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 85",
-      "alias": [],
+      "alias": [
+        "randori"
+      ],
       "links": []
     },
     {
@@ -1795,7 +1908,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 100",
-      "alias": [],
+      "alias": [
+        "hacer que pase",
+        "make it pass",
+        "green"
+      ],
       "links": [
         "107"
       ],
@@ -1841,7 +1958,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 102",
-      "alias": [],
+      "alias": [
+        "hacer que pase",
+        "make it pass",
+        "green"
+      ],
       "links": [
         "109"
       ],
@@ -1958,7 +2079,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 115",
-      "alias": [],
+      "alias": [
+        "test de integracion",
+        "integration tests"
+      ],
       "links": [],
       "instrument": "test_command de integracion",
       "threshold": "exit 0"
@@ -1977,7 +2101,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 115",
-      "alias": [],
+      "alias": [
+        "test de aceptacion",
+        "acceptance tests"
+      ],
       "links": [],
       "instrument": "test_command de aceptacion",
       "threshold": "exit 0"
@@ -1996,7 +2123,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 118",
-      "alias": [],
+      "alias": [
+        "test funcionales",
+        "functional tests"
+      ],
       "links": [],
       "instrument": "test_command funcional",
       "threshold": "exit 0"
@@ -2015,7 +2145,10 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 119",
-      "alias": [],
+      "alias": [
+        "test de sistema",
+        "system tests"
+      ],
       "links": [],
       "instrument": "test_command de sistema",
       "threshold": "exit 0"
@@ -2034,7 +2167,11 @@
       "pile": "A",
       "verification": "instrumented",
       "locator": "pagina 120",
-      "alias": [],
+      "alias": [
+        "repositorio unico",
+        "single repository",
+        "mainline"
+      ],
       "links": [
         "088"
       ],
@@ -2339,7 +2476,10 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 141",
-      "alias": [],
+      "alias": [
+        "parametro contra propiedad",
+        "parameter versus field"
+      ],
       "links": [
         "codigo-limpio/f1"
       ],
@@ -2633,7 +2773,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 157",
-      "alias": [],
+      "alias": [
+        "visualizar el flujo",
+        "visualize the workflow"
+      ],
       "links": [],
       "instrument": "tablero: el proceso esta representado en columnas",
       "threshold": "todas las etapas visibles"
@@ -2652,7 +2795,10 @@
       "pile": "A",
       "verification": "proxy",
       "locator": "pagina 158",
-      "alias": [],
+      "alias": [
+        "tablero Kanban",
+        "kanban board"
+      ],
       "links": [],
       "instrument": "tablero: existe y refleja el flujo",
       "threshold": "una columna por etapa"
@@ -2694,7 +2840,11 @@
       "pile": "B",
       "verification": "none",
       "locator": "pagina 161",
-      "alias": [],
+      "alias": [
+        "optimizar el flujo",
+        "optimize flow",
+        "cycle time"
+      ],
       "links": [
         "160"
       ]

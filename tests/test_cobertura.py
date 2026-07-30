@@ -144,6 +144,30 @@ class IdentidadTest(unittest.TestCase):
                             palabra, node['id'],
                             'el id contiene una palabra del titulo')
 
+    def test_toda_tecnica_medible_tiene_nombre_canonico(self):
+        """Sin alias, una tecnica solo se encuentra con las palabras del traductor.
+
+        Se exige en pila A sin excepciones: son las que tienen instrumento y
+        contrato, o sea justo las que un agente va a querer buscar. En pila B se
+        completan las que tienen nombre reconocido, pero no se exige: hay
+        subsecciones ("Funciones y responsabilidades", "Reglas del Juego") que
+        no son tecnicas y no tienen nombre canonico, e inventarles uno seria
+        meter ruido en la busqueda. Pila C son temas, tecnologias y pasos de
+        tutorial: ahi el alias no aporta nada.
+        """
+        for libro in LIBROS:
+            with open(os.path.join(RAIZ, 'books', libro + '.json'),
+                      encoding='utf-8') as fh:
+                nodes = json.load(fh)['nodes']
+            for node in nodes:
+                if node['pile'] != 'A':
+                    continue
+                with self.subTest(libro=libro, nodo=node['id']):
+                    self.assertTrue(
+                        node.get('alias'),
+                        'tecnica medible sin nombre canonico: no se puede '
+                        'encontrar desde otro idioma ni cruzar con otro libro')
+
     def test_los_enlaces_cruzados_usan_ids_estables(self):
         for libro in LIBROS:
             with open(os.path.join(RAIZ, 'books', libro + '.json'),

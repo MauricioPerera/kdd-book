@@ -140,10 +140,24 @@ recupera donde corresponde: el nodo de procedencia de cada libro trae el indice
 completo de titulos.
 
 Falta una pieza mas para cruzar idiomas, y no se resuelve copiando texto. Cada
-tecnica lleva un campo **`alias`** con su nombre canonico —61 de las 252 lo
-tienen—, que es metadato del triaje y no del autor. Sin eso la memoria solo
-responde a las palabras que eligio el traductor: `buscar demeter` no encontraba
-a G36, que en esta edicion se llama "Evitar desplazamientos transitivos".
+tecnica lleva un campo **`alias`** con su nombre canonico, que es metadato del
+triaje y no del autor. Sin eso la memoria solo responde a las palabras que
+eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
+se llama "Evitar desplazamientos transitivos".
+
+Lo tienen **150 de las 252**, y el reparto no es casual:
+
+| Pila | Con alias | Regla |
+|---|---|---|
+| A (medibles) | **86 de 86** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 61 de 70 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 96 | no aplica: son temas, tecnologias y pasos de tutorial |
+
+Las 9 de pila B que quedan afuera son subsecciones sin nombre propio —tres
+titulos repetidos "Funciones y responsabilidades", dos sub-pasos del Planning
+Poker, dos secciones de "cuando y como"—. **Inventarles un nombre canonico
+seria meter ruido en la busqueda**, que es lo contrario de lo que el alias
+existe para hacer.
 
 El alias es el handle que cruza idiomas **y libros**: `buscar DRY` devuelve las
 cinco entradas de los tres libros, todas apuntando al mismo instrumento.
