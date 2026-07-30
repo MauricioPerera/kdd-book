@@ -96,7 +96,7 @@
       "links": [
         "g9-codigo-muerto"
       ],
-      "instrument": "linter: regla ERA (codigo comentado)",
+      "instrument": "checks.py --rule c5",
       "threshold": "comentarios_con_codigo: 0"
     },
     {
@@ -116,8 +116,8 @@
       "links": [
         "e2-las-pruebas-requieren-mas-de-un-paso"
       ],
-      "instrument": "un solo comando de build; exit code",
-      "threshold": "pasos_build_max: 1"
+      "instrument": "repo_checks.py --rule e1",
+      "threshold": "generar en un solo paso"
     },
     {
       "id": "e2-las-pruebas-requieren-mas-de-un-paso",
@@ -136,8 +136,8 @@
       "links": [
         "e1-la-generacion-requiere-mas-de-un-paso"
       ],
-      "instrument": "test_command; exit code",
-      "threshold": "pasos_test_max: 1"
+      "instrument": "repo_checks.py --rule e2",
+      "threshold": "probar en un solo paso"
     },
     {
       "id": "f1-demasiados-argumentos",
@@ -156,7 +156,7 @@
       "links": [
         "g30-las-funciones-solo-deben-hacer-una-cosa"
       ],
-      "instrument": "measure_complexity.params",
+      "instrument": "params_max.py --max 3",
       "threshold": "params_max: 3"
     },
     {
@@ -176,7 +176,7 @@
       "links": [
         "f1-demasiados-argumentos"
       ],
-      "instrument": "AST: parametro mutado en el cuerpo",
+      "instrument": "checks.py --rule f2",
       "threshold": "args_de_salida: 0"
     },
     {
@@ -196,7 +196,7 @@
       "links": [
         "g15-argumentos-de-selector"
       ],
-      "instrument": "AST: parametro booleano usado en condicional",
+      "instrument": "checks.py --rule f3",
       "threshold": "args_indicador: 0"
     },
     {
@@ -216,7 +216,7 @@
       "links": [
         "g9-codigo-muerto"
       ],
-      "instrument": "analisis de alcanzabilidad (vulture/ruff)",
+      "instrument": "checks.py --rule f4",
       "threshold": "funciones_muertas: 0"
     },
     {
@@ -266,7 +266,7 @@
       "links": [
         "t5-probar-condiciones-de-limite"
       ],
-      "instrument": "mutation_audit sobre mutantes de limite",
+      "instrument": "mutation_audit sobre mutantes de limite (sin implementar)",
       "threshold": "mutantes_limite_vivos: 0"
     },
     {
@@ -284,7 +284,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G4",
       "links": [],
-      "instrument": "grep de supresiones (noqa, SuppressWarnings, skip)",
+      "instrument": "checks.py --rule g4",
       "threshold": "supresiones: 0"
     },
     {
@@ -305,7 +305,7 @@
         "g33-encapsular-condiciones-de-limite",
         "g12-desorden"
       ],
-      "instrument": "deteccion de clones (jscpd/CPD)",
+      "instrument": "checks.py --rule g5",
       "threshold": "bloques_duplicados: 0"
     },
     {
@@ -338,7 +338,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G7",
       "links": [],
-      "instrument": "grafo de referencias: la base nombra a su variante",
+      "instrument": "checks.py --rule g7",
       "threshold": "refs_base_a_variante: 0"
     },
     {
@@ -356,7 +356,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G8",
       "links": [],
-      "instrument": "conteo de miembros publicos por clase o modulo",
+      "instrument": "checks.py --rule g8",
       "threshold": "api_publica_max"
     },
     {
@@ -376,7 +376,7 @@
       "links": [
         "f4-funcion-muerta"
       ],
-      "instrument": "linter: codigo inalcanzable",
+      "instrument": "checks.py --rule g9",
       "threshold": "codigo_muerto: 0"
     },
     {
@@ -394,7 +394,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G10",
       "links": [],
-      "instrument": "AST: distancia en lineas entre declaracion y primer uso",
+      "instrument": "checks.py --rule g10",
       "threshold": "distancia_declaracion_max"
     },
     {
@@ -427,7 +427,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G12",
       "links": [],
-      "instrument": "linter: imports y variables sin usar, constructores vacios",
+      "instrument": "checks.py --rule g12",
       "threshold": "desorden: 0"
     },
     {
@@ -460,7 +460,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G14",
       "links": [],
-      "instrument": "AST: accesos a miembros ajenos vs propios por metodo",
+      "instrument": "checks.py --rule g14",
       "threshold": "accesos_ajenos_max"
     },
     {
@@ -480,7 +480,7 @@
       "links": [
         "f3-argumentos-de-indicador"
       ],
-      "instrument": "AST: parametro que selecciona comportamiento",
+      "instrument": "checks.py --rule g15",
       "threshold": "args_selector: 0"
     },
     {
@@ -609,7 +609,7 @@
       "links": [
         "g30-las-funciones-solo-deben-hacer-una-cosa"
       ],
-      "instrument": "AST: cadenas if/else o switch sobre discriminante de tipo",
+      "instrument": "checks.py --rule g23",
       "threshold": "switch_sobre_tipo: 0"
     },
     {
@@ -627,8 +627,8 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G24",
       "links": [],
-      "instrument": "run_linter_gate",
-      "threshold": "linter exit 0"
+      "instrument": "repo_checks.py --rule g24",
+      "threshold": "convenciones declaradas en verde"
     },
     {
       "id": "g25-sustituir-numeros-magicos-por-constantes-con-nombre",
@@ -645,7 +645,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G25",
       "links": [],
-      "instrument": "linter: literales numericos fuera de constante (PLR2004)",
+      "instrument": "checks.py --rule g25",
       "threshold": "numeros_magicos: 0"
     },
     {
@@ -696,7 +696,7 @@
         "g19-usar-variables-explicativas",
         "g29-evitar-condicionales-negativas"
       ],
-      "instrument": "AST: operadores booleanos por condicional",
+      "instrument": "checks.py --rule g28",
       "threshold": "operadores_por_condicion_max"
     },
     {
@@ -714,7 +714,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, G29",
       "links": [],
-      "instrument": "AST: condicionales negadas",
+      "instrument": "checks.py --rule g29",
       "threshold": "condicionales_negadas_max"
     },
     {
@@ -783,7 +783,7 @@
       "links": [
         "g5-duplicacion"
       ],
-      "instrument": "AST: subexpresion de limite repetida",
+      "instrument": "checks.py --rule g33",
       "threshold": "subexpr_limite_duplicada: 0"
     },
     {
@@ -835,7 +835,7 @@
       "links": [
         "g14-envidia-de-las-caracteristicas"
       ],
-      "instrument": "AST: profundidad de cadena de llamadas",
+      "instrument": "chain_depth.py --max 1",
       "threshold": "chain_depth_max: 1"
     },
     {
@@ -853,7 +853,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, J1",
       "links": [],
-      "instrument": "linter: imports con comodin y conteo de imports",
+      "instrument": "linter Java: imports con comodin (sin implementar, es Java)",
       "threshold": "imports_comodin: 0"
     },
     {
@@ -871,7 +871,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, J2",
       "links": [],
-      "instrument": "AST: interfaz solo-constantes implementada",
+      "instrument": "AST Java: interfaz solo-constantes (sin implementar, es Java)",
       "threshold": "herencia_de_constantes: 0"
     },
     {
@@ -975,7 +975,7 @@
       "links": [
         "n1-elegir-nombres-descriptivos"
       ],
-      "instrument": "AST: longitud de identificador vs lineas del ambito",
+      "instrument": "checks.py --rule n5",
       "threshold": "len(nombre) >= f(lineas_ambito)"
     },
     {
@@ -993,7 +993,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, N6",
       "links": [],
-      "instrument": "linter: prefijos hungaros y codificaciones en identificadores",
+      "instrument": "checks.py --rule n6",
       "threshold": "codificaciones: 0"
     },
     {
@@ -1030,7 +1030,7 @@
       "links": [
         "t2-usar-una-herramienta-de-cobertura"
       ],
-      "instrument": "cobertura",
+      "instrument": "repo_checks.py --rule t1",
       "threshold": "cobertura_min"
     },
     {
@@ -1050,7 +1050,7 @@
       "links": [
         "t1-pruebas-insuficientes"
       ],
-      "instrument": "presencia del gate de cobertura en CI",
+      "instrument": "repo_checks.py --rule t2",
       "threshold": "gate_cobertura: presente"
     },
     {
@@ -1102,7 +1102,7 @@
       "links": [
         "g3-comportamiento-incorrecto-en-los-limites"
       ],
-      "instrument": "mutation_audit sobre mutantes de limite",
+      "instrument": "mutation_audit sobre mutantes de limite (sin implementar)",
       "threshold": "mutantes_limite_vivos: 0"
     },
     {
@@ -1169,7 +1169,7 @@
       "verification": "instrumented",
       "locator": "capitulo 17, T9",
       "links": [],
-      "instrument": "wall time de la suite",
+      "instrument": "repo_checks.py --rule t9",
       "threshold": "test_seconds_max"
     }
   ]

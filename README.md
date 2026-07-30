@@ -232,6 +232,26 @@ Cuatro instrumentos se reusan entre libros sin tocar una linea:
 `checks.py --rule g12` para sus variables temporales mal usadas, y
 `repo_checks.py --rule g24` y `--rule e2` para codigo estandar y para testing.
 
+### Instrumentos de arquitectura
+
+`instruments/arch_checks.py` es familia propia porque estas mediciones necesitan
+que el proyecto **declare** algo: cuales son sus capas, que capa puede llamar a
+cual, cual es el esquema de la tabla. Y es correcto que sea explicito: una regla
+de capas que el instrumento adivine no es una regla, es una opinion. Sin la
+declaracion salen con exit 2, no con verde.
+
+Seis reglas que cubren doce tecnicas, porque varias son la misma propiedad vista
+desde distintas alturas:
+
+| Regla | Cubre |
+|---|---|
+| `capas` | SRP, MVC, MVC 2, DAO, capa de servicio |
+| `instanciacion` | inversion de control, Factory, inyeccion de dependencia |
+| `excepciones` · `isp` · `aop` · `coc` | una cada una |
+
+Que cinco tecnicas compartan instrumento no es un atajo: las cinco preguntan lo
+mismo, quien puede depender de quien.
+
 ### Instrumentos que leen git
 
 Tres heuristicas hablan de propiedades que no viven en un archivo ni en el

@@ -106,8 +106,8 @@
       "verification": "instrumented",
       "locator": "capitulo 6",
       "links": [],
-      "instrument": "AST: clausulas catch vacias o demasiado amplias",
-      "threshold": "cero catch mudos"
+      "instrument": "arch_checks.py --rule excepciones",
+      "threshold": "cero catch mudos, vacios o amplios"
     },
     {
       "id": "07-log4j",
@@ -141,7 +141,7 @@
         "09-el-modelo-mvc",
         "22-la-capa-de-servicio"
       ],
-      "instrument": "grafo de imports: la capa de presentacion no importa persistencia",
+      "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas",
       "body": "SRP y G30 de Codigo Limpio (\"las funciones solo deben hacer una cosa\") son el mismo principio, y quedan en pilas distintas. Martin nunca lo aterriza: cuenta operaciones semanticas y no da un numero, asi que su nodo queda en pila B. Caules lo aplica como separacion de capas — la JSP no contiene codigo de persistencia — y eso es una regla de imports que un checker de dependencias verifica. La contractabilidad no la decide la tecnica ni el dominio: la decide si el autor la operacionalizo."
     },
@@ -163,7 +163,7 @@
         "12-el-modelo-mvc-2",
         "22-la-capa-de-servicio"
       ],
-      "instrument": "grafo de imports: vista, controlador y modelo separados",
+      "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas"
     },
     {
@@ -217,7 +217,7 @@
       "links": [
         "09-el-modelo-mvc"
       ],
-      "instrument": "grafo de imports: el controlador no conoce la vista concreta",
+      "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que crucen capas"
     },
     {
@@ -282,7 +282,7 @@
         "codigo-limpio/g8-exceso-de-informacion",
         "17-el-patron-dao"
       ],
-      "instrument": "AST: metodos usados por el cliente sobre metodos de la interfaz",
+      "instrument": "arch_checks.py --rule isp",
       "threshold": "cero metodos de los que se depende sin usar"
     },
     {
@@ -303,7 +303,7 @@
         "18-el-patron-genericdao",
         "22-la-capa-de-servicio"
       ],
-      "instrument": "grafo de imports: la persistencia solo se toca via DAO",
+      "instrument": "arch_checks.py --rule capas",
       "threshold": "cero accesos a persistencia fuera de la capa DAO"
     },
     {
@@ -343,8 +343,8 @@
         "20-el-patron-factory",
         "23-la-inyeccion-de-dependencia"
       ],
-      "instrument": "AST: instanciacion de colaboradores dentro de la clase",
-      "threshold": "cero `new` de colaboradores"
+      "instrument": "arch_checks.py --rule instanciacion",
+      "threshold": "cero colaboradores creados por la clase"
     },
     {
       "id": "20-el-patron-factory",
@@ -363,8 +363,8 @@
         "19-el-principio-de-inversion-de-control",
         "21-el-patron-abstract-factory"
       ],
-      "instrument": "AST: instanciacion de colaboradores fuera de las factorias",
-      "threshold": "cero `new` de colaboradores fuera de la factoria"
+      "instrument": "arch_checks.py --rule instanciacion --permite-crear factoria",
+      "threshold": "creacion solo dentro de la factoria"
     },
     {
       "id": "21-el-patron-abstract-factory",
@@ -400,7 +400,7 @@
         "08-el-principio-srp",
         "17-el-patron-dao"
       ],
-      "instrument": "grafo de imports: la presentacion pasa por servicio y no por DAO",
+      "instrument": "arch_checks.py --rule capas",
       "threshold": "cero imports que salteen la capa de servicio"
     },
     {
@@ -419,7 +419,7 @@
       "links": [
         "19-el-principio-de-inversion-de-control"
       ],
-      "instrument": "AST: instanciacion de colaboradores dentro de la clase",
+      "instrument": "arch_checks.py --rule instanciacion",
       "threshold": "cero dependencias asignadas por la propia clase"
     },
     {
@@ -469,7 +469,7 @@
       "links": [
         "24-el-patron-template"
       ],
-      "instrument": "AST: codigo transversal dentro de las clases de negocio",
+      "instrument": "arch_checks.py --rule aop",
       "threshold": "cero logging ni transacciones en el negocio"
     },
     {
@@ -500,8 +500,8 @@
       "verification": "instrumented",
       "locator": "capitulo 28",
       "links": [],
-      "instrument": "comparacion entre campos de la clase y columnas de la tabla",
-      "threshold": "los nombres coinciden sin configuracion"
+      "instrument": "arch_checks.py --rule coc",
+      "threshold": "los campos coinciden con las columnas"
     },
     {
       "id": "29-java-server-faces",
