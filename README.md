@@ -104,6 +104,50 @@ igual. La razon no es obvia: **son propiedades del grafo de dependencias e
 instanciacion**, que es lo que el analisis estatico lee de forma nativa.
 "Semantico" para un humano no implica "no medible" para un parser.
 
+## El idioma y la identidad de un nodo
+
+De los 12 campos de un nodo, **2 dependen del idioma del libro y 10 no**:
+
+| Depende del idioma | No depende |
+|---|---|
+| `title`, `description` | `id`, `type`, `tags`, `pile`, `verification`, `locator`, `links`, `instrument`, `threshold`, `alias` |
+
+`alias` esta del lado estable a proposito: trae el nombre canonico en varias
+lenguas a la vez (`ley de Demeter`, `law of Demeter`, `train wreck`), asi que no
+depende de la edicion — es justamente el puente entre ellas.
+
+**Los instrumentos son inmunes.** `chain_depth.py --max 1` no sabe en que idioma
+se escribio el libro: mide el AST de Python. Y el contrato entre un agente y un
+instrumento **es el exit code, no el mensaje** — los mensajes estan en espanol y
+un agente en cualquier idioma consume 0/1/2 sin traducir nada.
+
+El `id` esta en la columna estable, pero no siempre lo estuvo. Era el codigo del
+autor pegado a un slug del titulo:
+
+```
+g36-evitar-desplazamientos-transitivos    <- edicion espanola
+g36-avoid-transitive-navigation           <- edicion inglesa: OTRO nodo
+```
+
+Tres consecuencias, y **ninguna la detectaba nadie porque cada grafo validaba
+perfecto por separado**: los enlaces entre libros dejaban de resolver, dos
+grafos del mismo libro en idiomas distintos se duplicaban en vez de fusionarse,
+y la memoria exportada no se podia juntar con la de otro.
+
+Ahora el id es solo el identificador del autor —`g36`, `142`, `08`— y el titulo
+una etiqueta que cambia con la edicion. La navegabilidad que daba el slug se
+recupera donde corresponde: el nodo de procedencia de cada libro trae el indice
+completo de titulos.
+
+Falta una pieza mas para cruzar idiomas, y no se resuelve copiando texto. Cada
+tecnica lleva un campo **`alias`** con su nombre canonico —61 de las 252 lo
+tienen—, que es metadato del triaje y no del autor. Sin eso la memoria solo
+responde a las palabras que eligio el traductor: `buscar demeter` no encontraba
+a G36, que en esta edicion se llama "Evitar desplazamientos transitivos".
+
+El alias es el handle que cruza idiomas **y libros**: `buscar DRY` devuelve las
+cinco entradas de los tres libros, todas apuntando al mismo instrumento.
+
 ## La memoria portable
 
 `memoria.py` exporta todo lo extraido a **un solo archivo** y lo hace
@@ -122,22 +166,14 @@ Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre 26 instrumentos sobre un archivo cualquiera y
 reporta 4 en rojo con la tecnica que senala cada uno.
 
-Tres propiedades la hacen portable, y las tres costaron trabajo:
+Cada tecnica exportada lleva su pila, su instrumento y su umbral, sus enlaces
+—incluidos los que cruzan de libro—, su ubicacion en la fuente, su nombre
+canonico y, si lo tiene, el contrato que la ejercita.
 
-- **Los ids son estables entre idiomas.** `g36`, no
-  `g36-evitar-desplazamientos-transitivos`. Dos memorias de fuentes distintas se
-  pueden fusionar por id en vez de duplicarse.
-- **El contrato con el instrumento es el exit code**, no el mensaje. Los
-  mensajes estan en espanol; un agente en cualquier idioma consume 0/1/2 sin
-  traducir nada.
-- **Cada tecnica lleva su nombre canonico** en `alias`. Sin eso la memoria solo
-  responde a las palabras que eligio el traductor: buscar "Demeter" no
-  encontraba a G36, que en esta edicion se llama "Evitar desplazamientos
-  transitivos". `buscar DRY` devuelve ahora las cinco entradas de los tres
-  libros, todas apuntando al mismo instrumento.
-
-El alias es metadato del triaje, no texto del autor: es el handle que cruza
-idiomas y libros.
+Lo que la hace portable es lo de la seccion anterior: **ids estables entre
+idiomas** para que dos memorias se fusionen en vez de duplicarse, **exit codes**
+en vez de mensajes como interfaz, y **alias** para que se pueda consultar sin
+saber como la tradujo cada edicion.
 
 ## Uso
 
@@ -164,6 +200,7 @@ necesidad del PDF.
 | `okf_emit.py` | JSON -> arbol `knowledge/` que pasa `validate_okf` | si |
 | `contract_emit.py` | ejercicios -> contratos que pasan los tres gates | si |
 | `instruments/` | miden si la tecnica quedo aplicada | si |
+| `memoria.py` | exporta el conocimiento a un archivo y lo hace consultable | si |
 
 El triaje es la unica pieza con juicio y esta aislada a proposito: vive como
 tabla legible en el script de build, auditable linea por linea.
@@ -263,7 +300,7 @@ Siete suites de prueba, y cada una existe por un error concreto que ya paso.
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
-| `test_cobertura` | toda tecnica con instrumento tiene ejercicio, salvo excepciones declaradas con su motivo |
+| `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
 Los errores que las hicieron nacer:
 
@@ -282,6 +319,9 @@ Los errores que las hicieron nacer:
 - **Los dos emisores tenian el mismo bug de indice**: un bloque compartido, asi
   que emitir un segundo libro dejaba huerfanos los nodos del primero. Comprobado
   antes de arreglarlo: 67 ORPHAN.
+- **Los ids de nodo dependian del idioma del libro**, y eso hacia la memoria no
+  fusionable. Es el defecto que menos se veia de todos: cada grafo validaba
+  perfecto por separado, y el problema solo aparecia al intentar juntar dos.
 
 ## Garantias de los emisores
 
