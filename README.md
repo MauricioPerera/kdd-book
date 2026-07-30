@@ -1,29 +1,150 @@
 # kdd-book
 
-Pipeline que deconstruye un libro en un grafo OKF de conocimiento y, donde hay
-instrumento, en contratos hibridos verificables de KDD.
+Deconstruye un libro tecnico en dos cosas: **conocimiento** (un grafo de nodos
+OKF) y **utilidad verificada** (contratos hibridos OKF+CCDD que se pueden
+ejecutar).
 
-Estado: **fase 1 (grafo OKF) y fase 2 (contratos) funcionando**, verificadas
-contra los validadores reales del repo KDD.
+Verificado contra los validadores reales del repo
+[KDD](https://github.com/MauricioPerera/KDD), no contra una imitacion.
 
 ```
-build -> okf_emit -> contract_emit -> validate_okf | validate_contracts | validate_test_commands
-                                          exit 0          exit 0                exit 0
+extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
+                                    \
+                                     -> contract_emit -> validate_contracts     exit 0
+                                                      -> validate_test_commands exit 0
 ```
 
-## Fase 2: los contratos
+## Que produjo
 
-Dos restricciones del validador definen el diseno, y ninguna es obvia hasta que
-se lee el codigo:
+Tres libros, 255 nodos, 38 contratos ejecutables.
 
-**1. `budget` solo admite cuatro subclaves**: `cyclomatic_max`, `nesting_max`,
+| Libro | items | contractable | `instrumented` | con script | ejercicios |
+|---|---|---|---|---|---|
+| Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
+| Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
+| Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
+| **Total** | **252** | **86** | **69** | **63** | **38** |
+
+Ademas: 17 tecnicas `proxy`, 70 en pila B (tecnica real sin propiedad medible)
+y 96 en pila C (conocimiento). 17 enlaces cruzan de un libro a otro.
+
+**La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
+diferencia es si el instrumento lee el artefacto del que trata la tecnica
+—codigo, build, historial— o un registro que llena una persona —un tablero, un
+diario—. Un umbral sin instrumento que lo lea sobre el objeto real es una
+intencion, no un contrato.
+
+## Por que estos numeros son una medicion y no una seleccion
+
+El corpus de cada libro es una **lista cerrada del autor**, no una eleccion del
+triaje: las 66 heuristicas enumeradas del capitulo 17 de Codigo Limpio, los 161
+marcadores que Bahit dejo en su PDF. Si el pipeline eligiera que cuenta como
+tecnica, el porcentaje seria una opinion.
+
+Lo que no es tecnica **se cuenta igual**, en pila C. Descartar las tecnologias
+(HTML, JSP, Hibernate) o los bullets de contexto inflaria el resultado.
+
+Una advertencia que viaja con su libro: **Arquitectura Java tiene corpus mas
+debil**. Es un tutorial progresivo sin lista cerrada de conclusiones, y sus 33
+items salieron de titulos de capitulo identificados por el triaje. n es menor y
+las barras de error mas anchas. Esta dicho tambien en su nodo de procedencia,
+no solo aca.
+
+## Los hallazgos
+
+### 1. La distribucion es bimodal, no un gradiente
+
+Cinco libros medidos (los tres del grafo, mas Proyectos Agiles con Scrum y
+Habitos Atomicos) dan 48%, 45%, 14%, 3,4% y 0% de `instrumented`. Pero el 14,4%
+de Scrum y XP **no es un valor intermedio**: es el promedio ponderado de dos
+poblaciones.
+
+| Seccion de Scrum y XP | `instrumented` |
+|---|---|
+| Refactoring | 55% |
+| TDD | 40% |
+| Integracion continua | 29% |
+| XP y Coding Dojo | 13% |
+| Introduccion y agilismo | 3% |
+| Scrum · Combinar · Kanban | 0% |
+
+Ninguna seccion cae en el medio. Por eso **el ruteo se decide por seccion, no
+por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
+el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
+Limpio.
+
+### 2. La contractabilidad la decide si el autor operacionalizo la tecnica
+
+No la decide la tecnica ni el dominio. El grafo lo demuestra con dos casos, y en
+sentidos opuestos:
+
+- `scrum-xp/142-expresiones-extensas` -> `codigo-limpio/g19-usar-variables-explicativas`.
+  **Misma refactorizacion, pilas distintas.** Martin la deja sin umbral —dice que
+  conviene siempre mas y que es dificil excederse— y ademas exige nombres
+  descriptivos, que es la mitad no medible. Bahit la deja medible porque su
+  ejemplo extrae a `$a`, `$b`, `$c`, `$d`: al no reclamar nada del nombre, solo
+  queda la reduccion de complejidad, que un parser cuenta.
+- `arquitectura-java/08-el-principio-srp` -> `codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa`.
+  Otra vez el mismo principio en pilas distintas, ahora con los papeles
+  cambiados: Martin cuenta operaciones semanticas y nunca da un numero; Caules lo
+  aplica como separacion de capas, que es una regla de imports.
+
+Que el caso aparezca dos veces en sentidos opuestos es lo que lo vuelve un
+patron y no una anecdota. Y solo se puede afirmar con los dos nodos a la vista:
+**por eso el grafo tiene enlaces entre libros y no es una tabla por libro**.
+
+DRY aparece en los tres libros y los tres autores la operacionalizan: los tres
+nodos son contractables y comparten instrumento.
+
+### 3. Los principios de arquitectura son tan medibles como las heuristicas de codigo
+
+Prediccion razonable para Arquitectura Java: mismo artefacto que Codigo Limpio
+pero tecnicas mas semanticas, o sea resultado intermedio. Salio 45,5%, casi
+igual. La razon no es obvia: **son propiedades del grafo de dependencias e
+instanciacion**, que es lo que el analisis estatico lee de forma nativa.
+"Semantico" para un humano no implica "no medible" para un parser.
+
+## Uso
+
+```bash
+python build_codigo_limpio.py <texto-extraido.txt>       # -> books/codigo-limpio.json
+python okf_emit.py books/codigo-limpio.json --out out/knowledge
+python contract_emit.py exercises --out out --book codigo-limpio
+
+python <KDD>/scripts/validate_okf.py out/knowledge
+python <KDD>/scripts/validate_contracts.py out/knowledge/contracts --repo-root out
+python <KDD>/scripts/validate_test_commands.py out/knowledge/contracts out
+```
+
+`out/` no se versiona: se regenera entero desde `books/` y `exercises/`, sin
+necesidad del PDF.
+
+## Piezas
+
+| Pieza | Que hace | Determinista |
+|---|---|---|
+| extraccion | PDF -> texto UTF-8 o volcado de marcadores | si |
+| `build_<libro>.py` | titulos del libro + el triaje declarado -> `books/<libro>.json` | si, dado el triaje |
+| **triaje** | clasificar cada tecnica en pila A/B/C | **no: es juicio** |
+| `okf_emit.py` | JSON -> arbol `knowledge/` que pasa `validate_okf` | si |
+| `contract_emit.py` | ejercicios -> contratos que pasan los tres gates | si |
+| `instruments/` | miden si la tecnica quedo aplicada | si |
+
+El triaje es la unica pieza con juicio y esta aislada a proposito: vive como
+tabla legible en el script de build, auditable linea por linea.
+
+## Los contratos
+
+Dos restricciones del validador definen todo el diseno, y ninguna se ve hasta
+leer su codigo:
+
+**1. `budget` solo admite cuatro subclaves** — `cyclomatic_max`, `nesting_max`,
 `lines_max`, `params_max`. Son las que lee el gate de nivel 2; cualquier otra es
-un error porque *el tope quedaria ignorado en silencio*. De las 32 heuristicas
-contractables de Codigo Limpio **una sola (F1) mapea directo**. Las demas no
-pueden apoyarse en el budget: necesitan un instrumento propio.
+error porque *el tope quedaria ignorado en silencio*. De las 32 heuristicas
+contractables de Codigo Limpio **una sola mapea directo**. Las demas necesitan
+instrumento propio.
 
 **2. `test_command` corre con `shlex.split` sin shell**, asi que no admite `&&`.
-Tiene que ser un comando unico.
 
 De esas dos sale `instruments/gate.py`, que resulta ser el diseno correcto:
 
@@ -32,376 +153,150 @@ De esas dos sale `instruments/gate.py`, que resulta ser el diseno correcto:
 | oraculo congelado | no rompiste el comportamiento | `ORACULO ROJO` |
 | instrumento | aplicaste la tecnica | `INSTRUMENTO ROJO` |
 
-Los dos hacen falta y hay que saber cual fallo. Una refactorizacion, por
-definicion, no cambia el comportamiento observable: **el oraculo pasa igual
-antes y despues**, asi que ningun test puede verificarla. Y al reves, un
-instrumento verde sobre codigo roto no vale nada.
+Hacen falta los dos y hay que saber cual fallo. **Una refactorizacion no cambia
+el comportamiento observable, asi que el oraculo pasa igual antes y despues**: en
+la mayoria de los ejercicios esta ciego y solo el instrumento discrimina. Si los
+tests bastaran, no harian falta los instrumentos.
 
-Las tres formas que puede tomar un ejercicio:
+## Los instrumentos
 
-- **G36 (Ley de Demeter)** - refactor puro. El oraculo esta verde sobre el seed
-  y sobre la solucion; lo unico que discrimina es `chain_depth.py`. Verificado:
-  con el seed el gate reporta *"el oraculo esta verde: no rompiste nada, pero no
-  aplicaste la tecnica"*.
-- **F1 (demasiados argumentos)** - cambia la interfaz, asi que el oraculo
-  arranca en rojo. El instrumento sigue haciendo falta: sin el, nada impide
-  satisfacer el oraculo con cuatro parametros.
-- **E2, capas, aislamiento** - nivel repo o multi-modulo: el `target` no es una
-  funcion sino el punto de entrada del proyecto o el archivo que cruza una capa.
-  El oraculo prueba la funcionalidad y queda ciego a la propiedad estructural.
+39 reglas en cinco familias. Que varias tecnicas compartan una no es un atajo: es
+que preguntan lo mismo.
 
-### Instrumentos
+| Familia | Reglas | Mide sobre | Ejemplo |
+|---|---|---|---|
+| `checks.py` | 22 | el AST de un archivo | duplicacion, numeros magicos, ley de Demeter |
+| `repo_checks.py` | 7 | el proyecto entero | un comando para probar, cobertura, tiempo de suite |
+| `arch_checks.py` | 6 | relaciones entre modulos | capas, instanciacion, ISP |
+| `git_checks.py` | 3 | el historial | cadencia de entregas, ramas sin integrar |
+| `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
-**60 de las 69 tecnicas `instrumented` del grafo tienen script**, repartidas en
-cuatro familias: `checks.py` (AST de un archivo), `repo_checks.py` (propiedades
-del proyecto), `git_checks.py` (propiedades del historial) y `arch_checks.py`
-(relaciones entre modulos). En Codigo Limpio, No son 28 scripts:
-son `instruments/checks.py`, un registro de 18 checks que comparten el andamiaje
-AST (mas dos alias, porque el libro define G15 igual que F3 y F4 igual que G9), y
-dos instrumentos dedicados para F1 y G36. Agregar una medicion cuesta una funcion
-corta y una entrada en `RULES`.
+Tres decisiones que conviene tener a la vista:
 
-```bash
-python instruments/checks.py --list
-python instruments/checks.py --rule g23 --max 2 target.py
-```
+- **`arch_checks` exige que el proyecto declare sus capas y su esquema.** Sin la
+  declaracion sale con exit 2, no verde. Una regla de capas que el instrumento
+  adivine no es una regla, es una opinion.
+- **`git_checks` sigue siendo `instrumented`, no `proxy`**: git no lo llena nadie
+  a mano. Es la diferencia con el tablero, que tiene timestamps automaticos pero
+  contenido escrito por personas. Sobre `tddorden` conviene ser preciso: el
+  historial conserva el **orden**, no el haber visto el test en rojo, y el
+  instrumento no pretende que sea lo mismo.
+- **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
+  obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
+  la suite ya venia en rojo — con la suite rota no se puede saber si mata
+  mutantes o si falla sola.
 
-Cada check tiene en `tests/test_checks.py` un caso rojo y uno verde: que detecte
-lo que dice detectar, y que no grite sobre codigo conforme. **Un instrumento que
-nunca dispara pasa todos los gates y no mide nada**, que es el fallo silencioso
-que este pipeline existe para evitar.
+## Los ejercicios
 
-Hay ademas un test estructural que compara las funciones `check_*` del modulo
-contra `RULES`. Existe porque el agujero aparecio de verdad: `check_g29` quedo
-escrito y sin registrar, y comparar los casos de prueba contra `RULES` no lo
-detecta — si la regla falta en los dos lados, los conjuntos coinciden igual.
+Cada uno trae seed, solucion de referencia, oraculo congelado y spec. Hay cuatro
+formas, y solo una deja el oraculo en rojo:
 
-### Contratos de nivel repo
+| Forma | Target | Oraculo sobre el seed |
+|---|---|---|
+| refactor | una funcion | verde: no cambia el comportamiento |
+| cambio de interfaz | una firma | **rojo**: la tecnica cambia la firma |
+| nivel repo | el punto de entrada del proyecto | verde: la funcionalidad esta intacta |
+| multi-modulo | el archivo que cruza una capa | verde: la estructura no cambia el resultado |
 
-E1, E2, G24, T1, T2 y T9 no hablan de un archivo sino del proyecto, asi que el
-`target` deja de ser codigo a refactorizar y pasa a ser el **punto de entrada**.
-La division se mantiene y se vuelve mas clara:
+Los que agregan pruebas (cobertura, limites, anatomia) reparten distinto: **el
+oraculo esta sellado y el `target` es OTRO archivo de pruebas**, el unico que se
+puede tocar. Sin eso el contrato pediria editar lo que el mismo congela.
 
-- **oraculo**: los tests del proyecto siguen pasando, o sea la funcionalidad esta intacta
-- **instrumento**: la propiedad del repo — un comando, cobertura, tiempo, convenciones
+## Que falta, y por que
 
-`instruments/repo_checks.py`, todo con stdlib: `subprocess` para ejecutar los
-comandos y `trace` para cobertura, sin dependencias externas. Usa `subprocess`
-por la misma razon por la que `validate_test_commands.py` del repo KDD rompe su
-propia convencion `forbids: subprocess`: **para medir si algo corre, hay que
-correrlo**.
+`tests/test_cobertura.py` mantiene este inventario exacto: falla si aparece un
+instrumento sin ejercicio que nadie declaro, y tambien si sobra una excepcion que
+ya no hace falta.
 
-Dos decisiones que conviene tener explicitas:
+| Que | n | Por que |
+|---|---|---|
+| tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
+| `git_checks` sin ejercicio | 3 reglas | el arreglo es integrar una rama o marcar una entrega: `touch_only` cubre archivos, no commits |
+| Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
+| J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-- **G24** verifica un subconjunto declarado (largo de linea, tabuladores,
-  espacios al final, salto final), no un linter completo. Decir "convenciones
-  estandar" sin enumerarlas seria pedir algo no verificable.
-- **E2** no se conforma con que el comando salga 0: exige que reporte cuantas
-  pruebas corrio. Un `test` que no prueba nada tambien sale 0, y ese es
-  justamente el fallo silencioso que la heuristica quiere evitar.
-
-### Mutacion de limites
-
-G3 ("comportamiento incorrecto en los limites") y T5 ("probar condiciones de
-limite") son la misma exigencia mirada desde lados opuestos: que la suite se
-entere si un limite se corre un lugar. Eso no se verifica leyendo el codigo ni
-leyendo los tests: hay que **romper el limite a proposito y ver si la suite lo
-nota**.
-
-`instruments/mutation_checks.py` genera un mutante por cada limite (`<` <-> `<=`,
-`>` <-> `>=`, `==` <-> `!=`, enteros +-1), corre la suite con cada uno y exige que
-todos mueran. Un mutante que sobrevive es una condicion de limite que nadie
-prueba. Solo stdlib.
-
-Su ejercicio reparte igual que T1: el oraculo `test_cupos.py` esta sellado y
-prueba los casos comodos, y el `target` es **otro** archivo de pruebas, el
-unico que se puede tocar. Con el seed, el instrumento dice exactamente que
-falta: *sobrevivio: linea 9: Lt -> LtE*, o sea que nadie prueba el valor exacto
-del limite.
-
-Dos cosas que este instrumento tiene que hacer bien porque **escribe sobre el
-archivo que mide**: restaurarlo siempre (hay un test que lo fija, verificado
-saboteando el `finally`), y salir con exit 2 si la suite ya venia en rojo — con
-la suite rota no se puede saber si mata mutantes o si falla sola.
-
-### La unica que falta, y por que
-
-**J1** ("evitar extensas listas de importacion mediante el uso de comodines") se
-queda afuera, y la razon es mas filosa que "es de Java": su consejo es *usar
-imports con comodin*, que en Python es justo lo que el estilo prohibe.
-Implementarla invirtiendo el consejo seria tergiversar al autor. La propiedad
-medible (cantidad de imports) existe, pero medir eso seria otra regla, no esta.
-
-### Ejercicios
-
-**38 contratos ejecutables** sobre los tres libros. Cada ejercicio trae seed,
-solucion de referencia, oraculo congelado y spec. Lo que los mantiene sanos es
-`tests/test_exercises.py`, que verifica los cuatro criterios en todos a la vez:
-
-1. el instrumento esta verde sobre la solucion;
-2. el instrumento esta rojo sobre el seed (si no, el ejercicio ya viene hecho);
-3. el oraculo pasa sobre la solucion;
-4. el oraculo se comporta como manda el `kind` declarado.
-
-Existe por un error concreto: en G29 declare `kind: refactor` y escribi un seed
-que cambiaba el comportamiento (`cupos != 0` contra `cupos > 0`, distinto para
-negativos). El contrato decia "el comportamiento no cambia" y era falso. Despues
-encontro un defecto peor, y del instrumento y no del ejercicio: `check_g9`
-marcaba como muerta a cualquier funcion no referenciada dentro de su propio
-archivo, o sea a toda API publica bien escrita.
-
-Los cinco contratos de nivel repo traen cada uno un proyecto de ejemplo. El
-oraculo prueba la funcionalidad y queda ciego a la propiedad del repositorio;
-el instrumento mide la propiedad. En T1 el reparto es explicito: el oraculo
-`test_cupos.py` esta sellado y cubre dos de los cinco caminos a proposito, y el
-`target` es **otro** archivo de pruebas, el unico que se puede tocar.
-
-### El inventario de lo que falta
-
-`tests/test_cobertura.py` obliga a que **toda tecnica con instrumento tenga
-ejercicio**, salvo excepciones declaradas con su motivo. Falla en las dos
-direcciones: si aparece un instrumento sin ejercicio que nadie declaro, y si
-queda declarada una excepcion que ya no hace falta.
-
-Existe porque la cobertura se venia comprobando a mano, y a mano no sobrevive al
-proximo libro. Sin esta prueba, un instrumento nuevo sin ejercicio no lo detecta
-nadie: los gates pasan igual, porque **un contrato que no existe no falla**.
-
-Las tres excepciones son de `git_checks`, y su motivo es el mismo: lo que hay
-que arreglar no es un archivo sino el historial. Integrar una rama, marcar una
-entrega o escribir el test antes que el codigo son operaciones de git, y
-`touch_only` cubre archivos, no commits. La tentacion seria darle al ejercicio
-un script que fabrique el historial y poner ese script como target — seria
-enseñar a fabricar un historial que se vea bien, que es lo contrario de la
+Ninguna razon es "no se puede medir". La tentacion con las de git seria darle al
+ejercicio un script que fabrique el historial y poner **ese** script como target:
+seria enseñar a fabricar un historial que se vea bien, o sea lo contrario de la
 tecnica.
 
-### Garantias de `contract_emit.py`
+## Lo que evita que esto se pudra
 
-Aborta con exit 1 antes de escribir si el `budget` usa una subclave que el gate
-no lee, si el nodo OKF referenciado no existe (el enlace quedaria roto y
-`validate_okf.py` lo rechazaria), si faltan campos requeridos, si hay menos de
+Siete suites de prueba, y cada una existe por un error concreto que ya paso.
+
+| Suite | Que sostiene |
+|---|---|
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_cobertura` | toda tecnica con instrumento tiene ejercicio, salvo excepciones declaradas con su motivo |
+
+Los errores que las hicieron nacer:
+
+- **`check_g29` quedo escrito y sin registrar**, midiendo nada. Comparar los
+  casos de prueba contra el registro no lo detectaba: si la regla falta en los
+  dos lados, los conjuntos coinciden. Ahora se comparan las funciones del modulo.
+- **En G29 declare `kind: refactor` con un seed que cambiaba el comportamiento**
+  (`cupos != 0` contra `cupos > 0`, distinto para negativos). El contrato decia
+  "el comportamiento no cambia" y era falso.
+- **`check_g9` marcaba como muerta a toda API publica bien escrita**, porque una
+  funcion publica no se llama dentro de su propio archivo. Ahora exige `__all__`
+  y sin el sale con **exit 2**: "no puedo saber" no es "esta limpio".
+- **`check_aislamiento` aislaba de a modulo y no detectaba nada**: una prueba que
+  depende de su vecina pasa igual cuando el modulo corre entero. Ahora corre cada
+  prueba por separado.
+- **Los dos emisores tenian el mismo bug de indice**: un bloque compartido, asi
+  que emitir un segundo libro dejaba huerfanos los nodos del primero. Comprobado
+  antes de arreglarlo: 67 ORPHAN.
+
+## Garantias de los emisores
+
+Los dos abortan con exit 1 **antes de escribir nada**. Un grafo a medias es peor
+que ninguno.
+
+`okf_emit.py` aborta si un enlace apunta a un id inexistente, si un nodo de pila
+A no declara `instrument` o `verification`, si un tag tiene mayusculas, si el
+`type` no esta en el vocabulario OKF o si hay ids duplicados. La emision es
+idempotente: dos corridas producen los mismos bytes.
+
+`contract_emit.py` aborta si el `budget` usa una subclave que el gate no lee, si
+el nodo OKF referenciado no existe, si faltan campos requeridos, si hay menos de
 dos `examples` o ningun `stop_if`.
 
-El sello `tests_sha256` se calcula con newlines normalizados a LF, igual que
-`_calculate_tests_hash` del validador. Verificado: agregar un comentario al
-oraculo dispara `FM_TESTS_FROZEN` con hash esperado y hash actual.
+**La regla de pila A no es cosmetica**: impide el unico error que este pipeline
+existe para no cometer, que es declarar contractable algo sin instrumento que lo
+mida.
 
-## Por que el grafo primero
+El sello `tests_sha256` se calcula con newlines normalizados a LF, igual que el
+validador. Verificado: agregar un comentario al oraculo dispara
+`FM_TESTS_FROZEN` con hash esperado y hash actual.
+
+### Por que el grafo primero
 
 El paso que decide si esto sirve no es generar nodos: es **cablearlos**.
-`validate_okf.py` del repo KDD rechaza con `ORPHAN` cualquier nodo que no sea
-alcanzable desde `index.md`, y con `LINK` cualquier enlace que no resuelva. Un
-generador que emite archivos sueltos produce un grafo invalido, aunque cada
-archivo por separado se vea bien.
+`validate_okf.py` rechaza con `ORPHAN` cualquier nodo no alcanzable desde
+`index.md`. Prueba de que el cableado es lo que hace el trabajo: si se borra el
+enlace de `index.md` a la carpeta del libro, el validador pasa de 0 errores a
+**67 ORPHAN** sobre los mismos archivos.
 
-Prueba de que el cableado es lo que hace el trabajo: si se borra el enlace de
-`index.md` a la carpeta del libro, el validador pasa de 0 errores a **67
-ORPHAN** sobre los mismos archivos.
+## Que se toma del libro y que no
 
-## Tres libros en un grafo
+El grafo **no reproduce el texto de los autores**. Cada nodo lleva el nombre de
+la tecnica y su ubicacion (`capitulo 17, F1`), para que quien tenga el libro
+pueda ir a leerla, y nada mas.
 
-| Libro | nodos | contractable | instrumented |
-|---|---|---|---|
-| Codigo Limpio | 67 | 48% | 48% |
-| Arquitectura Java solida | 34 | 45,5% | 45,5% |
-| Scrum y eXtreme Programming | 154 | 25,5% | 14,4% |
+Eso no le cuesta nada al pipeline, y la razon es el hallazgo central: **la
+propiedad medible vive en el instrumento, no en la prosa que la describe**. El
+grafo llego a tener 66 citas de Codigo Limpio; sacarlas dejo los contratos y los
+gates exactamente igual de verdes.
 
-Arquitectura Java tiene **corpus mas debil que los otros dos** y conviene
-saberlo antes de leer su numero: es un tutorial progresivo, no tiene lista
-cerrada de conclusiones del autor, y sus 33 items salieron de titulos de
-capitulo identificados por el triaje. n es menor y las barras de error mas
-anchas. Aun asi el resultado es claro: sus 15 tecnicas contractables son las 15
-`instrumented`, porque los principios de arquitectura son propiedades del grafo
-de imports y de instanciacion, que es lo que el analisis estatico lee de forma
-nativa. "Semantico" para un humano no implica "no medible" para un parser.
-
-El 14,4% del segundo **no es un valor intermedio**: es el promedio ponderado de
-dos poblaciones. Medido por seccion:
-
-| Seccion | instrumented |
-|---|---|
-| Refactoring | 55% |
-| TDD | 40% |
-| Integracion continua | 29% |
-| Programacion extrema y Coding Dojo | 13% |
-| Introduccion y agilismo | 3% |
-| Scrum | 0% |
-| Combinar Scrum y XP | 0% |
-| Kanban | 0% |
-
-Ninguna seccion cae en el medio. Por eso **el ruteo se decide por seccion, no
-por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
-el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
-Limpio.
-
-### El enlace que justifica que esto sea un grafo
-
-`scrum-xp/142-expresiones-extensas` enlaza a
-`codigo-limpio/g19-usar-variables-explicativas`. **Son la misma refactorizacion
-y quedan en pilas distintas.**
-
-Martin la deja fuera de lo contractable: dice que conviene siempre mas y que es
-dificil excederse — o sea sin umbral — y ademas le exige nombres descriptivos,
-que es la mitad no medible. Bahit la deja contractable, y de un modo casi
-provocador: su ejemplo extrae las subexpresiones a variables llamadas `$a`,
-`$b`, `$c`, `$d`. Al no reclamar nada del nombre, lo unico que queda de la
-tecnica es la reduccion de complejidad de la expresion, que es lo que un parser
-cuenta.
-
-**La contractabilidad no la decide la tecnica ni el dominio: la decide si el
-autor la operacionalizo.** Eso solo se puede afirmar con los dos nodos a la
-vista, y por eso el grafo tiene enlaces entre libros y no es una tabla por
-libro.
-
-El tercer libro trae el mismo caso otra vez, y en el sentido contrario.
-`arquitectura-java/08-el-principio-srp` enlaza a
-`codigo-limpio/g30-las-funciones-solo-deben-hacer-una-cosa`: **mismo principio,
-pilas distintas**. Martin nunca lo aterriza — cuenta operaciones semanticas y no
-da un numero — asi que su nodo queda en pila B. Caules lo aplica como separacion
-de capas, la JSP no contiene codigo de persistencia, y eso es una regla de
-imports. Que el caso aparezca dos veces con los papeles cambiados es lo que lo
-vuelve un patron y no una anecdota.
-
-`arquitectura-java/04-el-principio-dry` es la primera tecnica que aparece en los
-**tres** libros, y los tres autores la operacionalizan: los tres nodos son
-contractables y comparten instrumento.
-
-De las 39 tecnicas contractables del segundo libro:
-
-| | n | |
-|---|---|---|
-| `instrumented` con script corriendo | 17 | |
-| `instrumented` sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, y el proyecto la prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria e2 |
-| `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
-
-Cuatro instrumentos se reusan entre libros sin tocar una linea:
-`checks.py --rule g5` para las tres formas de duplicacion que enumera Bahit,
-`checks.py --rule g12` para sus variables temporales mal usadas, y
-`repo_checks.py --rule g24` y `--rule e2` para codigo estandar y para testing.
-
-### Instrumentos de arquitectura
-
-`instruments/arch_checks.py` es familia propia porque estas mediciones necesitan
-que el proyecto **declare** algo: cuales son sus capas, que capa puede llamar a
-cual, cual es el esquema de la tabla. Y es correcto que sea explicito: una regla
-de capas que el instrumento adivine no es una regla, es una opinion. Sin la
-declaracion salen con exit 2, no con verde.
-
-Seis reglas que cubren doce tecnicas, porque varias son la misma propiedad vista
-desde distintas alturas:
-
-| Regla | Cubre |
-|---|---|
-| `capas` | SRP, MVC, MVC 2, DAO, capa de servicio |
-| `instanciacion` | inversion de control, Factory, inyeccion de dependencia |
-| `excepciones` · `isp` · `aop` · `coc` | una cada una |
-
-Que cinco tecnicas compartan instrumento no es un atajo: las cinco preguntan lo
-mismo, quien puede depender de quien.
-
-### Instrumentos que leen git
-
-Tres heuristicas hablan de propiedades que no viven en un archivo ni en el
-tablero sino en el historial: cada cuanto se entrega, si el codigo esta
-integrado en un solo lugar, y si el test se escribio antes que la
-implementacion. Estan en `instruments/git_checks.py` y **siguen siendo
-`instrumented`, no `proxy`: git no lo llena nadie a mano.** Las fechas de
-commits y tags las pone la herramienta. Es la diferencia con el tablero, que
-tiene timestamps automaticos pero contenido escrito por personas.
-
-El caso del ciclo TDD merece decirse con cuidado. "Escribir el test y hacer que
-falle" es una propiedad del **proceso**, y el estado final del codigo no la
-conserva. El historial si: si el archivo de pruebas entro en un commit anterior
-al de la implementacion, el orden se cumplio. Es lo unico verificable despues
-de los hechos, y no hay que confundirlo con haber visto el test en rojo.
+El campo `quote` sigue existiendo en el emisor por si el libro de origen lo
+permite. Estos grafos simplemente no lo llenan.
 
 ## Licencia
 
 MIT, ver [LICENSE](LICENSE).
 
-Cubre el codigo de este repositorio: los emisores, los instrumentos, las
-pruebas y los ejercicios. **No cubre el libro del que sale el grafo.** Los
-nombres de las heuristicas son de su autor; este repositorio los referencia
-para poder apuntar a donde esta cada tecnica, y no reproduce su texto.
-
-## Que se toma del libro y que no
-
-El grafo **no reproduce el texto del autor**. Cada nodo lleva el nombre de la
-heuristica y su ubicacion (`capitulo 17, F1`), para que quien tenga el libro
-pueda ir a leerla, y nada mas.
-
-Eso no le cuesta nada al pipeline, y la razon es el hallazgo central del
-proyecto: **la propiedad medible vive en el instrumento, no en la prosa que la
-describe**. La cita explica por que F1 importa; quien decide si F1 se cumple es
-`params_max: 3`. Sacar las 66 citas dejo los 26 contratos y los cuatro gates
-exactamente igual de verdes.
-
-El campo `quote` sigue existiendo en el emisor por si el libro de origen lo
-permite. Este grafo simplemente no lo llena.
-
-## Piezas
-
-| Pieza | Que hace | Determinista |
-|---|---|---|
-| extraccion | PDF -> texto UTF-8 (PyMuPDF) | si |
-| `build_<libro>.py` | texto -> `books/<libro>.json`: titulos y citas del libro + el triaje declarado | si, dado el triaje |
-| triaje | clasificar cada tecnica en pila A/B/C | no: es juicio, y va explicito en el build |
-| `okf_emit.py` | JSON -> arbol `knowledge/` que pasa `validate_okf.py` | si |
-
-El triaje es la unica pieza con juicio, y esta aislada a proposito: vive como
-tabla legible en el script de build, auditable linea por linea.
-
-## Uso
-
-```bash
-python build_codigo_limpio.py <texto-extraido.txt>
-python okf_emit.py books/codigo-limpio.json --out out/knowledge
-python <KDD>/scripts/validate_okf.py out/knowledge   # exit 0
-```
-
-## Garantias de `okf_emit.py`
-
-Aborta con exit 1 **sin escribir nada** si:
-
-- un `links` apunta a un id inexistente (seria `LINK` en el validador);
-- un nodo de pila A no declara `instrument` o `verification`;
-- un tag tiene mayusculas, un `type` no esta en el vocabulario OKF, hay ids
-  duplicados o falta un campo requerido.
-
-Un grafo a medias es peor que ninguno, asi que la validacion completa ocurre
-antes de tocar el disco. La emision es idempotente: correrla dos veces produce
-los mismos bytes.
-
-La regla de la pila A no es cosmetica. Es la que impide el unico error que este
-pipeline existe para no cometer: **declarar contractable algo que no tiene
-instrumento que lo mida**, que es prometer verificacion que no existe.
-
-## Piso de la fase 1
-
-El grafo actual conecta los nodos entre si solo donde el libro establece la
-relacion. Enlazar por vecindad tematica inflaria el grafo sin agregar
-informacion. Los enlaces valiosos que faltan son los que cruzan libros: la
-misma tecnica operacionalizada por un autor y no por otro.
-
-## Medicion
-
-La fraccion que decide el ruteo de un libro es `instrumented`, no la
-contractable: si el instrumento lee el artefacto del que trata la tecnica
-(codigo, build, historial) o un registro que llena una persona (tablero,
-diario).
-
-| Libro | contractable | instrumented |
-|---|---|---|
-| Codigo Limpio | 48% | **48%** |
-| Arquitectura Java solida | 45% | **45%** |
-| Scrum y eXtreme Programming | 25,5% | **14,4%** |
-| Proyectos Agiles con Scrum | 26% | **3,4%** |
-| Habitos Atomicos | 8,7% | **0%** |
-
-La distribucion es bimodal: las tecnicas sobre codigo dan 40-55%, las tecnicas
-sobre personas o proceso dan 0-3%. Nada en el medio. Scrum+XP cae en 14,4% no
-por ser intermedio sino por ser **mezcla**: su capitulo de Refactoring da 55% y
-sus capitulos de Scrum dan 0%.
-
-Por eso el ruteo se decide **por seccion, no por libro**: el grafo OKF es uno
-solo para todo el libro, y los contratos cuelgan solo donde hay instrumento.
+Cubre el codigo de este repositorio: los emisores, los instrumentos, las pruebas
+y los ejercicios. **No cubre los libros de los que sale el grafo.** Los nombres
+de las tecnicas son de sus autores; este repositorio los referencia para poder
+apuntar a donde vive cada una, y no reproduce su texto.
