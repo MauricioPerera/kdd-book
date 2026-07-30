@@ -1,0 +1,48 @@
+{
+  "id": "instanciacion-inversion-de-control",
+  "node": "19-el-principio-de-inversion-de-control",
+  "title": "Inversion de control: el servicio recibe su dependencia",
+  "description": "Quitar del servicio la creacion de su propio DAO.",
+  "intent": "Hacer que ServicioTarifas reciba su dependencia en vez de fabricarsela.",
+  "signature": "def __init__(self, dao) -> None:",
+  "target": "proyecto/servicio.py",
+  "oracle": "proyecto/test_servicio.py",
+  "seed": "seed_servicio.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "instanciacion",
+      "--proyecto",
+      "proyecto"
+    ],
+    "threshold": "cero colaboradores creados por la propia clase"
+  },
+  "invariants": [
+    "El calculo del recargo no cambia.",
+    "El servicio guarda tal cual el DAO que recibe.",
+    "Ninguna clase instancia un tipo que su modulo importo."
+  ],
+  "examples": [
+    "`self.dao = TarifaDAO()` dentro del servicio -> la clase se asigna su propia dependencia, en rojo.",
+    "`def __init__(self, dao): self.dao = dao` -> en verde.",
+    "Una factoria queda exenta con `--permite-crear`: existe justo para crear, marcarla seria absurdo."
+  ],
+  "do": [
+    "Recibir el colaborador por constructor.",
+    "Dejar que quien arma la aplicacion decida cual pasar."
+  ],
+  "dont": [
+    "Dejar un valor por defecto que instancie el DAO: la clase seguiria fabricandoselo."
+  ],
+  "stop_if": [
+    "el oraculo exige que el servicio funcione sin recibir dependencia"
+  ]
+}

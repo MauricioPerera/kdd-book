@@ -1,0 +1,50 @@
+{
+  "id": "aop-negocio-sin-transversales",
+  "node": "26-programacion-orientada-a-aspectos",
+  "title": "AOP: el negocio sin codigo transversal",
+  "description": "Sacar el registro de actividad de la funcion de negocio.",
+  "intent": "Eliminar el codigo transversal de la funcion de negocio.",
+  "signature": "def total_inscripcion(base, cantidad):",
+  "target": "proyecto/negocio/inscripciones.py",
+  "oracle": "proyecto/test_inscripciones.py",
+  "seed": "seed_inscripciones.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "aop",
+      "--proyecto",
+      "proyecto",
+      "--negocio",
+      "negocio"
+    ],
+    "threshold": "cero logging ni transacciones en el negocio"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El total se sigue calculando igual.",
+    "Ningun modulo de negocio llama a logging ni maneja transacciones."
+  ],
+  "examples": [
+    "`logging.info(...)` dentro de la funcion de negocio -> en rojo.",
+    "La funcion calculando y nada mas -> en verde.",
+    "Que modulos son de negocio se declara en el contrato: sin eso, hasta el propio logger pareceria una violacion."
+  ],
+  "do": [
+    "Dejar en la funcion solo el calculo.",
+    "Poner lo transversal en el borde, donde se decora o se envuelve."
+  ],
+  "dont": [
+    "Cambiar `logging` por un `print`: sigue siendo algo que no es el calculo."
+  ],
+  "stop_if": [
+    "quitar el registro hace perder informacion que el oraculo verifica"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "isp-dependencia-angosta",
+  "node": "16-el-principio-isp",
+  "title": "ISP: depender solo de lo que se usa",
+  "description": "Angostar la dependencia del buscador a los metodos que realmente usa.",
+  "intent": "Quitarle al Buscador la dependencia de metodos que nunca llama.",
+  "signature": "def por_titulo(self, repo: SoloBusqueda, titulo):",
+  "target": "proyecto/cliente.py",
+  "oracle": "proyecto/test_buscador.py",
+  "seed": "seed_cliente.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "isp",
+      "--proyecto",
+      "proyecto"
+    ],
+    "threshold": "cero metodos de los que se depende sin usar"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "El buscador sigue sirviendo con el repositorio completo.",
+    "Ningun cliente declara depender de metodos que no llama."
+  ],
+  "examples": [
+    "`repo: RepositorioLibros` usando solo `buscar()` de sus cinco metodos -> en rojo.",
+    "`repo: SoloBusqueda` con un solo metodo -> en verde.",
+    "El repositorio completo sigue encajando: angostar el contrato no achica al que ya cumplia de mas."
+  ],
+  "do": [
+    "Declarar la interfaz minima que el cliente necesita.",
+    "Anotar el parametro con esa interfaz."
+  ],
+  "dont": [
+    "Borrar metodos del repositorio: otros clientes los usan, y el problema era de quien declara la dependencia."
+  ],
+  "stop_if": [
+    "el cliente termina usando mas metodos de los que la interfaz angosta declara"
+  ]
+}

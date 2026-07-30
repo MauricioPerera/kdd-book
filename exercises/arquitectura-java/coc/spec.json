@@ -1,0 +1,50 @@
+{
+  "id": "coc-campos-segun-la-tabla",
+  "node": "28-el-principio-coc",
+  "title": "COC: los campos se llaman como las columnas",
+  "description": "Renombrar los campos del modelo para que sigan la convencion de la tabla.",
+  "intent": "Hacer que los campos de Libro coincidan con las columnas de su tabla.",
+  "signature": "def __init__(self, titulo, autor, anio) -> None:",
+  "target": "proyecto/modelo.py",
+  "oracle": "proyecto/test_modelo.py",
+  "seed": "seed_modelo.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "coc",
+      "--proyecto",
+      "proyecto",
+      "--esquema",
+      "proyecto/esquema.json"
+    ],
+    "threshold": "los campos coinciden con las columnas declaradas"
+  },
+  "invariants": [
+    "El modelo sigue guardando los tres datos que recibe, en el mismo orden.",
+    "No se agregan campos que la tabla no tenga.",
+    "Los nombres de los campos coinciden con las columnas de `esquema.json`."
+  ],
+  "examples": [
+    "`self.escritor` cuando la columna se llama `autor` -> obliga a configurar el mapeo, en rojo.",
+    "`self.autor` -> la convencion evita la configuracion, en verde.",
+    "El esquema se declara en el contrato: adivinarlo seria inventar la convencion en vez de seguirla."
+  ],
+  "do": [
+    "Leer las columnas del esquema y usar esos nombres.",
+    "Renombrar tambien los parametros, para que el objeto se lea igual por dentro y por fuera."
+  ],
+  "dont": [
+    "Agregar un mapa de traduccion nombre-columna: eso es justo la configuracion que la convencion viene a evitar."
+  ],
+  "stop_if": [
+    "alguna columna no tiene un nombre valido como atributo de Python"
+  ]
+}

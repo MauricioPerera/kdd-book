@@ -37,7 +37,7 @@ definicion, no cambia el comportamiento observable: **el oraculo pasa igual
 antes y despues**, asi que ningun test puede verificarla. Y al reves, un
 instrumento verde sobre codigo roto no vale nada.
 
-Las dos formas que puede tomar un ejercicio, una por cada caso:
+Las tres formas que puede tomar un ejercicio:
 
 - **G36 (Ley de Demeter)** - refactor puro. El oraculo esta verde sobre el seed
   y sobre la solucion; lo unico que discrimina es `chain_depth.py`. Verificado:
@@ -46,10 +46,16 @@ Las dos formas que puede tomar un ejercicio, una por cada caso:
 - **F1 (demasiados argumentos)** - cambia la interfaz, asi que el oraculo
   arranca en rojo. El instrumento sigue haciendo falta: sin el, nada impide
   satisfacer el oraculo con cuatro parametros.
+- **E2, capas, aislamiento** - nivel repo o multi-modulo: el `target` no es una
+  funcion sino el punto de entrada del proyecto o el archivo que cruza una capa.
+  El oraculo prueba la funcionalidad y queda ciego a la propiedad estructural.
 
 ### Instrumentos
 
-**28 de las 32 heuristicas contractables tienen instrumento.** No son 28 scripts:
+**60 de las 69 tecnicas `instrumented` del grafo tienen script**, repartidas en
+cuatro familias: `checks.py` (AST de un archivo), `repo_checks.py` (propiedades
+del proyecto), `git_checks.py` (propiedades del historial) y `arch_checks.py`
+(relaciones entre modulos). En Codigo Limpio, No son 28 scripts:
 son `instruments/checks.py`, un registro de 18 checks que comparten el andamiaje
 AST (mas dos alias, porque el libro define G15 igual que F3 y F4 igual que G9), y
 dos instrumentos dedicados para F1 y G36. Agregar una medicion cuesta una funcion
@@ -106,7 +112,7 @@ todavia no emite.
 
 ### Ejercicios
 
-**26 contratos ejecutables, uno por cada instrumento.** Cada ejercicio trae seed,
+**36 contratos ejecutables** sobre los tres libros. Cada ejercicio trae seed,
 solucion de referencia, oraculo congelado y spec. Lo que los mantiene sanos es
 `tests/test_exercises.py`, que verifica los cuatro criterios en todos a la vez:
 

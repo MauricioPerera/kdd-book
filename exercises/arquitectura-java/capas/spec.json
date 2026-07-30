@@ -1,0 +1,58 @@
+{
+  "id": "capas-presentacion-sin-persistencia",
+  "node": "08-el-principio-srp",
+  "title": "Capas: la presentacion no toca la persistencia",
+  "description": "Hacer que la vista pase por la capa de servicio en vez de ir directo al DAO.",
+  "intent": "Eliminar el import que salta de presentacion a persistencia.",
+  "signature": "def pantalla_de_libros() -> str:",
+  "target": "proyecto/vistas/pantalla.py",
+  "oracle": "proyecto/test_pantalla.py",
+  "seed": "seed_pantalla.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "capas",
+      "--proyecto",
+      "proyecto",
+      "--capa",
+      "presentacion=vistas",
+      "--capa",
+      "negocio=servicios",
+      "--capa",
+      "persistencia=dao",
+      "--permite",
+      "presentacion>negocio",
+      "--permite",
+      "negocio>persistencia"
+    ],
+    "threshold": "cero imports que crucen capas sin permiso"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "`pantalla_de_libros` conserva su nombre y su firma.",
+    "Ningun modulo de presentacion importa nada de persistencia."
+  ],
+  "examples": [
+    "`from dao.libros import LibroDAO` dentro de `vistas/` -> salta una capa, en rojo.",
+    "`from servicios.libros import ServicioLibros` -> en verde.",
+    "Las capas y sus aristas permitidas se declaran en el contrato: una regla de capas que el instrumento adivine no es una regla, es una opinion."
+  ],
+  "do": [
+    "Pedirle al servicio lo que la vista necesita.",
+    "Dejar que el servicio siga hablando con el DAO."
+  ],
+  "dont": [
+    "Mover el DAO a `servicios/` para que el import deje de cruzar: eso arregla el instrumento y no el diseno."
+  ],
+  "stop_if": [
+    "el servicio no expone lo que la vista necesita y agregarlo cambiaria su contrato"
+  ]
+}

@@ -311,6 +311,11 @@ def main(argv=None):
     parser.add_argument('--negocio', action='append')
     parser.add_argument('--esquema')
     parser.add_argument('--max-sin-usar', type=int, default=0)
+    # El proyecto a escanear se puede fijar explicitamente. Hace falta porque
+    # estas reglas miden relaciones ENTRE modulos: derivar la raiz del archivo
+    # que se esta tocando escanearia solo su capa, y una regla de capas que ve
+    # una sola capa siempre esta en verde.
+    parser.add_argument('--proyecto')
     parser.add_argument('raiz', nargs='?', default='.')
     args = parser.parse_args(argv)
 
@@ -322,9 +327,10 @@ def main(argv=None):
     if args.rule not in RULES:
         print('NO-VERIFICABLE: regla desconocida: {!r} (ver --list)'.format(args.rule))
         return 2
-    raiz = args.raiz if os.path.isdir(args.raiz) else os.path.dirname(args.raiz)
+    objetivo = args.proyecto or args.raiz
+    raiz = objetivo if os.path.isdir(objetivo) else os.path.dirname(objetivo)
     if not os.path.isdir(raiz):
-        print('NO-VERIFICABLE: no existe el directorio: {}'.format(args.raiz))
+        print('NO-VERIFICABLE: no existe el directorio: {}'.format(objetivo))
         return 2
 
     func, etiqueta = RULES[args.rule]

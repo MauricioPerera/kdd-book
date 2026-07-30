@@ -1,0 +1,48 @@
+{
+  "id": "excepciones-sin-catch-mudos",
+  "node": "06-manejo-de-excepciones",
+  "title": "Excepciones: cada catch dice que atrapa",
+  "description": "Reemplazar los except mudos y vacios por tipos concretos.",
+  "intent": "Eliminar los except sin tipo y los bloques except vacios.",
+  "signature": "def leer_cupos(texto) -> int:",
+  "target": "proyecto/parser_datos.py",
+  "oracle": "proyecto/test_parser.py",
+  "seed": "seed_parser.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 5,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "instrument": {
+    "script": "arch_checks.py",
+    "args": [
+      "--rule",
+      "excepciones",
+      "--proyecto",
+      "proyecto"
+    ],
+    "threshold": "cero except mudos, vacios o demasiado amplios"
+  },
+  "invariants": [
+    "El comportamiento no cambia para las entradas que fija el oraculo.",
+    "Un texto invalido sigue devolviendo el valor neutro.",
+    "Ningun `except` queda sin tipo, vacio ni atrapando `Exception`."
+  ],
+  "examples": [
+    "`except:` -> atrapa hasta lo que no sabe manejar, en rojo.",
+    "`except ValueError: pass` -> el error se pierde en silencio, en rojo.",
+    "`except ValueError: return 0` -> dice que atrapa y que hace, en verde."
+  ],
+  "do": [
+    "Nombrar la excepcion que de verdad puede ocurrir.",
+    "Devolver el valor neutro desde el propio except, sin caer por abajo."
+  ],
+  "dont": [
+    "Cambiar `except:` por `except Exception:`: sigue siendo demasiado amplio y el instrumento tambien lo marca."
+  ],
+  "stop_if": [
+    "hace falta atrapar mas de un tipo y el oraculo no dice cual gana"
+  ]
+}
