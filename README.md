@@ -113,6 +113,12 @@ nota**.
 todos mueran. Un mutante que sobrevive es una condicion de limite que nadie
 prueba. Solo stdlib.
 
+Su ejercicio reparte igual que T1: el oraculo `test_cupos.py` esta sellado y
+prueba los casos comodos, y el `target` es **otro** archivo de pruebas, el
+unico que se puede tocar. Con el seed, el instrumento dice exactamente que
+falta: *sobrevivio: linea 9: Lt -> LtE*, o sea que nadie prueba el valor exacto
+del limite.
+
 Dos cosas que este instrumento tiene que hacer bien porque **escribe sobre el
 archivo que mide**: restaurarlo siempre (hay un test que lo fija, verificado
 saboteando el `finally`), y salir con exit 2 si la suite ya venia en rojo — con
@@ -128,7 +134,7 @@ medible (cantidad de imports) existe, pero medir eso seria otra regla, no esta.
 
 ### Ejercicios
 
-**36 contratos ejecutables** sobre los tres libros. Cada ejercicio trae seed,
+**38 contratos ejecutables** sobre los tres libros. Cada ejercicio trae seed,
 solucion de referencia, oraculo congelado y spec. Lo que los mantiene sanos es
 `tests/test_exercises.py`, que verifica los cuatro criterios en todos a la vez:
 

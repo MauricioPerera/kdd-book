@@ -127,8 +127,14 @@ def main(argv=None):
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')
     parser.add_argument('--proyecto')
+    # El archivo a mutar se declara aparte del positional a proposito: en un
+    # contrato, lo que se edita es el archivo de PRUEBAS y lo que hay que mutar
+    # es el CODIGO. Son distintos, y confundirlos mutaria los tests.
+    parser.add_argument('--mutar')
     parser.add_argument('objetivo', nargs='?')
     args = parser.parse_args(argv)
+    if args.mutar:
+        args.objetivo = args.mutar
 
     if args.list:
         for nombre in sorted(RULES):

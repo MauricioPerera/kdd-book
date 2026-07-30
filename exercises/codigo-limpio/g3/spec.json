@@ -1,0 +1,56 @@
+{
+  "id": "g3-condiciones-de-limite",
+  "node": "g3-comportamiento-incorrecto-en-los-limites",
+  "task": "g3_condiciones_de_limite",
+  "title": "G3/T5: probar los limites hasta que ningun mutante sobreviva",
+  "description": "Agregar las pruebas de borde que faltan para que la suite detecte un limite corrido.",
+  "intent": "Cubrir las condiciones de limite de estado_cupos.",
+  "signature": "class LimitesTest(unittest.TestCase):",
+  "target": "proyecto/test_limites.py",
+  "oracle": "proyecto/test_cupos.py",
+  "seed": "seed_limites.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 3,
+    "nesting_max": 1,
+    "lines_max": 40,
+    "params_max": 2
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "mutation_checks.py",
+    "args": [
+      "--rule",
+      "limites",
+      "--proyecto",
+      "proyecto",
+      "--mutar",
+      "proyecto/cupos.py"
+    ],
+    "threshold": "cero mutantes de limite vivos"
+  },
+  "invariants": [
+    "`cupos.py` no se toca: este contrato agrega pruebas, no cambia el codigo.",
+    "El oraculo `test_cupos.py` sigue sellado y en verde.",
+    "Ningun mutante de limite sobrevive a la suite."
+  ],
+  "examples": [
+    "Con solo `(10, 3)` y `(10, 20)` probados, cambiar `<` por `<=` no rompe nada: mutante vivo, en rojo.",
+    "Agregando `(10, 10) -> 'completo'`, ese mutante muere, en verde.",
+    "Una prueba mas del caso comodo no mata ningun mutante: el instrumento mide bordes, no cantidad de pruebas."
+  ],
+  "do": [
+    "Probar el valor exacto del limite, el de antes y el de despues.",
+    "Leer que mutante sobrevivio: dice cual borde falta."
+  ],
+  "dont": [
+    "Tocar `proyecto/cupos.py` para sacarle una comparacion: eso mata mutantes sin probar nada.",
+    "Tocar `proyecto/test_cupos.py`: es el oraculo congelado."
+  ],
+  "stop_if": [
+    "un mutante sobrevive porque el codigo tiene una rama inalcanzable",
+    "la suite ya viene en rojo y el instrumento no puede medir (exit 2)"
+  ]
+}

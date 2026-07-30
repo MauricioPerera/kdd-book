@@ -1,0 +1,38 @@
+{
+  "id": "j2-no-heredar-constantes",
+  "node": "j2-no-heredar-constantes",
+  "title": "J2: citar las constantes en vez de heredarlas",
+  "description": "Quitar la herencia que existe solo para escribir las constantes sin calificar.",
+  "intent": "Eliminar la herencia usada como atajo para acceder a constantes.",
+  "signature": "def cupos_validos(self, cantidad) -> bool:",
+  "instrument": {
+    "script": "checks.py",
+    "args": [
+      "--rule",
+      "j2",
+      "--max",
+      "0"
+    ],
+    "threshold": "cero herencias de clases que solo aportan constantes"
+  },
+  "invariants": [
+    "El comportamiento no cambia: el oraculo pasa igual antes y despues.",
+    "Los limites siguen siendo 5 y 100, ambos inclusive.",
+    "Ninguna clase hereda de otra que solo aporta constantes."
+  ],
+  "examples": [
+    "`class ServicioEventos(LimitesDeEvento)` para escribir `self.TOPE_DE_CUPOS` -> usa la herencia como atajo de sintaxis, en rojo.",
+    "`LimitesDeEvento.TOPE_DE_CUPOS` -> en verde, y ademas dice de donde sale el valor.",
+    "Heredar de una clase que si tiene comportamiento no cuenta: el instrumento marca solo las que aportan constantes y nada mas."
+  ],
+  "do": [
+    "Citar la constante por su clase, que ademas la hace rastreable.",
+    "Dejar la clase de limites como esta: el problema es de quien hereda."
+  ],
+  "dont": [
+    "Copiar las constantes dentro del servicio: duplica el valor y cae en G25."
+  ],
+  "stop_if": [
+    "la clase base tambien aporta comportamiento y la herencia esta justificada"
+  ]
+}
