@@ -35,7 +35,7 @@
         "plugin de vite"
       ],
       "links": [],
-      "instrument": "tailwind_checks: el punto de entrada de Vite declara el plugin de Tailwind y la CSS de entrada tiene el import (sin implementar)",
+      "instrument": "tailwind_checks.py --rule instalacion",
       "threshold": "el plugin y el import estan declarados"
     },
     {
@@ -96,7 +96,7 @@
         "stylus"
       ],
       "links": [],
-      "instrument": "tailwind_checks: cero dependencias de Sass, Less o Stylus en un proyecto que usa Tailwind v4 (sin implementar)",
+      "instrument": "tailwind_checks.py --rule preprocesadores",
       "threshold": "cero"
     },
     {
@@ -119,7 +119,7 @@
         "style blocks"
       ],
       "links": [],
-      "instrument": "tailwind_checks: todo <style> con @apply o @variant declara @reference (sin implementar)",
+      "instrument": "tailwind_checks.py --rule referencia",
       "threshold": "cero bloques de estilo sin @reference",
       "body": "La misma regla aparece en Functions and directives, bajo `@reference`: la pagina de compatibilidad la da como excepcion para Vue/Svelte y CSS modules, y la de directivas la da como sintaxis general. Un solo nodo cubre las dos."
     },
@@ -178,7 +178,7 @@
         "guia de actualizacion"
       ],
       "links": [],
-      "instrument": "tailwind_checks: cero utilidades v3 removidas o renombradas en las plantillas (sin implementar)",
+      "instrument": "tailwind_checks.py --rule utilidades-removidas",
       "threshold": "cero apariciones de la lista de utilidades removidas o renombradas"
     },
     {
@@ -200,7 +200,7 @@
         "important modifier"
       ],
       "links": [],
-      "instrument": "tailwind_checks: el modificador important va como sufijo, no como prefijo (sin implementar)",
+      "instrument": "tailwind_checks.py --rule modificador-important",
       "threshold": "cero clases con el modificador antepuesto"
     },
     {
@@ -242,7 +242,7 @@
         "conflicting utility classes"
       ],
       "links": [],
-      "instrument": "tailwind_checks: cero elementos con dos utilidades que fijan la misma propiedad CSS (sin implementar)",
+      "instrument": "tailwind_checks.py --rule utilidades-en-conflicto",
       "threshold": "cero conflictos por elemento"
     },
     {
@@ -325,7 +325,7 @@
         "breakpoints"
       ],
       "links": [],
-      "instrument": "tailwind_checks: cero utilidades con prefijo de breakpoint chico sin la utilidad sin prefijo que las precede (sin implementar)",
+      "instrument": "tailwind_checks.py --rule mobile-first",
       "threshold": "cero utilidades \"mobile\" declaradas solo bajo un breakpoint"
     },
     {
@@ -368,7 +368,7 @@
         "@theme"
       ],
       "links": [],
-      "instrument": "tailwind_checks: los theme tokens se declaran con @theme, en el nivel superior de la hoja (sin implementar)",
+      "instrument": "tailwind_checks.py --rule theme-variables",
       "threshold": "cero tokens declarados con :root o anidados"
     },
     {
@@ -393,7 +393,7 @@
       "links": [
         "t17"
       ],
-      "instrument": "tailwind_checks: los colores custom usan el namespace --color-* (sin implementar)",
+      "instrument": "tailwind_checks.py --rule namespace-color",
       "threshold": "cero colores custom fuera del namespace",
       "body": "Colores custom es el mismo requisito que theme variables —declarar con `@theme`, en el namespace correcto— aplicado especificamente a `--color-*`. Se separan porque el autor les dedica paginas distintas, pero comparten instrumento."
     },
@@ -433,7 +433,7 @@
         "nombres dinamicos"
       ],
       "links": [],
-      "instrument": "tailwind_checks: cero nombres de clase construidos por concatenacion o interpolacion de strings (sin implementar)",
+      "instrument": "tailwind_checks.py --rule clases-dinamicas",
       "threshold": "cero clases dinamicas"
     },
     {

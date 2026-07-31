@@ -46,11 +46,33 @@ SIN_EJERCICIO = {
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
 # Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {}
+PENDIENTE = {
+    ('tailwind_checks.py', 'clases-dinamicas'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'instalacion'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'mobile-first'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'modificador-important'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'namespace-color'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'preprocesadores'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'referencia'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'theme-variables'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'utilidades-en-conflicto'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+    ('tailwind_checks.py', 'utilidades-removidas'): (
+        'el instrumento esta escrito y probado; falta el ejercicio'),
+}
 
 
 def _alias_de(script):
@@ -270,7 +292,7 @@ class CoberturaTest(unittest.TestCase):
         for modulo in ('checks', 'repo_checks', 'git_checks', 'arch_checks',
                        'mutation_checks', 'html_checks', 'http_checks',
                        'template_checks', 'entorno_checks', 'a11y_checks',
-                       'pep8_checks', 'prosa_checks'):
+                       'pep8_checks', 'prosa_checks', 'tailwind_checks'):
             registros[modulo + '.py'] = __import__(modulo)
         for script, regla in sorted(_instrumentos_ejercitados()):
             if not regla or script not in registros:

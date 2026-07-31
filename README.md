@@ -16,9 +16,9 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Nueve fuentes, 574 nodos, 130 contratos ejecutables, 134 instrumentos en doce
+Nueve fuentes, 574 nodos, 130 contratos ejecutables, 146 instrumentos en trece
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 227 pruebas propias.
+`validate_test_commands` y las 256 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -26,7 +26,7 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Google developer documentation style guide | 80 | 52,5% | **52,5%** | 42 | 42 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
-| Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 0 | 0 |
+| Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 10 | 0 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
@@ -111,13 +111,14 @@ refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 Ademas: 17 tecnicas `proxy`, 204 en pila B (tecnica real sin propiedad medible)
 y 175 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
-Hay 195 tecnicas en pila A y 130 ejercicios, y la diferencia no es un pendiente:
-**la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
-mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
-las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
-cuyo instrumento admite la forma de ejercicio lo tiene**, y eso no se afirma de
-memoria: `test_cobertura` compara el conjunto exacto y falla tanto si falta un
-ejercicio como si sobra una excepcion declarada.
+Hay 195 tecnicas en pila A y 130 ejercicios. Parte de la diferencia no es un
+pendiente: **la cobertura se cuenta por regla, no por nodo**, porque un
+instrumento no mejora por ejercitarse dos veces. DRY aparece en cinco nodos de
+tres fuentes y las cinco corren `checks.py --rule g5`: un ejercicio las cubre.
+El resto de la diferencia si es un pendiente declarado: las 10 reglas de
+`tailwind_checks`, recien escritas, todavia no tienen ejercicio. Nada de esto
+se afirma de memoria: `test_cobertura` compara el conjunto exacto y falla tanto
+si falta un ejercicio como si sobra una excepcion declarada.
 
 **La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
 diferencia es si el instrumento lee el artefacto del que trata la tecnica
@@ -435,14 +436,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 574 tecnicas, 136 instrumentos
+python memoria.py exportar          # -> memoria.json: 574 tecnicas, 146 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **585 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **608 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -564,7 +565,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-134 reglas en doce familias. Que varias tecnicas compartan una no es un atajo:
+146 reglas en trece familias. Que varias tecnicas compartan una no es un atajo:
 es que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -579,6 +580,8 @@ es que preguntan lo mismo.
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
 | `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
+| `prosa_checks.py` | 42 | un documento de prosa (Markdown u otro texto) | coma serial, encabezados, texto de enlace, alt de imagen |
+| `tailwind_checks.py` | 10 | HTML/JSX con clases de Tailwind y CSS con `@theme` | utilidades en conflicto, mobile-first, namespace de color |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -676,6 +679,22 @@ Tres decisiones que conviene tener a la vista:
   Saboteados los 42 mecanismos, los 42 tienen dientes. Corrida contra el propio
   repositorio via `pep8_checks`, la unica marca real fueron seis identificadores
   `l` en comprensiones — renombrados.
+- **`tailwind_checks` es la primera familia sin parser real detras.** Ni de
+  HTML ni de CSS: son expresiones regulares sobre el texto, igual que
+  `html_checks` antes de tener un arbol. El mapa utilidad -> propiedad CSS que
+  usan `utilidades-en-conflicto` y `mobile-first` es deliberadamente chico —
+  cubre solo las familias que las propias paginas fuente usan de ejemplo
+  (`display`, `position`, `text-align`...), ampliable con `--propiedades` — y
+  la regla de utilidades removidas es angosta a proposito: solo mide las que
+  la guia de actualizacion llama "removidas" (`bg-opacity-*`), no las
+  "renombradas" (`shadow` -> `shadow-sm`), porque estas ultimas **siguen siendo
+  clases validas en v4** con otra escala, y marcarlas seria adivinar si el
+  autor migro a proposito o dejo el codigo a medio actualizar.
+  `className={` de JSX usa llaves y no comillas, asi que el patron que detecta
+  `class="..."`/`className="..."` no ve un template literal como
+  `` className={`bg-${color}-600`} ``: hizo falta un segundo patron aparte
+  para ese caso, que es ademas el mas comun de nombre de clase dinamico en
+  React.
 
 ## Los ejercicios
 
@@ -837,16 +856,16 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| Tailwind sin instrumento | 10 | la fuente entro recien. Sus 10 medibles leen HTML/JSX con clases, un artefacto que ninguna de las doce familias toca todavia: haria falta una `tailwind_checks`. Es lo unico de esta lista que se arregla trabajando |
+| `tailwind_checks` sin ejercicio | 10 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Solo la primera fila es un instrumento que falte.** Las 185 tecnicas de pila A
-de las otras ocho fuentes tienen instrumento, y toda regla que admite la forma
-de ejercicio lo tiene. El resto son limites, no deudas: un artefacto que este
+**Ninguna fila es un instrumento que falte.** Las 195 tecnicas de pila A tienen
+instrumento; lo unico pendiente son los 10 ejercicios de Tailwind. El resto son
+limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
@@ -858,11 +877,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Quince suites, 227 pruebas, y cada suite existe por un error concreto que ya paso.
+Dieciseis suites, 256 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 130 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |

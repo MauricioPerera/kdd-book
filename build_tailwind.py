@@ -58,40 +58,30 @@ SECCIONES = [
 
 # Pila A: (instrumento, umbral). 10 de 21.
 #
-# Ninguna tiene instrumento escrito todavia: se nombra el que haria falta,
-# igual que la 53 de htmx antes de `template_checks`. El artefacto es HTML o
-# JSX con clases de Tailwind, y ninguna de las doce familias existentes lo lee.
+# Las diez viven en `tailwind_checks`, familia nueva y la unica que lee HTML o
+# JSX con clases de Tailwind. Ninguna de las otras once familias tocaba ese
+# artefacto.
 A_NODES = {
-    1: ('tailwind_checks: el punto de entrada de Vite declara el plugin de '
-        'Tailwind y la CSS de entrada tiene el import (sin implementar)',
+    1: ('tailwind_checks.py --rule instalacion',
         'el plugin y el import estan declarados'),
-    4: ('tailwind_checks: cero dependencias de Sass, Less o Stylus en un '
-        'proyecto que usa Tailwind v4 (sin implementar)',
+    4: ('tailwind_checks.py --rule preprocesadores',
         'cero'),
-    5: ('tailwind_checks: todo <style> con @apply o @variant declara '
-        '@reference (sin implementar)',
+    5: ('tailwind_checks.py --rule referencia',
         'cero bloques de estilo sin @reference'),
-    8: ('tailwind_checks: cero utilidades v3 removidas o renombradas en las '
-        'plantillas (sin implementar)',
+    8: ('tailwind_checks.py --rule utilidades-removidas',
         'cero apariciones de la lista de utilidades removidas o renombradas'),
-    9: ('tailwind_checks: el modificador important va como sufijo, no como '
-        'prefijo (sin implementar)',
+    9: ('tailwind_checks.py --rule modificador-important',
         'cero clases con el modificador antepuesto'),
-    11: ('tailwind_checks: cero elementos con dos utilidades que fijan la '
-         'misma propiedad CSS (sin implementar)',
-         'cero conflictos por elemento'),
-    15: ('tailwind_checks: cero utilidades con prefijo de breakpoint chico '
-         'sin la utilidad sin prefijo que las precede (sin implementar)',
-         'cero utilidades "mobile" declaradas solo bajo un breakpoint'),
-    17: ('tailwind_checks: los theme tokens se declaran con @theme, en el '
-         'nivel superior de la hoja (sin implementar)',
-         'cero tokens declarados con :root o anidados'),
-    18: ('tailwind_checks: los colores custom usan el namespace --color-* '
-         '(sin implementar)',
-         'cero colores custom fuera del namespace'),
-    20: ('tailwind_checks: cero nombres de clase construidos por '
-         'concatenacion o interpolacion de strings (sin implementar)',
-         'cero clases dinamicas'),
+    11: ('tailwind_checks.py --rule utilidades-en-conflicto',
+        'cero conflictos por elemento'),
+    15: ('tailwind_checks.py --rule mobile-first',
+        'cero utilidades "mobile" declaradas solo bajo un breakpoint'),
+    17: ('tailwind_checks.py --rule theme-variables',
+        'cero tokens declarados con :root o anidados'),
+    18: ('tailwind_checks.py --rule namespace-color',
+        'cero colores custom fuera del namespace'),
+    20: ('tailwind_checks.py --rule clases-dinamicas',
+        'cero clases dinamicas'),
 }
 
 # Pila B: tecnica real cuya propiedad definitoria no es medible.
