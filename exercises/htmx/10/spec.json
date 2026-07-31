@@ -1,0 +1,49 @@
+{
+  "id": "10-indicador-de-peticion",
+  "node": "10",
+  "title": "Indicador: avisar que la peticion esta en curso",
+  "description": "Dar al emisor de la peticion un indicador de carga.",
+  "intent": "Declarar un indicador para el boton que genera el reporte.",
+  "signature": "<button hx-get=\"/reporte\" hx-indicator=\"#cargando\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "html_checks.py",
+    "args": [
+      "--rule",
+      "indicador"
+    ],
+    "threshold": "todo emisor con indicador en alcance"
+  },
+  "invariants": [
+    "Lo que la pagina muestra no cambia: el oraculo pasa igual antes y despues.",
+    "El boton sigue pidiendo /reporte y sigue escribiendo en #salida.",
+    "Todo elemento que emite una peticion tiene un indicador en alcance."
+  ],
+  "examples": [
+    "`<button hx-get=\"/reporte\">` sin nada mas -> el usuario no sabe que paso, en rojo.",
+    "`hx-indicator=\"#cargando\"` en el boton o en un ancestro -> en verde.",
+    "Un descendiente con `class=\"htmx-indicator\"` tambien vale: es el mecanismo por defecto."
+  ],
+  "do": [
+    "Declarar el indicador en el emisor o en un ancestro comun.",
+    "Marcar el elemento indicador con la clase htmx-indicator."
+  ],
+  "dont": [
+    "Poner el indicador dentro de #salida: el swap lo va a reemplazar justo cuando hace falta."
+  ],
+  "stop_if": [
+    "no hay ningun elemento que pueda servir de indicador sin ser reemplazado"
+  ]
+}

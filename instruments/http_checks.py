@@ -223,6 +223,11 @@ def main(argv=None):
     parser.add_argument('--list', action='store_true')
     parser.add_argument('--exige', action='append',
                         help='directiva que la CSP debe declarar; repetible')
+    # Las capturas se declaran aparte del positional a proposito: en un
+    # contrato lo que se EDITA es la app y lo que se MIDE son las respuestas
+    # que produce. Confundirlos haria que el ejercicio midiera el archivo que
+    # se esta tocando.
+    parser.add_argument('--capturas')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
 
@@ -234,13 +239,14 @@ def main(argv=None):
     if args.rule not in RULES:
         print('NO-VERIFICABLE: regla desconocida: {!r} (ver --list)'.format(args.rule))
         return 2
-    if not args.files:
+    fuentes = [args.capturas] if args.capturas else args.files
+    if not fuentes:
         print('NO-VERIFICABLE: no se indicaron capturas')
         return 2
 
     func, etiqueta = RULES[args.rule]
     try:
-        hallazgos = func(capturas(args.files), args)
+        hallazgos = func(capturas(fuentes), args)
     except NoVerificable as exc:
         print('NO-VERIFICABLE: {}: {}'.format(etiqueta, exc))
         return 2

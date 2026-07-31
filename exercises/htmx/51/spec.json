@@ -1,0 +1,53 @@
+{
+  "id": "51-vary-hx-request",
+  "node": "51",
+  "title": "Caching: declarar que la respuesta varia segun HX-Request",
+  "description": "Agregar Vary: HX-Request a la respuesta que cambia segun esa cabecera.",
+  "intent": "Declarar con Vary que la respuesta depende de HX-Request.",
+  "signature": "def responder(ruta, cabeceras):",
+  "target": "proyecto/app.py",
+  "oracle": "proyecto/oracle_test.py",
+  "seed": "seed_app.py",
+  "preparar": "proyecto/preparar.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "http_checks.py",
+    "args": [
+      "--rule",
+      "vary",
+      "--capturas",
+      "proyecto/capturas"
+    ],
+    "threshold": "Vary: HX-Request cuando la respuesta varia por esa cabecera"
+  },
+  "invariants": [
+    "Lo que la app devuelve no cambia: el oraculo pasa igual antes y despues.",
+    "Sin la cabecera sigue devolviendo la pagina entera; con ella, el fragmento.",
+    "La respuesta declara Vary: HX-Request."
+  ],
+  "examples": [
+    "Dos capturas de la misma ruta con cuerpos distintos y sin `Vary` -> la cache sirve el fragmento a quien pidio la pagina, en rojo.",
+    "La misma respuesta con `Vary: HX-Request` -> en verde.",
+    "Si los dos cuerpos fueran iguales el instrumento no exige nada: pedir Vary donde no varia seria pedir ruido."
+  ],
+  "do": [
+    "Agregar la cabecera en la respuesta que de verdad varia.",
+    "Dejar los cuerpos como estan: la tecnica es declarativa."
+  ],
+  "dont": [
+    "Devolver siempre lo mismo para que deje de variar: eso apaga la funcionalidad, no la declara.",
+    "Editar las capturas a mano: se regeneran desde la app en cada corrida."
+  ],
+  "stop_if": [
+    "la respuesta no varia de verdad y el instrumento sale con exit 2"
+  ]
+}

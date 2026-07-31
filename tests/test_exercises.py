@@ -73,7 +73,23 @@ class CoherenciaTest(unittest.TestCase):
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
         return destino
 
+    def _preparar(self, base, spec):
+        """Corre el paso de preparacion, si el ejercicio declara uno.
+
+        Tiene que estar porque el gate lo corre: sin esto la prueba mediria una
+        secuencia distinta de la que se ejecuta de verdad, y los contratos que
+        derivan su artefacto del target —las respuestas HTTP que produce la
+        app— salian con exit 2 por medir capturas que todavia no existian.
+        """
+        preparar = spec.get('preparar')
+        if not preparar:
+            return
+        ruta = os.path.join(base, _nativo(preparar))
+        subprocess.run([sys.executable, os.path.basename(ruta)],
+                       cwd=os.path.dirname(ruta), capture_output=True, text=True)
+
     def _instrumento(self, base, spec):
+        self._preparar(base, spec)
         instrumento = spec['instrument']
         cmd = ([sys.executable, os.path.join(INSTRUMENTOS, instrumento['script'])]
                + list(instrumento.get('args', []))

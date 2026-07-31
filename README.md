@@ -16,15 +16,15 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cuatro fuentes, 315 nodos, 38 contratos ejecutables.
+Cuatro fuentes, 315 nodos, 43 contratos ejecutables.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
-| htmx ~ Documentation | 59 | 10,2% | **10,2%** | 5 | 0 |
-| **Total** | **311** | **92** | **75** | **68** | **38** |
+| htmx ~ Documentation | 59 | 10,2% | **10,2%** | 5 | 5 |
+| **Total** | **311** | **92** | **75** | **68** | **43** |
 
 La cuarta no es un libro: es **documentacion de referencia**, y esta para probar
 hasta donde llega el metodo. Cae al 10,2% por una razon distinta a la de Scrum —
@@ -365,7 +365,7 @@ formas, y solo una deja el oraculo en rojo:
 
 | Forma | Target | Oraculo sobre el seed |
 |---|---|---|
-| refactor | una funcion | verde: no cambia el comportamiento |
+| refactor | una funcion o una pagina | verde: no cambia el comportamiento |
 | cambio de interfaz | una firma | **rojo**: la tecnica cambia la firma |
 | nivel repo | el punto de entrada del proyecto | verde: la funcionalidad esta intacta |
 | multi-modulo | el archivo que cruza una capa | verde: la estructura no cambia el resultado |
@@ -373,6 +373,19 @@ formas, y solo una deja el oraculo en rojo:
 Los que agregan pruebas (cobertura, limites, anatomia) reparten distinto: **el
 oraculo esta sellado y el `target` es OTRO archivo de pruebas**, el unico que se
 puede tocar. Sin eso el contrato pediria editar lo que el mismo congela.
+
+Los de HTTP necesitaron un paso mas, declarado en el spec como `preparar`: se
+edita la app y se miden **las respuestas que produce**, asi que las capturas se
+regeneran desde el target en cada corrida. No es un atajo: si el target fueran
+las capturas, el ejercicio enseniaria a **falsificar la evidencia** en vez de
+arreglar la causa. Es el mismo motivo por el que las tres reglas de git no
+tienen ejercicio.
+
+Para una pagina, el comportamiento observable es su contenido, y ahi el oraculo
+tiene una obligacion extra: **no importa el instrumento**. Parsea con
+`html.parser` por su cuenta aunque `html_checks` ya tenga un parser, porque un
+oraculo que usa el parser del instrumento le da la razon por construccion — si
+el parser se equivoca, los dos se equivocan igual y nadie lo nota.
 
 ## Que falta, y por que
 

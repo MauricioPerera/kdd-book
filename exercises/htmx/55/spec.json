@@ -1,0 +1,56 @@
+{
+  "id": "55-politica-de-seguridad",
+  "node": "55",
+  "title": "CSP: declarar la politica de seguridad de contenido",
+  "description": "Devolver una Content-Security-Policy con las directivas exigidas.",
+  "intent": "Agregar a la respuesta la politica de seguridad con sus directivas.",
+  "signature": "def responder(ruta, cabeceras):",
+  "target": "proyecto/app.py",
+  "oracle": "proyecto/oracle_test.py",
+  "seed": "seed_app.py",
+  "preparar": "proyecto/preparar.py",
+  "kind": "nivel-repo",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "http_checks.py",
+    "args": [
+      "--rule",
+      "csp",
+      "--capturas",
+      "proyecto/capturas",
+      "--exige",
+      "default-src",
+      "--exige",
+      "connect-src"
+    ],
+    "threshold": "politica presente con default-src y connect-src"
+  },
+  "invariants": [
+    "Lo que la app devuelve no cambia: el oraculo pasa igual antes y despues.",
+    "El Vary que ya estaba sigue estando.",
+    "Toda respuesta HTML declara una politica con default-src y connect-src."
+  ],
+  "examples": [
+    "Respuesta HTML sin politica -> en rojo.",
+    "`default-src 'self'; connect-src 'self'` -> en verde.",
+    "Una politica vacia tambien es una CSP: por eso el contrato declara que directivas exige, en vez de pedir \"una CSP\"."
+  ],
+  "do": [
+    "Declarar la politica en la cabecera de la respuesta.",
+    "Incluir las dos directivas que el contrato exige."
+  ],
+  "dont": [
+    "Poner la politica solo en el <meta> de la pagina entera: el fragmento tambien es HTML y no la llevaria."
+  ],
+  "stop_if": [
+    "alguna directiva exigida rompe funcionalidad que el oraculo fija"
+  ]
+}

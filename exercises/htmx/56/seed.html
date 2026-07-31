@@ -1,0 +1,7 @@
+<!-- Punto de partida: el token vive en <body>, y con hx-boost eso no
+     se actualiza nunca. -->
+<body hx-headers='{"X-CSRF-TOKEN": "abc123"}' hx-boost="true">
+  <main id="zona">
+    <a href="/pedidos">Mis pedidos</a>
+  </main>
+</body>

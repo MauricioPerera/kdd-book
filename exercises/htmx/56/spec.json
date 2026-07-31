@@ -1,0 +1,51 @@
+{
+  "id": "56-token-csrf",
+  "node": "56",
+  "title": "CSRF: el token en un elemento que el swap reemplaza",
+  "description": "Mover el token CSRF fuera de <body>, que con hx-boost no se actualiza.",
+  "intent": "Poner el token CSRF en un elemento que el swap si reemplace.",
+  "signature": "<main id=\"zona\" hx-headers='{\"X-CSRF-TOKEN\": \"...\"}'>",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "html_checks.py",
+    "args": [
+      "--rule",
+      "csrf",
+      "--token",
+      "X-CSRF-TOKEN"
+    ],
+    "threshold": "el token viaja en un elemento que de verdad lo lleva"
+  },
+  "invariants": [
+    "Lo que la pagina muestra no cambia: el oraculo pasa igual antes y despues.",
+    "El token sigue siendo el mismo valor y sigue viajando una sola vez.",
+    "hx-boost sigue activo: la tecnica no consiste en apagarlo."
+  ],
+  "examples": [
+    "El token en `<body>` con hx-boost -> queda viejo tras el primer swap, en rojo.",
+    "El token en el `<main>` que el swap reemplaza -> en verde.",
+    "Un `<input type=\"hidden\">` con el token dentro del formulario tambien vale: la documentacion lo alienta."
+  ],
+  "do": [
+    "Poner el token donde el swap lo vuelva a escribir.",
+    "Dejar hx-boost como esta."
+  ],
+  "dont": [
+    "Sacar hx-boost para que el problema desaparezca: eso cambia el comportamiento, no aplica la tecnica."
+  ],
+  "stop_if": [
+    "ningun elemento que se reemplace puede llevar el token"
+  ]
+}

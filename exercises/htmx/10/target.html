@@ -1,0 +1,8 @@
+<!-- Solucion: el boton declara su indicador. -->
+<div id="panel">
+  <button hx-get="/reporte" hx-target="#salida" hx-indicator="#cargando">
+    Generar reporte
+  </button>
+  <img id="cargando" class="htmx-indicator" src="/spinner.gif" alt="">
+  <div id="salida"></div>
+</div>

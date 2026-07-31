@@ -39,18 +39,13 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
-# Van en un diccionario aparte a proposito. `SIN_EJERCICIO` dice "no se puede";
-# esto dice "no esta hecho", y son cosas distintas: mezclarlas convertiria el
-# inventario en una lista donde lo imposible y lo pendiente se ven igual, que es
-# justo lo que esta prueba existe para evitar. Lo pendiente se vacia trabajando;
-# lo imposible no.
-PENDIENTE = {
-    ('html_checks.py', 'progresivo'): 'falta el ejercicio: HTML con boton suelto -> envuelto en form',
-    ('html_checks.py', 'csrf'): 'falta el ejercicio: token en <body> con hx-boost -> en el elemento que se reemplaza',
-    ('html_checks.py', 'indicador'): 'falta el ejercicio: emisor sin indicador -> con hx-indicator',
-    ('http_checks.py', 'vary'): 'falta el ejercicio: capturas que varian sin declarar Vary',
-    ('http_checks.py', 'csp'): 'falta el ejercicio: respuesta HTML sin politica -> con las directivas',
-}
+# Vacio hoy: las cinco de htmx que estaban aca ya tienen ejercicio. Se conserva
+# el diccionario porque la distincion es el valor de la prueba. `SIN_EJERCICIO`
+# dice "no se puede" y no se vacia nunca: describe un limite de la forma de
+# contrato. Esto dice "no esta hecho" y se vacia trabajando. Mezclarlos
+# convertiria el inventario en una lista donde lo imposible y lo pendiente se
+# ven igual.
+PENDIENTE = {}
 
 
 def _alias_de(script):

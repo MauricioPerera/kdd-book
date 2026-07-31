@@ -1,0 +1,49 @@
+{
+  "id": "20-mejora-progresiva",
+  "node": "20",
+  "title": "Mejora progresiva: el boton funciona sin javascript",
+  "description": "Hacer que el emisor de la peticion siga sirviendo con javascript deshabilitado.",
+  "intent": "Envolver el boton en un formulario que funcione sin javascript.",
+  "signature": "<form action=\"/inscribir\" method=\"post\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "html_checks.py",
+    "args": [
+      "--rule",
+      "progresivo"
+    ],
+    "threshold": "todo emisor degrada sin javascript"
+  },
+  "invariants": [
+    "Lo que la pagina muestra no cambia: el oraculo pasa igual antes y despues.",
+    "El boton sigue emitiendo a /inscribir y sigue apuntando a #contenido.",
+    "Todo elemento que emite una peticion es un <a href> o un <form action>, o esta dentro de uno."
+  ],
+  "examples": [
+    "`<button hx-post=\"/inscribir\">` suelto -> sin javascript no hace nada, en rojo.",
+    "El mismo boton dentro de `<form action=\"/inscribir\" method=\"post\">` -> en verde.",
+    "`<div hx-boost=\"true\"><a href=\"/blog\">` -> en verde: es el ejemplo que la documentacion da como degradacion correcta."
+  ],
+  "do": [
+    "Envolver el emisor en el formulario que el navegador ya sabe enviar.",
+    "Repetir en el form el destino que el atributo htmx ya declaraba."
+  ],
+  "dont": [
+    "Quitar el atributo htmx: la mejora progresiva es sumar, no renunciar al ajax."
+  ],
+  "stop_if": [
+    "el emisor no tiene un destino que el navegador pueda usar sin javascript"
+  ]
+}

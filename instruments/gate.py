@@ -51,6 +51,26 @@ def main(argv=None):
         print('NO-VERIFICABLE: no se pudo leer {}: {}'.format(spec_path, exc))
         return 2
 
+    # 0. Preparacion opcional: derivar del target el artefacto que el
+    #    instrumento mide. Hace falta cuando lo que se edita y lo que se mide
+    #    no son el mismo archivo — en los contratos de HTTP se toca la app y se
+    #    miden las respuestas que produce. Es un paso de build, no un atajo: si
+    #    el target fuera la captura, el ejercicio enseniaria a falsificar la
+    #    evidencia en vez de arreglar la causa.
+    preparar = spec.get('preparar')
+    if preparar:
+        ruta = os.path.join(exercise, preparar.replace('/', os.sep))
+        if not os.path.isfile(ruta):
+            print('NO-VERIFICABLE: preparacion ausente: {}'.format(preparar))
+            return 2
+        result = _run([sys.executable, os.path.basename(ruta)],
+                      cwd=os.path.dirname(ruta))
+        if result.returncode != 0:
+            print('NO-VERIFICABLE: la preparacion fallo, no hay que medir')
+            print(result.stdout)
+            print(result.stderr)
+            return 2
+
     oracle = spec.get('oracle', 'oracle_test.py')
     oracle_abs = os.path.join(exercise, oracle.replace('/', os.sep))
     if not os.path.isfile(oracle_abs):
