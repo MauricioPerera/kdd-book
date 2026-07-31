@@ -46,7 +46,7 @@ class NoVerificable(Exception):
 
 
 class Elemento:
-    __slots__ = ('tag', 'attrs', 'padre', 'hijos', 'linea')
+    __slots__ = ('tag', 'attrs', 'padre', 'hijos', 'linea', 'texto')
 
     def __init__(self, tag, attrs, padre, linea):
         self.tag = tag
@@ -54,6 +54,13 @@ class Elemento:
         self.padre = padre
         self.hijos = []
         self.linea = linea
+        # Texto propio, sin el de los descendientes. Lo agrego `a11y_checks`,
+        # que necesita comparar la etiqueta VISIBLE de un control contra su
+        # nombre accesible; las tres reglas de este modulo solo miran atributos.
+        # Vive aca y no en un arbol aparte porque dos parsers de HTML en el
+        # mismo repositorio terminan discrepando, y ya paso una vez con la
+        # definicion de emisor.
+        self.texto = ''
 
     def ancestros(self):
         actual = self.padre
@@ -72,6 +79,18 @@ class Elemento:
 
     def clases(self):
         return (self.attrs.get('class') or '').split()
+
+    def texto_visible(self):
+        """El texto propio mas el de los descendientes, normalizado.
+
+        Se saltea `script` y `style`, cuyo contenido no lo ve nadie: contarlo
+        haria que un boton con un `<script>` adentro pareciera tener etiqueta.
+        """
+        if self.tag in ('script', 'style'):
+            return ''
+        partes = [self.texto]
+        partes.extend(h.texto_visible() for h in self.hijos)
+        return ' '.join(' '.join(partes).split())
 
     def __repr__(self):
         return '<{}>'.format(self.tag)
@@ -99,6 +118,10 @@ class _Arbol(html.parser.HTMLParser):
                         self.actual, self.getpos()[0])
         self.actual.hijos.append(nodo)
         self.todos.append(nodo)
+
+    def handle_data(self, data):
+        if data.strip():
+            self.actual.texto += ' ' + data
 
     def handle_endtag(self, tag):
         if tag in VACIOS:

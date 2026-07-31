@@ -346,7 +346,7 @@
         "autocomplete"
       ],
       "links": [],
-      "instrument": "a11y_checks: todo campo que pide datos del usuario declara su `autocomplete` con un token de la lista del propio criterio (sin implementar)",
+      "instrument": "a11y_checks.py --rule autocomplete",
       "threshold": "cero campos de datos personales sin token de autocomplete"
     },
     {
@@ -423,7 +423,7 @@
         "autoplay"
       ],
       "links": [],
-      "instrument": "a11y_checks: audio o video con `autoplay`, sin `muted` y sin `controls` (sin implementar)",
+      "instrument": "a11y_checks.py --rule autoplay",
       "threshold": "cero"
     },
     {
@@ -449,7 +449,7 @@
       "links": [
         "sc1-4-6"
       ],
-      "instrument": "a11y_checks: razon de contraste sobre los pares de color declarados (sin implementar, declarado)",
+      "instrument": "a11y_checks.py --rule contraste --min 4.5 --min-grande 3.0",
       "threshold": "4.5:1 para texto normal, 3:1 para texto grande",
       "body": "Junto con 1.4.6, 2.5.5 y 2.5.8 son los cuatro umbrales mas nitidos de los 87 —una razon de contraste, un area en pixeles— y los cuatro necesitan valores **renderizados** que el HTML no tiene. Es el mismo problema que resolvio `http_checks` sin salir a la red: el proyecto declara el artefacto medible. Que el umbral sea impecable no alcanza si lo que compara no esta al alcance."
     },
@@ -507,7 +507,7 @@
         "contrast enhanced"
       ],
       "links": [],
-      "instrument": "a11y_checks: razon de contraste sobre los pares de color declarados (sin implementar, declarado)",
+      "instrument": "a11y_checks.py --rule contraste --min 7.0 --min-grande 4.5",
       "threshold": "7:1 para texto normal, 4.5:1 para texto grande"
     },
     {
@@ -928,7 +928,7 @@
         "prefers-reduced-motion"
       ],
       "links": [],
-      "instrument": "a11y_checks: si la hoja de estilos declara animaciones o transiciones, tiene un bloque `prefers-reduced-motion: reduce` (sin implementar)",
+      "instrument": "a11y_checks.py --rule movimiento",
       "threshold": "cero animaciones de interaccion sin alternativa reducida"
     },
     {
@@ -968,7 +968,7 @@
         "skip link"
       ],
       "links": [],
-      "instrument": "a11y_checks: la pagina ofrece un salto de bloques (enlace a un ancla de contenido, o una region `main`) (sin implementar)",
+      "instrument": "a11y_checks.py --rule saltar",
       "threshold": "al menos un mecanismo de salto por pagina"
     },
     {
@@ -1258,7 +1258,7 @@
         "label in name"
       ],
       "links": [],
-      "instrument": "a11y_checks: el nombre accesible contiene el texto visible de la etiqueta (sin implementar)",
+      "instrument": "a11y_checks.py --rule etiquetaennombre",
       "threshold": "cero controles cuyo nombre accesible no contenga su etiqueta visible"
     },
     {
@@ -1298,7 +1298,7 @@
         "target size enhanced"
       ],
       "links": [],
-      "instrument": "a11y_checks: area de toque sobre las medidas declaradas (sin implementar, declarado)",
+      "instrument": "a11y_checks.py --rule toque --min 44",
       "threshold": "44 por 44 pixeles CSS"
     },
     {
@@ -1357,7 +1357,7 @@
       "links": [
         "sc2-5-5"
       ],
-      "instrument": "a11y_checks: area de toque sobre las medidas declaradas (sin implementar, declarado)",
+      "instrument": "a11y_checks.py --rule toque --min 24",
       "threshold": "24 por 24 pixeles CSS"
     },
     {
@@ -1413,7 +1413,7 @@
         "lang"
       ],
       "links": [],
-      "instrument": "a11y_checks: el elemento raiz declara `lang` con una etiqueta de idioma bien formada (sin implementar)",
+      "instrument": "a11y_checks.py --rule idioma",
       "threshold": "un lang valido por pagina"
     },
     {
@@ -1679,7 +1679,7 @@
         "label"
       ],
       "links": [],
-      "instrument": "a11y_checks: todo control de formulario tiene etiqueta asociada o nombre accesible (sin implementar)",
+      "instrument": "a11y_checks.py --rule etiqueta",
       "threshold": "cero controles sin etiqueta"
     },
     {
@@ -1870,7 +1870,7 @@
         "accessible name"
       ],
       "links": [],
-      "instrument": "a11y_checks: todo elemento con `role` de componente tiene nombre accesible, y los `aria-*` que usa existen para ese rol (sin implementar)",
+      "instrument": "a11y_checks.py --rule nombrerol",
       "threshold": "cero componentes sin nombre y cero aria invalido para el rol"
     },
     {

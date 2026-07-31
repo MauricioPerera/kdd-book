@@ -58,52 +58,39 @@ SECCIONES = [
 
 # Pila A: (instrumento, umbral). Doce de 87 criterios.
 #
-# Ninguno tiene instrumento escrito todavia: se nombra el que haria falta, igual
-# que la 53 de htmx antes de `template_checks` y los doce factores antes de
-# `entorno_checks`. `verification: instrumented` describe que clase de
-# verificacion pide la tecnica, no si ya esta escrita.
+# Diez reglas para doce criterios: `contraste` y `toque` sirven a dos cada una,
+# que es lo que pasa cuando el autor da el mismo umbral en dos niveles de
+# conformidad distintos (AA y AAA). El instrumento recibe el umbral por
+# argumento y el nodo lo declara: es el nodo el que dice que exige.
 #
-# Los cuatro con (declarado) necesitan valores renderizados que el HTML no
-# tiene, y el proyecto los declara — misma forma que las capturas de
-# `http_checks` y las capas de `arch_checks`.
+# Contraste y area de toque necesitan valores renderizados que el HTML no tiene.
+# El instrumento lee los estilos en linea, que si estan en el artefacto, y lo
+# que el proyecto declare con `--medidas` — misma forma que las capturas de
+# `http_checks`. Sin nada de eso, exit 2.
 A_NODES = {
-    19: ('a11y_checks: todo campo que pide datos del usuario declara su '
-         '`autocomplete` con un token de la lista del propio criterio '
-         '(sin implementar)',
+    19: ('a11y_checks.py --rule autocomplete',
          'cero campos de datos personales sin token de autocomplete'),
-    23: ('a11y_checks: audio o video con `autoplay`, sin `muted` y sin '
-         '`controls` (sin implementar)',
+    23: ('a11y_checks.py --rule autoplay',
          'cero'),
-    24: ('a11y_checks: razon de contraste sobre los pares de color declarados '
-         '(sin implementar, declarado)',
+    24: ('a11y_checks.py --rule contraste --min 4.5 --min-grande 3.0',
          '4.5:1 para texto normal, 3:1 para texto grande'),
-    27: ('a11y_checks: razon de contraste sobre los pares de color declarados '
-         '(sin implementar, declarado)',
+    27: ('a11y_checks.py --rule contraste --min 7.0 --min-grande 4.5',
          '7:1 para texto normal, 4.5:1 para texto grande'),
-    51: ('a11y_checks: si la hoja de estilos declara animaciones o transiciones, '
-         'tiene un bloque `prefers-reduced-motion: reduce` (sin implementar)',
+    51: ('a11y_checks.py --rule movimiento',
          'cero animaciones de interaccion sin alternativa reducida'),
-    53: ('a11y_checks: la pagina ofrece un salto de bloques (enlace a un ancla '
-         'de contenido, o una region `main`) (sin implementar)',
+    53: ('a11y_checks.py --rule saltar',
          'al menos un mecanismo de salto por pagina'),
-    69: ('a11y_checks: el nombre accesible contiene el texto visible de la '
-         'etiqueta (sin implementar)',
+    69: ('a11y_checks.py --rule etiquetaennombre',
          'cero controles cuyo nombre accesible no contenga su etiqueta visible'),
-    71: ('a11y_checks: area de toque sobre las medidas declaradas '
-         '(sin implementar, declarado)',
+    71: ('a11y_checks.py --rule toque --min 44',
          '44 por 44 pixeles CSS'),
-    74: ('a11y_checks: area de toque sobre las medidas declaradas '
-         '(sin implementar, declarado)',
+    74: ('a11y_checks.py --rule toque --min 24',
          '24 por 24 pixeles CSS'),
-    77: ('a11y_checks: el elemento raiz declara `lang` con una etiqueta de '
-         'idioma bien formada (sin implementar)',
+    77: ('a11y_checks.py --rule idioma',
          'un lang valido por pagina'),
-    92: ('a11y_checks: todo control de formulario tiene etiqueta asociada o '
-         'nombre accesible (sin implementar)',
+    92: ('a11y_checks.py --rule etiqueta',
          'cero controles sin etiqueta'),
-    103: ('a11y_checks: todo elemento con `role` de componente tiene nombre '
-          'accesible, y los `aria-*` que usa existen para ese rol '
-          '(sin implementar)',
+    103: ('a11y_checks.py --rule nombrerol',
           'cero componentes sin nombre y cero aria invalido para el rol'),
 }
 

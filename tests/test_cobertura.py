@@ -42,12 +42,42 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
-# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {}
+PENDIENTE = {
+    ('a11y_checks.py', 'autocomplete'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'un formulario que pide datos personales sin declarar su proposito'),
+    ('a11y_checks.py', 'autoplay'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'una pagina con un medio que arranca solo y sin controles'),
+    ('a11y_checks.py', 'contraste'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'una pagina con un par de colores que no llega al minimo'),
+    ('a11y_checks.py', 'etiqueta'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'un formulario con un control sin etiqueta'),
+    ('a11y_checks.py', 'etiquetaennombre'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'un control cuyo nombre accesible no contiene su etiqueta visible'),
+    ('a11y_checks.py', 'idioma'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'una pagina que no declara su idioma'),
+    ('a11y_checks.py', 'movimiento'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'una hoja con animaciones y sin alternativa reducida'),
+    ('a11y_checks.py', 'nombrerol'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'un componente con rol y sin nombre accesible'),
+    ('a11y_checks.py', 'saltar'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'una pagina sin enlace de salto ni region principal'),
+    ('a11y_checks.py', 'toque'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'un objetivo mas chico que el minimo'),
+}
 
 
 def _alias_de(script):
@@ -261,7 +291,7 @@ class CoberturaTest(unittest.TestCase):
         # sin que nadie comprobara que la regla que nombran existe.
         for modulo in ('checks', 'repo_checks', 'git_checks', 'arch_checks',
                        'mutation_checks', 'html_checks', 'http_checks',
-                       'template_checks', 'entorno_checks'):
+                       'template_checks', 'entorno_checks', 'a11y_checks'):
             registros[modulo + '.py'] = __import__(modulo)
         for script, regla in sorted(_instrumentos_ejercitados()):
             if not regla or script not in registros:

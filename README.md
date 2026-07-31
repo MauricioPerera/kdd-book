@@ -16,9 +16,9 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Seis fuentes, 431 nodos, 52 contratos ejecutables, 55 instrumentos en nueve
+Seis fuentes, 431 nodos, 52 contratos ejecutables, 65 instrumentos en diez
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 138 pruebas propias.
+`validate_test_commands` y las 173 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -26,9 +26,9 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
-| WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 0 | 0 |
+| WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 0 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **431** | **114** | **97** | **79** | **52** |
+| **Total** | **431** | **114** | **97** | **91** | **52** |
 
 Tres de las seis no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -424,7 +424,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-55 reglas en nueve familias. Que varias tecnicas compartan una no es un atajo: es
+65 reglas en diez familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -434,6 +434,7 @@ que preguntan lo mismo.
 | `arch_checks.py` | 6 | relaciones entre modulos | capas, instanciacion, ISP |
 | `git_checks.py` | 5 | el historial | cadencia de entregas, ramas sin integrar, identificador de release |
 | `entorno_checks.py` | 8 | la forma del proyecto | dependencias declaradas, config en el entorno, logs a stdout |
+| `a11y_checks.py` | 10 | el DOM y valores renderizados | idioma, etiquetas, contraste, area de toque |
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
 | `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
@@ -497,6 +498,24 @@ Tres decisiones que conviene tener a la vista:
   repo tambien encontro tres rojos legitimos —sin manejador de SIGTERM, sin
   puerto propio, sin manifiesto— que son correctos: esto es una biblioteca de
   instrumentos, no una app de doce factores.
+- **`a11y_checks` es la unica familia donde el verde de mas hace dano.** Diez
+  reglas para doce criterios: `contraste` y `toque` sirven a dos cada una, con
+  el umbral por argumento, porque el autor da el mismo mecanismo en dos niveles
+  de conformidad. Y su docstring dice lo que ninguna otra necesita decir tan
+  fuerte: **verde no es "la pagina es accesible", es "estos doce mecanismos
+  estan"**. Una herramienta de accesibilidad que da verde de mas convence de que
+  no hay nada que revisar, y quedan afuera 75 criterios que son tecnicas reales.
+  Reusa el arbol de `html_checks` en vez de construir otro, y para eso hubo que
+  agregarle texto a los elementos: comparar la etiqueta visible contra el nombre
+  accesible pide el texto, y las tres reglas de htmx solo miraban atributos. Dos
+  parsers de HTML en el mismo repositorio terminan discrepando — ya paso una vez
+  con la definicion de emisor de peticiones.
+  Correr las diez de una pasada destapo un defecto propio: `contraste` y `toque`
+  comparten `--min`, y 24 —que son pixeles— se leyo como una razon de contraste.
+  **21:1 es el maximo posible**, negro sobre blanco, asi que ese umbral no lo
+  cumple ninguna pagina: el instrumento se ponia rojo sobre paginas impecables
+  sin dar ninguna pista. Ahora sale con exit 2 y nombra la regla que el que lo
+  corrio probablemente queria.
 - **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
@@ -570,16 +589,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| WCAG sin instrumento | 12 | la fuente entro recien y ninguno esta escrito. Cuatro de los doce —contraste y area de toque— necesitan ademas que el proyecto declare valores renderizados, como `http_checks` con las capturas |
+| `a11y_checks` sin ejercicio | 10 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Solo la primera es un instrumento que falte.** Las seis medibles de htmx y las
-diez de los doce factores tienen instrumento, y todas las reglas que admiten la
-forma de ejercicio lo tienen; las doce de WCAG entraron con la fuente y se
-declaran sin escribir. Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Ninguna es un instrumento que falte.** Las seis medibles de htmx, las diez de
+los doce factores y las doce de WCAG tienen instrumento. Lo unico pendiente son
+los diez ejercicios de accesibilidad; las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -593,11 +611,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Doce suites, 138 pruebas, y cada suite existe por un error concreto que ya paso.
+Trece suites, 173 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 52 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
