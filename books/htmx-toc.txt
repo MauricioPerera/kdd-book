@@ -1,0 +1,59 @@
+  1| H2 | p1   | htmx in a Nutshell
+  2| H2 | p2   | 1.x to 2.x Migration Guide
+  3| H2 | p2   | Installing
+  4| H3 | p2   | Via A CDN (e.g. jsDelivr)
+  5| H3 | p3   | Download a copy
+  6| H3 | p3   | npm
+  7| H3 | p3   | Webpack
+  8| H2 | p4   | AJAX
+  9| H3 | p4   | Triggering Requests
+ 10| H3 | p7   | Request Indicators
+ 11| H3 | p9   | Targets
+ 12| H3 | p10  | Swapping
+ 13| H3 | p13  | Synchronization
+ 14| H3 | p14  | CSS Transitions
+ 15| H3 | p15  | Out of Band Swaps
+ 16| H3 | p16  | Parameters
+ 17| H3 | p17  | Confirming Requests
+ 18| H2 | p18  | Attribute Inheritance
+ 19| H2 | p19  | Boosting
+ 20| H3 | p19  | Progressive Enhancement
+ 21| H2 | p21  | Web Sockets & SSE
+ 22| H2 | p21  | History Support
+ 23| H3 | p22  | Specifying History Snapshot Element
+ 24| H3 | p22  | Undoing DOM Mutations By 3rd Party Libraries
+ 25| H3 | p23  | Disabling History Snapshots
+ 26| H2 | p23  | Requests & Responses
+ 27| H3 | p24  | Configuring Response Handling
+ 28| H3 | p26  | CORS
+ 29| H3 | p26  | Request Headers
+ 30| H3 | p27  | Response Headers
+ 31| H3 | p28  | Request Order of Operations
+ 32| H2 | p29  | Validation
+ 33| H3 | p30  | Validation Example
+ 34| H2 | p30  | Animations
+ 35| H2 | p30  | Extensions
+ 36| H3 | p30  | Core Extensions
+ 37| H3 | p31  | Installing Extensions
+ 38| H3 | p32  | Enabling Extensions
+ 39| H3 | p33  | Creating Extensions
+ 40| H2 | p33  | Events & Logging
+ 41| H3 | p33  | Initialize A 3rd Party Library With Events
+ 42| H3 | p34  | Configure a Request With Events
+ 43| H3 | p34  | Modifying Swapping Behavior With Events
+ 44| H3 | p35  | Event Naming
+ 45| H3 | p35  | Logging
+ 46| H2 | p35  | Debugging
+ 47| H3 | p36  | Creating Demos
+ 48| H2 | p37  | Scripting
+ 49| H3 | p38  | The hx-on* Attributes
+ 50| H3 | p40  | 3rd Party Javascript
+ 51| H2 | p42  | Caching
+ 52| H2 | p43  | Security
+ 53| H3 | p43  | Rule 1: Escape All User Content
+ 54| H3 | p44  | htmx Security Tools
+ 55| H3 | p45  | CSP Options
+ 56| H3 | p46  | CSRF Prevention
+ 57| H2 | p47  | Configuring htmx
+ 58| H2 | p52  | Conclusion
+ 59| H2 | p52  | haiku

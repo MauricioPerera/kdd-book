@@ -73,7 +73,7 @@ def _reglas_disponibles():
     sys.path.insert(0, INSTRUMENTOS)
     out = []
     for modulo in ('checks', 'repo_checks', 'arch_checks', 'git_checks',
-                   'mutation_checks'):
+                   'html_checks', 'http_checks', 'mutation_checks'):
         try:
             mod = __import__(modulo)
         except ImportError:

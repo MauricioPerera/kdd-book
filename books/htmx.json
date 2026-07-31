@@ -1,0 +1,1084 @@
+{
+  "source": {
+    "slug": "htmx",
+    "title": "htmx ~ Documentation",
+    "author": "Big Sky Software",
+    "file": "htmx.org/docs (PDF, 52 paginas)",
+    "pages": 52,
+    "extracted_with": "pymupdf (tamano de fuente y geometria)",
+    "tags": [
+      "fuente",
+      "documentacion",
+      "htmx"
+    ],
+    "corpus": "Los 59 titulos de seccion del documento (H2 y H3), extraidos por tamano de fuente porque el PDF no trae marcadores. CORPUS MAS DEBIL QUE EL DE LOS TRES LIBROS: es documentacion de referencia, describe una API y no cataloga tecnicas, asi que casi la mitad cae en pila C por definicion del genero."
+  },
+  "nodes": [
+    {
+      "id": "01",
+      "title": "htmx in a Nutshell",
+      "description": "htmx in a Nutshell (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 1, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "02",
+      "title": "1.x to 2.x Migration Guide",
+      "description": "1.x to 2.x Migration Guide (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 2, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "03",
+      "title": "Installing",
+      "description": "Installing (seccion: instalacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "instalacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 2, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "04",
+      "title": "Via A CDN (e.g. jsDelivr)",
+      "description": "Via A CDN (e.g. jsDelivr) (seccion: instalacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "instalacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 2, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "05",
+      "title": "Download a copy",
+      "description": "Download a copy (seccion: instalacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "instalacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 3, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "06",
+      "title": "npm",
+      "description": "npm (seccion: instalacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "instalacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 3, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "07",
+      "title": "Webpack",
+      "description": "Webpack (seccion: instalacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "instalacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 3, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "08",
+      "title": "AJAX",
+      "description": "AJAX (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 4, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "09",
+      "title": "Triggering Requests",
+      "description": "Triggering Requests (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 4, H3",
+      "alias": [
+        "hx-trigger",
+        "triggering requests"
+      ],
+      "links": []
+    },
+    {
+      "id": "10",
+      "title": "Request Indicators",
+      "description": "Request Indicators (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 7, H3",
+      "alias": [
+        "indicador de carga",
+        "request indicator",
+        "loading indicator"
+      ],
+      "links": [],
+      "instrument": "html_checks.py --rule indicador",
+      "threshold": "todo emisor de peticion con indicador en alcance"
+    },
+    {
+      "id": "11",
+      "title": "Targets",
+      "description": "Targets (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 9, H3",
+      "alias": [
+        "hx-target",
+        "targeting"
+      ],
+      "links": []
+    },
+    {
+      "id": "12",
+      "title": "Swapping",
+      "description": "Swapping (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 10, H3",
+      "alias": [
+        "hx-swap",
+        "swapping"
+      ],
+      "links": [],
+      "why_not": "elegir la estrategia de swap correcta es un juicio sobre la interfaz, no un umbral"
+    },
+    {
+      "id": "13",
+      "title": "Synchronization",
+      "description": "Synchronization (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 13, H3",
+      "alias": [
+        "hx-sync",
+        "request synchronization"
+      ],
+      "links": []
+    },
+    {
+      "id": "14",
+      "title": "CSS Transitions",
+      "description": "CSS Transitions (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 14, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "15",
+      "title": "Out of Band Swaps",
+      "description": "Out of Band Swaps (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 15, H3",
+      "alias": [
+        "out of band swap",
+        "hx-swap-oob"
+      ],
+      "links": []
+    },
+    {
+      "id": "16",
+      "title": "Parameters",
+      "description": "Parameters (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 16, H3",
+      "alias": [
+        "hx-params",
+        "request parameters"
+      ],
+      "links": []
+    },
+    {
+      "id": "17",
+      "title": "Confirming Requests",
+      "description": "Confirming Requests (seccion: ajax).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "ajax",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 17, H3",
+      "alias": [
+        "hx-confirm",
+        "confirmation"
+      ],
+      "links": []
+    },
+    {
+      "id": "18",
+      "title": "Attribute Inheritance",
+      "description": "Attribute Inheritance (seccion: herencia de atributos).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "herencia-de-atributos",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 18, H2",
+      "alias": [
+        "herencia de atributos",
+        "attribute inheritance",
+        "hx-disinherit"
+      ],
+      "links": [
+        "codigo-limpio/g35"
+      ],
+      "why_not": "que atributo conviene heredar y cual cortar depende del diseno de la pagina",
+      "body": "La herencia de atributos de htmx es la misma idea que G35 de Codigo Limpio (\"mantener los datos configurables en los niveles superiores\"): declarar arriba y heredar hacia abajo. Martin la deja en pila B porque que dato conviene subir es un juicio, y aca pasa lo mismo con que atributo conviene heredar."
+    },
+    {
+      "id": "19",
+      "title": "Boosting",
+      "description": "Boosting (seccion: boosting).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "boosting",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 19, H2",
+      "alias": [
+        "hx-boost",
+        "boosting"
+      ],
+      "links": [],
+      "why_not": "usar hx-boost o no es una decision de arquitectura, no una propiedad medible"
+    },
+    {
+      "id": "20",
+      "title": "Progressive Enhancement",
+      "description": "Progressive Enhancement (seccion: boosting).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "boosting",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 19, H3",
+      "alias": [
+        "mejora progresiva",
+        "progressive enhancement",
+        "graceful degradation"
+      ],
+      "links": [],
+      "instrument": "html_checks.py --rule progresivo",
+      "threshold": "todo emisor funciona sin javascript"
+    },
+    {
+      "id": "21",
+      "title": "Web Sockets & SSE",
+      "description": "Web Sockets & SSE (seccion: websockets y sse).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "websockets-y-sse",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 21, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "22",
+      "title": "History Support",
+      "description": "History Support (seccion: historial).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "historial",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 21, H2",
+      "alias": [
+        "soporte de historial",
+        "history support",
+        "hx-push-url"
+      ],
+      "links": []
+    },
+    {
+      "id": "23",
+      "title": "Specifying History Snapshot Element",
+      "description": "Specifying History Snapshot Element (seccion: historial).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "historial",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 22, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "24",
+      "title": "Undoing DOM Mutations By 3rd Party Libraries",
+      "description": "Undoing DOM Mutations By 3rd Party Libraries (seccion: historial).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "historial",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 22, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "25",
+      "title": "Disabling History Snapshots",
+      "description": "Disabling History Snapshots (seccion: historial).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "historial",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 23, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "26",
+      "title": "Requests & Responses",
+      "description": "Requests & Responses (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 23, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "27",
+      "title": "Configuring Response Handling",
+      "description": "Configuring Response Handling (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 24, H3",
+      "alias": [
+        "manejo de respuestas",
+        "response handling"
+      ],
+      "links": []
+    },
+    {
+      "id": "28",
+      "title": "CORS",
+      "description": "CORS (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 26, H3",
+      "alias": [
+        "CORS",
+        "cross origin"
+      ],
+      "links": []
+    },
+    {
+      "id": "29",
+      "title": "Request Headers",
+      "description": "Request Headers (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 26, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "30",
+      "title": "Response Headers",
+      "description": "Response Headers (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 27, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "31",
+      "title": "Request Order of Operations",
+      "description": "Request Order of Operations (seccion: peticiones y respuestas).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "peticiones-y-respuestas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 28, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "32",
+      "title": "Validation",
+      "description": "Validation (seccion: validacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "validacion",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 29, H2",
+      "alias": [
+        "validacion",
+        "validation"
+      ],
+      "links": []
+    },
+    {
+      "id": "33",
+      "title": "Validation Example",
+      "description": "Validation Example (seccion: validacion).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "validacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 30, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "34",
+      "title": "Animations",
+      "description": "Animations (seccion: animaciones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "animaciones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 30, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "35",
+      "title": "Extensions",
+      "description": "Extensions (seccion: extensiones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "extensiones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 30, H2",
+      "alias": [],
+      "links": [
+        "arquitectura-java/11"
+      ],
+      "body": "El mecanismo de extensiones es OCP aplicado: se agrega comportamiento sin tocar el nucleo. Caules lo deja medible porque lo operacionaliza como \"agregar una funcionalidad no debe obligar a tocar el controlador\"; htmx describe el mecanismo pero no da con que medirlo."
+    },
+    {
+      "id": "36",
+      "title": "Core Extensions",
+      "description": "Core Extensions (seccion: extensiones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "extensiones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 30, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "37",
+      "title": "Installing Extensions",
+      "description": "Installing Extensions (seccion: extensiones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "extensiones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 31, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "38",
+      "title": "Enabling Extensions",
+      "description": "Enabling Extensions (seccion: extensiones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "extensiones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 32, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "39",
+      "title": "Creating Extensions",
+      "description": "Creating Extensions (seccion: extensiones).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "extensiones",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 33, H3",
+      "alias": [],
+      "links": [
+        "35"
+      ]
+    },
+    {
+      "id": "40",
+      "title": "Events & Logging",
+      "description": "Events & Logging (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 33, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "41",
+      "title": "Initialize A 3rd Party Library With Events",
+      "description": "Initialize A 3rd Party Library With Events (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 33, H3",
+      "alias": [
+        "inicializar biblioteca de terceros",
+        "third party init"
+      ],
+      "links": []
+    },
+    {
+      "id": "42",
+      "title": "Configure a Request With Events",
+      "description": "Configure a Request With Events (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 34, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "43",
+      "title": "Modifying Swapping Behavior With Events",
+      "description": "Modifying Swapping Behavior With Events (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 34, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "44",
+      "title": "Event Naming",
+      "description": "Event Naming (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 35, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "45",
+      "title": "Logging",
+      "description": "Logging (seccion: eventos y logging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "eventos-y-logging",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 35, H3",
+      "alias": [
+        "logging"
+      ],
+      "links": []
+    },
+    {
+      "id": "46",
+      "title": "Debugging",
+      "description": "Debugging (seccion: debugging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "debugging",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 35, H2",
+      "alias": [
+        "debugging"
+      ],
+      "links": []
+    },
+    {
+      "id": "47",
+      "title": "Creating Demos",
+      "description": "Creating Demos (seccion: debugging).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "debugging",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 36, H3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "48",
+      "title": "Scripting",
+      "description": "Scripting (seccion: scripting).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "scripting",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 37, H2",
+      "alias": [
+        "scripting",
+        "hyperscript"
+      ],
+      "links": []
+    },
+    {
+      "id": "49",
+      "title": "The hx-on* Attributes",
+      "description": "The hx-on* Attributes (seccion: scripting).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "scripting",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 38, H3",
+      "alias": [
+        "hx-on",
+        "inline handlers"
+      ],
+      "links": []
+    },
+    {
+      "id": "50",
+      "title": "3rd Party Javascript",
+      "description": "3rd Party Javascript (seccion: scripting).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "scripting",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 40, H3",
+      "alias": [
+        "javascript de terceros",
+        "third party javascript"
+      ],
+      "links": []
+    },
+    {
+      "id": "51",
+      "title": "Caching",
+      "description": "Caching (seccion: caching).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "caching",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 42, H2",
+      "alias": [
+        "cacheo",
+        "caching",
+        "Vary"
+      ],
+      "links": [
+        "55"
+      ],
+      "instrument": "http_checks.py --rule vary",
+      "threshold": "Vary: HX-Request cuando la respuesta varia por esa cabecera"
+    },
+    {
+      "id": "52",
+      "title": "Security",
+      "description": "Security (seccion: seguridad).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "seguridad",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 43, H2",
+      "alias": [],
+      "links": [
+        "53",
+        "54",
+        "55",
+        "56"
+      ]
+    },
+    {
+      "id": "53",
+      "title": "Rule 1: Escape All User Content",
+      "description": "Rule 1: Escape All User Content (seccion: seguridad).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "seguridad",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 43, H3",
+      "alias": [
+        "escapar contenido del usuario",
+        "escape user content",
+        "XSS"
+      ],
+      "links": [],
+      "instrument": "plantillas: interpolacion sin escapar (sin implementar: el marcador depende del motor y el proyecto tendria que declararlo)",
+      "threshold": "cero interpolaciones sin escapar",
+      "body": "Es la unica de las seis medibles que todavia no tiene instrumento. Lee plantillas, y el marcador de interpolacion sin escapar cambia con cada motor, asi que el proyecto tendria que declarar cual usa — igual que declara sus capas para `arch_checks`."
+    },
+    {
+      "id": "54",
+      "title": "htmx Security Tools",
+      "description": "htmx Security Tools (seccion: seguridad).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "seguridad",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "pagina 44, H3",
+      "alias": [
+        "hx-disable",
+        "security tools"
+      ],
+      "links": [],
+      "why_not": "las herramientas existen y son medibles una por una; que combinacion hace falta es juicio"
+    },
+    {
+      "id": "55",
+      "title": "CSP Options",
+      "description": "CSP Options (seccion: seguridad).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "seguridad",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 45, H3",
+      "alias": [
+        "CSP",
+        "content security policy"
+      ],
+      "links": [
+        "56"
+      ],
+      "instrument": "http_checks.py --rule csp",
+      "threshold": "politica presente con las directivas declaradas"
+    },
+    {
+      "id": "56",
+      "title": "CSRF Prevention",
+      "description": "CSRF Prevention (seccion: seguridad).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "seguridad",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "pagina 46, H3",
+      "alias": [
+        "CSRF",
+        "cross site request forgery"
+      ],
+      "links": [],
+      "instrument": "html_checks.py --rule csrf",
+      "threshold": "el token viaja en un elemento que de verdad lo lleva"
+    },
+    {
+      "id": "57",
+      "title": "Configuring htmx",
+      "description": "Configuring htmx (seccion: cierre).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "cierre",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 47, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "58",
+      "title": "Conclusion",
+      "description": "Conclusion (seccion: cierre).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "cierre",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 52, H2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "59",
+      "title": "haiku",
+      "description": "haiku (seccion: cierre).",
+      "type": "Concept",
+      "tags": [
+        "htmx",
+        "cierre",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "pagina 52, H2",
+      "alias": [],
+      "links": []
+    }
+  ]
+}

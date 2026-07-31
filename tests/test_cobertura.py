@@ -18,7 +18,7 @@ import unittest
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java')
+LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
@@ -35,6 +35,21 @@ SIN_EJERCICIO = {
     ('git_checks.py', 'cadencia'): 'el arreglo es marcar una entrega, no editar un archivo',
     ('git_checks.py', 'repounico'): 'el arreglo es integrar una rama, no editar un archivo',
     ('git_checks.py', 'tddorden'): 'el arreglo es el orden de los commits, no el contenido de un archivo',
+}
+
+# Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
+#
+# Van en un diccionario aparte a proposito. `SIN_EJERCICIO` dice "no se puede";
+# esto dice "no esta hecho", y son cosas distintas: mezclarlas convertiria el
+# inventario en una lista donde lo imposible y lo pendiente se ven igual, que es
+# justo lo que esta prueba existe para evitar. Lo pendiente se vacia trabajando;
+# lo imposible no.
+PENDIENTE = {
+    ('html_checks.py', 'progresivo'): 'falta el ejercicio: HTML con boton suelto -> envuelto en form',
+    ('html_checks.py', 'csrf'): 'falta el ejercicio: token en <body> con hx-boost -> en el elemento que se reemplaza',
+    ('html_checks.py', 'indicador'): 'falta el ejercicio: emisor sin indicador -> con hx-indicator',
+    ('http_checks.py', 'vary'): 'falta el ejercicio: capturas que varian sin declarar Vary',
+    ('http_checks.py', 'csp'): 'falta el ejercicio: respuesta HTML sin politica -> con las directivas',
 }
 
 
@@ -190,15 +205,26 @@ class CoberturaTest(unittest.TestCase):
                       for _libro, _nodo, script, regla in _tecnicas_con_script()
                       if (script, regla) not in ejercitados}
         self.assertEqual(
-            sin_cubrir, set(SIN_EJERCICIO),
+            sin_cubrir, set(SIN_EJERCICIO) | set(PENDIENTE),
             'la cobertura de ejercicios cambio: hay instrumentos sin ejercicio '
-            'que no estan declarados en SIN_EJERCICIO, o excepciones declaradas '
-            'que ya no hacen falta')
+            'que no estan declarados ni en SIN_EJERCICIO ni en PENDIENTE, o '
+            'declaraciones que ya no hacen falta')
 
     def test_cada_excepcion_declara_su_motivo(self):
-        for clave, motivo in SIN_EJERCICIO.items():
+        for clave, motivo in list(SIN_EJERCICIO.items()) + list(PENDIENTE.items()):
             self.assertTrue(motivo and len(motivo) > 20,
                             'la excepcion {} no explica por que'.format(clave))
+
+    def test_lo_imposible_y_lo_pendiente_no_se_mezclan(self):
+        """Un instrumento no puede estar en las dos listas a la vez.
+
+        La distincion es el valor de la prueba: `SIN_EJERCICIO` no se vacia
+        nunca porque describe un limite de la forma de contrato; `PENDIENTE` se
+        vacia trabajando. Si un mismo instrumento cayera en las dos, dejaria de
+        saberse cual es cual.
+        """
+        self.assertEqual(set(SIN_EJERCICIO) & set(PENDIENTE), set(),
+                         'un instrumento esta declarado imposible y pendiente a la vez')
 
     def test_los_instrumentos_declarados_existen(self):
         """Un nodo que nombra un script inexistente promete lo que no tiene."""

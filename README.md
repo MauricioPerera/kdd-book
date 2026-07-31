@@ -16,17 +16,23 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Tres libros, 255 nodos, 38 contratos ejecutables.
+Cuatro fuentes, 315 nodos, 38 contratos ejecutables.
 
-| Libro | items | contractable | `instrumented` | con script | ejercicios |
+| Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
-| **Total** | **252** | **86** | **69** | **63** | **38** |
+| htmx ~ Documentation | 59 | 10,2% | **10,2%** | 5 | 0 |
+| **Total** | **311** | **92** | **75** | **68** | **38** |
 
-Ademas: 17 tecnicas `proxy`, 70 en pila B (tecnica real sin propiedad medible)
-y 96 en pila C (conocimiento). 17 enlaces cruzan de un libro a otro.
+La cuarta no es un libro: es **documentacion de referencia**, y esta para probar
+hasta donde llega el metodo. Cae al 10,2% por una razon distinta a la de Scrum —
+no habla de personas, habla de codigo— pero **describir una API no es prescribir
+una tecnica**, y por eso casi la mitad cae en pila C por definicion del genero.
+
+Ademas: 17 tecnicas `proxy`, 95 en pila B (tecnica real sin propiedad medible)
+y 124 en pila C (conocimiento). 19 enlaces cruzan de una fuente a otra.
 
 **La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
 diferencia es si el instrumento lee el artefacto del que trata la tecnica
@@ -44,8 +50,12 @@ tecnica, el porcentaje seria una opinion.
 Lo que no es tecnica **se cuenta igual**, en pila C. Descartar las tecnologias
 (HTML, JSP, Hibernate) o los bullets de contexto inflaria el resultado.
 
-Una advertencia que viaja con su libro: **Arquitectura Java tiene corpus mas
-debil**. Es un tutorial progresivo sin lista cerrada de conclusiones, y sus 33
+Dos advertencias que viajan con su fuente. **htmx es el corpus mas debil de los
+cuatro**: documentacion de referencia, cuyos 59 items son titulos de seccion
+extraidos del PDF por tamano de fuente porque no traia marcadores. Es estructura
+del autor, si, pero de un documento cuyo proposito no es enumerar tecnicas.
+
+**Arquitectura Java tiene corpus mas debil** que los otros dos libros. Es un tutorial progresivo sin lista cerrada de conclusiones, y sus 33
 items salieron de titulos de capitulo identificados por el triaje. n es menor y
 las barras de error mas anchas. Esta dicho tambien en su nodo de procedencia,
 no solo aca.
@@ -96,7 +106,22 @@ patron y no una anecdota. Y solo se puede afirmar con los dos nodos a la vista:
 DRY aparece en los tres libros y los tres autores la operacionalizan: los tres
 nodos son contractables y comparten instrumento.
 
-### 3. Los principios de arquitectura son tan medibles como las heuristicas de codigo
+### 3. El metodo transfiere; los instrumentos no
+
+Probar el pipeline sobre documentacion de htmx dio 10,2% medible, y las seis
+tecnicas medibles resultaron leer **HTML, HTTP o plantillas**. Ninguna de las 39
+reglas que habia servia: todas parsean AST de Python o corren comandos.
+
+El triaje, el criterio de pila, la regla de ruteo por seccion y la forma del
+contrato funcionaron igual. Lo que no transfiere es **la capa de medicion, que
+esta atada al lenguaje del artefacto**. De ahi salieron `html_checks` y
+`http_checks`, y queda una sin instrumento porque lee plantillas y el marcador
+cambia con cada motor.
+
+Era parcialmente visible con J1 y J2, que quedaron afuera por ser de Java. Aca
+el efecto fue total, porque cambio el artefacto entero.
+
+### 4. Los principios de arquitectura son tan medibles como las heuristicas de codigo
 
 Prediccion razonable para Arquitectura Java: mismo artefacto que Codigo Limpio
 pero tecnicas mas semanticas, o sea resultado intermedio. Salio 45,5%, casi
