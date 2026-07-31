@@ -16,7 +16,9 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cuatro fuentes, 315 nodos, 44 contratos ejecutables.
+Cuatro fuentes, 311 nodos, 44 contratos ejecutables, 45 instrumentos en ocho
+familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
+`validate_test_commands` y las 107 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -24,7 +26,7 @@ Cuatro fuentes, 315 nodos, 44 contratos ejecutables.
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **311** | **92** | **75** | **68** | **44** |
+| **Total** | **311** | **92** | **75** | **69** | **44** |
 
 La cuarta no es un libro: es **documentacion de referencia**, y esta para probar
 hasta donde llega el metodo. Cae al 10,2% por una razon distinta a la de Scrum —
@@ -170,22 +172,23 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **150 de las 252**, y el reparto no es casual:
+Lo tienen **176 de las 311**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **86 de 86** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 61 de 70 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 96 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **92 de 92** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 81 de 95 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 124 | no aplica: son temas, tecnologias y pasos de tutorial |
 
-Las 9 de pila B que quedan afuera son subsecciones sin nombre propio —tres
-titulos repetidos "Funciones y responsabilidades", dos sub-pasos del Planning
-Poker, dos secciones de "cuando y como"—. **Inventarles un nombre canonico
-seria meter ruido en la busqueda**, que es lo contrario de lo que el alias
-existe para hacer.
+Las 14 de pila B que quedan afuera son subsecciones sin nombre propio: nueve de
+Scrum y XP —tres titulos repetidos "Funciones y responsabilidades", dos
+sub-pasos del Planning Poker, dos secciones de "cuando y como"— y cinco de htmx
+que nombran una combinacion de atributos y no una tecnica ("Configure a Request
+With Events"). **Inventarles un nombre canonico seria meter ruido en la
+busqueda**, que es lo contrario de lo que el alias existe para hacer.
 
 El alias es el handle que cruza idiomas **y libros**: `buscar DRY` devuelve las
-cinco entradas de los tres libros, todas apuntando al mismo instrumento.
+cinco entradas de los tres libros de codigo, todas apuntando al mismo instrumento.
 
 ## La memoria portable
 
@@ -194,17 +197,20 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 252 tecnicas, 41 instrumentos
+python memoria.py exportar          # -> memoria.json: 311 tecnicas, 46 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **364 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **294 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
-PDF y sin el repo, `aplicar` corre 26 instrumentos sobre un archivo cualquiera y
-reporta 4 en rojo con la tecnica que senala cada uno.
+PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
+cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
+—sobre una funcion de ejemplo, 6: cadena de Demeter, variable lejos de su uso,
+import sin usar, numeros magicos, expresion de limite repetida y exceso de
+parametros—.
 
 Cada tecnica exportada lleva su pila, su instrumento y su umbral, sus enlaces
 —incluidos los que cruzan de libro—, su ubicacion en la fuente, su nombre
@@ -224,7 +230,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 318 entradas -> 252 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 377 entradas -> 311 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -239,8 +245,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 252 + 66 | **252 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 252 + 66 | 318 tecnicas | 0 |
+| ids estables (`g36`) | 311 + 66 | **311 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 311 + 66 | 377 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -314,7 +320,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-44 reglas en siete familias. Que varias tecnicas compartan una no es un atajo: es
+45 reglas en ocho familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -429,6 +435,13 @@ ya no hace falta.
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
+**Ninguna de las cuatro es un instrumento que falte.** Las seis tecnicas
+medibles de htmx —las tres de HTML, las dos de HTTP y la de plantillas— tienen
+instrumento y ejercicio; lo que queda son limites declarados: un artefacto que
+este repositorio no tiene, una forma de contrato que no aplica, una prohibicion
+del proyecto y un consejo que en Python no se puede seguir sin tergiversar al
+autor.
+
 Ninguna razon es "no se puede medir". La tentacion con las de git seria darle al
 ejercicio un script que fabrique el historial y poner **ese** script como target:
 seria enseñar a fabricar un historial que se vea bien, o sea lo contrario de la
@@ -436,7 +449,7 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Once suites de prueba, y cada una existe por un error concreto que ya paso.
+Once suites, 107 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
