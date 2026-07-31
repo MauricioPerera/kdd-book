@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cinco fuentes, 327 nodos, 52 contratos ejecutables, 55 instrumentos en nueve
+Seis fuentes, 431 nodos, 52 contratos ejecutables, 55 instrumentos en nueve
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 138 pruebas propias.
 
@@ -26,17 +26,18 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
+| WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 0 | 0 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **327** | **102** | **85** | **79** | **52** |
+| **Total** | **431** | **114** | **97** | **79** | **52** |
 
-Dos de las cinco no son libros, y estan para probar hasta donde llega el metodo.
+Tres de las seis no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
 habla de personas, habla de codigo— pero **describir una API no es prescribir
 una tecnica**, y por eso casi la mitad cae en pila C por definicion del genero.
 
 Los doce factores van al otro extremo por el motivo simetrico: **un manifiesto
 es prescripcion pura**, sin una linea de relleno, y da el porcentaje mas alto de
-las cinco. Se sumo con una prediccion hecha antes de triajar y escrita en el
+las seis. Se sumo con una prediccion hecha antes de triajar y escrita en el
 script de build: si la contractabilidad la decide que el autor haya
 operacionalizado la tecnica, un documento asi tiene que quedar por encima de los
 libros de codigo. Quedo. Sobre los doce factores solos, sin el preambulo, es
@@ -47,10 +48,19 @@ pagina con titulo, bajada y sin subsecciones, comprobado pagina por pagina. Con
 n=16 cada item vale 6,3 puntos, asi que el porcentaje es real pero la precision
 implicita no.
 
-Ademas: 17 tecnicas `proxy`, 97 en pila B (tecnica real sin propiedad medible)
-y 128 en pila C (conocimiento). 23 enlaces cruzan de una fuente a otra.
+**WCAG entro para refutar, no para confirmar**, y es la fuente que corrigio el
+hallazgo 2. Sus criterios se llaman literalmente *"testable success criteria"*:
+estan operacionalizados al maximo por diseno, con umbrales numericos explicitos
+—4.5:1 de contraste, 24 por 24 pixeles de area de toque— y su artefacto es HTML,
+que este repositorio ya sabe leer. Si "el autor lo operacionalizo" fuera toda la
+explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
+el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
+refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Hay 102 tecnicas en pila A y 52 ejercicios, y la diferencia no es un pendiente:
+Ademas: 17 tecnicas `proxy`, 171 en pila B (tecnica real sin propiedad medible)
+y 146 en pila C (conocimiento). 25 enlaces cruzan de una fuente a otra.
+
+Hay 114 tecnicas en pila A y 52 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -113,9 +123,13 @@ lo que ordena la distribucion **no es el dominio sino el genero**. Un manifiesto
 explicacion), que queda arriba de un libro de proceso (prescripcion mas
 personas), que queda arriba de documentacion de referencia (descripcion de una
 API). El dominio de los doce factores es infraestructura, tan lejos del AST como
-Scrum, y sin embargo es el mas contractable de los cinco.
+Scrum, y sin embargo es el mas contractable de las seis.
 
-### 2. La contractabilidad la decide si el autor operacionalizo la tecnica
+La sexta cae en 11,5%, entre Scrum y htmx, y no encaja en ese eje: WCAG no es ni
+descripcion ni prescripcion con relleno, es una **norma**. Lo que la baja es
+otra cosa, y esta en el hallazgo 2.
+
+### 2. La contractabilidad la decide si el autor operacionalizo la tecnica, y ademas si el umbral compara algo que esta en el artefacto
 
 No la decide la tecnica ni el dominio. El grafo lo demuestra con dos casos, y en
 sentidos opuestos:
@@ -134,6 +148,42 @@ sentidos opuestos:
 Que el caso aparezca dos veces en sentidos opuestos es lo que lo vuelve un
 patron y no una anecdota. Y solo se puede afirmar con los dos nodos a la vista:
 **por eso el grafo tiene enlaces entre libros y no es una tabla por libro**.
+
+**La segunda mitad del titulo la agrego WCAG, y es una correccion.** Durante
+cinco fuentes el hallazgo decia solo que la contractabilidad la decide la
+operacionalizacion, y WCAG entro justamente para poder desmentirlo: es la fuente
+mas operacionalizada de las seis y da 11,5%.
+
+La diferencia esta en que quiere decir "testable" para el W3C: **que una persona
+formada pueda decidir si se cumple**. Eso no es lo mismo que medible, y la
+distancia no es de grado. 1.1.1 pide una alternativa textual que cumpla "el
+proposito equivalente": que el `alt` este es decidible, que sea equivalente no lo
+decide ninguna medicion, y *equivalente* es la palabra del criterio. Lo mismo con
+2.4.2 (un titulo que "describe el tema"), 2.4.4 (el proposito del enlace en su
+contexto) y 2.4.6. Son criterios impecables y ninguno es un umbral sobre el
+artefacto: son juicios sobre el **contenido**.
+
+Los 12 que si son medibles se distinguen por una sola cosa: el autor nombro un
+**mecanismo** decidible —un token de `autocomplete`, un `lang` bien formado, un
+`role` con nombre accesible, el texto visible contenido en el nombre accesible—
+en vez de una cualidad del contenido.
+
+Y hay un caso que separa las dos condiciones con una nitidez que no se consigue
+inventando ejemplos. Contraste (1.4.3, 1.4.6) y area de toque (2.5.5, 2.5.8)
+tienen **los umbrales mas nitidos de los 87** —una razon de 4.5:1, un area de 24
+por 24— y aun asi no se miden leyendo el HTML: comparan valores **renderizados**.
+Umbral perfecto, artefacto fuera de alcance. Quedan en pila A porque el proyecto
+puede declarar esos valores, que es la misma salida que uso `http_checks` para no
+salir a la red — pero muestran que operacionalizar no alcanza si lo que el
+umbral compara no esta donde se puede leer.
+
+El par que mejor lo ilustra cruza dos fuentes y describe **la misma pagina
+rota**. `wcag/sc2-1-1` (Keyboard) y `htmx/20` (mejora progresiva) hablan del
+mismo defecto: un `<div hx-get>` no es un enlace ni un boton, asi que ni degrada
+sin javascript ni se puede operar con el teclado. htmx pide un `<a href>` o un
+`<form action>` —un mecanismo, y esta en pila A—; WCAG pide que "toda la
+funcionalidad sea operable por teclado" —un resultado, y esta en pila B—. No es
+que un criterio sea mejor: **el que nombra el mecanismo se puede instrumentar**.
 
 La quinta fuente sumo un tercer caso, y esta vez con un umbral que no admite
 interpretacion: `doce-factores/f03` (guardar la config en el entorno) contra
@@ -220,20 +270,24 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **188 de las 327**, y el reparto no es casual:
+Lo tienen **211 de las 431**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **102 de 102** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 83 de 97 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 128 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **114 de 114** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 94 de 171 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 146 | no aplica: son temas, tecnologias y pasos de tutorial |
 
-Las 14 de pila B que quedan afuera son subsecciones sin nombre propio: nueve de
-Scrum y XP —tres titulos repetidos "Funciones y responsabilidades", dos
-sub-pasos del Planning Poker, dos secciones de "cuando y como"— y cinco de htmx
-que nombran una combinacion de atributos y no una tecnica ("Configure a Request
-With Events"). **Inventarles un nombre canonico seria meter ruido en la
-busqueda**, que es lo contrario de lo que el alias existe para hacer.
+Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
+titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
+Adjustable" no tienen otro nombre por el que alguien los busque, y su
+identificador —2.2.1— es mas conocido que cualquier alias que yo les inventara.
+Se completaron los 23 que si tienen nombre de uso corriente (*skip link*,
+*focus visible*, *aria-live*). Las 14 restantes son subsecciones sin nombre
+propio: nueve de Scrum y XP y cinco de htmx que nombran una combinacion de
+atributos y no una tecnica. **Inventar un nombre canonico donde no lo hay seria
+meter ruido en la busqueda**, que es lo contrario de lo que el alias existe para
+hacer.
 
 El alias es el handle que cruza idiomas **y libros**: `buscar DRY` devuelve las
 cinco entradas de los tres libros de codigo, todas apuntando al mismo instrumento.
@@ -245,14 +299,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 327 tecnicas, 48 instrumentos
+python memoria.py exportar          # -> memoria.json: 431 tecnicas, 48 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **329 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **379 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
@@ -278,7 +332,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 393 entradas -> 327 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 497 entradas -> 431 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -293,8 +347,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 327 + 66 | **327 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 327 + 66 | 393 tecnicas | 0 |
+| ids estables (`g36`) | 431 + 66 | **431 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 431 + 66 | 497 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -516,15 +570,16 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
+| WCAG sin instrumento | 12 | la fuente entro recien y ninguno esta escrito. Cuatro de los doce —contraste y area de toque— necesitan ademas que el proyecto declare valores renderizados, como `http_checks` con las capturas |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna de las tres es un instrumento que falte, ni un ejercicio pendiente.**
-Las seis medibles de htmx y las diez de los doce factores tienen instrumento, y
-todas las que admiten la forma de ejercicio lo tienen. Lo que queda son limites
-declarados: un artefacto que este repositorio no tiene, una forma de contrato
+**Solo la primera es un instrumento que falte.** Las seis medibles de htmx y las
+diez de los doce factores tienen instrumento, y todas las reglas que admiten la
+forma de ejercicio lo tienen; las doce de WCAG entraron con la fuente y se
+declaran sin escribir. Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del

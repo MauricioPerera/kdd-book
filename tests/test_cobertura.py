@@ -19,7 +19,7 @@ import unittest
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
-          'doce-factores')
+          'doce-factores', 'wcag')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
@@ -127,8 +127,19 @@ class IdentidadTest(unittest.TestCase):
     titulo es una etiqueta que cambia con la edicion.
     """
 
-    # Codigo del autor: letras opcionales seguidas de numero. Nada de prosa.
-    ID_ESTABLE = re.compile(r'^[a-z]{0,4}\d{1,3}$')
+    # Codigo del autor: letras opcionales y numeros, con guion bajo entre
+    # numerales. Nada de prosa.
+    #
+    # El guion entro con WCAG, cuyo identificador de autor es una numeracion
+    # jerarquica: `1.4.13`. Ampliar la forma no afloja la invariante, porque la
+    # invariante no es "el id es corto" sino **el id no depende del idioma**:
+    # `sc1-4-13` es la numeracion del autor y es la misma en la traduccion al
+    # castellano.
+    #
+    # Y sigue rechazando lo que existia para rechazar: el guion solo une
+    # NUMERALES, asi que `g36-evitar-desplazamientos-transitivos` —el id con
+    # prosa que motivo esta prueba— no matchea.
+    ID_ESTABLE = re.compile(r'^[a-z]{0,4}\d{1,3}(?:-\d{1,3}){0,2}$')
 
     def test_los_ids_no_llevan_prosa(self):
         for libro in LIBROS:

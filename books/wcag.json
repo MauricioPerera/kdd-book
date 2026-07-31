@@ -1,0 +1,1902 @@
+{
+  "source": {
+    "slug": "wcag",
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+    "author": "W3C Accessibility Guidelines Working Group",
+    "file": "w3.org/TR/WCAG22 (recomendacion W3C)",
+    "pages": 0,
+    "extracted_with": "titulos del documento, verificados contra la fuente",
+    "tags": [
+      "fuente",
+      "norma",
+      "accesibilidad"
+    ],
+    "corpus": "Los 4 principios, las 13 pautas y los 87 criterios de exito, con su nivel de conformidad tal como el documento los escribe. Se conserva 4.1.1, que la propia fuente marca \"(Obsolete and removed)\": sacarlo seria editar el corpus. GENERO NUEVO: es una norma, y sus criterios estan escritos para ser verificables. Que verificable no sea medible es lo que esta fuente vino a poner a prueba."
+  },
+  "nodes": [
+    {
+      "id": "p1",
+      "title": "Perceivable",
+      "description": "Perceivable (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, P1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g1-1",
+      "title": "Text Alternatives",
+      "description": "Text Alternatives (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-1-1",
+      "title": "Non-text Content (Level A)",
+      "description": "Non-text Content (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.1.1",
+      "alias": [
+        "texto alternativo",
+        "alt text",
+        "non-text content"
+      ],
+      "links": [],
+      "why_not": "pide una alternativa textual que cumpla \"el proposito equivalente\". Que el `alt` este es decidible; que sea equivalente no lo decide ninguna medicion, y equivalente es la palabra del criterio"
+    },
+    {
+      "id": "g1-2",
+      "title": "Time-based Media",
+      "description": "Time-based Media (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-1",
+      "title": "Audio-only and Video-only (Prerecorded) (Level A)",
+      "description": "Audio-only and Video-only (Prerecorded) (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-2",
+      "title": "Captions (Prerecorded) (Level A)",
+      "description": "Captions (Prerecorded) (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-3",
+      "title": "Audio Description or Media Alternative (Prerecorded) (Level A)",
+      "description": "Audio Description or Media Alternative (Prerecorded) (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-4",
+      "title": "Captions (Live) (Level AA)",
+      "description": "Captions (Live) (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-5",
+      "title": "Audio Description (Prerecorded) (Level AA)",
+      "description": "Audio Description (Prerecorded) (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-6",
+      "title": "Sign Language (Prerecorded) (Level AAA)",
+      "description": "Sign Language (Prerecorded) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-7",
+      "title": "Extended Audio Description (Prerecorded) (Level AAA)",
+      "description": "Extended Audio Description (Prerecorded) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.7",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-8",
+      "title": "Media Alternative (Prerecorded) (Level AAA)",
+      "description": "Media Alternative (Prerecorded) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.8",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-2-9",
+      "title": "Audio-only (Live) (Level AAA)",
+      "description": "Audio-only (Live) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.2.9",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g1-3",
+      "title": "Adaptable",
+      "description": "Adaptable (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-3-1",
+      "title": "Info and Relationships (Level A)",
+      "description": "Info and Relationships (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3.1",
+      "alias": [
+        "info y relaciones",
+        "info and relationships",
+        "semantica del marcado"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc1-3-2",
+      "title": "Meaningful Sequence (Level A)",
+      "description": "Meaningful Sequence (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-3-3",
+      "title": "Sensory Characteristics (Level A)",
+      "description": "Sensory Characteristics (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-3-4",
+      "title": "Orientation (Level AA)",
+      "description": "Orientation (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-3-5",
+      "title": "Identify Input Purpose (Level AA)",
+      "description": "Identify Input Purpose (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "contractable",
+        "instrumented",
+        "nivel-aa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 1.3.5",
+      "alias": [
+        "proposito del campo",
+        "identify input purpose",
+        "autocomplete"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: todo campo que pide datos del usuario declara su `autocomplete` con un token de la lista del propio criterio (sin implementar)",
+      "threshold": "cero campos de datos personales sin token de autocomplete"
+    },
+    {
+      "id": "sc1-3-6",
+      "title": "Identify Purpose (Level AAA)",
+      "description": "Identify Purpose (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.3.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g1-4",
+      "title": "Distinguishable",
+      "description": "Distinguishable (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-1",
+      "title": "Use of Color (Level A)",
+      "description": "Use of Color (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.1",
+      "alias": [
+        "uso del color",
+        "use of color"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc1-4-2",
+      "title": "Audio Control (Level A)",
+      "description": "Audio Control (Level A) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 1.4.2",
+      "alias": [
+        "control de audio",
+        "audio control",
+        "autoplay"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: audio o video con `autoplay`, sin `muted` y sin `controls` (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "sc1-4-3",
+      "title": "Contrast (Minimum) (Level AA)",
+      "description": "Contrast (Minimum) (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "contractable",
+        "instrumented",
+        "nivel-aa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 1.4.3",
+      "alias": [
+        "contraste minimo",
+        "contrast minimum",
+        "razon de contraste"
+      ],
+      "links": [
+        "sc1-4-6"
+      ],
+      "instrument": "a11y_checks: razon de contraste sobre los pares de color declarados (sin implementar, declarado)",
+      "threshold": "4.5:1 para texto normal, 3:1 para texto grande",
+      "body": "Junto con 1.4.6, 2.5.5 y 2.5.8 son los cuatro umbrales mas nitidos de los 87 —una razon de contraste, un area en pixeles— y los cuatro necesitan valores **renderizados** que el HTML no tiene. Es el mismo problema que resolvio `http_checks` sin salir a la red: el proyecto declara el artefacto medible. Que el umbral sea impecable no alcanza si lo que compara no esta al alcance."
+    },
+    {
+      "id": "sc1-4-4",
+      "title": "Resize Text (Level AA)",
+      "description": "Resize Text (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-5",
+      "title": "Images of Text (Level AA)",
+      "description": "Images of Text (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-6",
+      "title": "Contrast (Enhanced) (Level AAA)",
+      "description": "Contrast (Enhanced) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "contractable",
+        "instrumented",
+        "nivel-aaa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 1.4.6",
+      "alias": [
+        "contraste mejorado",
+        "contrast enhanced"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: razon de contraste sobre los pares de color declarados (sin implementar, declarado)",
+      "threshold": "7:1 para texto normal, 4.5:1 para texto grande"
+    },
+    {
+      "id": "sc1-4-7",
+      "title": "Low or No Background Audio (Level AAA)",
+      "description": "Low or No Background Audio (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.7",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-8",
+      "title": "Visual Presentation (Level AAA)",
+      "description": "Visual Presentation (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.8",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-9",
+      "title": "Images of Text (No Exception) (Level AAA)",
+      "description": "Images of Text (No Exception) (Level AAA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.9",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-10",
+      "title": "Reflow (Level AA)",
+      "description": "Reflow (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.10",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-11",
+      "title": "Non-text Contrast (Level AA)",
+      "description": "Non-text Contrast (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.11",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-12",
+      "title": "Text Spacing (Level AA)",
+      "description": "Text Spacing (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.12",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc1-4-13",
+      "title": "Content on Hover or Focus (Level AA)",
+      "description": "Content on Hover or Focus (Level AA) (principio: perceptible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "perceptible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 1.4.13",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "p2",
+      "title": "Operable",
+      "description": "Operable (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, P2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g2-1",
+      "title": "Keyboard Accessible",
+      "description": "Keyboard Accessible (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-1-1",
+      "title": "Keyboard (Level A)",
+      "description": "Keyboard (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.1.1",
+      "alias": [
+        "operable por teclado",
+        "keyboard accessible"
+      ],
+      "links": [
+        "htmx/20"
+      ],
+      "why_not": "\"toda la funcionalidad operable por teclado\" no es decidible leyendo la pagina. Lo que si se mide —manejadores de click en elementos no enfocables— es una parte, y confundir la parte con el criterio seria dar verde sobre paginas que lo incumplen",
+      "body": "Es el mismo defecto que mide htmx/20 (mejora progresiva) y es el par mas nitido del grafo, porque los dos autores describen **la misma pagina rota**: un `<div hx-get>` no es un enlace ni un boton, asi que ni degrada sin javascript ni se puede operar con el teclado. La diferencia esta en que fijo cada uno. La documentacion de htmx pide un `<a href>` o un `<form action>`, que es un mecanismo y se mide. WCAG pide que \"toda la funcionalidad sea operable por teclado\", que es el resultado y no se mide. Por eso htmx/20 esta en pila A y este en B, y no es que un criterio sea mejor que el otro: el que nombra el mecanismo se puede instrumentar."
+    },
+    {
+      "id": "sc2-1-2",
+      "title": "No Keyboard Trap (Level A)",
+      "description": "No Keyboard Trap (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.1.2",
+      "alias": [
+        "trampa de teclado",
+        "no keyboard trap"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc2-1-3",
+      "title": "Keyboard (No Exception) (Level AAA)",
+      "description": "Keyboard (No Exception) (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.1.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-1-4",
+      "title": "Character Key Shortcuts (Level A)",
+      "description": "Character Key Shortcuts (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.1.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g2-2",
+      "title": "Enough Time",
+      "description": "Enough Time (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-1",
+      "title": "Timing Adjustable (Level A)",
+      "description": "Timing Adjustable (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-2",
+      "title": "Pause, Stop, Hide (Level A)",
+      "description": "Pause, Stop, Hide (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-3",
+      "title": "No Timing (Level AAA)",
+      "description": "No Timing (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-4",
+      "title": "Interruptions (Level AAA)",
+      "description": "Interruptions (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-5",
+      "title": "Re-authenticating (Level AAA)",
+      "description": "Re-authenticating (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-2-6",
+      "title": "Timeouts (Level AAA)",
+      "description": "Timeouts (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.2.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g2-3",
+      "title": "Seizures and Physical Reactions",
+      "description": "Seizures and Physical Reactions (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-3-1",
+      "title": "Three Flashes or Below Threshold (Level A)",
+      "description": "Three Flashes or Below Threshold (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.3.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-3-2",
+      "title": "Three Flashes (Level AAA)",
+      "description": "Three Flashes (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.3.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-3-3",
+      "title": "Animation from Interactions (Level AAA)",
+      "description": "Animation from Interactions (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "contractable",
+        "instrumented",
+        "nivel-aaa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 2.3.3",
+      "alias": [
+        "animacion por interaccion",
+        "animation from interactions",
+        "prefers-reduced-motion"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: si la hoja de estilos declara animaciones o transiciones, tiene un bloque `prefers-reduced-motion: reduce` (sin implementar)",
+      "threshold": "cero animaciones de interaccion sin alternativa reducida"
+    },
+    {
+      "id": "g2-4",
+      "title": "Navigable",
+      "description": "Navigable (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-1",
+      "title": "Bypass Blocks (Level A)",
+      "description": "Bypass Blocks (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 2.4.1",
+      "alias": [
+        "saltar bloques",
+        "bypass blocks",
+        "skip link"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: la pagina ofrece un salto de bloques (enlace a un ancla de contenido, o una region `main`) (sin implementar)",
+      "threshold": "al menos un mecanismo de salto por pagina"
+    },
+    {
+      "id": "sc2-4-2",
+      "title": "Page Titled (Level A)",
+      "description": "Page Titled (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.2",
+      "alias": [
+        "pagina titulada",
+        "page titled"
+      ],
+      "links": [],
+      "why_not": "el titulo tiene que \"describir el tema o proposito\". La presencia se mide; la descripcion es juicio, igual que en 1.1.1"
+    },
+    {
+      "id": "sc2-4-3",
+      "title": "Focus Order (Level A)",
+      "description": "Focus Order (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.3",
+      "alias": [
+        "orden de foco",
+        "focus order"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc2-4-4",
+      "title": "Link Purpose (In Context) (Level A)",
+      "description": "Link Purpose (In Context) (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.4",
+      "alias": [],
+      "links": [],
+      "why_not": "el proposito del enlace se juzga contra su contexto: es comprension de texto, no una propiedad del marcado"
+    },
+    {
+      "id": "sc2-4-5",
+      "title": "Multiple Ways (Level AA)",
+      "description": "Multiple Ways (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-6",
+      "title": "Headings and Labels (Level AA)",
+      "description": "Headings and Labels (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.6",
+      "alias": [],
+      "links": [],
+      "why_not": "\"describen el tema o proposito\" otra vez: la existencia de encabezados se mide, su calidad no"
+    },
+    {
+      "id": "sc2-4-7",
+      "title": "Focus Visible (Level AA)",
+      "description": "Focus Visible (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.7",
+      "alias": [
+        "foco visible",
+        "focus visible"
+      ],
+      "links": [],
+      "why_not": "el indicador de foco tiene que ser visible, y visible se decide al renderizar. La ausencia de `outline` es una pista, no el criterio"
+    },
+    {
+      "id": "sc2-4-8",
+      "title": "Location (Level AAA)",
+      "description": "Location (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.8",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-9",
+      "title": "Link Purpose (Link Only) (Level AAA)",
+      "description": "Link Purpose (Link Only) (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.9",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-10",
+      "title": "Section Headings (Level AAA)",
+      "description": "Section Headings (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.10",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-11",
+      "title": "Focus Not Obscured (Minimum) (Level AA)",
+      "description": "Focus Not Obscured (Minimum) (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.11",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-12",
+      "title": "Focus Not Obscured (Enhanced) (Level AAA)",
+      "description": "Focus Not Obscured (Enhanced) (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.12",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-4-13",
+      "title": "Focus Appearance (Level AAA)",
+      "description": "Focus Appearance (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.4.13",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g2-5",
+      "title": "Input Modalities",
+      "description": "Input Modalities (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-1",
+      "title": "Pointer Gestures (Level A)",
+      "description": "Pointer Gestures (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-2",
+      "title": "Pointer Cancellation (Level A)",
+      "description": "Pointer Cancellation (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-3",
+      "title": "Label in Name (Level A)",
+      "description": "Label in Name (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 2.5.3",
+      "alias": [
+        "etiqueta en el nombre",
+        "label in name"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: el nombre accesible contiene el texto visible de la etiqueta (sin implementar)",
+      "threshold": "cero controles cuyo nombre accesible no contenga su etiqueta visible"
+    },
+    {
+      "id": "sc2-5-4",
+      "title": "Motion Actuation (Level A)",
+      "description": "Motion Actuation (Level A) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-5",
+      "title": "Target Size (Enhanced) (Level AAA)",
+      "description": "Target Size (Enhanced) (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "contractable",
+        "instrumented",
+        "nivel-aaa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 2.5.5",
+      "alias": [
+        "area de toque mejorada",
+        "target size enhanced"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: area de toque sobre las medidas declaradas (sin implementar, declarado)",
+      "threshold": "44 por 44 pixeles CSS"
+    },
+    {
+      "id": "sc2-5-6",
+      "title": "Concurrent Input Mechanisms (Level AAA)",
+      "description": "Concurrent Input Mechanisms (Level AAA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-7",
+      "title": "Dragging Movements (Level AA)",
+      "description": "Dragging Movements (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 2.5.7",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc2-5-8",
+      "title": "Target Size (Minimum) (Level AA)",
+      "description": "Target Size (Minimum) (Level AA) (principio: operable).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "operable",
+        "contractable",
+        "instrumented",
+        "nivel-aa"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 2.5.8",
+      "alias": [
+        "area de toque minima",
+        "target size minimum"
+      ],
+      "links": [
+        "sc2-5-5"
+      ],
+      "instrument": "a11y_checks: area de toque sobre las medidas declaradas (sin implementar, declarado)",
+      "threshold": "24 por 24 pixeles CSS"
+    },
+    {
+      "id": "p3",
+      "title": "Understandable",
+      "description": "Understandable (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, P3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g3-1",
+      "title": "Readable",
+      "description": "Readable (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-1-1",
+      "title": "Language of Page (Level A)",
+      "description": "Language of Page (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 3.1.1",
+      "alias": [
+        "idioma de la pagina",
+        "language of page",
+        "lang"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: el elemento raiz declara `lang` con una etiqueta de idioma bien formada (sin implementar)",
+      "threshold": "un lang valido por pagina"
+    },
+    {
+      "id": "sc3-1-2",
+      "title": "Language of Parts (Level A)",
+      "description": "Language of Parts (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1.2",
+      "alias": [
+        "idioma de las partes",
+        "language of parts"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc3-1-3",
+      "title": "Unusual Words (Level AAA)",
+      "description": "Unusual Words (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-1-4",
+      "title": "Abbreviations (Level AAA)",
+      "description": "Abbreviations (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-1-5",
+      "title": "Reading Level (Level AAA)",
+      "description": "Reading Level (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-1-6",
+      "title": "Pronunciation (Level AAA)",
+      "description": "Pronunciation (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.1.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g3-2",
+      "title": "Predictable",
+      "description": "Predictable (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-1",
+      "title": "On Focus (Level A)",
+      "description": "On Focus (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-2",
+      "title": "On Input (Level A)",
+      "description": "On Input (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.2",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-3",
+      "title": "Consistent Navigation (Level AA)",
+      "description": "Consistent Navigation (Level AA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-4",
+      "title": "Consistent Identification (Level AA)",
+      "description": "Consistent Identification (Level AA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-5",
+      "title": "Change on Request (Level AAA)",
+      "description": "Change on Request (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-2-6",
+      "title": "Consistent Help (Level A)",
+      "description": "Consistent Help (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.2.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g3-3",
+      "title": "Input Assistance",
+      "description": "Input Assistance (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-1",
+      "title": "Error Identification (Level A)",
+      "description": "Error Identification (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.1",
+      "alias": [
+        "identificacion de errores",
+        "error identification"
+      ],
+      "links": []
+    },
+    {
+      "id": "sc3-3-2",
+      "title": "Labels or Instructions (Level A)",
+      "description": "Labels or Instructions (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 3.3.2",
+      "alias": [
+        "etiquetas o instrucciones",
+        "labels or instructions",
+        "label"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: todo control de formulario tiene etiqueta asociada o nombre accesible (sin implementar)",
+      "threshold": "cero controles sin etiqueta"
+    },
+    {
+      "id": "sc3-3-3",
+      "title": "Error Suggestion (Level AA)",
+      "description": "Error Suggestion (Level AA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.3",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-4",
+      "title": "Error Prevention (Legal, Financial, Data) (Level AA)",
+      "description": "Error Prevention (Legal, Financial, Data) (Level AA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-5",
+      "title": "Help (Level AAA)",
+      "description": "Help (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.5",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-6",
+      "title": "Error Prevention (All) (Level AAA)",
+      "description": "Error Prevention (All) (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.6",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-7",
+      "title": "Redundant Entry (Level A)",
+      "description": "Redundant Entry (Level A) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-a"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.7",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-8",
+      "title": "Accessible Authentication (Minimum) (Level AA)",
+      "description": "Accessible Authentication (Minimum) (Level AA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.8",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc3-3-9",
+      "title": "Accessible Authentication (Enhanced) (Level AAA)",
+      "description": "Accessible Authentication (Enhanced) (Level AAA) (principio: comprensible).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "comprensible",
+        "no-especificable",
+        "nivel-aaa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 3.3.9",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "p4",
+      "title": "Robust",
+      "description": "Robust (principio: robusto).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "robusto",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, P4",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "g4-1",
+      "title": "Compatible",
+      "description": "Compatible (principio: robusto).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "robusto",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 4.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc4-1-1",
+      "title": "Parsing (Obsolete and removed)",
+      "description": "Parsing (Obsolete and removed) (principio: robusto).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "robusto",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "WCAG 2.2, 4.1.1",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "sc4-1-2",
+      "title": "Name, Role, Value (Level A)",
+      "description": "Name, Role, Value (Level A) (principio: robusto).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "robusto",
+        "contractable",
+        "instrumented",
+        "nivel-a"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "WCAG 2.2, 4.1.2",
+      "alias": [
+        "nombre, rol, valor",
+        "name role value",
+        "accessible name"
+      ],
+      "links": [],
+      "instrument": "a11y_checks: todo elemento con `role` de componente tiene nombre accesible, y los `aria-*` que usa existen para ese rol (sin implementar)",
+      "threshold": "cero componentes sin nombre y cero aria invalido para el rol"
+    },
+    {
+      "id": "sc4-1-3",
+      "title": "Status Messages (Level AA)",
+      "description": "Status Messages (Level AA) (principio: robusto).",
+      "type": "Concept",
+      "tags": [
+        "wcag",
+        "robusto",
+        "no-especificable",
+        "nivel-aa"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "WCAG 2.2, 4.1.3",
+      "alias": [
+        "mensajes de estado",
+        "status messages",
+        "aria-live"
+      ],
+      "links": [
+        "htmx/10"
+      ],
+      "why_not": "exige saber cuales mensajes son de estado, y eso es una decision sobre el significado del contenido",
+      "body": "Toca directamente al indicador de htmx/10: un indicador de carga es un mensaje de estado, y para que un lector de pantalla lo anuncie tiene que vivir en una region con `aria-live`. htmx/10 mide que el indicador **exista**, que es lo que se puede medir; este criterio pide ademas que **se anuncie**, y eso depende de reconocer cual contenido es un mensaje de estado."
+    }
+  ]
+}
