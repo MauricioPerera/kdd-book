@@ -127,5 +127,69 @@ class GitChecksTest(unittest.TestCase):
         self.assertTrue(hallazgos[0][1], 'deberia ser no-verificable, no rojo')
 
 
+    # ------------------------------------------------------------ codebase
+    def test_codebase_acepta_un_repositorio_solo(self):
+        repo = self._repo('uno')
+        self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
+        self.assertEqual(git_checks.check_codebase(repo, _opts()), [])
+
+    def test_codebase_marca_el_directorio_sin_control_de_versiones(self):
+        """Aca "no hay repositorio" es el hallazgo, no una imposibilidad.
+
+        Es lo que separa esta regla de las otras tres: ellas miden propiedades
+        DEL historial y sin historial no hay nada que medir; esta mide si hay
+        historial. Por eso `main` se saltea la comprobacion previa para ella, y
+        por eso la lista `SIN_REPO_ES_HALLAZGO` tiene que seguir nombrandola.
+        """
+        suelto = os.path.join(self.raiz, 'suelto')
+        os.makedirs(suelto)
+        hallazgos = git_checks.check_codebase(suelto, _opts())
+        self.assertTrue(hallazgos, 'dio verde sobre un directorio sin git')
+        self.assertFalse(hallazgos[0][1], 'lo reporto como no-verificable en vez de rojo')
+        self.assertIn('control de versiones', hallazgos[0][0])
+
+    def test_codebase_se_saltea_la_comprobacion_previa_de_main(self):
+        """Sin eso, la regla saldria con exit 2 justo en el caso que debe marcar."""
+        suelto = os.path.join(self.raiz, 'suelto2')
+        os.makedirs(suelto)
+        self.assertEqual(git_checks.main(['--rule', 'codebase', suelto]), 1)
+
+    def test_codebase_detecta_otro_codebase_adentro(self):
+        repo = self._repo('padre')
+        self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
+        hijo = os.path.join(repo, 'vendor', 'lib')
+        os.makedirs(hijo)
+        self._git(hijo, 'init', '-q', '-b', 'master')
+        hallazgos = git_checks.check_codebase(repo, _opts())
+        self.assertTrue(hallazgos, 'no vio el repositorio anidado')
+        self.assertIn('otro codebase', hallazgos[0][0])
+
+    # ----------------------------------------------------------- releaseid
+    def test_releaseid_acepta_una_marca_por_estado(self):
+        repo = self._repo('releases')
+        self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
+        self._tag(repo, 'v1', '2024-01-01T10:00:00')
+        self._commit(repo, 'b.py', 'Y = 2\n', '2024-02-01T10:00:00')
+        self._tag(repo, 'v2', '2024-02-01T10:00:00')
+        self.assertEqual(git_checks.check_releaseid(repo, _opts()), [])
+
+    def test_releaseid_marca_el_repositorio_sin_ninguna_marca(self):
+        repo = self._repo('sin-tags')
+        self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
+        hallazgos = git_checks.check_releaseid(repo, _opts())
+        self.assertTrue(hallazgos)
+        self.assertFalse(hallazgos[0][1], 'sin releases identificados es rojo, no exit 2')
+
+    def test_releaseid_detecta_dos_identificadores_para_un_mismo_estado(self):
+        """Lo que se repite en la practica no es el nombre del tag sino el estado."""
+        repo = self._repo('dobles')
+        self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
+        self._tag(repo, 'v1', '2024-01-01T10:00:00')
+        self._tag(repo, 'v1.0.0', '2024-01-01T10:00:00')
+        hallazgos = git_checks.check_releaseid(repo, _opts())
+        self.assertTrue(hallazgos, 'no vio los dos tags sobre el mismo commit')
+        self.assertIn('mismo estado', hallazgos[0][0])
+
+
 if __name__ == '__main__':
     unittest.main()

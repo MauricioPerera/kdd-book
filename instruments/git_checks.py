@@ -140,11 +140,88 @@ def check_tddorden(repo, opts):
     return []
 
 
+def check_codebase(repo, opts):
+    """Un codebase por aplicacion, bajo control de versiones.
+
+    Es la unica regla del modulo para la que **no ser un repositorio es el
+    hallazgo y no una imposibilidad**. Las otras tres miden propiedades DEL
+    historial, asi que sin historial no hay nada que medir y sale exit 2; esta
+    mide si hay historial, y ahi "no lo hay" es exactamente el rojo. Por eso
+    `main` se saltea la comprobacion previa para ella.
+
+    La segunda mitad —un solo codebase— se mide contando repositorios anidados.
+    Que haya otro `.git` adentro significa que en el arbol conviven dos
+    codebases, que es la forma en que el factor dice que se rompe.
+
+    Lo que no puede ver: si OTRO repositorio comparte este codigo. Eso pasa
+    afuera del artefacto y ninguna lectura de este arbol lo alcanza.
+    """
+    if not _es_repo(repo):
+        return [('el proyecto no esta bajo control de versiones: sin eso no hay '
+                 'codebase del que hablar', False)]
+
+    anidados = []
+    for raiz, dirs, _archivos in os.walk(repo):
+        if os.path.abspath(raiz) == os.path.abspath(repo):
+            continue
+        if '.git' in dirs:
+            anidados.append(os.path.relpath(raiz, repo))
+        dirs[:] = [d for d in dirs if d != '.git']
+
+    out = [('{} es otro codebase dentro de este: dos codebases no son una '
+            'aplicacion, son un sistema distribuido'.format(ruta), False)
+           for ruta in sorted(anidados)]
+    return out
+
+
+def check_releaseid(repo, opts):
+    """Todo release tiene un identificador propio.
+
+    El autor lo pide literal —"every release should always have a unique release
+    ID"— y de eso quedan dos rastros medibles en el historial. Que no haya
+    ninguna marca de release es el primero. Que dos marcas apunten al mismo
+    commit es el segundo, y es el mas util: si dos identificadores nombran el
+    mismo estado, el identificador no esta identificando el release.
+
+    Que git impida repetir el NOMBRE de un tag no ahorra esta regla: lo que se
+    repite en la practica no es el nombre sino el estado.
+    """
+    codigo, salida = _git(repo, 'for-each-ref', '--format=%(refname:short) %(objectname)',
+                          'refs/tags')
+    if codigo != 0:
+        return [('no se pudieron leer los tags', True)]
+
+    lineas = [l for l in salida.splitlines() if l.strip()]
+    if not lineas:
+        return [('no hay ninguna marca de release: ningun release tiene '
+                 'identificador', False)]
+
+    por_commit = {}
+    for linea in lineas:
+        nombre, _, objeto = linea.partition(' ')
+        # Un tag anotado apunta a un objeto tag, no al commit: se desreferencia
+        # para comparar estados y no envoltorios.
+        _c, commit = _git(repo, 'rev-list', '-n', '1', nombre)
+        por_commit.setdefault(commit or objeto, []).append(nombre)
+
+    return [('{} nombran el mismo estado ({}): dos identificadores para un '
+             'release'.format(', '.join(sorted(nombres)), commit[:8]), False)
+            for commit, nombres in sorted(por_commit.items()) if len(nombres) > 1]
+
+
 RULES = {
     'cadencia': (check_cadencia, 'Entregas cortas: hueco maximo entre entregas'),
+    'codebase': (check_codebase, 'Codebase: uno por aplicacion, bajo control de versiones'),
+    'releaseid': (check_releaseid, 'Release: todo release tiene identificador propio'),
     'repounico': (check_repounico, 'Unificacion del codigo en un repositorio'),
     'tddorden': (check_tddorden, 'Ciclo TDD: el test entra antes que el codigo'),
 }
+
+# Reglas para las que la ausencia de repositorio ES el hallazgo, no una
+# imposibilidad de medir. Sin esta lista, `codebase` saldria con exit 2 sobre un
+# directorio sin control de versiones, que es justo el caso que tiene que
+# marcar en rojo.
+SIN_REPO_ES_HALLAZGO = ('codebase',)
 
 
 def main(argv=None):
@@ -170,7 +247,7 @@ def main(argv=None):
         print('NO-VERIFICABLE: no existe el directorio: {}'.format(args.repo))
         return 2
     try:
-        if not _es_repo(args.repo):
+        if args.rule not in SIN_REPO_ES_HALLAZGO and not _es_repo(args.repo):
             print('NO-VERIFICABLE: {} no es un repositorio git'.format(args.repo))
             return 2
     except (OSError, subprocess.TimeoutExpired) as exc:

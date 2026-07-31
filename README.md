@@ -16,18 +16,18 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cinco fuentes, 327 nodos, 44 contratos ejecutables, 45 instrumentos en ocho
+Cinco fuentes, 327 nodos, 44 contratos ejecutables, 55 instrumentos en nueve
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 107 pruebas propias.
+`validate_test_commands` y las 138 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
-| The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 0 | 0 |
+| The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 0 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **327** | **102** | **85** | **69** | **44** |
+| **Total** | **327** | **102** | **85** | **79** | **44** |
 
 Dos de las cinco no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -350,7 +350,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-45 reglas en ocho familias. Que varias tecnicas compartan una no es un atajo: es
+55 reglas en nueve familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -358,7 +358,8 @@ que preguntan lo mismo.
 | `checks.py` | 22 | el AST de un archivo Python | duplicacion, numeros magicos, ley de Demeter |
 | `repo_checks.py` | 7 | el proyecto entero | un comando para probar, cobertura, tiempo de suite |
 | `arch_checks.py` | 6 | relaciones entre modulos | capas, instanciacion, ISP |
-| `git_checks.py` | 3 | el historial | cadencia de entregas, ramas sin integrar |
+| `git_checks.py` | 5 | el historial | cadencia de entregas, ramas sin integrar, identificador de release |
+| `entorno_checks.py` | 8 | la forma del proyecto | dependencias declaradas, config en el entorno, logs a stdout |
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
 | `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
@@ -405,6 +406,23 @@ Tres decisiones que conviene tener a la vista:
   dentro de un `<script>` ni en un atributo sin comillas. Eso es escapado
   sensible al contexto y es otra tecnica; queda declarado para que el verde no
   se lea como mas de lo que es.
+- **`entorno_checks` es la primera familia que no lee ni codigo ni ejecucion,
+  sino la forma del proyecto.** Sus ocho reglas salen de los doce factores, pero
+  lo que las junta es que miden: como se declara lo que la app necesita, como se
+  expone, como se comporta como proceso. Es tambien la familia que mas dice lo
+  que **no** ve: las reglas que buscan un marcador lexico —una credencial, un
+  locator— encuentran lo que se escribe con las palabras de la convencion, y una
+  clave asignada a una variable llamada `x` no la ve nadie. Eso no se arregla
+  afinando la expresion regular: es el limite de leer el codigo en vez de
+  ejecutarlo, y esta escrito en cada regla para que el verde no se lea como mas
+  de lo que es.
+  Su primer hallazgo fue contra este mismo repositorio, y fue un falso positivo
+  propio: `daemonizar` marcaba cualquier llamada con un argumento terminado en
+  `.pid`, asi que **la linea que hace la comprobacion se marcaba a si misma**.
+  Preguntar si una ruta es un archivo PID no es escribirlo. Corrido contra el
+  repo tambien encontro tres rojos legitimos —sin manejador de SIGTERM, sin
+  puerto propio, sin manifiesto— que son correctos: esto es una biblioteca de
+  instrumentos, no una app de doce factores.
 - **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
@@ -460,16 +478,16 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| doce factores sin instrumento | 10 | la fuente entro recien; sus tecnicas leen el manifiesto de dependencias, el historial de releases y los archivos de despliegue, y esos instrumentos todavia no estan escritos. Es lo unico de esta lista que se arregla trabajando |
+| `entorno_checks` sin ejercicio | 8 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
-| `git_checks` sin ejercicio | 3 reglas | el arreglo es integrar una rama o marcar una entrega: `touch_only` cubre archivos, no commits |
+| `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
 **Solo la primera es un instrumento que falte.** Las seis tecnicas
 medibles de htmx —las tres de HTML, las dos de HTTP y la de plantillas— tienen
-instrumento y ejercicio; las diez de los doce factores estan declaradas y sin
-escribir. Las otras tres filas son limites, no deudas: un artefacto que este
+instrumento y ejercicio, y las diez de los doce factores ya tienen instrumento:
+ocho esperan ejercicio y dos no lo admiten, por el mismo motivo que las de git. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
@@ -481,11 +499,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Once suites, 107 pruebas, y cada suite existe por un error concreto que ya paso.
+Doce suites, 138 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 44 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |

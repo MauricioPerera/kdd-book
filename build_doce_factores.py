@@ -56,36 +56,29 @@ SECCIONES = [
 # una persona. Es lo esperable en un manifiesto de operaciones: describe cosas
 # que el sistema hace o no hace, no cosas que un equipo declara haber hecho.
 #
-# Las que dicen "sin implementar" nombran el instrumento que haria falta en vez
-# de un script, igual que la 53 de htmx antes de tener `template_checks`. La
-# convencion importa: `verification: instrumented` describe QUE CLASE de
-# verificacion pide la tecnica, no si ya esta escrita.
+# Ocho viven en `entorno_checks`, familia nueva que esta fuente obligo a
+# inventar, y dos en `git_checks`, que ya existia: `codebase` y `releaseid`
+# miden el historial, que es donde vive lo que esos dos factores prescriben.
 A_NODES = {
-    5: ('repo_checks: el codigo esta bajo control de versiones y el proyecto '
-        'declara una sola aplicacion (sin implementar)',
+    5: ('git_checks.py --rule codebase',
         'un codebase bajo control de versiones por aplicacion'),
-    6: ('repo_checks: todo import de primer nivel resuelve a un paquete '
-        'declarado en el manifiesto (sin implementar)',
+    6: ('entorno_checks.py --rule dependencias',
         'cero dependencias implicitas del sistema'),
-    7: ('repo_checks: constantes de configuracion y credenciales en el codigo '
-        '(sin implementar)',
+    7: ('entorno_checks.py --rule config',
         'cero: el repositorio se podria abrir hoy sin filtrar credenciales'),
-    8: ('repo_checks: locators de servicio escritos en el codigo en vez de '
-        'leidos de la config (sin implementar)',
+    8: ('entorno_checks.py --rule servicios',
         'cero locators en el codigo'),
-    9: ('git_checks: todo release tiene identificador unico (sin implementar)',
+    9: ('git_checks.py --rule releaseid',
         'cero releases sin identificador propio'),
-    11: ('repo_checks: el punto de entrada abre su propio puerto y el servidor '
-         'esta en el manifiesto (sin implementar)',
+    11: ('entorno_checks.py --rule puerto',
          'la app exporta su servicio sin servidor inyectado'),
-    12: ('checks: llamadas a daemonize y escrituras de PID file (sin implementar)',
+    12: ('entorno_checks.py --rule daemonizar',
          'cero'),
-    13: ('checks: el proceso instala un manejador de SIGTERM (sin implementar)',
+    13: ('entorno_checks.py --rule sigterm',
          'un manejador de SIGTERM por proceso de larga vida'),
-    14: ('repo_checks: los despliegues declarados usan el mismo tipo y version '
-         'de cada servicio de respaldo (sin implementar)',
+    14: ('entorno_checks.py --rule paridad',
          'cero diferencias de tipo o version entre despliegues'),
-    15: ('checks: handlers de logging que escriben a archivo (sin implementar)',
+    15: ('entorno_checks.py --rule logs',
          'cero: el proceso escribe a stdout'),
 }
 

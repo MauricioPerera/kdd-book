@@ -100,7 +100,7 @@
       "links": [
         "scrum-xp/122"
       ],
-      "instrument": "repo_checks: el codigo esta bajo control de versiones y el proyecto declara una sola aplicacion (sin implementar)",
+      "instrument": "git_checks.py --rule codebase",
       "threshold": "un codebase bajo control de versiones por aplicacion",
       "body": "Vecino de \"Unificacion del codigo en Repositorios\" de Scrum y XP, y conviene no confundirlos: Bahit mide **ramas sin integrar** y este factor mide **cuantos codebases hay por aplicacion**. Son dos propiedades distintas del mismo repositorio, y por eso comparten vecindad pero no instrumento."
     },
@@ -124,7 +124,7 @@
         "dependency manifest"
       ],
       "links": [],
-      "instrument": "repo_checks: todo import de primer nivel resuelve a un paquete declarado en el manifiesto (sin implementar)",
+      "instrument": "entorno_checks.py --rule dependencias",
       "threshold": "cero dependencias implicitas del sistema"
     },
     {
@@ -151,7 +151,7 @@
         "codigo-limpio/g35",
         "f04"
       ],
-      "instrument": "repo_checks: constantes de configuracion y credenciales en el codigo (sin implementar)",
+      "instrument": "entorno_checks.py --rule config",
       "threshold": "cero: el repositorio se podria abrir hoy sin filtrar credenciales",
       "body": "Es G35 de Codigo Limpio —\"mantener los datos configurables en los niveles superiores\"— llevado hasta el final y, sobre todo, **medible**. Martin lo deja en pila B porque que dato conviene subir es un juicio; aca el autor fija el nivel superior (el entorno) y da el umbral con un test que no admite interpretacion: si el repositorio no se puede abrir hoy sin filtrar credenciales, esta en rojo. Es el mismo par que G19 y 142, o que G30 y SRP: la misma idea, y la contractabilidad la decide cual de los dos autores la operacionalizo."
     },
@@ -177,7 +177,7 @@
       "links": [
         "arquitectura-java/19"
       ],
-      "instrument": "repo_checks: locators de servicio escritos en el codigo en vez de leidos de la config (sin implementar)",
+      "instrument": "entorno_checks.py --rule servicios",
       "threshold": "cero locators en el codigo",
       "body": "El \"cambiar MySQL local por RDS sin tocar el codigo\" es inversion de control aplicada a los recursos, o sea el principio 19 de Arquitectura Java visto desde operaciones. Caules lo mide sobre instanciacion en el codigo; aca se mide sobre donde vive el locator."
     },
@@ -203,7 +203,7 @@
       "links": [
         "f01"
       ],
-      "instrument": "git_checks: todo release tiene identificador unico (sin implementar)",
+      "instrument": "git_checks.py --rule releaseid",
       "threshold": "cero releases sin identificador propio"
     },
     {
@@ -247,7 +247,7 @@
         "self-contained server"
       ],
       "links": [],
-      "instrument": "repo_checks: el punto de entrada abre su propio puerto y el servidor esta en el manifiesto (sin implementar)",
+      "instrument": "entorno_checks.py --rule puerto",
       "threshold": "la app exporta su servicio sin servidor inyectado"
     },
     {
@@ -271,7 +271,7 @@
         "no daemonizar"
       ],
       "links": [],
-      "instrument": "checks: llamadas a daemonize y escrituras de PID file (sin implementar)",
+      "instrument": "entorno_checks.py --rule daemonizar",
       "threshold": "cero"
     },
     {
@@ -295,7 +295,7 @@
         "SIGTERM"
       ],
       "links": [],
-      "instrument": "checks: el proceso instala un manejador de SIGTERM (sin implementar)",
+      "instrument": "entorno_checks.py --rule sigterm",
       "threshold": "un manejador de SIGTERM por proceso de larga vida"
     },
     {
@@ -319,7 +319,7 @@
       "links": [
         "f04"
       ],
-      "instrument": "repo_checks: los despliegues declarados usan el mismo tipo y version de cada servicio de respaldo (sin implementar)",
+      "instrument": "entorno_checks.py --rule paridad",
       "threshold": "cero diferencias de tipo o version entre despliegues"
     },
     {
@@ -344,7 +344,7 @@
       "links": [
         "arquitectura-java/07"
       ],
-      "instrument": "checks: handlers de logging que escriben a archivo (sin implementar)",
+      "instrument": "entorno_checks.py --rule logs",
       "threshold": "cero: el proceso escribe a stdout",
       "body": "Caules dedica una seccion a Log4J, que es la herramienta; este factor prescribe el destino, que es lo medible. La distincion se repite en todo el grafo: la tecnologia cae en pila C y la prescripcion sobre ella puede caer en A."
     },
