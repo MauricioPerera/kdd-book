@@ -1,0 +1,36 @@
+# Volcado curado de tailwindcss.com/docs (Getting started + Core concepts).
+#
+# A DIFERENCIA DE LAS OCHO FUENTES ANTERIORES, esto NO es un volcado literal de
+# todos los titulos de la fuente. El sitio tiene ~210 paginas y ~195 son
+# referencia de clases CSS (z-index, flex-basis, border-radius...), sin una
+# tecnica que prescribir. Se triajaron a mano las 13 paginas de "Getting
+# started" y "Core concepts" —las que parecian prescriptivas— ANTES de
+# construir el grafo, y de ahi salieron estos 21 nodos. El porcentaje que da
+# esta fuente mide la fraccion contractable DE LA SELECCION, no del sitio: no
+# es comparable al de las otras ocho sin decir esto.
+#
+# Formato:  <indice>| H<nivel> | <ancla> | <titulo>
+#
+# El ancla es <pagina>[#fragmento] dentro de tailwindcss.com/docs/.
+
+  1| H2 | installation                                    | Instalar Tailwind declarando el plugin y el import
+  2| H2 | editor-setup                                    | Orden de clases via el plugin de Prettier
+  3| H2 | editor-setup                                     | Eleccion de editor o IDE
+  4| H2 | compatibility                                    | Cero preprocesadores (Sass, Less, Stylus) junto con v4
+  5| H2 | compatibility#css-modules                         | Los <style> con @apply o @variant declaran @reference
+  6| H2 | compatibility#css-modules                         | Evitar CSS modules junto con Tailwind
+  7| H2 | compatibility#browser-support                     | Version minima de navegador
+  8| H2 | upgrade-guide#renamed-utilities                   | Cero utilidades v3 removidas o renombradas en el codigo
+  9| H2 | upgrade-guide#the-important-modifier              | El modificador important va al final de la clase
+ 10| H2 | upgrade-guide#variant-stacking-order              | Orden de apilado de variantes
+ 11| H2 | styling-with-utility-classes#conflicting-utility-classes | Cero utilidades en conflicto sobre la misma propiedad
+ 12| H2 | styling-with-utility-classes#using-arbitrary-values | Valores arbitrarios solo para casos puntuales
+ 13| H2 | styling-with-utility-classes#managing-duplication | No repetir stacks largos de utilidades
+ 14| H2 | hover-focus-and-other-states                      | Variantes de estado (referencia)
+ 15| H2 | responsive-design#working-mobile-first            | Utilidad sin prefijo para mobile, no el breakpoint chico
+ 16| H2 | dark-mode#toggling-dark-mode-manually             | Metodo de activacion de dark mode
+ 17| H2 | theme#theme-variables                             | Los theme tokens se declaran con @theme, top-level
+ 18| H2 | colors#working-with-colors                        | Los colores custom van bajo el namespace --color-*
+ 19| H2 | adding-custom-styles                              | Arbitrario, CSS custom o @apply: sin prescripcion explicita
+ 20| H2 | detecting-classes-in-source-files#dynamic-class-names | Nunca construir el nombre de clase por concatenacion
+ 21| H2 | functions-and-directives#reference                | Sintaxis de las directivas (referencia)

@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Ocho fuentes, 553 nodos, 130 contratos ejecutables, 134 instrumentos en doce
+Nueve fuentes, 574 nodos, 130 contratos ejecutables, 134 instrumentos en doce
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 227 pruebas propias.
 
@@ -26,11 +26,17 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Google developer documentation style guide | 80 | 52,5% | **52,5%** | 42 | 42 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
+| Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 0 | 0 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **553** | **185** | **168** | **162** | **130** |
+| **Total** | **574** | **195** | **178** | **162** | **130** |
+
+\* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
+otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
+mano de 13 paginas sobre un sitio de ~210, donde el 93% restante es referencia
+de clases CSS sin tecnica que prescribir. El detalle esta mas abajo.
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -102,10 +108,10 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 198 en pila B (tecnica real sin propiedad medible)
-y 170 en pila C (conocimiento). 38 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 204 en pila B (tecnica real sin propiedad medible)
+y 175 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
-Hay 185 tecnicas en pila A y 130 ejercicios, y la diferencia no es un pendiente:
+Hay 195 tecnicas en pila A y 130 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -138,6 +144,20 @@ del autor, si, pero de un documento cuyo proposito no es enumerar tecnicas.
 items salieron de titulos de capitulo identificados por el triaje. n es menor y
 las barras de error mas anchas. Esta dicho tambien en su nodo de procedencia,
 no solo aca.
+
+**Tailwind rompe la regla del titulo de esta seccion, y a proposito.** Su
+corpus **es una eleccion del triaje**, no una lista cerrada del autor: de las
+~210 paginas del sitio se eligieron a mano las 13 de "Getting started" y "Core
+concepts" porque parecian prescriptivas, y de ahi salieron 21 tecnicas. El 47,6%
+que da esa fuente mide la fraccion contractable **de esa seleccion**, no del
+sitio — sobre las ~210 paginas completas el numero seria mucho mas bajo que el
+de htmx, porque el 93% restante es referencia de clases CSS (`z-index`,
+`flex-basis`...) sin tecnica que prescribir, mas extremo que la mitad de htmx
+que cae en pila C. Se dejo entrar de todos modos porque el punto no era medir
+el genero "documentacion de framework": era ver si, adentro de un sitio
+dominado por referencia, la porcion que si prescribe se comporta como las otras
+ocho fuentes. Se comporta: aparecen los mismos dos pares correcto/incorrecto
+escritos por el autor que ya daban WCAG y PEP 8.
 
 ## Los hallazgos
 
@@ -320,6 +340,31 @@ igual. La razon no es obvia: **son propiedades del grafo de dependencias e
 instanciacion**, que es lo que el analisis estatico lee de forma nativa.
 "Semantico" para un humano no implica "no medible" para un parser.
 
+### 5. El autor que se molesta en escribir el error real hace el trabajo del oraculo
+
+Dos tecnicas de la seleccion curada de Tailwind traen, en el propio texto de la
+documentacion, un ejemplo del error **y** su correccion, uno al lado del otro:
+
+- `working-mobile-first` — la guia escribe el anti-patron completo:
+  `<div class="sm:text-center">` (centra solo desde 640px) contra
+  `<div class="text-center sm:text-left">` (centra en mobile, alinea a la
+  izquierda desde 640px). No hace falta inventar el caso rojo: el autor ya lo
+  escribio como advertencia.
+- `conflicting-utility-classes` explica por que dos utilidades que fijan la
+  misma propiedad CSS no "se combinan": la que gana es la que queda mas tarde
+  en la hoja generada, no la que esta mas a la derecha en el `class=""`. Es
+  exactamente el tipo de propiedad —relacion entre dos elementos del mismo
+  artefacto— que `checks.py` mide sobre Python (G33, condiciones de limite
+  repetidas) y `pep8_checks` sobre nombres.
+
+Es el mismo patron que ya daba WCAG con `sc2-1-1`/`htmx-20` —la misma pagina
+rota descrita por dos autores—: **cuando el autor se toma el trabajo de
+escribir el error real en vez de solo nombrar la regla, el oraculo del
+ejercicio ya esta escrito**, solo hay que copiarlo. Encontrarlo en una fuente
+elegida por seleccion humana y no por lista cerrada del autor sugiere que el
+patron no depende de como se armo el corpus: depende de si el autor prescribio
+con un ejemplo concreto o con una abstraccion.
+
 ## El idioma y la identidad de un nodo
 
 De los 12 campos de un nodo, **2 dependen del idioma del libro y 10 no**:
@@ -361,13 +406,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **287 de las 553**, y el reparto no es casual:
+Lo tienen **303 de las 574**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **185 de 185** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 99 de 198 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 170 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **195 de 195** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 105 de 204 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 175 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -390,14 +435,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 553 tecnicas, 136 instrumentos
+python memoria.py exportar          # -> memoria.json: 574 tecnicas, 136 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **570 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **585 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -427,7 +472,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 539 entradas -> 473 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 640 entradas -> 574 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -442,8 +487,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 473 + 66 | **473 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 473 + 66 | 539 tecnicas | 0 |
+| ids estables (`g36`) | 574 + 66 | **574 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 574 + 66 | 640 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -792,15 +837,16 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
+| Tailwind sin instrumento | 10 | la fuente entro recien. Sus 10 medibles leen HTML/JSX con clases, un artefacto que ninguna de las doce familias toca todavia: haria falta una `tailwind_checks`. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 185
-tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
-ejercicio lo tiene. Lo que queda son limites, no deudas: un artefacto que este
+**Solo la primera fila es un instrumento que falte.** Las 185 tecnicas de pila A
+de las otras ocho fuentes tienen instrumento, y toda regla que admite la forma
+de ejercicio lo tiene. El resto son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.

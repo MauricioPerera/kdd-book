@@ -1,0 +1,456 @@
+{
+  "source": {
+    "slug": "tailwind",
+    "title": "Tailwind CSS Documentation (Getting started + Core concepts)",
+    "author": "Tailwind Labs",
+    "file": "tailwindcss.com/docs",
+    "pages": 13,
+    "extracted_with": "triaje curado sobre 13 de ~210 paginas, verificado pagina por pagina",
+    "tags": [
+      "fuente",
+      "documentacion",
+      "css",
+      "tailwind"
+    ],
+    "corpus": "21 tecnicas de las 13 paginas de \"Getting started\" y \"Core concepts\", elegidas a mano de un sitio de ~210 paginas donde ~195 son referencia de clases CSS sin tecnica que prescribir. NO ES UN VOLCADO LITERAL como en las otras ocho fuentes: el porcentaje mide la fraccion contractable de esta seleccion, no la del sitio, y no es comparable sin decir esto."
+  },
+  "nodes": [
+    {
+      "id": "t01",
+      "title": "Instalar Tailwind declarando el plugin y el import",
+      "description": "Instalar Tailwind declarando el plugin y el import (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/installation",
+      "alias": [
+        "instalacion",
+        "installation",
+        "plugin de vite"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: el punto de entrada de Vite declara el plugin de Tailwind y la CSS de entrada tiene el import (sin implementar)",
+      "threshold": "el plugin y el import estan declarados"
+    },
+    {
+      "id": "t02",
+      "title": "Orden de clases via el plugin de Prettier",
+      "description": "Orden de clases via el plugin de Prettier (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/editor-setup",
+      "alias": [
+        "orden de clases",
+        "class sorting",
+        "prettier plugin"
+      ],
+      "links": [],
+      "why_not": "el plugin de Prettier fija un orden, pero esta pagina no reproduce el algoritmo —solo enlaza a una entrada de blog aparte—. Sin el algoritmo declarado en esta fuente no hay umbral que aplicar"
+    },
+    {
+      "id": "t03",
+      "title": "Eleccion de editor o IDE",
+      "description": "Eleccion de editor o IDE (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/editor-setup",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "t04",
+      "title": "Cero preprocesadores (Sass, Less, Stylus) junto con v4",
+      "description": "Cero preprocesadores (Sass, Less, Stylus) junto con v4 (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/compatibility",
+      "alias": [
+        "preprocesadores",
+        "sass",
+        "less",
+        "stylus"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: cero dependencias de Sass, Less o Stylus en un proyecto que usa Tailwind v4 (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "t05",
+      "title": "Los <style> con @apply o @variant declaran @reference",
+      "description": "Los <style> con @apply o @variant declaran @reference (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/compatibility#css-modules",
+      "alias": [
+        "@reference",
+        "css modules",
+        "style blocks"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: todo <style> con @apply o @variant declara @reference (sin implementar)",
+      "threshold": "cero bloques de estilo sin @reference",
+      "body": "La misma regla aparece en Functions and directives, bajo `@reference`: la pagina de compatibilidad la da como excepcion para Vue/Svelte y CSS modules, y la de directivas la da como sintaxis general. Un solo nodo cubre las dos."
+    },
+    {
+      "id": "t06",
+      "title": "Evitar CSS modules junto con Tailwind",
+      "description": "Evitar CSS modules junto con Tailwind (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/compatibility#css-modules",
+      "alias": [
+        "css modules"
+      ],
+      "links": [],
+      "why_not": "es una recomendacion condicional —\"no lo recomendamos si se puede evitar\"— y no una prohibicion. No hay un umbral binario que aplicarle a un condicional"
+    },
+    {
+      "id": "t07",
+      "title": "Version minima de navegador",
+      "description": "Version minima de navegador (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/compatibility#browser-support",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "t08",
+      "title": "Cero utilidades v3 removidas o renombradas en el codigo",
+      "description": "Cero utilidades v3 removidas o renombradas en el codigo (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/upgrade-guide#renamed-utilities",
+      "alias": [
+        "utilidades removidas",
+        "renamed utilities",
+        "guia de actualizacion"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: cero utilidades v3 removidas o renombradas en las plantillas (sin implementar)",
+      "threshold": "cero apariciones de la lista de utilidades removidas o renombradas"
+    },
+    {
+      "id": "t09",
+      "title": "El modificador important va al final de la clase",
+      "description": "El modificador important va al final de la clase (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/upgrade-guide#the-important-modifier",
+      "alias": [
+        "modificador important",
+        "important modifier"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: el modificador important va como sufijo, no como prefijo (sin implementar)",
+      "threshold": "cero clases con el modificador antepuesto"
+    },
+    {
+      "id": "t10",
+      "title": "Orden de apilado de variantes",
+      "description": "Orden de apilado de variantes (seccion: getting started).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "getting-started",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/upgrade-guide#variant-stacking-order",
+      "alias": [
+        "orden de variantes",
+        "variant stacking order"
+      ],
+      "links": [],
+      "why_not": "el orden depende de que variantes se combinen. No hay una regla general sin enumerar cada par de variantes, y enumerarlos seria inventar la regla en vez de leerla"
+    },
+    {
+      "id": "t11",
+      "title": "Cero utilidades en conflicto sobre la misma propiedad",
+      "description": "Cero utilidades en conflicto sobre la misma propiedad (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/styling-with-utility-classes#conflicting-utility-classes",
+      "alias": [
+        "utilidades en conflicto",
+        "conflicting utility classes"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: cero elementos con dos utilidades que fijan la misma propiedad CSS (sin implementar)",
+      "threshold": "cero conflictos por elemento"
+    },
+    {
+      "id": "t12",
+      "title": "Valores arbitrarios solo para casos puntuales",
+      "description": "Valores arbitrarios solo para casos puntuales (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/styling-with-utility-classes#using-arbitrary-values",
+      "alias": [
+        "valores arbitrarios",
+        "arbitrary values"
+      ],
+      "links": [],
+      "why_not": "cuando un valor es realmente \"puntual\" en vez de merecer un token de diseno es un juicio sobre el sistema de diseno, no una propiedad del codigo"
+    },
+    {
+      "id": "t13",
+      "title": "No repetir stacks largos de utilidades",
+      "description": "No repetir stacks largos de utilidades (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/styling-with-utility-classes#managing-duplication",
+      "alias": [
+        "duplicacion",
+        "managing duplication",
+        "DRY"
+      ],
+      "links": [
+        "codigo-limpio/g5"
+      ],
+      "why_not": "es DRY dicho de nuevo: cuanto es \"demasiado larga\" una lista de utilidades para extraerla es el mismo juicio que G5 de Codigo Limpio, y por el mismo motivo no tiene umbral",
+      "body": "Es G5 de Codigo Limpio —duplicacion— visto desde utilidades en vez de funciones. Martin tampoco le da un umbral a \"cuanto es demasiada duplicacion\": los dos autores coinciden en que es un juicio, no una propiedad que se cuenta."
+    },
+    {
+      "id": "t14",
+      "title": "Variantes de estado (referencia)",
+      "description": "Variantes de estado (referencia) (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/hover-focus-and-other-states",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "t15",
+      "title": "Utilidad sin prefijo para mobile, no el breakpoint chico",
+      "description": "Utilidad sin prefijo para mobile, no el breakpoint chico (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/responsive-design#working-mobile-first",
+      "alias": [
+        "mobile-first",
+        "working mobile-first",
+        "breakpoints"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: cero utilidades con prefijo de breakpoint chico sin la utilidad sin prefijo que las precede (sin implementar)",
+      "threshold": "cero utilidades \"mobile\" declaradas solo bajo un breakpoint"
+    },
+    {
+      "id": "t16",
+      "title": "Metodo de activacion de dark mode",
+      "description": "Metodo de activacion de dark mode (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually",
+      "alias": [
+        "dark mode",
+        "modo oscuro"
+      ],
+      "links": [],
+      "why_not": "que mecanismo de activacion conviene —preferencia del sistema, clase manual, atributo de datos— es una decision de producto, no un error que corregir"
+    },
+    {
+      "id": "t17",
+      "title": "Los theme tokens se declaran con @theme, top-level",
+      "description": "Los theme tokens se declaran con @theme, top-level (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/theme#theme-variables",
+      "alias": [
+        "theme variables",
+        "variables de tema",
+        "@theme"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: los theme tokens se declaran con @theme, en el nivel superior de la hoja (sin implementar)",
+      "threshold": "cero tokens declarados con :root o anidados"
+    },
+    {
+      "id": "t18",
+      "title": "Los colores custom van bajo el namespace --color-*",
+      "description": "Los colores custom van bajo el namespace --color-* (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/colors#working-with-colors",
+      "alias": [
+        "colores custom",
+        "custom colors",
+        "--color-*"
+      ],
+      "links": [
+        "t17"
+      ],
+      "instrument": "tailwind_checks: los colores custom usan el namespace --color-* (sin implementar)",
+      "threshold": "cero colores custom fuera del namespace",
+      "body": "Colores custom es el mismo requisito que theme variables —declarar con `@theme`, en el namespace correcto— aplicado especificamente a `--color-*`. Se separan porque el autor les dedica paginas distintas, pero comparten instrumento."
+    },
+    {
+      "id": "t19",
+      "title": "Arbitrario, CSS custom o @apply: sin prescripcion explicita",
+      "description": "Arbitrario, CSS custom o @apply: sin prescripcion explicita (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/adding-custom-styles",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "t20",
+      "title": "Nunca construir el nombre de clase por concatenacion",
+      "description": "Nunca construir el nombre de clase por concatenacion (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "tailwindcss.com/docs/detecting-classes-in-source-files#dynamic-class-names",
+      "alias": [
+        "deteccion de clases",
+        "detecting classes",
+        "nombres dinamicos"
+      ],
+      "links": [],
+      "instrument": "tailwind_checks: cero nombres de clase construidos por concatenacion o interpolacion de strings (sin implementar)",
+      "threshold": "cero clases dinamicas"
+    },
+    {
+      "id": "t21",
+      "title": "Sintaxis de las directivas (referencia)",
+      "description": "Sintaxis de las directivas (referencia) (seccion: core concepts).",
+      "type": "Concept",
+      "tags": [
+        "tailwind",
+        "core-concepts",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "tailwindcss.com/docs/functions-and-directives#reference",
+      "alias": [],
+      "links": []
+    }
+  ]
+}

@@ -21,7 +21,7 @@ import unittest
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
-          'doce-factores', 'wcag', 'pep8', 'estilo-google')
+          'doce-factores', 'wcag', 'pep8', 'estilo-google', 'tailwind')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
