@@ -1,0 +1,47 @@
+{
+  "id": "a4-idempotencia-en-lectura",
+  "node": "a4",
+  "title": "Sacar el header Idempotency-Key de una peticion GET",
+  "description": "Sacar el header Idempotency-Key de una peticion GET.",
+  "intent": "Sacar el header de idempotencia de una peticion que no lo necesita.",
+  "signature": "requests.get(url, auth=(STRIPE_KEY, \"\"))",
+  "target": "proyecto/client.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_client.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "stripe_checks.py",
+    "args": [
+      "--rule",
+      "idempotencia-en-lectura"
+    ],
+    "threshold": "cero headers Idempotency-Key en peticiones GET o DELETE"
+  },
+  "invariants": [
+    "Sigue siendo la misma funcion, el mismo GET al mismo endpoint: el oraculo pasa igual antes y despues.",
+    "Cero headers Idempotency-Key en la peticion."
+  ],
+  "examples": [
+    "`requests.get(url, headers={\"Idempotency-Key\": k})` -> no tiene efecto en un GET, en rojo.",
+    "El mismo GET sin ese header -> en verde.",
+    "El mismo header en un `requests.post(...)` no se mide: ahi la clave si tiene efecto."
+  ],
+  "do": [
+    "Sacar el header Idempotency-Key de la llamada."
+  ],
+  "dont": [
+    "Cambiar el metodo a POST en vez de sacar el header, total ahi no molesta: deja de ser el mismo GET que pide el ejercicio."
+  ],
+  "stop_if": [
+    "el proyecto no hace ninguna peticion GET o DELETE a la API de Stripe"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "a1-claves-en-codigo",
+  "node": "a1",
+  "title": "Sacar la clave secreta de Stripe del codigo fuente",
+  "description": "Sacar la clave secreta de Stripe del codigo fuente.",
+  "intent": "Reemplazar la clave literal por una lectura del entorno.",
+  "signature": "STRIPE_KEY = os.environ[\"STRIPE_KEY\"]",
+  "target": "proyecto/config.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_config.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "stripe_checks.py",
+    "args": [
+      "--rule",
+      "claves-en-codigo"
+    ],
+    "threshold": "cero claves secretas o restringidas de Stripe escritas como literal"
+  },
+  "invariants": [
+    "config.py sigue exponiendo STRIPE_KEY: el oraculo pasa igual antes y despues.",
+    "client.py no cambia: sigue importando STRIPE_KEY de config."
+  ],
+  "examples": [
+    "`STRIPE_KEY = \"sk_test_...\"` en config.py -> clave secreta embebida, en rojo.",
+    "`STRIPE_KEY = os.environ[\"STRIPE_KEY\"]` -> en verde.",
+    "Una clave publicable (`pk_...`) no se mide: esa esta pensada para vivir en el cliente."
+  ],
+  "do": [
+    "Reemplazar el literal por una lectura de variable de entorno."
+  ],
+  "dont": [
+    "Mover la resolucion de la clave a client.py y dejar config.py sin STRIPE_KEY: el problema sigue ahi, solo cambio de archivo."
+  ],
+  "stop_if": [
+    "el proyecto no declara ninguna clave de Stripe en el codigo"
+  ]
+}

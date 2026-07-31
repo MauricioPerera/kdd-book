@@ -1,0 +1,150 @@
+{
+  "source": {
+    "slug": "stripe",
+    "title": "Stripe API Reference (Using the API)",
+    "author": "Stripe",
+    "file": "docs.stripe.com/api",
+    "pages": 7,
+    "extracted_with": "triaje curado sobre 7 de ~750 paginas, verificado pagina por pagina",
+    "tags": [
+      "fuente",
+      "documentacion",
+      "api",
+      "stripe"
+    ],
+    "corpus": "7 tecnicas de las 7 paginas de \"Using the API\", elegidas a mano de un sitio de ~750 paginas donde el resto es el arbol completo de recursos (Charges, Customers, PaymentIntents...) sin tecnica que prescribir. NO ES UN VOLCADO LITERAL, y el porcentaje no es comparable ni a las ocho fuentes originales ni a Tailwind: mide la fraccion contractable de esta seleccion de 7 paginas, no la del sitio."
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "title": "Claves restringidas, nunca una clave secreta en el codigo fuente",
+      "description": "Claves restringidas, nunca una clave secreta en el codigo fuente (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "docs.stripe.com/api/authentication",
+      "alias": [
+        "restricted keys",
+        "claves restringidas",
+        "api keys",
+        "secretos en el codigo"
+      ],
+      "links": [],
+      "instrument": "stripe_checks.py --rule claves-en-codigo",
+      "threshold": "cero claves secretas o restringidas de Stripe escritas como literal"
+    },
+    {
+      "id": "a2",
+      "title": "Forma del objeto error y codigos HTTP (referencia)",
+      "description": "Forma del objeto error y codigos HTTP (referencia) (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "docs.stripe.com/api/errors",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "a3",
+      "title": "Parametros de list: limit, starting_after, ending_before (referencia)",
+      "description": "Parametros de list: limit, starting_after, ending_before (referencia) (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "docs.stripe.com/api/pagination",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "a4",
+      "title": "Cero Idempotency-Key en peticiones GET o DELETE",
+      "description": "Cero Idempotency-Key en peticiones GET o DELETE (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "docs.stripe.com/api/idempotent_requests",
+      "alias": [
+        "idempotency key",
+        "clave de idempotencia",
+        "get y delete"
+      ],
+      "links": [],
+      "instrument": "stripe_checks.py --rule idempotencia-en-lectura",
+      "threshold": "cero headers Idempotency-Key en peticiones GET o DELETE"
+    },
+    {
+      "id": "a5",
+      "title": "Expandir campos relacionados con el parametro expand",
+      "description": "Expandir campos relacionados con el parametro expand (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "docs.stripe.com/api/expanding_objects",
+      "alias": [
+        "expand",
+        "expandir respuestas"
+      ],
+      "links": [],
+      "why_not": "expandir un campo relacionado con `expand` es una capacidad opcional, no un correcto/incorrecto: no usarlo no es un defecto, solo un round trip extra. No hay umbral que aplicarle a una opcion"
+    },
+    {
+      "id": "a6",
+      "title": "Como cada SDK fija la version de API (referencia)",
+      "description": "Como cada SDK fija la version de API (referencia) (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "docs.stripe.com/api/versioning",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "a7",
+      "title": "Request-Id para soporte (referencia)",
+      "description": "Request-Id para soporte (referencia) (seccion: Using the API).",
+      "type": "Concept",
+      "tags": [
+        "stripe",
+        "using-the-api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "docs.stripe.com/api/request_ids",
+      "alias": [],
+      "links": []
+    }
+  ]
+}

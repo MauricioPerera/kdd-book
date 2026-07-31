@@ -16,9 +16,9 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Nueve fuentes, 574 nodos, 140 contratos ejecutables, 146 instrumentos en trece
+Diez fuentes, 581 nodos, 142 contratos ejecutables, 148 instrumentos en catorce
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 256 pruebas propias.
+`validate_test_commands` y las 265 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -29,14 +29,22 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 10 | 10 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
+| Stripe API Reference (seleccion curada)\*\* | 7 | 28,6% | **28,6%** | 2 | 2 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **574** | **195** | **178** | **172** | **140** |
+| **Total** | **581** | **197** | **180** | **174** | **142** |
 
 \* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
 otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
 mano de 13 paginas sobre un sitio de ~210, donde el 93% restante es referencia
 de clases CSS sin tecnica que prescribir. El detalle esta mas abajo.
+
+\*\* El numero de Stripe **es el caso mas extremo de los dos**, y tampoco es
+comparable. Es una seleccion de 7 paginas conceptuales ("Using the API") sobre
+un sitio de ~750, donde el resto es el arbol completo de recursos (Charges,
+Customers, PaymentIntents...) sin ninguna pagina prescriptiva. Sobre el sitio
+completo el numero seria muchisimo mas bajo que el de Tailwind. El detalle esta
+mas abajo.
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -108,10 +116,10 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 204 en pila B (tecnica real sin propiedad medible)
-y 175 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 205 en pila B (tecnica real sin propiedad medible)
+y 179 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
-Hay 195 tecnicas en pila A y 140 ejercicios, y la diferencia no es un pendiente:
+Hay 197 tecnicas en pila A y 142 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -406,13 +414,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **303 de las 574**, y el reparto no es casual:
+Lo tienen **306 de las 581**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **195 de 195** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 105 de 204 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 175 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **197 de 197** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 106 de 205 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 179 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -435,14 +443,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 574 tecnicas, 146 instrumentos
+python memoria.py exportar          # -> memoria.json: 581 tecnicas, 148 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **608 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **622 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -472,7 +480,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 640 entradas -> 574 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 647 entradas -> 581 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -487,8 +495,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 574 + 66 | **574 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 574 + 66 | 640 tecnicas | 0 |
+| ids estables (`g36`) | 581 + 66 | **581 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 581 + 66 | 647 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -564,7 +572,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-146 reglas en trece familias. Que varias tecnicas compartan una no es un atajo:
+148 reglas en catorce familias. Que varias tecnicas compartan una no es un atajo:
 es que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -581,6 +589,7 @@ es que preguntan lo mismo.
 | `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
 | `prosa_checks.py` | 42 | un documento de prosa (Markdown u otro texto) | coma serial, encabezados, texto de enlace, alt de imagen |
 | `tailwind_checks.py` | 10 | HTML/JSX con clases de Tailwind y CSS con `@theme` | utilidades en conflicto, mobile-first, namespace de color |
+| `stripe_checks.py` | 2 | codigo Python que llama a la API de Stripe | claves embebidas en el codigo, Idempotency-Key en GET/DELETE |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -694,6 +703,16 @@ Tres decisiones que conviene tener a la vista:
   `` className={`bg-${color}-600`} ``: hizo falta un segundo patron aparte
   para ese caso, que es ademas el mas comun de nombre de clase dinamico en
   React.
+- **`stripe_checks` es la familia mas chica del repositorio: dos reglas**, y
+  las dos son la contrapositiva de una prohibicion sin condicional del propio
+  texto de docs.stripe.com/api. La otra mitad de "Idempotent requests" -usar
+  una clave de idempotencia al crear o actualizar- es condicional ("cuando..."),
+  no una prohibicion plana, y por eso no entro en el umbral: exigirla en cada
+  POST hubiera sido inventar una regla que el texto no da sin condicion. Lee
+  codigo Python via `ast`, igual que `entorno_checks`, y declara el mismo tipo
+  de limite: una clave armada por concatenacion en vez de un literal no la ve
+  nadie, y un header de idempotencia en una variable intermedia en vez de un
+  dict inline en la llamada tampoco.
 
 ## Los ejercicios
 
@@ -820,6 +839,16 @@ el contenido de un panel en vez de resolver el conflicto de utilidades, y
 cambiar el valor del color en vez de solo su namespace — los tres ponen el
 oraculo en rojo.
 
+Los dos de Stripe son los mas chicos del repositorio, y cada uno mueve un solo
+archivo de un proyecto de dos: sacar la clave literal de `config.py` sin tocar
+`client.py`, y sacar el header de idempotencia de un `requests.get(...)` sin
+cambiar de metodo. El oraculo afirma lo que no depende de la tecnica —que
+`config.py` sigue exponiendo `STRIPE_KEY`, que `client.py` sigue siendo el
+mismo GET a `customers`— y se comprobo que frena los dos atajos que su `dont`
+prohibe: mover la clave a `client.py` en vez de resolverla en `config.py`, y
+cambiar el GET por un POST en vez de sacar el header. Los dos ponen el oraculo
+en rojo.
+
 ## El repositorio contra sus propios instrumentos
 
 Corriendo `checks` y `pep8_checks` sobre este mismo codigo aparecieron nueve
@@ -874,7 +903,7 @@ ya no hace falta.
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 195
+**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 197
 tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
 ejercicio lo tiene. El resto son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -888,12 +917,12 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Dieciseis suites, 256 pruebas, y cada suite existe por un error concreto que ya paso.
+Diecisiete suites, 265 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 140 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` · `test_stripe_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_exercises` | coherencia de los 142 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

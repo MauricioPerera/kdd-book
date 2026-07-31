@@ -1,0 +1,24 @@
+# Volcado curado de docs.stripe.com/api (seccion "Using the API").
+#
+# Corpus mas chico y mas extremo que el de Tailwind. docs.stripe.com/api tiene
+# ~750 paginas: el arbol completo de recursos (Charges, Customers,
+# PaymentIntents...) donde cada pagina lista parametros y tipos de campo, sin
+# tecnica que prescribir. Se triajaron a mano las 7 paginas de "Using the
+# API" -las conceptuales, antes del arbol de recursos- y de ahi salen estos 7
+# nodos, uno por pagina: ninguna trae mas de una tecnica.
+#
+# El porcentaje que da esta fuente mide la fraccion contractable DE LA
+# SELECCION, no del sitio: sobre el sitio completo seria muchisimo mas bajo
+# que Tailwind, no comparable a ninguna de las nueve fuentes anteriores.
+#
+# Formato:  <indice>| H<nivel> | <ancla> | <titulo>
+#
+# El ancla es <pagina> dentro de docs.stripe.com/api/.
+
+  1| H2 | authentication      | Claves restringidas, nunca una clave secreta en el codigo fuente
+  2| H2 | errors              | Forma del objeto error y codigos HTTP (referencia)
+  3| H2 | pagination          | Parametros de list: limit, starting_after, ending_before (referencia)
+  4| H2 | idempotent_requests | Cero Idempotency-Key en peticiones GET o DELETE
+  5| H2 | expanding_objects   | Expandir campos relacionados con el parametro expand
+  6| H2 | versioning          | Como cada SDK fija la version de API (referencia)
+  7| H2 | request_ids         | Request-Id para soporte (referencia)
