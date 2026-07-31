@@ -289,7 +289,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-42 reglas en seis familias. Que varias tecnicas compartan una no es un atajo: es
+44 reglas en siete familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -299,6 +299,7 @@ que preguntan lo mismo.
 | `arch_checks.py` | 6 | relaciones entre modulos | capas, instanciacion, ISP |
 | `git_checks.py` | 3 | el historial | cadencia de entregas, ramas sin integrar |
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
+| `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -319,6 +320,14 @@ Tres decisiones que conviene tener a la vista:
   igual; lo que no transfiere es la capa de medicion, que esta atada al lenguaje
   del artefacto. `html.parser` no devuelve un arbol, asi que se construye uno:
   las tres reglas preguntan por ancestros y sin arbol ninguna se puede escribir.
+- **`http_checks` no sale a la red: lee capturas.** Las dos tecnicas hablan de
+  lo que el servidor devuelve, y el proyecto prohibe red. La salida es la misma
+  que con las capas: el proyecto **declara** el artefacto, en este caso
+  intercambios capturados en el formato de la propia HTTP. Producirlos —un test,
+  un `curl -v`, un proxy— es su responsabilidad.
+  `vary` no adivina si la respuesta varia: **lo demuestra** comparando dos
+  capturas de la misma ruta, una con `HX-Request` y otra sin el. Con una sola no
+  hay nada que comparar y sale con exit 2, que es mas honesto que dar verde.
 - **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
@@ -360,11 +369,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Nueve suites de prueba, y cada una existe por un error concreto que ya paso.
+Diez suites de prueba, y cada una existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
