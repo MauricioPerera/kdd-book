@@ -27,6 +27,8 @@ Uso:
     python mutation_checks.py --rule limites --proyecto proyecto <archivo.py>
 """
 
+__all__ = ['NoVerificable', 'check_limites', 'main']
+
 import argparse
 import ast
 import copy
@@ -131,6 +133,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

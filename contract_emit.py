@@ -32,6 +32,8 @@ Uso:
     python contract_emit.py <dir_ejercicios> --out out --book codigo-limpio
 """
 
+__all__ = ['EmitError', 'emit', 'load_specs', 'main']
+
 import argparse
 import hashlib
 import json
@@ -261,6 +263,9 @@ def _merge_index(existing, block, book):
 
 
 def emit(specs, exercises_root, out_dir, book):
+    """Escribe los contratos, el arbol de conocimiento y la copia de los
+    instrumentos que van a correr.
+    """
     knowledge = os.path.join(out_dir, 'knowledge')
     contracts_dir = os.path.join(knowledge, 'contracts')
     instruments_out = os.path.join(out_dir, 'instruments')
@@ -314,6 +319,7 @@ def emit(specs, exercises_root, out_dir, book):
 
 
 def load_specs(exercises_root, book):
+    """Lee los `spec.json` de los ejercicios de una fuente, en orden."""
     root = os.path.join(exercises_root, book)
     if not os.path.isdir(root):
         raise EmitError('no existe el directorio de ejercicios: {}'.format(root))
@@ -332,6 +338,7 @@ def load_specs(exercises_root, book):
 
 
 def main(argv=None):
+    """Emite los contratos de una fuente y devuelve el exit code."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('exercises', help='raiz de ejercicios (ej: exercises)')
     parser.add_argument('--out', default='out', help='raiz del repo generado')

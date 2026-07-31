@@ -26,6 +26,17 @@ Uso:
     python arch_checks.py --list
 """
 
+__all__ = [
+    'NoVerificable',
+    'check_aop',
+    'check_capas',
+    'check_coc',
+    'check_excepciones',
+    'check_instanciacion',
+    'check_isp',
+    'main',
+]
+
 import argparse
 import ast
 import json
@@ -310,6 +321,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

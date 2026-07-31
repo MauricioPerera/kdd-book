@@ -15,6 +15,8 @@ Uso:
     python build_codigo_limpio.py <clean_code_es.txt> [-o books/codigo-limpio.json]
 """
 
+__all__ = ['build', 'extract_catalogue', 'main', 'slugify']
+
 import argparse
 import json
 import os
@@ -207,12 +209,16 @@ def extract_catalogue(text):
 
 
 def build(text):
+    """Arma el spec de la fuente a partir del volcado de titulos."""
     catalogue = extract_catalogue(text)
     missing = [c for c in list(A_NODES) + sorted(C_NODES) if c not in catalogue]
     if missing:
         raise SystemExit('ERROR: codigos no encontrados en el texto: {}'.format(missing))
 
     def sort_key(code):
+        """Ordena los codigos del autor por letra y despues por numero, para
+        que G10 no quede antes que G9.
+        """
         return (code[0], int(code[1:]))
 
     id_by_code = {}
@@ -279,6 +285,7 @@ def build(text):
 
 
 def main(argv=None):
+    """Lee el volcado de titulos, arma el JSON de la fuente y lo escribe."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('text', help='texto extraido del PDF (UTF-8)')
     parser.add_argument('-o', '--out', default=os.path.join('books', 'codigo-limpio.json'))

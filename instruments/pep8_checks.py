@@ -33,6 +33,39 @@ Uso:
     python pep8_checks.py --list
 """
 
+__all__ = [
+    'Fuente',
+    'NoVerificable',
+    'check_ambiguos',
+    'check_anotafuncion',
+    'check_anotavariable',
+    'check_ascii',
+    'check_blancos',
+    'check_bloque',
+    'check_clase',
+    'check_codificacion',
+    'check_comafinal',
+    'check_comillas',
+    'check_constante',
+    'check_docstring',
+    'check_dunder',
+    'check_enlinea',
+    'check_espacios',
+    'check_excepcion',
+    'check_funcion',
+    'check_global',
+    'check_imports',
+    'check_metodo',
+    'check_modulo',
+    'check_operador',
+    'check_operadores',
+    'check_primerarg',
+    'check_publica',
+    'check_sangria',
+    'check_tipovar',
+    'main',
+]
+
 import argparse
 import ast
 import io
@@ -127,6 +160,7 @@ class Fuente:
                                   token_mod.ENDMARKER)]
 
     def linea(self, numero):
+        """La linea pedida del archivo, o vacia si no existe."""
         return self.lineas[numero - 1] if 0 < numero <= len(self.lineas) else ''
 
 
@@ -863,6 +897,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

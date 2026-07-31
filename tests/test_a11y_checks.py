@@ -7,6 +7,8 @@ ahi tienen que salir NO-VERIFICABLE y no verde, que es la diferencia entre "no
 lo puedo medir" y "esta bien".
 """
 
+__all__ = ['A11yChecksTest']
+
 import argparse
 import json
 import os
@@ -20,8 +22,10 @@ A = contexto.instrumento('a11y_checks')
 
 
 class A11yChecksTest(unittest.TestCase):
+    """Cada regla de accesibilidad contra una pagina rota y una sana."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-a11y-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -46,17 +50,23 @@ class A11yChecksTest(unittest.TestCase):
         return A.RULES[regla][0](self._pagina(html), self._opts(**kwargs))
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(A.RULES) - probadas, set(),
                          'hay reglas de accesibilidad sin prueba')
 
     def test_todas_las_funciones_check_estan_registradas(self):
+        """Todas las funciones check estan registradas."""
         definidas = {n[len('check_'):] for n in dir(A) if n.startswith('check_')}
         self.assertEqual(definidas - set(A.RULES), set(),
                          'hay checks escritos que el instrumento no puede ejecutar')
 
     # --------------------------------------------------------- autocomplete
     def test_autocomplete_detecta_y_acepta(self):
+        """Las dos mitades de `autocomplete`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('autocomplete', '<input type="email" name="correo">\n')
         self.assertTrue(rojo, 'un campo de email sin autocomplete no se detecto')
         verde = self._correr('autocomplete',
@@ -71,12 +81,17 @@ class A11yChecksTest(unittest.TestCase):
         self.assertIn('no esta en la lista', rojo[0][1])
 
     def test_autocomplete_acepta_los_modificadores_del_criterio(self):
+        """Autocomplete acepta los modificadores del criterio."""
         verde = self._correr('autocomplete',
                              '<input autocomplete="shipping street-address">\n')
         self.assertEqual(verde, [])
 
     # -------------------------------------------------------------- autoplay
     def test_autoplay_detecta_y_acepta(self):
+        """Las dos mitades de `autoplay`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('autoplay', '<audio autoplay src="a.mp3"></audio>\n'))
         self.assertEqual(self._correr('autoplay',
                                       '<audio autoplay muted src="a.mp3"></audio>\n'), [])
@@ -85,6 +100,10 @@ class A11yChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------------- contraste
     def test_contraste_detecta_y_acepta(self):
+        """Las dos mitades de `contraste`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('contraste',
                             '<p style="color:#777;background-color:#fff">hola</p>\n')
         self.assertTrue(rojo, 'gris medio sobre blanco no llega a 4.5:1')
@@ -114,6 +133,7 @@ class A11yChecksTest(unittest.TestCase):
                         'con texto chico el minimo es 4.5:1 y ese par no llega')
 
     def test_contraste_lee_las_medidas_declaradas(self):
+        """Contraste lee las medidas declaradas."""
         ruta = self._json({'boton primario': {'color': '#888', 'fondo': '#999'}})
         rojo = self._correr('contraste', '<p>sin estilos</p>\n', medidas=ruta)
         self.assertTrue(rojo)
@@ -138,17 +158,23 @@ class A11yChecksTest(unittest.TestCase):
             self._correr('contraste', '<p>hola</p>\n')
 
     def test_contraste_avisa_si_no_sabe_leer_el_color(self):
+        """Contraste avisa si no sabe leer el color."""
         with self.assertRaises(A.NoVerificable):
             self._correr('contraste',
                          '<p style="color:rebeccapurple;background-color:#fff">a</p>\n')
 
     # -------------------------------------------------------------- etiqueta
     def test_etiqueta_detecta_y_acepta(self):
+        """Las dos mitades de `etiqueta`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('etiqueta', '<input type="text" id="a">\n'))
         self.assertEqual(self._correr('etiqueta',
                                       '<label for="a">Nombre</label><input id="a">\n'), [])
 
     def test_etiqueta_acepta_el_label_que_envuelve(self):
+        """Etiqueta acepta el label que envuelve."""
         verde = self._correr('etiqueta', '<label>Nombre <input type="text"></label>\n')
         self.assertEqual(verde, [])
 
@@ -158,6 +184,7 @@ class A11yChecksTest(unittest.TestCase):
                                      '<input type="text" placeholder="Nombre">\n'))
 
     def test_etiqueta_ignora_los_controles_que_no_piden_nada(self):
+        """Etiqueta ignora los controles que no piden nada."""
         verde = self._correr('etiqueta',
                              '<input type="hidden" name="csrf">'
                              '<input type="submit" value="Enviar">\n')
@@ -165,6 +192,10 @@ class A11yChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------ etiquetaennombre
     def test_etiquetaennombre_detecta_y_acepta(self):
+        """Las dos mitades de `etiquetaennombre`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('etiquetaennombre',
                             '<button aria-label="Enviar formulario">Buscar</button>\n')
         self.assertTrue(rojo, 'quien dice "buscar" en voz alta no activa ese boton')
@@ -174,28 +205,39 @@ class A11yChecksTest(unittest.TestCase):
         self.assertEqual(verde, [])
 
     def test_etiquetaennombre_necesita_las_dos_cosas_para_comparar(self):
+        """Etiquetaennombre necesita las dos cosas para comparar."""
         self.assertEqual(self._correr('etiquetaennombre',
                                       '<button aria-label="Cerrar"></button>\n'), [])
         self.assertEqual(self._correr('etiquetaennombre', '<button>Cerrar</button>\n'), [])
 
     # ---------------------------------------------------------------- idioma
     def test_idioma_detecta_y_acepta(self):
+        """Las dos mitades de `idioma`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('idioma', '<html><body>hola</body></html>\n'))
         self.assertEqual(self._correr('idioma',
                                       '<html lang="es-AR"><body>hola</body></html>\n'), [])
 
     def test_idioma_rechaza_lo_que_no_tiene_forma_de_etiqueta(self):
+        """Idioma rechaza lo que no tiene forma de etiqueta."""
         for malo in ('espanol', 'es_AR', '  '):
             with self.subTest(lang=malo):
                 self.assertTrue(self._correr(
                     'idioma', '<html lang="{}"><body>x</body></html>\n'.format(malo)))
 
     def test_idioma_no_mide_un_fragmento(self):
+        """Idioma no mide un fragmento."""
         with self.assertRaises(A.NoVerificable):
             self._correr('idioma', '<div>un fragmento</div>\n')
 
     # ------------------------------------------------------------ movimiento
     def test_movimiento_detecta_y_acepta(self):
+        """Las dos mitades de `movimiento`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('movimiento',
                             '<style>.x { animation: girar 2s; }</style>\n')
         self.assertTrue(rojo)
@@ -206,14 +248,20 @@ class A11yChecksTest(unittest.TestCase):
         self.assertEqual(verde, [])
 
     def test_movimiento_no_pide_nada_si_no_hay_animaciones(self):
+        """Movimiento no pide nada si no hay animaciones."""
         self.assertEqual(self._correr('movimiento', '<style>.x { color: red; }</style>\n'), [])
 
     def test_movimiento_sin_estilos_no_mide(self):
+        """Movimiento sin estilos no mide."""
         with self.assertRaises(A.NoVerificable):
             self._correr('movimiento', '<p>una pagina sin estilos</p>\n')
 
     # ------------------------------------------------------------- nombrerol
     def test_nombrerol_detecta_y_acepta(self):
+        """Las dos mitades de `nombrerol`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('nombrerol', '<div role="button"></div>\n'))
         self.assertEqual(self._correr('nombrerol', '<div role="button">Cerrar</div>\n'), [])
 
@@ -224,6 +272,7 @@ class A11yChecksTest(unittest.TestCase):
         self.assertIn('no existe', rojo[0][1])
 
     def test_nombrerol_acepta_el_aria_valido(self):
+        """Nombrerol acepta el aria valido."""
         self.assertEqual(self._correr('nombrerol', '<div aria-hidden="true">x</div>\n'), [])
 
     def test_nombrerol_no_toma_por_nombre_lo_que_nadie_ve(self):
@@ -243,31 +292,43 @@ class A11yChecksTest(unittest.TestCase):
 
     # ---------------------------------------------------------------- saltar
     def test_saltar_detecta_y_acepta(self):
+        """Las dos mitades de `saltar`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('saltar', '<body><h1>Titulo</h1></body>\n'))
         self.assertEqual(self._correr(
             'saltar', '<a href="#c">Saltar al contenido</a><div id="c">x</div>\n'), [])
 
     def test_saltar_acepta_la_region_principal(self):
+        """Saltar acepta la region principal."""
         self.assertEqual(self._correr('saltar', '<body><main>x</main></body>\n'), [])
 
     def test_saltar_no_acepta_un_enlace_a_un_ancla_inexistente(self):
+        """Saltar no acepta un enlace a un ancla inexistente."""
         self.assertTrue(self._correr('saltar', '<a href="#contenido">Saltar</a>\n'),
                         'un salto a un destino que no existe no saltea nada')
 
     # ----------------------------------------------------------------- toque
     def test_toque_detecta_y_acepta(self):
+        """Las dos mitades de `toque`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('toque', '<a style="width:16px;height:16px">x</a>\n', min=24)
         self.assertTrue(rojo)
         verde = self._correr('toque', '<a style="width:24px;height:24px">x</a>\n', min=24)
         self.assertEqual(verde, [])
 
     def test_toque_usa_el_umbral_que_se_le_pide(self):
+        """Toque usa el umbral que se le pide."""
         html = '<a style="width:24px;height:24px">x</a>\n'
         self.assertEqual(self._correr('toque', html, min=24), [])
         self.assertTrue(self._correr('toque', html, min=44),
                         'el nivel AAA pide 44 y 24 no alcanza')
 
     def test_toque_sin_nada_que_medir_no_mide(self):
+        """Toque sin nada que medir no mide."""
         with self.assertRaises(A.NoVerificable):
             self._correr('toque', '<a href="/x">sin medidas</a>\n')
 

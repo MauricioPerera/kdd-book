@@ -5,6 +5,8 @@ tienen que verificar tambien que lo deje como estaba. Un instrumento que mide
 bien pero corrompe el codigo es peor que no tenerlo.
 """
 
+__all__ = ['MutacionTest']
+
 import argparse
 import os
 import shutil
@@ -34,8 +36,10 @@ SIN_PRUEBAS = 'import unittest\n'
 
 
 class MutacionTest(unittest.TestCase):
+    """La regla de mutacion, y sus dos obligaciones extra."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-mut-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -49,6 +53,7 @@ class MutacionTest(unittest.TestCase):
         return ruta, os.path.join(ruta, 'cupos.py')
 
     def test_detecta_el_limite_sin_probar(self):
+        """Detecta el limite sin probar."""
         proyecto, objetivo = self._proyecto('rojo', SIN_LIMITE)
         sobrevivientes, total = mutation_checks.check_limites(
             objetivo, proyecto, argparse.Namespace())
@@ -58,6 +63,7 @@ class MutacionTest(unittest.TestCase):
         self.assertEqual(total, 1)
 
     def test_acepta_cuando_el_limite_esta_probado(self):
+        """Acepta cuando el limite esta probado."""
         proyecto, objetivo = self._proyecto('verde', CON_LIMITE)
         sobrevivientes, _total = mutation_checks.check_limites(
             objetivo, proyecto, argparse.Namespace())
@@ -70,11 +76,13 @@ class MutacionTest(unittest.TestCase):
             mutation_checks.check_limites(objetivo, proyecto, argparse.Namespace())
 
     def test_avisa_si_no_hay_pruebas(self):
+        """Avisa si no hay pruebas."""
         proyecto, objetivo = self._proyecto('vacia', SIN_PRUEBAS)
         with self.assertRaises(mutation_checks.NoVerificable):
             mutation_checks.check_limites(objetivo, proyecto, argparse.Namespace())
 
     def test_avisa_si_no_hay_limites_que_mutar(self):
+        """Avisa si no hay limites que mutar."""
         proyecto, objetivo = self._proyecto(
             'plana', 'import unittest\nfrom cupos import saludo\n\n\n'
                      'class T(unittest.TestCase):\n'
@@ -93,6 +101,7 @@ class MutacionTest(unittest.TestCase):
                          'el instrumento dejo el archivo mutado')
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         self.assertEqual(set(mutation_checks.RULES), {'limites'},
                          'hay reglas de mutacion sin prueba')
 

@@ -23,6 +23,8 @@ Uso:
     python okf_emit.py <nodos.json> [--out knowledge] [--dry-run]
 """
 
+__all__ = ['EmitError', 'emit', 'main']
+
 import argparse
 import json
 import os
@@ -243,6 +245,7 @@ def _render_source(source, nodes):
     total = len(nodes)
 
     def pct(value):
+        """Un porcentaje sobre el total, o "n/d" si no hay nada que dividir."""
         return '{:.1f}%'.format(100.0 * value / total) if total else 'n/d'
 
     out = []
@@ -378,6 +381,7 @@ def emit(spec, out_dir, dry_run=False):
 
 
 def main(argv=None):
+    """Emite el grafo OKF de una fuente y devuelve el exit code."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('spec', help='JSON de nodos triados')
     parser.add_argument('--out', default='knowledge', help='directorio knowledge/ destino')

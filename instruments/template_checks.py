@@ -33,6 +33,8 @@ Uso:
     python template_checks.py --list
 """
 
+__all__ = ['NoVerificable', 'check_escapado', 'main']
+
 import argparse
 import os
 import re
@@ -253,6 +255,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

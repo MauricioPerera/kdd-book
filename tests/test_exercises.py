@@ -26,6 +26,8 @@ Que el oraculo quede ciego en dos de las tres no es un defecto: es la razon de
 ser del instrumento. Si los tests bastaran, no harian falta.
 """
 
+__all__ = ['CoherenciaTest']
+
 import json
 import os
 import shutil
@@ -62,8 +64,10 @@ def _nativo(ruta):
 
 
 class CoherenciaTest(unittest.TestCase):
+    """Cada ejercicio contra su seed, su solucion y su `kind`."""
 
     def setUp(self):
+        """SetUp."""
         self.tmp = tempfile.mkdtemp(prefix='kddbook-ej-')
         self.addCleanup(shutil.rmtree, self.tmp, True)
 
@@ -108,9 +112,11 @@ class CoherenciaTest(unittest.TestCase):
         shutil.copyfile(origen, os.path.join(base, _nativo(spec.get('target', 'target.py'))))
 
     def test_hay_ejercicios(self):
+        """Hay ejercicios."""
         self.assertTrue(list(_specs()), 'no se encontro ningun ejercicio')
 
     def test_instrumento_verde_sobre_la_solucion(self):
+        """Instrumento verde sobre la solucion."""
         for nombre, spec in _specs():
             with self.subTest(ejercicio=nombre):
                 base = self._copiar(nombre)
@@ -118,6 +124,7 @@ class CoherenciaTest(unittest.TestCase):
                                  'la solucion de referencia no satisface su propio instrumento')
 
     def test_instrumento_rojo_sobre_el_seed(self):
+        """Instrumento rojo sobre el seed."""
         for nombre, spec in _specs():
             with self.subTest(ejercicio=nombre):
                 base = self._copiar(nombre)
@@ -127,12 +134,14 @@ class CoherenciaTest(unittest.TestCase):
                                  'el ejercicio ya viene hecho o el instrumento no mide')
 
     def test_el_kind_declarado_es_conocido(self):
+        """El kind declarado es conocido."""
         for nombre, spec in _specs():
             with self.subTest(ejercicio=nombre):
                 self.assertIn(spec.get('kind', 'refactor'), ORACULO_CIEGO | ORACULO_ROJO,
                               'kind desconocido: no se sabe que esperar del oraculo')
 
     def test_el_oraculo_concuerda_con_el_kind_declarado(self):
+        """El oraculo concuerda con el kind declarado."""
         for nombre, spec in _specs():
             with self.subTest(ejercicio=nombre):
                 base = self._copiar(nombre)
@@ -151,6 +160,7 @@ class CoherenciaTest(unittest.TestCase):
                         'seed: el oraculo no esta escrito contra la firma de destino')
 
     def test_el_oraculo_pasa_sobre_la_solucion(self):
+        """El oraculo pasa sobre la solucion."""
         for nombre, spec in _specs():
             with self.subTest(ejercicio=nombre):
                 base = self._copiar(nombre)

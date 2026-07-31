@@ -19,6 +19,34 @@ Uso:
     python checks.py --list
 """
 
+__all__ = [
+    'NoVerificable',
+    'check_anatomia',
+    'check_c5',
+    'check_exprops',
+    'check_f2',
+    'check_f3',
+    'check_g10',
+    'check_g12',
+    'check_g14',
+    'check_g23',
+    'check_g25',
+    'check_g28',
+    'check_g29',
+    'check_g33',
+    'check_g4',
+    'check_g5',
+    'check_g7',
+    'check_g8',
+    'check_g9',
+    'check_j2',
+    'check_metlineas',
+    'check_n5',
+    'check_n6',
+    'main',
+    'run',
+]
+
 import argparse
 import ast
 import io
@@ -678,6 +706,7 @@ ALIASES = {'g15': 'f3', 'f4': 'g9'}
 
 
 def run(rule, paths, limit):
+    """Corre una regla sobre varios archivos y devuelve sus hallazgos."""
     func, default, _label = RULES[rule]
     if limit is None:
         limit = default
@@ -692,6 +721,9 @@ def run(rule, paths, limit):
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--max', type=int, default=None)

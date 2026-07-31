@@ -7,6 +7,8 @@ Confundir "no puedo saber" con "esta limpio" es el fallo silencioso que toda
 esta familia existe para no cometer.
 """
 
+__all__ = ['ArchChecksTest']
+
 import argparse
 import os
 import shutil
@@ -26,8 +28,10 @@ def _opts(**kwargs):
 
 
 class ArchChecksTest(unittest.TestCase):
+    """Cada regla de arquitectura contra un proyecto roto y uno sano."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-arch-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -41,6 +45,7 @@ class ArchChecksTest(unittest.TestCase):
         return ruta
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(arch_checks.RULES) - probadas, set(),
                          'hay reglas de arquitectura sin prueba')
@@ -51,6 +56,10 @@ class ArchChecksTest(unittest.TestCase):
                   permite=['presentacion>negocio', 'negocio>persistencia'])
 
     def test_capas_detecta_y_acepta(self):
+        """Las dos mitades de `capas`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('capv', {
             'vistas/pantalla.py': 'from servicios.libros import Servicio\n',
             'servicios/libros.py': 'from dao.libros import LibroDAO\n\n\nclass Servicio:\n    pass\n',
@@ -68,12 +77,17 @@ class ArchChecksTest(unittest.TestCase):
         self.assertFalse(hallazgos[0][1])
 
     def test_capas_avisa_si_no_hay_capas_declaradas(self):
+        """Capas avisa si no hay capas declaradas."""
         proyecto = self._proyecto('capn', {'a.py': 'x = 1\n'})
         with self.assertRaises(arch_checks.NoVerificable):
             arch_checks.check_capas(proyecto, _opts())
 
     # ----------------------------------------------------- instanciacion
     def test_instanciacion_detecta_y_acepta(self):
+        """Las dos mitades de `instanciacion`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('insv', {
             'dao.py': 'class LibroDAO:\n    pass\n',
             'servicio.py': 'from dao import LibroDAO\n\n\nclass Servicio:\n'
@@ -102,6 +116,10 @@ class ArchChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------- excepciones
     def test_excepciones_detecta_y_acepta(self):
+        """Las dos mitades de `excepciones`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('excv', {
             'a.py': 'def f(t):\n    try:\n        return int(t)\n'
                     '    except ValueError:\n        return 0\n'})
@@ -120,6 +138,10 @@ class ArchChecksTest(unittest.TestCase):
 
     # --------------------------------------------------------------- isp
     def test_isp_detecta_y_acepta(self):
+        """Las dos mitades de `isp`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('ispv', {
             'a.py': 'class Repositorio:\n'
                     '    def buscar(self):\n        return 1\n\n\n'
@@ -141,6 +163,10 @@ class ArchChecksTest(unittest.TestCase):
 
     # --------------------------------------------------------------- aop
     def test_aop_detecta_y_acepta(self):
+        """Las dos mitades de `aop`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('aopv', {
             'negocio/tarifas.py': 'def total(x):\n    return x * 2\n'})
         self.assertEqual(
@@ -154,6 +180,7 @@ class ArchChecksTest(unittest.TestCase):
             'no detecto el logging dentro del negocio')
 
     def test_aop_avisa_si_no_se_declara_el_negocio(self):
+        """Aop avisa si no se declara el negocio."""
         proyecto = self._proyecto('aopn', {'a.py': 'x = 1\n'})
         with self.assertRaises(arch_checks.NoVerificable):
             arch_checks.check_aop(proyecto, _opts())
@@ -166,6 +193,10 @@ class ArchChecksTest(unittest.TestCase):
         return ruta
 
     def test_coc_detecta_y_acepta(self):
+        """Las dos mitades de `coc`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         esquema = self._esquema('{"Libro": ["titulo", "autor", "anio"]}')
         verde = self._proyecto('cocv', {
             'a.py': 'class Libro:\n    def __init__(self, t, a, n):\n'
@@ -180,6 +211,7 @@ class ArchChecksTest(unittest.TestCase):
                         'no detecto los campos que no siguen la convencion')
 
     def test_coc_avisa_si_no_hay_esquema(self):
+        """Coc avisa si no hay esquema."""
         proyecto = self._proyecto('cocn', {'a.py': 'x = 1\n'})
         with self.assertRaises(arch_checks.NoVerificable):
             arch_checks.check_coc(proyecto, _opts())

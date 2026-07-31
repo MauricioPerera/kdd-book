@@ -8,6 +8,8 @@ no esta escrito en ella, y un instrumento que lo adivinara diria "limpio"
 sobre una plantilla que inyecta.
 """
 
+__all__ = ['TemplateChecksTest']
+
 import argparse
 import unittest
 
@@ -27,8 +29,10 @@ def _archivos(texto, nombre='plantilla.html'):
 
 
 class TemplateChecksTest(unittest.TestCase):
+    """La regla de plantillas contra fragmentos rojos y verdes."""
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(T.RULES) - probadas, set(),
                          'hay reglas de plantillas sin prueba')
@@ -46,6 +50,7 @@ class TemplateChecksTest(unittest.TestCase):
 
     # ------------------------------------------------- jinja2 y django
     def test_escapado_acepta_el_autoescape_encendido(self):
+        """Escapado acepta el autoescape encendido."""
         verde = _archivos('<p>{{ comentario }}</p>\n')
         self.assertEqual(
             T.check_escapado(verde, _opts(motor='jinja2', autoescape='on')), [])
@@ -58,6 +63,7 @@ class TemplateChecksTest(unittest.TestCase):
         self.assertIn('salida de escape', hallazgos[0][2])
 
     def test_escapado_detecta_el_autoescape_apagado(self):
+        """Escapado detecta el autoescape apagado."""
         rojo = _archivos('<p>{{ comentario }}</p>\n')
         hallazgos = T.check_escapado(rojo, _opts(motor='jinja2', autoescape='off'))
         self.assertTrue(hallazgos, 'con autoescape off toda interpolacion entra cruda')
@@ -69,6 +75,7 @@ class TemplateChecksTest(unittest.TestCase):
             T.check_escapado(verde, _opts(motor='jinja2', autoescape='off')), [])
 
     def test_escapado_sigue_los_bloques_de_autoescape(self):
+        """Escapado sigue los bloques de autoescape."""
         texto = ('<p>{{ a }}</p>\n'
                  '{% autoescape false %}\n'
                  '<p>{{ b }}</p>\n'
@@ -80,6 +87,7 @@ class TemplateChecksTest(unittest.TestCase):
                          'el bloque tiene que abrir y CERRAR: solo b esta cruda')
 
     def test_escapado_ignora_lo_que_esta_comentado(self):
+        """Escapado ignora lo que esta comentado."""
         texto = '{# {{ viejo|safe }} #}\n<p>{{ a }}</p>\n'
         self.assertEqual(
             T.check_escapado(_archivos(texto), _opts(motor='jinja2', autoescape='on')),
@@ -117,6 +125,7 @@ class TemplateChecksTest(unittest.TestCase):
 
     # ------------------------------------------- handlebars y mustache
     def test_escapado_detecta_el_triple_stache(self):
+        """Escapado detecta el triple stache."""
         rojo = _archivos('<p>{{{ comentario }}}</p>\n')
         hallazgos = T.check_escapado(rojo, _opts(motor='handlebars'))
         self.assertTrue(hallazgos, 'no detecto el triple stache')
@@ -140,6 +149,7 @@ class TemplateChecksTest(unittest.TestCase):
         self.assertEqual(total, 1, 'el ampersand se conto dos veces')
 
     def test_escapado_detecta_el_ampersand(self):
+        """Escapado detecta el ampersand."""
         rojo = _archivos('<p>{{& comentario }}</p>\n')
         self.assertTrue(T.check_escapado(rojo, _opts(motor='mustache')))
 
@@ -160,6 +170,7 @@ class TemplateChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------ declaraciones
     def test_escapado_avisa_si_no_se_declara_el_motor(self):
+        """Escapado avisa si no se declara el motor."""
         with self.assertRaises(T.NoVerificable):
             T.check_escapado(_archivos('<p>{{ a }}</p>'), _opts())
 
@@ -181,6 +192,7 @@ class TemplateChecksTest(unittest.TestCase):
                              _opts(motor='jinja2', autoescape='on'))
 
     def test_escapado_no_cuenta_las_constantes_como_contenido_de_usuario(self):
+        """Escapado no cuenta las constantes como contenido de usuario."""
         with self.assertRaises(T.NoVerificable):
             T.check_escapado(_archivos('<p>{{ "-" }}</p>\n'),
                              _opts(motor='jinja2', autoescape='off'))

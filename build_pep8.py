@@ -45,6 +45,8 @@ Uso:
     python build_pep8.py [books/pep8-toc.txt] [-o books/pep8.json]
 """
 
+__all__ = ['build', 'leer', 'main', 'seccion_de']
+
 import argparse
 import json
 import os
@@ -229,6 +231,7 @@ _LINEA = re.compile(r'^\s*(\d+)\|\s*H(\d)\s*\|\s*(\S+)\s*\|\s*(.+?)\s*$')
 
 
 def leer(texto):
+    """Indexa el volcado de titulos por numero de entrada."""
     out = {}
     for linea in texto.splitlines():
         if linea.lstrip().startswith('#'):
@@ -240,6 +243,7 @@ def leer(texto):
 
 
 def seccion_de(indice):
+    """La seccion del documento a la que pertenece un indice."""
     for desde, hasta, nombre in SECCIONES:
         if desde <= indice <= hasta:
             return nombre
@@ -247,6 +251,7 @@ def seccion_de(indice):
 
 
 def build(texto):
+    """Arma el spec de la fuente a partir del volcado de titulos."""
     entradas = leer(texto)
     faltan = [i for i in list(A_NODES) + sorted(C_INDICES) if i not in entradas]
     if faltan:
@@ -255,6 +260,9 @@ def build(texto):
     ids = {i: 's{:02d}'.format(i) for i in entradas}
 
     def destino(t):
+        """Resuelve un enlace: si ya es texto apunta a otra fuente, y si es
+        un indice se traduce al id local.
+        """
         return t if isinstance(t, str) else ids.get(t)
 
     nodes = []
@@ -318,6 +326,7 @@ def build(texto):
 
 
 def main(argv=None):
+    """Lee el volcado de titulos, arma el JSON de la fuente y lo escribe."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('toc', nargs='?', default=os.path.join('books', 'pep8-toc.txt'))
     parser.add_argument('-o', '--out', default=os.path.join('books', 'pep8.json'))

@@ -11,6 +11,8 @@ opuestas segun el contexto, el comentario dentro de un string, la sangria de
 continuacion— traen ademas su prueba propia.
 """
 
+__all__ = ['Pep8ChecksTest']
+
 import argparse
 import os
 import shutil
@@ -63,8 +65,10 @@ CASOS = {
 
 
 class Pep8ChecksTest(unittest.TestCase):
+    """Las 27 reglas de PEP 8 contra su tabla de casos."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-pep8-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -82,17 +86,20 @@ class Pep8ChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------------ estructura
     def test_toda_regla_tiene_su_par(self):
+        """Toda regla tiene su par."""
         self.assertEqual(set(P.RULES) - set(CASOS), set(),
                          'hay reglas de PEP 8 sin caso de prueba')
         self.assertEqual(set(CASOS) - set(P.RULES), set(),
                          'hay casos de prueba para reglas que no existen')
 
     def test_todas_las_funciones_check_estan_registradas(self):
+        """Todas las funciones check estan registradas."""
         definidas = {n[len('check_'):] for n in dir(P) if n.startswith('check_')}
         self.assertEqual(definidas - set(P.RULES), set(),
                          'hay checks escritos que el instrumento no puede ejecutar')
 
     def test_cada_regla_detecta_su_rojo(self):
+        """Cada regla detecta su rojo."""
         for regla, (rojo, _verde) in sorted(CASOS.items()):
             if rojo is None:
                 continue
@@ -101,6 +108,7 @@ class Pep8ChecksTest(unittest.TestCase):
                                 'la regla no detecta su propio caso rojo')
 
     def test_cada_regla_acepta_su_verde(self):
+        """Cada regla acepta su verde."""
         for regla, (_rojo, verde) in sorted(CASOS.items()):
             if verde is None:
                 continue
@@ -130,6 +138,7 @@ class Pep8ChecksTest(unittest.TestCase):
                          'tomo por comentario un numeral que esta dentro de un string')
 
     def test_enlinea_no_confunde_un_numeral_dentro_de_un_string(self):
+        """Enlinea no confunde un numeral dentro de un string."""
         self.assertEqual(self._correr('enlinea', 'x = "a # b"\n'), [])
 
     def test_sangria_no_mide_las_lineas_de_continuacion(self):
@@ -137,12 +146,15 @@ class Pep8ChecksTest(unittest.TestCase):
         self.assertEqual(self._correr('sangria', 'x = f(1,\n      2)\n'), [])
 
     def test_bloque_acepta_la_linea_de_interprete(self):
+        """Bloque acepta la linea de interprete."""
         self.assertEqual(self._correr('bloque', '#!/usr/bin/env python3\nx = 1\n'), [])
 
     def test_comafinal_no_pide_nada_en_una_sola_linea(self):
+        """Comafinal no pide nada en una sola linea."""
         self.assertEqual(self._correr('comafinal', 'X = [1, 2]\n'), [])
 
     def test_comafinal_no_pide_nada_en_un_literal_vacio(self):
+        """Comafinal no pide nada en un literal vacio."""
         self.assertEqual(self._correr('comafinal', 'X = [\n]\n'), [])
 
     def test_comillas_no_marca_la_cadena_que_necesita_las_dos(self):
@@ -150,14 +162,17 @@ class Pep8ChecksTest(unittest.TestCase):
         self.assertEqual(self._correr('comillas', 'x = \'dice "hola" y \\\'chau\\\'\'\n'), [])
 
     def test_dunder_acepta_el_import_de_future(self):
+        """Dunder acepta el import de future."""
         codigo = 'from __future__ import annotations\n__version__ = "1"\nimport os\n'
         self.assertEqual(self._correr('dunder', codigo), [])
 
     def test_primerarg_no_le_pide_self_a_un_estatico(self):
+        """Primerarg no le pide self a un estatico."""
         codigo = 'class A:\n    @staticmethod\n    def m(x):\n        pass\n'
         self.assertEqual(self._correr('primerarg', codigo), [])
 
     def test_primerarg_le_pide_cls_a_un_metodo_de_clase(self):
+        """Primerarg le pide cls a un metodo de clase."""
         codigo = 'class A:\n    @classmethod\n    def m(self):\n        pass\n'
         self.assertTrue(self._correr('primerarg', codigo))
 
@@ -189,22 +204,27 @@ class Pep8ChecksTest(unittest.TestCase):
         self.assertEqual(self._correr('global', calculado), [])
 
     def test_docstring_no_le_pide_nada_a_lo_privado(self):
+        """Docstring no le pide nada a lo privado."""
         codigo = '"""Modulo."""\n\n\ndef _interna():\n    pass\n'
         self.assertEqual(self._correr('docstring', codigo), [])
 
     def test_publica_no_le_pide_nada_a_un_modulo_sin_api(self):
+        """Publica no le pide nada a un modulo sin api."""
         self.assertEqual(self._correr('publica', '"""M."""\n\n\ndef _x():\n    pass\n'), [])
 
     def test_modulo_mide_el_nombre_del_archivo(self):
+        """Modulo mide el nombre del archivo."""
         self.assertEqual(self._correr('modulo', 'x = 1\n', 'mi_modulo.py'), [])
         self.assertTrue(self._correr('modulo', 'x = 1\n', 'MiModulo.py'))
         self.assertTrue(self._correr('modulo', 'x = 1\n', 'mi-modulo.py'))
 
     def test_blancos_no_le_pide_nada_al_primer_metodo_de_una_clase(self):
+        """Blancos no le pide nada al primer metodo de una clase."""
         codigo = 'class A:\n    def m(self):\n        pass\n'
         self.assertEqual(self._correr('blancos', codigo), [])
 
     def test_blancos_pide_una_sola_entre_metodos(self):
+        """Blancos pide una sola entre metodos."""
         pegados = 'class A:\n    def m(self):\n        pass\n    def n(self):\n        pass\n'
         self.assertTrue(self._correr('blancos', pegados))
         separados = ('class A:\n    def m(self):\n        pass\n\n'
@@ -212,6 +232,7 @@ class Pep8ChecksTest(unittest.TestCase):
         self.assertEqual(self._correr('blancos', separados), [])
 
     def test_excepcion_solo_mira_lo_que_hereda_de_una_excepcion(self):
+        """Excepcion solo mira lo que hereda de una excepcion."""
         self.assertEqual(self._correr('excepcion', 'class Fallo:\n    pass\n'), [],
                          'una clase cualquiera no es una excepcion')
 
@@ -230,6 +251,7 @@ class Pep8ChecksTest(unittest.TestCase):
         self.assertTrue(self._correr('excepcion', 'class Fallo(ValueError):\n    pass\n'))
 
     def test_excepcion_exige_capwords_siempre(self):
+        """Excepcion exige capwords siempre."""
         self.assertTrue(self._correr('excepcion',
                                      'class mi_fallo(Exception):\n    pass\n'))
 
@@ -246,10 +268,12 @@ class Pep8ChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------------ no medible
     def test_un_archivo_que_no_compila_no_se_mide(self):
+        """Un archivo que no compila no se mide."""
         with self.assertRaises(P.NoVerificable):
             self._fuente('def f(\n')
 
     def test_un_archivo_que_no_decodifica_no_se_mide(self):
+        """Un archivo que no decodifica no se mide."""
         ruta = os.path.join(self.raiz, 'raro.py')
         with open(ruta, 'wb') as fh:
             fh.write(b'x = "\xff\xfe"\n')

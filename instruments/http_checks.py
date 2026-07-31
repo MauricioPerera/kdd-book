@@ -39,6 +39,16 @@ Uso:
     python http_checks.py --list
 """
 
+__all__ = [
+    'Intercambio',
+    'NoVerificable',
+    'capturas',
+    'check_csp',
+    'check_vary',
+    'main',
+    'parsear',
+]
+
 import argparse
 import email.parser
 import glob
@@ -61,6 +71,7 @@ class NoVerificable(Exception):
 
 
 class Intercambio:
+    """Una peticion y su respuesta, tal como se capturaron."""
     __slots__ = ('archivo', 'metodo', 'ruta', 'peticion', 'estado', 'respuesta', 'cuerpo')
 
     def __init__(self, archivo, metodo, ruta, peticion, estado, respuesta, cuerpo):
@@ -74,15 +85,23 @@ class Intercambio:
 
     @property
     def clave(self):
+        """Metodo y ruta: lo que identifica a dos capturas como la misma
+        peticion.
+        """
         return (self.metodo, self.ruta)
 
     def cabecera_peticion(self, nombre):
+        """El valor de una cabecera de la peticion."""
         return self.peticion.get(nombre)
 
     def cabecera_respuesta(self, nombre):
+        """El valor de una cabecera de la respuesta."""
         return self.respuesta.get(nombre)
 
     def huella(self):
+        """Un resumen corto del cuerpo, para decir si dos respuestas
+        difieren.
+        """
         return hashlib.sha256(self.cuerpo.encode('utf-8')).hexdigest()[:12]
 
 
@@ -123,6 +142,7 @@ def parsear(ruta):
 
 
 def capturas(rutas):
+    """Los intercambios de un directorio, en orden de nombre."""
     archivos = []
     for r in rutas:
         if os.path.isdir(r):
@@ -226,6 +246,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

@@ -7,6 +7,8 @@ entrada mas rica — y peor, los desacuerdos de triaje entre las dos fuentes
 nunca se verian, porque nada las estaria comparando.
 """
 
+__all__ = ['ConsultaTest', 'FusionTest', 'InventarioDeInstrumentosTest']
+
 import os
 import sys
 import unittest
@@ -33,8 +35,10 @@ def _memoria(tecnicas, libros=None):
 
 
 class FusionTest(unittest.TestCase):
+    """La fusion de dos memorias y que hace con cada campo."""
 
     def test_la_misma_tecnica_de_dos_ediciones_es_una_sola(self):
+        """La misma tecnica de dos ediciones es una sola."""
         es = _memoria([_tecnica('codigo-limpio/g36', 'G36: Evitar desplazamientos transitivos',
                                 alias=['ley de Demeter'])])
         en = _memoria([_tecnica('codigo-limpio/g36', 'G36: Avoid transitive navigation',
@@ -44,6 +48,7 @@ class FusionTest(unittest.TestCase):
         self.assertEqual(conflictos, [])
 
     def test_el_titulo_de_la_otra_edicion_queda_como_alias(self):
+        """El titulo de la otra edicion queda como alias."""
         es = _memoria([_tecnica('codigo-limpio/g36', 'Evitar desplazamientos transitivos')])
         en = _memoria([_tecnica('codigo-limpio/g36', 'Avoid transitive navigation')])
         fusion, _ = M.fusionar([es, en])
@@ -52,6 +57,7 @@ class FusionTest(unittest.TestCase):
                       'un titulo en otro idioma es un nombre alternativo')
 
     def test_completa_el_instrumento_que_a_una_le_falta(self):
+        """Completa el instrumento que a una le falta."""
         con = _memoria([_tecnica('codigo-limpio/g5', 'Duplicacion',
                                  instrumento='checks.py --rule g5')])
         sin = _memoria([_tecnica('codigo-limpio/g5', 'Duplication', instrumento=None)])
@@ -74,12 +80,14 @@ class FusionTest(unittest.TestCase):
                          'la primera memoria manda; el desacuerdo va al reporte')
 
     def test_los_alias_no_se_duplican_por_mayusculas(self):
+        """Los alias no se duplican por mayusculas."""
         a = _memoria([_tecnica('codigo-limpio/g36', 'x', alias=['ley de Demeter'])])
         b = _memoria([_tecnica('codigo-limpio/g36', 'x', alias=['Ley De Demeter'])])
         fusion, _ = M.fusionar([a, b])
         self.assertEqual(fusion['tecnicas'][0]['alias'], ['ley de Demeter'])
 
     def test_dos_libros_distintos_se_suman(self):
+        """Dos libros distintos se suman."""
         a = _memoria([_tecnica('codigo-limpio/g5', 'Duplicacion')])
         b = _memoria([_tecnica('scrum-xp/144', 'Codigo duplicado')],
                      libros=[{'slug': 'scrum-xp', 'titulo': 'Scrum y XP'}])
@@ -105,8 +113,10 @@ class FusionTest(unittest.TestCase):
 
 
 class ConsultaTest(unittest.TestCase):
+    """Las consultas sobre una memoria exportada."""
 
     def test_la_busqueda_ignora_acentos(self):
+        """La busqueda ignora acentos."""
         m = _memoria([_tecnica('codigo-limpio/g5', 'G5: Duplicación')])
         self.assertEqual(len(M.buscar(m, 'duplicacion')), 1)
 
@@ -119,6 +129,7 @@ class ConsultaTest(unittest.TestCase):
         self.assertEqual(len(M.buscar(m, 'demeter')), 1)
 
     def test_medibles_solo_devuelve_las_que_tienen_instrumento(self):
+        """Medibles solo devuelve las que tienen instrumento."""
         m = _memoria([_tecnica('codigo-limpio/g5', 'Duplicacion'),
                       _tecnica('codigo-limpio/g30', 'Una sola cosa', pila='B',
                                verification='none', instrumento=None)])
@@ -145,6 +156,7 @@ class InventarioDeInstrumentosTest(unittest.TestCase):
     """
 
     def test_toda_familia_del_repositorio_esta_en_la_memoria(self):
+        """Toda familia del repositorio esta en la memoria."""
         import glob
         en_disco = set()
         for ruta in glob.glob(os.path.join(RAIZ, 'instruments', '*_checks.py')):
@@ -155,6 +167,7 @@ class InventarioDeInstrumentosTest(unittest.TestCase):
                          'el bundle sale incompleto y no falla nada')
 
     def test_toda_regla_de_cada_familia_esta_en_la_memoria(self):
+        """Toda regla de cada familia esta en la memoria."""
         exportadas = {(i['script'], i['regla']) for i in M._reglas_disponibles()}
         sys.path.insert(0, os.path.join(RAIZ, 'instruments'))
         import glob

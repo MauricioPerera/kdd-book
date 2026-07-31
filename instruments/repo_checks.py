@@ -24,6 +24,17 @@ Uso:
     python repo_checks.py --list
 """
 
+__all__ = [
+    'check_aislamiento',
+    'check_e1',
+    'check_e2',
+    'check_g24',
+    'check_t1',
+    'check_t2',
+    'check_t9',
+    'main',
+]
+
 import argparse
 import ast
 import io
@@ -325,6 +336,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

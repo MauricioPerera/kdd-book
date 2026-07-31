@@ -690,11 +690,24 @@ sobre el mismo archivo, que es lo mismo que pasa entre J1 y PEP 8 con los
 imports con comodin. Se resolvio sin cancelar nada: el modulo expone una funcion
 y las suites la usan, asi que el nombre se usa de verdad.
 
-Quedan dos reglas en rojo y estan dichas, no escondidas: `docstring` (241) y
-`publica` (39). Las dos son lecturas correctas de PEP 8 y **167 de las 241 caen
-en la suite de pruebas**, donde escribir un docstring por metodo de prueba
-seria justo el relleno que uno de los ejercicios de este repositorio prohibe en
-su `dont`. Se dejan como estan, con el numero a la vista.
+**Las 27 reglas de PEP 8, mas `g4` y `g12`, quedan en verde sobre todo el
+repositorio**: los scripts, los once instrumentos y las catorce suites.
+
+Cerrar las dos ultimas dejo una observacion que vale mas que el verde. `publica`
+y `docstring` sobre el codigo de produccion pagan: 24 modulos que ahora declaran
+que exponen, y 74 funciones publicas que ahora dicen que hacen — `main`, `build`,
+`leer`, los metodos del arbol de HTML—. Sobre la suite de pruebas, en cambio,
+167 de los 241 docstrings **repiten el nombre del metodo**: un
+`test_g12_perdona_el_import_marcado_con_noqa` no gana nada con un docstring que
+diga lo mismo. Los 70 que ya existian ahi son justo los que explican una
+sutileza que el nombre no alcanza a decir.
+
+O sea: la regla es una lectura correcta de PEP 8 y su valor **depende del
+alcance**. En codigo que otro importa, un docstring es la interfaz. En una suite
+bien nombrada, es una repeticion. Queda anotado porque es el mismo patron que el
+grafo encontro en WCAG y en la clausula del sufijo `Error`: un criterio correcto
+puede pedir algo que en cierto contexto no aporta, y la unica salida honesta es
+decirlo con el numero al lado.
 
 ## Que falta, y por que
 

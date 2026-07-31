@@ -18,6 +18,8 @@ Uso:
     python params_max.py --max 3 <archivo.py> [<archivo.py> ...]
 """
 
+__all__ = ['count_params', 'main', 'measure']
+
 import argparse
 import ast
 import sys
@@ -57,6 +59,9 @@ def measure(path):
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--max', type=int, required=True)
     parser.add_argument('files', nargs='+')

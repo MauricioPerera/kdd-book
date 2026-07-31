@@ -40,6 +40,8 @@ Uso:
     python build_wcag.py [books/wcag-toc.txt] [-o books/wcag.json]
 """
 
+__all__ = ['build', 'id_de', 'leer', 'main', 'seccion_de']
+
 import argparse
 import json
 import os
@@ -184,6 +186,7 @@ _NIVEL = re.compile(r'\(Level (A{1,3})\)$')
 
 
 def leer(texto):
+    """Indexa el volcado de titulos por numero de entrada."""
     out = {}
     for linea in texto.splitlines():
         if linea.lstrip().startswith('#'):
@@ -195,6 +198,7 @@ def leer(texto):
 
 
 def seccion_de(indice):
+    """La seccion del documento a la que pertenece un indice."""
     for desde, hasta, nombre in SECCIONES:
         if desde <= indice <= hasta:
             return nombre
@@ -216,6 +220,7 @@ def id_de(referencia):
 
 
 def build(texto):
+    """Arma el spec de la fuente a partir del volcado de titulos."""
     entradas = leer(texto)
     faltan = [i for i in list(A_NODES) + sorted(C_INDICES) if i not in entradas]
     if faltan:
@@ -224,6 +229,9 @@ def build(texto):
     ids = {i: id_de(entradas[i][1]) for i in entradas}
 
     def destino(t):
+        """Resuelve un enlace: si ya es texto apunta a otra fuente, y si es
+        un indice se traduce al id local.
+        """
         return t if isinstance(t, str) else ids.get(t)
 
     nodes = []
@@ -291,6 +299,7 @@ def build(texto):
 
 
 def main(argv=None):
+    """Lee el volcado de titulos, arma el JSON de la fuente y lo escribe."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('toc', nargs='?', default=os.path.join('books', 'wcag-toc.txt'))
     parser.add_argument('-o', '--out', default=os.path.join('books', 'wcag.json'))

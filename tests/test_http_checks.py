@@ -7,6 +7,8 @@ declaradas "tener una CSP" no significa nada. Ahi tienen que salir
 NO-VERIFICABLE, no verde.
 """
 
+__all__ = ['HttpChecksTest']
+
 import argparse
 import os
 import shutil
@@ -41,8 +43,10 @@ def _captura(metodo, ruta, hx, estado, cabeceras, cuerpo):
 
 
 class HttpChecksTest(unittest.TestCase):
+    """Cada regla de HTTP contra capturas rojas y verdes."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-http-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -56,12 +60,17 @@ class HttpChecksTest(unittest.TestCase):
         return H.capturas([ruta])
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(H.RULES) - probadas, set(),
                          'hay reglas de HTTP sin prueba')
 
     # --------------------------------------------------------------- vary
     def test_vary_detecta_y_acepta(self):
+        """Las dos mitades de `vary`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         base = {'Content-Type': 'text/html'}
         rojo = self._dir('varyr', {
             'pagina.http': _captura('GET', '/lista', None, 200, base, PAGINA),
@@ -94,6 +103,10 @@ class HttpChecksTest(unittest.TestCase):
 
     # ---------------------------------------------------------------- csp
     def test_csp_detecta_y_acepta(self):
+        """Las dos mitades de `csp`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         cab = {'Content-Type': 'text/html',
                'Content-Security-Policy': "default-src 'self'; connect-src 'self'"}
         verde = self._dir('cspv', {'a.http': _captura('GET', '/', None, 200, cab, PAGINA)})
@@ -114,6 +127,7 @@ class HttpChecksTest(unittest.TestCase):
         self.assertIn('connect-src', hallazgos[0][0])
 
     def test_csp_acepta_el_meta_que_muestra_la_doc(self):
+        """Csp acepta el meta que muestra la doc."""
         cuerpo = ('<html><head><meta http-equiv="Content-Security-Policy" '
                   'content="default-src \'self\'"></head><body>x</body></html>')
         meta = self._dir('cspm', {'a.http': _captura('GET', '/', None, 200,
@@ -121,11 +135,13 @@ class HttpChecksTest(unittest.TestCase):
         self.assertEqual(H.check_csp(meta, _opts(exige=['default-src'])), [])
 
     def test_csp_ignora_lo_que_no_es_html(self):
+        """Csp ignora lo que no es html."""
         cab = {'Content-Type': 'application/json'}
         json_ = self._dir('cspj', {'a.http': _captura('GET', '/api', None, 200, cab, '{}')})
         self.assertEqual(H.check_csp(json_, _opts(exige=['default-src'])), [])
 
     def test_csp_avisa_si_no_se_declaran_directivas(self):
+        """Csp avisa si no se declaran directivas."""
         cab = {'Content-Type': 'text/html'}
         alguna = self._dir('cspn', {'a.http': _captura('GET', '/', None, 200, cab, PAGINA)})
         with self.assertRaises(H.NoVerificable):
@@ -133,6 +149,7 @@ class HttpChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------------ formato
     def test_una_captura_mal_formada_no_da_verde(self):
+        """Una captura mal formada no da verde."""
         ruta = os.path.join(self.raiz, 'mala')
         os.makedirs(ruta)
         with open(os.path.join(ruta, 'x.http'), 'w', encoding='utf-8') as fh:

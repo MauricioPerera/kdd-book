@@ -19,6 +19,8 @@ Uso:
     python build_scrum_xp.py <sxp_toc.txt> [-o books/scrum-xp.json]
 """
 
+__all__ = ['build', 'leer_marcadores', 'main', 'seccion_de', 'slugify']
+
 import argparse
 import json
 import os
@@ -235,6 +237,7 @@ _LINEA = re.compile(r'^\s*(\d+)\|\s*L(\d)\s*\|\s*(.+?)\s*\|\s*p(\d+)\s*$')
 
 
 def slugify(text, maxlen=60):
+    """Convierte un titulo en un fragmento apto para un identificador."""
     norm = unicodedata.normalize('NFKD', text)
     ascii_text = ''.join(c for c in norm if not unicodedata.combining(c)).lower()
     ascii_text = re.sub(r'[^a-z0-9]+', '-', ascii_text).strip('-')
@@ -242,6 +245,7 @@ def slugify(text, maxlen=60):
 
 
 def leer_marcadores(texto):
+    """Indexa el volcado de marcadores del PDF por numero de entrada."""
     entradas = {}
     for linea in texto.splitlines():
         m = _LINEA.match(linea)
@@ -251,6 +255,7 @@ def leer_marcadores(texto):
 
 
 def seccion_de(indice):
+    """La seccion del documento a la que pertenece un indice."""
     for desde, hasta, nombre in SECCIONES:
         if desde <= indice <= hasta:
             return nombre
@@ -258,6 +263,7 @@ def seccion_de(indice):
 
 
 def build(texto):
+    """Arma el spec de la fuente a partir del volcado de titulos."""
     entradas = leer_marcadores(texto)
     indices = [i for i in sorted(entradas) if i not in CONTENEDORES]
 
@@ -273,6 +279,9 @@ def build(texto):
         id_por_indice[indice] = '{:03d}'.format(indice)
 
     def destino(objetivo):
+        """Resuelve un enlace: si ya es texto apunta a otra fuente, y si es
+        un indice se traduce al id local.
+        """
         if isinstance(objetivo, str):
             return objetivo
         return id_por_indice.get(objetivo)
@@ -337,6 +346,7 @@ def build(texto):
 
 
 def main(argv=None):
+    """Lee el volcado de titulos, arma el JSON de la fuente y lo escribe."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('toc', help='volcado de marcadores del PDF')
     parser.add_argument('-o', '--out', default=os.path.join('books', 'scrum-xp.json'))

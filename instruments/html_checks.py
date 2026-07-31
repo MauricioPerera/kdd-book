@@ -27,6 +27,16 @@ Uso:
     python html_checks.py --list
 """
 
+__all__ = [
+    'Elemento',
+    'NoVerificable',
+    'check_csrf',
+    'check_indicador',
+    'check_progresivo',
+    'main',
+    'parsear',
+]
+
 import argparse
 import html.parser
 import os
@@ -54,6 +64,9 @@ class NoVerificable(Exception):
 
 
 class Elemento:
+    """Un elemento del documento, con su lugar en el arbol y su texto
+    propio.
+    """
     __slots__ = ('tag', 'attrs', 'padre', 'hijos', 'linea', 'texto')
 
     def __init__(self, tag, attrs, padre, linea):
@@ -71,21 +84,25 @@ class Elemento:
         self.texto = ''
 
     def ancestros(self):
+        """Los ancestros, del padre hacia la raiz."""
         actual = self.padre
         while actual is not None:
             yield actual
             actual = actual.padre
 
     def descendientes(self):
+        """Los descendientes, en profundidad."""
         for hijo in self.hijos:
             yield hijo
             for nieto in hijo.descendientes():
                 yield nieto
 
     def emite_request(self):
+        """True si el elemento lleva un verbo htmx propio."""
         return any(v in self.attrs for v in VERBOS)
 
     def clases(self):
+        """Las clases CSS declaradas, ya separadas."""
         return (self.attrs.get('class') or '').split()
 
     def texto_visible(self):
@@ -114,6 +131,7 @@ class _Arbol(html.parser.HTMLParser):
         self.todos = []
 
     def handle_starttag(self, tag, attrs):
+        """Abre un elemento y lo cuelga de su padre."""
         nodo = Elemento(tag, {k: (v if v is not None else '') for k, v in attrs},
                         self.actual, self.getpos()[0])
         self.actual.hijos.append(nodo)
@@ -122,16 +140,21 @@ class _Arbol(html.parser.HTMLParser):
             self.actual = nodo
 
     def handle_startendtag(self, tag, attrs):
+        """Un elemento que abre y cierra en la misma etiqueta."""
         nodo = Elemento(tag, {k: (v if v is not None else '') for k, v in attrs},
                         self.actual, self.getpos()[0])
         self.actual.hijos.append(nodo)
         self.todos.append(nodo)
 
     def handle_data(self, data):
+        """Acumula el texto propio del elemento abierto."""
         if data.strip():
             self.actual.texto += ' ' + data
 
     def handle_endtag(self, tag):
+        """Cierra hasta la etiqueta que corresponde, tolerando lo que quedo
+        sin cerrar.
+        """
         if tag in VACIOS:
             return
         nodo = self.actual
@@ -142,6 +165,7 @@ class _Arbol(html.parser.HTMLParser):
 
 
 def parsear(ruta):
+    """Los elementos de una pagina, en el orden en que aparecen."""
     with open(ruta, 'r', encoding='utf-8') as fh:
         contenido = fh.read()
     arbol = _Arbol()
@@ -273,6 +297,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

@@ -27,6 +27,8 @@ Uso:
     python build_arquitectura_java.py [-o books/arquitectura-java.json]
 """
 
+__all__ = ['build', 'main', 'slugify']
+
 import argparse
 import json
 import os
@@ -167,6 +169,7 @@ NOTA_CRUZADA = {
 
 
 def slugify(text, maxlen=52):
+    """Convierte un titulo en un fragmento apto para un identificador."""
     norm = unicodedata.normalize('NFKD', text)
     ascii_text = ''.join(c for c in norm if not unicodedata.combining(c)).lower()
     ascii_text = re.sub(r'[^a-z0-9]+', '-', ascii_text).strip('-')
@@ -175,9 +178,13 @@ def slugify(text, maxlen=52):
 
 def build():
     # El id es el numero de capitulo y nada mas. Ver ADR abajo.
+    """Arma el spec de la fuente a partir del volcado de titulos."""
     id_por_indice = {i: '{:02d}'.format(i) for i, _t, _ in ITEMS}
 
     def destino(objetivo):
+        """Resuelve un enlace: si ya es texto apunta a otra fuente, y si es
+        un indice se traduce al id local.
+        """
         return objetivo if isinstance(objetivo, str) else id_por_indice.get(objetivo)
 
     nodes = []
@@ -229,6 +236,7 @@ def build():
 
 
 def main(argv=None):
+    """Lee el volcado de titulos, arma el JSON de la fuente y lo escribe."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('-o', '--out',
                         default=os.path.join('books', 'arquitectura-java.json'))

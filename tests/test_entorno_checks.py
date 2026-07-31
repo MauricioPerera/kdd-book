@@ -6,6 +6,8 @@ declaracion —el manifiesto de dependencias y los despliegues— traen ademas e
 caso en que falta: ahi tienen que salir NO-VERIFICABLE y no verde.
 """
 
+__all__ = ['EntornoChecksTest']
+
 import argparse
 import os
 import shutil
@@ -18,8 +20,10 @@ E = contexto.instrumento('entorno_checks')
 
 
 class EntornoChecksTest(unittest.TestCase):
+    """Cada regla de entorno contra un proyecto roto y uno sano."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-ent-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -41,17 +45,23 @@ class EntornoChecksTest(unittest.TestCase):
         return E.RULES[regla][0](E._fuentes(self.raiz), self._opts(**kwargs))
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(E.RULES) - probadas, set(),
                          'hay reglas de entorno sin prueba')
 
     def test_todas_las_funciones_check_estan_registradas(self):
+        """Todas las funciones check estan registradas."""
         definidas = {n[len('check_'):] for n in dir(E) if n.startswith('check_')}
         self.assertEqual(definidas - set(E.RULES), set(),
                          'hay checks escritos que el instrumento no puede ejecutar')
 
     # -------------------------------------------------------- dependencias
     def test_dependencias_detecta_y_acepta(self):
+        """Las dos mitades de `dependencias`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('dependencias',
                             {'app.py': 'import os\nimport requests\n',
                              'requirements.txt': 'flask==3.0\n'},
@@ -66,6 +76,7 @@ class EntornoChecksTest(unittest.TestCase):
         self.assertEqual(verde, [])
 
     def test_dependencias_no_marca_la_stdlib_ni_lo_local(self):
+        """Dependencias no marca la stdlib ni lo local."""
         verde = self._correr('dependencias',
                              {'app.py': 'import json\nimport util\nfrom . import x\n',
                               'util.py': 'X = 1\n',
@@ -74,6 +85,7 @@ class EntornoChecksTest(unittest.TestCase):
         self.assertEqual(verde, [], 'marco stdlib, un modulo local o un import relativo')
 
     def test_dependencias_sin_manifiesto_declarado_no_mide(self):
+        """Dependencias sin manifiesto declarado no mide."""
         with self.assertRaises(E.NoVerificable):
             self._correr('dependencias', {'app.py': 'import requests\n'})
 
@@ -86,6 +98,10 @@ class EntornoChecksTest(unittest.TestCase):
 
     # --------------------------------------------------------------- config
     def test_config_detecta_y_acepta(self):
+        """Las dos mitades de `config`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('config', {'app.py': 'API_KEY = "sk-abc123"\n'})
         self.assertTrue(rojo, 'no detecto la credencial escrita en el codigo')
 
@@ -98,11 +114,16 @@ class EntornoChecksTest(unittest.TestCase):
         self.assertEqual(self._correr('config', {'app.py': 'TOKEN = ""\n'}), [])
 
     def test_config_acepta_nombres_declarados_por_el_proyecto(self):
+        """Config acepta nombres declarados por el proyecto."""
         self.assertEqual(self._correr('config', {'app.py': 'PEPE = "x"\n'}), [])
         self.assertTrue(self._correr('config', {'app.py': 'PEPE = "x"\n'}, nombre=['pepe']))
 
     # ------------------------------------------------------------ servicios
     def test_servicios_detecta_y_acepta(self):
+        """Las dos mitades de `servicios`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('servicios',
                             {'app.py': 'DB = "postgres://u:p@localhost/db"\n'})
         self.assertTrue(rojo, 'no detecto el locator escrito en el codigo')
@@ -117,6 +138,10 @@ class EntornoChecksTest(unittest.TestCase):
 
     # --------------------------------------------------------------- puerto
     def test_puerto_detecta_y_acepta(self):
+        """Las dos mitades de `puerto`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._correr('puerto',
                              {'app.py': 'import socket\ns = socket.socket()\n'
                                         's.bind(("0.0.0.0", 8000))\n'})
@@ -128,6 +153,10 @@ class EntornoChecksTest(unittest.TestCase):
 
     # -------------------------------------------------------------- paridad
     def test_paridad_detecta_y_acepta(self):
+        """Las dos mitades de `paridad`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         archivos = {'app.py': 'X = 1\n',
                     'dev.yml': 'services:\n  db:\n    image: postgres:14\n',
                     'prod.yml': 'services:\n  db:\n    image: postgres:16\n'}
@@ -141,6 +170,7 @@ class EntornoChecksTest(unittest.TestCase):
                                       despliegue=['dev=dev.yml', 'prod=prod.yml']), [])
 
     def test_paridad_detecta_el_servicio_que_falta_en_un_despliegue(self):
+        """Paridad detecta el servicio que falta en un despliegue."""
         rojo = self._correr('paridad',
                             {'app.py': 'X = 1\n',
                              'dev.yml': 'image: postgres:14\nimage: redis:7\n',
@@ -156,6 +186,7 @@ class EntornoChecksTest(unittest.TestCase):
                          despliegue=['dev=dev.yml'])
 
     def test_paridad_avisa_si_el_despliegue_no_declara_imagenes(self):
+        """Paridad avisa si el despliegue no declara imagenes."""
         with self.assertRaises(E.NoVerificable):
             self._correr('paridad',
                          {'app.py': 'X = 1\n', 'a.yml': 'nada: aca\n',
@@ -164,10 +195,15 @@ class EntornoChecksTest(unittest.TestCase):
 
     # ----------------------------------------------------------- daemonizar
     def test_daemonizar_detecta_y_acepta(self):
+        """Las dos mitades de `daemonizar`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         self.assertTrue(self._correr('daemonizar', {'app.py': 'import os\nos.fork()\n'}))
         self.assertEqual(self._correr('daemonizar', {'app.py': 'print("hola")\n'}), [])
 
     def test_daemonizar_detecta_el_archivo_pid(self):
+        """Daemonizar detecta el archivo pid."""
         rojo = self._correr('daemonizar', {'app.py': 'open("/var/run/app.pid", "w")\n'})
         self.assertTrue(rojo, 'no detecto la escritura del archivo PID')
 
@@ -186,6 +222,10 @@ class EntornoChecksTest(unittest.TestCase):
 
     # -------------------------------------------------------------- sigterm
     def test_sigterm_detecta_y_acepta(self):
+        """Las dos mitades de `sigterm`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._correr('sigterm',
                              {'app.py': 'import signal\n'
                                         'signal.signal(signal.SIGTERM, lambda *a: None)\n'})
@@ -193,6 +233,7 @@ class EntornoChecksTest(unittest.TestCase):
         self.assertTrue(self._correr('sigterm', {'app.py': 'print("hola")\n'}))
 
     def test_sigterm_no_se_conforma_con_cualquier_senial(self):
+        """Sigterm no se conforma con cualquier senial."""
         rojo = self._correr('sigterm',
                             {'app.py': 'import signal\n'
                                        'signal.signal(signal.SIGINT, lambda *a: None)\n'})
@@ -200,6 +241,10 @@ class EntornoChecksTest(unittest.TestCase):
 
     # ----------------------------------------------------------------- logs
     def test_logs_detecta_y_acepta(self):
+        """Las dos mitades de `logs`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         rojo = self._correr('logs', {'app.py': 'import logging\n'
                                                'h = logging.FileHandler("app.log")\n'})
         self.assertTrue(rojo, 'no detecto el handler a archivo')
@@ -207,6 +252,7 @@ class EntornoChecksTest(unittest.TestCase):
                                                          'logging.basicConfig()\n'}), [])
 
     def test_logs_detecta_el_basicconfig_con_filename(self):
+        """Logs detecta el basicconfig con filename."""
         rojo = self._correr('logs', {'app.py': 'import logging\n'
                                                'logging.basicConfig(filename="a.log")\n'})
         self.assertTrue(rojo)

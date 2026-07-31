@@ -30,6 +30,15 @@ Uso:
     python git_checks.py --list
 """
 
+__all__ = [
+    'check_cadencia',
+    'check_codebase',
+    'check_releaseid',
+    'check_repounico',
+    'check_tddorden',
+    'main',
+]
+
 import argparse
 import datetime
 import os
@@ -233,6 +242,9 @@ SIN_REPO_ES_HALLAZGO = ('codebase',)
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

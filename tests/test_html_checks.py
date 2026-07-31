@@ -6,6 +6,8 @@ de una declaracion —el nombre del header CSRF— traen ademas el caso en que
 falta: ahi tienen que salir NO-VERIFICABLE y no verde.
 """
 
+__all__ = ['HtmlChecksTest']
+
 import argparse
 import os
 import shutil
@@ -24,8 +26,10 @@ def _opts(**kwargs):
 
 
 class HtmlChecksTest(unittest.TestCase):
+    """Cada regla de HTML contra un fragmento rojo y uno verde."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-html-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -36,6 +40,7 @@ class HtmlChecksTest(unittest.TestCase):
         return H.parsear(ruta)
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(H.RULES) - probadas, set(),
                          'hay reglas de HTML sin prueba')
@@ -43,6 +48,10 @@ class HtmlChecksTest(unittest.TestCase):
     # --------------------------------------------------------- progresivo
     def test_progresivo_detecta_y_acepta(self):
         # el ejemplo de la documentacion: hx-boost sobre un ancla con destino
+        """Las dos mitades de `progresivo`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._elementos(
             '<div hx-boost="true">\n  <a href="/blog">Blog</a>\n</div>\n')
         self.assertEqual(H.check_progresivo(verde, _opts()), [])
@@ -61,6 +70,10 @@ class HtmlChecksTest(unittest.TestCase):
 
     # --------------------------------------------------------------- csrf
     def test_csrf_detecta_y_acepta(self):
+        """Las dos mitades de `csrf`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._elementos(
             '<body hx-headers=\'{"X-CSRF-TOKEN": "abc"}\'>\n'
             '  <button hx-post="/x">Enviar</button>\n</body>\n')
@@ -88,17 +101,23 @@ class HtmlChecksTest(unittest.TestCase):
         self.assertEqual(H.check_csrf(con_input, _opts(token='X-CSRF-TOKEN')), [])
 
     def test_csrf_avisa_si_no_se_declara_el_header(self):
+        """Csrf avisa si no se declara el header."""
         elementos = self._elementos('<button hx-post="/x">x</button>')
         with self.assertRaises(H.NoVerificable):
             H.check_csrf(elementos, _opts())
 
     def test_csrf_avisa_si_no_hay_peticiones_que_verificar(self):
+        """Csrf avisa si no hay peticiones que verificar."""
         elementos = self._elementos('<p>una pagina sin htmx</p>')
         with self.assertRaises(H.NoVerificable):
             H.check_csrf(elementos, _opts(token='X-CSRF-TOKEN'))
 
     # ---------------------------------------------------------- indicador
     def test_indicador_detecta_y_acepta(self):
+        """Las dos mitades de `indicador`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._elementos(
             '<button hx-get="/x" hx-indicator="#spin">Ir</button>\n')
         self.assertEqual(H.check_indicador(verde, _opts()), [])

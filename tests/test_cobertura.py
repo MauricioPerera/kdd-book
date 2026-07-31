@@ -10,6 +10,8 @@ test obliga a mantener exacta —falla tanto si sobra como si falta— es un
 inventario.
 """
 
+__all__ = ['CoberturaTest', 'IdentidadTest']
+
 import glob
 import re
 import json
@@ -143,6 +145,7 @@ class IdentidadTest(unittest.TestCase):
     ID_ESTABLE = re.compile(r'^[a-z]{0,4}\d{1,3}(?:-\d{1,3}){0,2}$')
 
     def test_los_ids_no_llevan_prosa(self):
+        """Los ids no llevan prosa."""
         for libro in LIBROS:
             with open(os.path.join(RAIZ, 'books', libro + '.json'),
                       encoding='utf-8') as fh:
@@ -193,6 +196,7 @@ class IdentidadTest(unittest.TestCase):
                         'encontrar desde otro idioma ni cruzar con otro libro')
 
     def test_los_enlaces_cruzados_usan_ids_estables(self):
+        """Los enlaces cruzados usan ids estables."""
         for libro in LIBROS:
             with open(os.path.join(RAIZ, 'books', libro + '.json'),
                       encoding='utf-8') as fh:
@@ -207,8 +211,10 @@ class IdentidadTest(unittest.TestCase):
 
 
 class CoberturaTest(unittest.TestCase):
+    """El inventario de instrumentos con y sin ejercicio."""
 
     def test_toda_tecnica_con_instrumento_tiene_ejercicio(self):
+        """Toda tecnica con instrumento tiene ejercicio."""
         ejercitados = _instrumentos_ejercitados()
         sin_cubrir = {(script, regla)
                       for _libro, _nodo, script, regla in _tecnicas_con_script()
@@ -220,6 +226,7 @@ class CoberturaTest(unittest.TestCase):
             'declaraciones que ya no hacen falta')
 
     def test_cada_excepcion_declara_su_motivo(self):
+        """Cada excepcion declara su motivo."""
         for clave, motivo in list(SIN_EJERCICIO.items()) + list(PENDIENTE.items()):
             self.assertTrue(motivo and len(motivo) > 20,
                             'la excepcion {} no explica por que'.format(clave))

@@ -24,6 +24,8 @@ Uso:
     python instruments/gate.py <dir_ejercicio>
 """
 
+__all__ = ['main']
+
 import json
 import os
 import subprocess
@@ -37,6 +39,9 @@ def _run(cmd, cwd):
 
 
 def main(argv=None):
+    """Corre el oraculo y despues el instrumento, y devuelve el exit code
+    que los distingue.
+    """
     argv = sys.argv[1:] if argv is None else argv
     if len(argv) != 1:
         print('NO-VERIFICABLE: uso: gate.py <dir_ejercicio>')

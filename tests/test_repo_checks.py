@@ -5,6 +5,8 @@ minimos en un directorio temporal en vez de simular. Si el instrumento se
 puede enganar con un proyecto de juguete, se puede enganar con uno real.
 """
 
+__all__ = ['RepoChecksTest']
+
 import argparse
 import os
 import shutil
@@ -92,8 +94,10 @@ def _opts(**kwargs):
 
 
 class RepoChecksTest(unittest.TestCase):
+    """Cada regla de nivel repo contra un proyecto armado al vuelo."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -108,6 +112,7 @@ class RepoChecksTest(unittest.TestCase):
         return os.path.join(ruta, 'tareas.py')
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n[len('test_'):].split('_')[0] for n in dir(self)
                     if n.startswith('test_') and n[len('test_'):].split('_')[0]
                     in repo_checks.RULES}
@@ -115,6 +120,10 @@ class RepoChecksTest(unittest.TestCase):
                          'hay reglas de nivel repo sin prueba')
 
     def test_aislamiento_detecta_y_acepta(self):
+        """Las dos mitades de `aislamiento`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('aisv', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_aislamiento(verde, _opts()), [])
 
@@ -142,12 +151,20 @@ class RepoChecksTest(unittest.TestCase):
                         'no detecto la prueba que depende de otra')
 
     def test_e1_detecta_y_acepta(self):
+        """Las dos mitades de `e1`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('e1v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_e1(verde, _opts()), [])
         rojo = self._proyecto('e1r', _tareas('test', 'coverage'))
         self.assertTrue(repo_checks.check_e1(rojo, _opts()))
 
     def test_e2_detecta_y_acepta(self):
+        """Las dos mitades de `e2`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('e2v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_e2(verde, _opts(min_tests=2)), [])
         rojo = self._proyecto('e2r', TAREAS_SIN_TEST)
@@ -159,6 +176,10 @@ class RepoChecksTest(unittest.TestCase):
         self.assertTrue(repo_checks.check_e2(rojo, _opts(min_tests=5)))
 
     def test_t1_detecta_y_acepta(self):
+        """Las dos mitades de `t1`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('t1v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_t1(verde, _opts(min_coverage=80)), [])
         rojo = self._proyecto('t1r', TAREAS_COMPLETO, prueba=TEST_QUE_NO_TOCA_LA_FUENTE)
@@ -173,6 +194,10 @@ class RepoChecksTest(unittest.TestCase):
         self.assertEqual(repo_checks.check_t1(verde, _opts(min_coverage=100)), [])
 
     def test_t2_detecta_y_acepta(self):
+        """Las dos mitades de `t2`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('t2v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_t2(verde, _opts()), [])
         sin_tarea = _tareas('build', 'test')
@@ -187,12 +212,20 @@ class RepoChecksTest(unittest.TestCase):
         self.assertTrue(repo_checks.check_t2(self._proyecto('t2m', muda), _opts()))
 
     def test_t9_detecta_y_acepta(self):
+        """Las dos mitades de `t9`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('t9v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_t9(verde, _opts(max_seconds=30)), [])
         rojo = self._proyecto('t9r', TAREAS_COMPLETO, prueba=TEST_LENTO)
         self.assertTrue(repo_checks.check_t9(rojo, _opts(max_seconds=0.2)))
 
     def test_g24_detecta_y_acepta(self):
+        """Las dos mitades de `g24`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._proyecto('g24v', TAREAS_COMPLETO)
         self.assertEqual(repo_checks.check_g24(verde, _opts()), [])
         rojo = self._proyecto('g24r', TAREAS_COMPLETO,

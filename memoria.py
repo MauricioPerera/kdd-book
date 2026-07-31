@@ -35,6 +35,8 @@ Uso:
     python memoria.py aplicar mi_modulo.py
 """
 
+__all__ = ['aplicar', 'buscar', 'exportar', 'fusionar', 'main', 'medibles']
+
 import argparse
 import glob
 import json
@@ -118,6 +120,9 @@ def _reglas_disponibles():
 
 
 def exportar(destino):
+    """Escribe la memoria portable: tecnicas, instrumentos disponibles y
+    contratos.
+    """
     contratos = _contratos_por_nodo()
     libros, tecnicas = [], []
     for ruta in sorted(glob.glob(os.path.join(AQUI, 'books', '*.json'))):
@@ -193,6 +198,9 @@ def _plegar(texto):
 
 
 def buscar(memoria, texto):
+    """Las tecnicas cuyo titulo, alias o tags coinciden con la consulta,
+    ignorando caja y acentos.
+    """
     texto = _plegar(texto)
     return [t for t in memoria['tecnicas']
             if texto in _plegar(t['titulo'])
@@ -202,6 +210,7 @@ def buscar(memoria, texto):
 
 
 def medibles(memoria):
+    """Las tecnicas que declaran instrumento."""
     return [t for t in memoria['tecnicas'] if t['verification'] == 'instrumented'
             and t.get('instrumento')]
 
@@ -342,6 +351,7 @@ def aplicar(memoria, archivo):
 # ---------------------------------------------------------------------------
 
 def main(argv=None):
+    """Despacha la accion pedida y devuelve el exit code."""
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('accion', choices=('exportar', 'buscar', 'medibles',
                                           'aplicar', 'fusionar'))

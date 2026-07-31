@@ -49,6 +49,20 @@ Uso:
     python a11y_checks.py --list
 """
 
+__all__ = [
+    'check_autocomplete',
+    'check_autoplay',
+    'check_contraste',
+    'check_etiqueta',
+    'check_etiquetaennombre',
+    'check_idioma',
+    'check_movimiento',
+    'check_nombrerol',
+    'check_saltar',
+    'check_toque',
+    'main',
+]
+
 import argparse
 import json
 import os
@@ -521,6 +535,9 @@ RULES = {
 
 
 def main(argv=None):
+    """Corre la regla pedida sobre los archivos dados y devuelve el exit
+    code.
+    """
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')

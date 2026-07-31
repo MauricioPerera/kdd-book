@@ -6,6 +6,8 @@ cada regla necesita las dos pruebas: que detecte lo que dice detectar, y que no
 grite sobre codigo conforme.
 """
 
+__all__ = ['InstrumentosTest']
+
 import ast
 import unittest
 
@@ -129,12 +131,14 @@ CASOS = [
 
 
 class InstrumentosTest(unittest.TestCase):
+    """Cada regla de `checks` contra su caso rojo y su caso verde."""
 
     def _correr(self, rule, source, limit):
         func = checks.RULES[rule][0]
         return func(ast.parse(source), source, limit)
 
     def test_todas_las_reglas_estan_cubiertas(self):
+        """Todas las reglas estan cubiertas."""
         cubiertas = {caso[0] for caso in CASOS}
         self.assertEqual(cubiertas, set(checks.RULES),
                          'hay reglas registradas sin caso de prueba')
@@ -153,6 +157,7 @@ class InstrumentosTest(unittest.TestCase):
                          'hay checks definidos que no estan en RULES: no miden nada')
 
     def test_los_alias_apuntan_a_reglas_reales(self):
+        """Los alias apuntan a reglas reales."""
         for alias, destino in checks.ALIASES.items():
             self.assertIn(destino, checks.RULES,
                           'el alias {} apunta a {} que no existe'.format(alias, destino))
@@ -167,12 +172,14 @@ class InstrumentosTest(unittest.TestCase):
             self._correr('g9', 'def sola():\n    return 1\n', 0)
 
     def test_rojo_dispara(self):
+        """Rojo dispara."""
         for rule, limit, rojo, _verde in CASOS:
             with self.subTest(regla=rule):
                 self.assertTrue(self._correr(rule, rojo, limit),
                                 'la regla {} no detecto su propio caso rojo'.format(rule))
 
     def test_verde_no_dispara(self):
+        """Verde no dispara."""
         for rule, limit, _rojo, verde in CASOS:
             with self.subTest(regla=rule):
                 self.assertEqual(self._correr(rule, verde, limit), [],

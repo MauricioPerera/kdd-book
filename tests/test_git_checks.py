@@ -5,6 +5,8 @@ salida de git. Un instrumento que solo se probo contra una cadena inventada no
 sabe nada del formato real.
 """
 
+__all__ = ['GitChecksTest']
+
 import argparse
 import os
 import shutil
@@ -24,8 +26,10 @@ def _opts(**kwargs):
 
 
 class GitChecksTest(unittest.TestCase):
+    """Cada regla de git contra repositorios armados en temporales."""
 
     def setUp(self):
+        """SetUp."""
         self.raiz = tempfile.mkdtemp(prefix='kddbook-git-')
         self.addCleanup(shutil.rmtree, self.raiz, True)
 
@@ -57,11 +61,16 @@ class GitChecksTest(unittest.TestCase):
                        cwd=repo, env=entorno, capture_output=True, text=True)
 
     def test_todas_las_reglas_tienen_prueba(self):
+        """Todas las reglas tienen prueba."""
         probadas = {n.split('_')[1] for n in dir(self) if n.startswith('test_')}
         self.assertEqual(set(git_checks.RULES) - probadas, set(),
                          'hay reglas de git sin prueba')
 
     def test_cadencia_detecta_y_acepta(self):
+        """Las dos mitades de `cadencia`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._repo('cadv')
         self._commit(verde, 'a.txt', '1\n', '2026-01-01T10:00:00')
         self._tag(verde, 'v1', '2026-01-01T10:00:00')
@@ -88,6 +97,10 @@ class GitChecksTest(unittest.TestCase):
         self.assertTrue(hallazgos[0][1], 'deberia ser no-verificable, no rojo')
 
     def test_repounico_detecta_y_acepta(self):
+        """Las dos mitades de `repounico`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._repo('repv')
         self._commit(verde, 'a.txt', '1\n', '2026-01-01T10:00:00')
         self.assertEqual(git_checks.check_repounico(verde, _opts()), [])
@@ -101,6 +114,10 @@ class GitChecksTest(unittest.TestCase):
                         'no detecto la rama con commits sin integrar')
 
     def test_tddorden_detecta_y_acepta(self):
+        """Las dos mitades de `tddorden`: dispara sobre el caso roto y calla
+        sobre el sano. Con una sola, un instrumento que nunca dispara
+        pasaria igual.
+        """
         verde = self._repo('tddv')
         self._commit(verde, 'test_x.py', 'assert True\n', '2026-01-01T10:00:00')
         self._commit(verde, 'x.py', 'x = 1\n', '2026-01-02T10:00:00')
@@ -117,6 +134,7 @@ class GitChecksTest(unittest.TestCase):
         self.assertFalse(hallazgos[0][1], 'deberia ser rojo, no no-verificable')
 
     def test_tddorden_avisa_si_el_archivo_no_esta_en_el_historial(self):
+        """Tddorden avisa si el archivo no esta en el historial."""
         repo = self._repo('tddn')
         self._commit(repo, 'x.py', 'x = 1\n', '2026-01-01T10:00:00')
         hallazgos = git_checks.check_tddorden(
@@ -127,6 +145,7 @@ class GitChecksTest(unittest.TestCase):
 
     # ------------------------------------------------------------ codebase
     def test_codebase_acepta_un_repositorio_solo(self):
+        """Codebase acepta un repositorio solo."""
         repo = self._repo('uno')
         self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
         self.assertEqual(git_checks.check_codebase(repo, _opts()), [])
@@ -153,6 +172,7 @@ class GitChecksTest(unittest.TestCase):
         self.assertEqual(git_checks.main(['--rule', 'codebase', suelto]), 1)
 
     def test_codebase_detecta_otro_codebase_adentro(self):
+        """Codebase detecta otro codebase adentro."""
         repo = self._repo('padre')
         self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
         hijo = os.path.join(repo, 'vendor', 'lib')
@@ -164,6 +184,7 @@ class GitChecksTest(unittest.TestCase):
 
     # ----------------------------------------------------------- releaseid
     def test_releaseid_acepta_una_marca_por_estado(self):
+        """Releaseid acepta una marca por estado."""
         repo = self._repo('releases')
         self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
         self._tag(repo, 'v1', '2024-01-01T10:00:00')
@@ -172,6 +193,7 @@ class GitChecksTest(unittest.TestCase):
         self.assertEqual(git_checks.check_releaseid(repo, _opts()), [])
 
     def test_releaseid_marca_el_repositorio_sin_ninguna_marca(self):
+        """Releaseid marca el repositorio sin ninguna marca."""
         repo = self._repo('sin-tags')
         self._commit(repo, 'a.py', 'X = 1\n', '2024-01-01T10:00:00')
         hallazgos = git_checks.check_releaseid(repo, _opts())

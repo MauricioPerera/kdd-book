@@ -11,6 +11,8 @@ queda entero. Se importa por su efecto, que es la unica razon por la que un
 import puede no usarse.
 """
 
+__all__ = ['instrumento']
+
 import os
 import sys
 
