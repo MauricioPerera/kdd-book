@@ -1,0 +1,47 @@
+{
+  "id": "s04-sangria",
+  "node": "s04",
+  "title": "Llevar la sangria a cuatro espacios por nivel",
+  "description": "Llevar la sangria a cuatro espacios por nivel.",
+  "intent": "Sangrar con cuatro espacios por nivel.",
+  "signature": "def total(precios):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "sangria"
+    ],
+    "threshold": "cuatro espacios por nivel"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cuatro espacios por nivel."
+  ],
+  "examples": [
+    "Seis espacios de sangria -> ni es el nivel de adentro ni el de afuera, en rojo.",
+    "Cuatro espacios -> en verde.",
+    "Las lineas de continuacion no cuentan: se alinean con el delimitador, no con un multiplo de cuatro."
+  ],
+  "do": [
+    "Sangrar con cuatro espacios por nivel."
+  ],
+  "dont": [
+    "Mezclar tabuladores: eso lo mide g24 y ademas Python lo prohibe."
+  ],
+  "stop_if": [
+    "el archivo usa tabuladores y el arreglo es otro"
+  ]
+}

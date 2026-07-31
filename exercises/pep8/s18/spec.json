@@ -1,0 +1,47 @@
+{
+  "id": "s18-bloque",
+  "node": "s18",
+  "title": "Dar formato a los comentarios de bloque",
+  "description": "Dar formato a los comentarios de bloque.",
+  "intent": "Poner un espacio despues del numeral en los comentarios de bloque.",
+  "signature": "# El descuento se aplica sobre el subtotal.",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "bloque"
+    ],
+    "threshold": "cero comentarios mal formados"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero comentarios mal formados."
+  ],
+  "examples": [
+    "`#Texto` -> en rojo: sin el espacio se lee como una directiva y no como prosa.",
+    "`# Texto` -> en verde.",
+    "La linea `#!` del interprete no cuenta: no es un comentario del codigo."
+  ],
+  "do": [
+    "Poner un espacio despues del numeral."
+  ],
+  "dont": [
+    "Borrar el comentario para que la regla calle."
+  ],
+  "stop_if": [
+    "el archivo no tiene comentarios de bloque"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "s10-imports",
+  "node": "s10",
+  "title": "Reemplazar el import con comodin por los nombres que se usan",
+  "description": "Reemplazar el import con comodin por los nombres que se usan.",
+  "intent": "Importar explicitamente los nombres que el modulo usa.",
+  "signature": "from ayuda import normalizar, redondear",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "imports"
+    ],
+    "threshold": "cero imports con comodin y cero grupos fuera de orden"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero imports con comodin y cero grupos fuera de orden."
+  ],
+  "examples": [
+    "`from ayuda import *` -> nadie sabe que nombres entraron al espacio de nombres, en rojo.",
+    "`from ayuda import normalizar, redondear` -> en verde.",
+    "La regla no mide el orden de los grupos: saber que paquete es de terceros pide el manifiesto, que no esta en el archivo."
+  ],
+  "do": [
+    "Importar por nombre lo que el modulo usa de verdad."
+  ],
+  "dont": [
+    "Dejar importado lo que no se usa: eso lo marca `checks.py --rule g12`."
+  ],
+  "stop_if": [
+    "el modulo auxiliar no declara que exporta y no se puede saber que entra"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "s37-publica",
+  "node": "s37",
+  "title": "Declarar la superficie publica del modulo",
+  "description": "Declarar la superficie publica del modulo.",
+  "intent": "Declarar __all__ con los nombres publicos del modulo.",
+  "signature": "__all__ = [\"formatear\"]",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "publica"
+    ],
+    "threshold": "toda API publica declarada"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en toda API publica declarada."
+  ],
+  "examples": [
+    "Un modulo con funciones publicas y sin `__all__` -> nadie sabe que es API y que es detalle, en rojo.",
+    "`__all__ = [\"formatear\"]` -> en verde.",
+    "Es lo mismo que `checks.py --rule g9` exige antes de hablar de codigo muerto: sin saber que es publico no se puede decir que sobra."
+  ],
+  "do": [
+    "Declarar en `__all__` los nombres que son API."
+  ],
+  "dont": [
+    "Listar tambien lo interno: declarar todo es lo mismo que no declarar nada."
+  ],
+  "stop_if": [
+    "el modulo no expone nada publico"
+  ]
+}

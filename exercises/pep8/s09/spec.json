@@ -1,0 +1,47 @@
+{
+  "id": "s09-codificacion",
+  "node": "s09",
+  "title": "Sacar la declaracion de codificacion que ya no hace falta",
+  "description": "Sacar la declaracion de codificacion que ya no hace falta.",
+  "intent": "Quitar la cookie de codificacion redundante.",
+  "signature": "\"\"\"Modulo de saludos.\"\"\"",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "codificacion"
+    ],
+    "threshold": "UTF-8 sin cookie redundante"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en UTF-8 sin cookie redundante."
+  ],
+  "examples": [
+    "`# -*- coding: utf-8 -*-` -> en Python 3 UTF-8 ya es el valor por omision, en rojo.",
+    "El mismo archivo sin la linea -> en verde.",
+    "Que el archivo decodifique lo comprueba el instrumento al leerlo: si no, sale con exit 2 y no mide nada."
+  ],
+  "do": [
+    "Borrar la linea de codificacion."
+  ],
+  "dont": [
+    "Cambiar la codificacion del archivo: lo que sobra es la declaracion, no el UTF-8."
+  ],
+  "stop_if": [
+    "el archivo esta en otra codificacion y la declaracion no es redundante"
+  ]
+}

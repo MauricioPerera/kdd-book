@@ -1,0 +1,47 @@
+{
+  "id": "s29-tipovar",
+  "node": "s29",
+  "title": "Marcar la varianza en el nombre de la variable de tipo",
+  "description": "Marcar la varianza en el nombre de la variable de tipo.",
+  "intent": "Agregar el sufijo de varianza a la variable de tipo.",
+  "signature": "T_co = TypeVar(\"T_co\", covariant=True)",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "tipovar"
+    ],
+    "threshold": "cero variables de tipo fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero variables de tipo fuera de convencion."
+  ],
+  "examples": [
+    "`T = TypeVar(\"T\", covariant=True)` -> el nombre no dice la varianza, en rojo.",
+    "`T_co` -> en verde.",
+    "Los dos sufijos los da el propio documento: `_co` y `_contra`."
+  ],
+  "do": [
+    "Agregar el sufijo que corresponde a la varianza declarada."
+  ],
+  "dont": [
+    "Sacar la varianza para que el nombre alcance: eso cambia el tipo."
+  ],
+  "stop_if": [
+    "el modulo no declara variables de tipo"
+  ]
+}

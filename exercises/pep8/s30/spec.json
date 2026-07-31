@@ -1,0 +1,47 @@
+{
+  "id": "s30-excepcion",
+  "node": "s30",
+  "title": "Terminar en Error el nombre de la excepcion",
+  "description": "Terminar en Error el nombre de la excepcion.",
+  "intent": "Renombrar la excepcion para que termine en Error.",
+  "signature": "class SaldoInsuficienteError(ValueError):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "excepcion"
+    ],
+    "threshold": "cero excepciones fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia; lo que cambia es el nombre, y el oraculo esta escrito contra el nombre de destino.",
+    "El umbral de la regla queda en cero excepciones fuera de convencion."
+  ],
+  "examples": [
+    "`class SaldoInsuficiente(ValueError)` -> hereda de un Error y no lo dice en su nombre, en rojo.",
+    "`class SaldoInsuficienteError(ValueError)` -> en verde.",
+    "Una excepcion que hereda de `Exception` y no es un error no pide el sufijo: el documento lo condiciona y la regla tambien."
+  ],
+  "do": [
+    "Renombrar la excepcion para que termine en Error."
+  ],
+  "dont": [
+    "Cambiar la clase base para esquivar la regla: eso cambia que se puede capturar."
+  ],
+  "stop_if": [
+    "la excepcion no representa un error, sino control de flujo"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "s08-blancos",
+  "node": "s08",
+  "title": "Separar las definiciones con las lineas en blanco que pide la guia",
+  "description": "Separar las definiciones con las lineas en blanco que pide la guia.",
+  "intent": "Dejar dos lineas en blanco entre definiciones de nivel superior.",
+  "signature": "\\n\\ndef siguiente():",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "blancos"
+    ],
+    "threshold": "dos entre definiciones de nivel superior, una entre metodos"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en dos entre definiciones de nivel superior, una entre metodos."
+  ],
+  "examples": [
+    "Dos definiciones pegadas -> en rojo: no se ve donde termina una.",
+    "Dos lineas en blanco entre ellas -> en verde.",
+    "Entre metodos de una clase alcanza con una, y el primero de la clase no pide ninguna."
+  ],
+  "do": [
+    "Dejar dos lineas en blanco entre definiciones de nivel superior."
+  ],
+  "dont": [
+    "Separar tambien las funciones anidadas: adentro de una funcion la guia pide moderacion."
+  ],
+  "stop_if": [
+    "las definiciones estan adentro de otra funcion y la regla no aplica"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "s35-constante",
+  "node": "s35",
+  "title": "Poner en mayusculas la constante de modulo",
+  "description": "Poner en mayusculas la constante de modulo.",
+  "intent": "Renombrar a mayusculas la constante literal del modulo.",
+  "signature": "LIMITE_DE_INTENTOS = 3",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "constante"
+    ],
+    "threshold": "cero constantes fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero constantes fuera de convencion."
+  ],
+  "examples": [
+    "`limite_de_intentos = 3` -> se lee como una variable que alguien puede cambiar, en rojo.",
+    "`LIMITE_DE_INTENTOS = 3` -> en verde.",
+    "Solo alcanza a las asignaciones de modulo cuyo valor es un literal: lo calculado lo mide `global`."
+  ],
+  "do": [
+    "Poner el nombre en mayusculas con guion bajo."
+  ],
+  "dont": [
+    "Mover la constante adentro de la funcion: eso no la nombra, la esconde."
+  ],
+  "stop_if": [
+    "el modulo no declara constantes literales"
+  ]
+}

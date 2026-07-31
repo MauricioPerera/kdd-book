@@ -1,0 +1,47 @@
+{
+  "id": "s19-enlinea",
+  "node": "s19",
+  "title": "Separar el comentario en linea del codigo",
+  "description": "Separar el comentario en linea del codigo.",
+  "intent": "Dejar dos espacios antes del numeral de un comentario en linea.",
+  "signature": "return base * 1.21  # IVA general",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "enlinea"
+    ],
+    "threshold": "cero comentarios en linea pegados al codigo"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero comentarios en linea pegados al codigo."
+  ],
+  "examples": [
+    "Un solo espacio antes del `#` -> el comentario se lee pegado al codigo, en rojo.",
+    "Dos espacios -> en verde.",
+    "Es una de las pocas reglas del documento con un numero, y por eso se mide sin discutir."
+  ],
+  "do": [
+    "Dejar dos espacios antes del numeral."
+  ],
+  "dont": [
+    "Mover el comentario a su propia linea: eso lo convierte en otro tipo de comentario."
+  ],
+  "stop_if": [
+    "el archivo no tiene comentarios en linea"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "s11-dunder",
+  "node": "s11",
+  "title": "Poner los dunder de modulo antes de los imports",
+  "description": "Poner los dunder de modulo antes de los imports.",
+  "intent": "Mover el dunder de modulo arriba de los imports.",
+  "signature": "__version__ = \"1.4.0\"",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "dunder"
+    ],
+    "threshold": "cero dunder fuera de lugar"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero dunder fuera de lugar."
+  ],
+  "examples": [
+    "`__version__` despues de los imports -> en rojo.",
+    "El mismo dunder entre el docstring y los imports -> en verde.",
+    "`from __future__ import ...` es la excepcion que el propio documento nombra: va antes de todo."
+  ],
+  "do": [
+    "Mover el dunder arriba de los imports y debajo del docstring."
+  ],
+  "dont": [
+    "Borrar el dunder: lo que esta mal es donde esta, no que exista."
+  ],
+  "stop_if": [
+    "el modulo no declara ningun dunder y la regla no aplica"
+  ]
+}

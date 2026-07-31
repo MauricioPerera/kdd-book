@@ -1,0 +1,47 @@
+{
+  "id": "s31-global",
+  "node": "s31",
+  "title": "Renombrar la global calculada a minusculas",
+  "description": "Renombrar la global calculada a minusculas.",
+  "intent": "Renombrar la global que no es constante.",
+  "signature": "registro = os.environ",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "global"
+    ],
+    "threshold": "cero globales fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero globales fuera de convencion."
+  ],
+  "examples": [
+    "`RegistroGlobal` -> CapWords es para clases, en rojo.",
+    "`registro` -> en verde.",
+    "Las globales cuyo valor es un literal son constantes y las mide la otra regla: por eso las dos no se contradicen."
+  ],
+  "do": [
+    "Renombrar la global a minusculas con guion bajo."
+  ],
+  "dont": [
+    "Ponerla en mayusculas: no es una constante, su valor se calcula."
+  ],
+  "stop_if": [
+    "el modulo no declara globales calculadas"
+  ]
+}

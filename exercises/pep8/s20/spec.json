@@ -1,0 +1,47 @@
+{
+  "id": "s20-docstring",
+  "node": "s20",
+  "title": "Documentar la API publica del modulo",
+  "description": "Documentar la API publica del modulo.",
+  "intent": "Agregar el docstring del modulo y el de cada funcion publica.",
+  "signature": "\"\"\"Convierte grados Celsius a Fahrenheit.\"\"\"",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "docstring"
+    ],
+    "threshold": "cero publicas sin docstring"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero publicas sin docstring."
+  ],
+  "examples": [
+    "Un modulo sin docstring y una funcion publica sin docstring -> en rojo.",
+    "Los dos con docstring -> en verde.",
+    "`_redondear` empieza con guion bajo: no es publica y no se le pide nada."
+  ],
+  "do": [
+    "Documentar el modulo y cada funcion publica."
+  ],
+  "dont": [
+    "Poner un docstring que repita el nombre de la funcion: la regla no lo detecta y el lector tampoco lo agradece."
+  ],
+  "stop_if": [
+    "el modulo no expone nada publico"
+  ]
+}

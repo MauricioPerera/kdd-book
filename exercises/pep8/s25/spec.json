@@ -1,0 +1,47 @@
+{
+  "id": "s25-ambiguos",
+  "node": "s25",
+  "title": "Renombrar la variable que se confunde con un digito",
+  "description": "Renombrar la variable que se confunde con un digito.",
+  "intent": "Renombrar la variable de un solo caracter ambiguo.",
+  "signature": "for linea in lineas:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "ambiguos"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "`l` de un caracter -> en muchas tipografias es un uno, en rojo.",
+    "`linea` -> en verde.",
+    "La lista la da el autor: `l`, `O` y `I`, y solo cuando son el identificador entero."
+  ],
+  "do": [
+    "Renombrar a algo que se lea."
+  ],
+  "dont": [
+    "Cambiar a `I` o a `O`: son los otros dos de la misma lista."
+  ],
+  "stop_if": [
+    "el archivo no declara identificadores de un solo caracter"
+  ]
+}

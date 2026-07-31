@@ -1,0 +1,47 @@
+{
+  "id": "s14-espacios",
+  "node": "s14",
+  "title": "Sacar los espacios sobrantes de delimitadores y comas",
+  "description": "Sacar los espacios sobrantes de delimitadores y comas.",
+  "intent": "Quitar el espacio pegado a los delimitadores y antes de las comas.",
+  "signature": "return maximo(precios, 0)",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "espacios"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "`max( precios )` -> el espacio pegado al parentesis, en rojo.",
+    "`max(precios)` -> en verde.",
+    "Un espacio antes de la coma tambien: la coma va pegada a lo que la precede."
+  ],
+  "do": [
+    "Pegar los delimitadores a su contenido."
+  ],
+  "dont": [
+    "Sacar tambien el espacio DESPUES de la coma: ese si va."
+  ],
+  "stop_if": [
+    "el archivo no tiene llamadas ni literales que revisar"
+  ]
+}

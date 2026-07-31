@@ -38,70 +38,17 @@ SIN_EJERCICIO = {
     ('git_checks.py', 'tddorden'): 'el arreglo es el orden de los commits, no el contenido de un archivo',
     ('git_checks.py', 'codebase'): 'el arreglo es poner el proyecto bajo control de versiones o sacar un repositorio anidado, no editar un archivo',
     ('git_checks.py', 'releaseid'): 'el arreglo es marcar el release, no editar un archivo',
+    ('pep8_checks.py', 'modulo'): 'el arreglo es renombrar el archivo, y `touch_only` cubre el contenido de un archivo, no su nombre',
 }
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {
-    ('pep8_checks.py', 'ambiguos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'anotafuncion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'anotavariable'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'ascii'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'blancos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'bloque'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'clase'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'codificacion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'comafinal'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'comillas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'constante'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'docstring'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'dunder'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'enlinea'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'espacios'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'excepcion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'funcion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'global'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'imports'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'metodo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'modulo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'operador'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'operadores'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'primerarg'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'publica'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'sangria'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('pep8_checks.py', 'tipovar'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-}
+PENDIENTE = {}
 
 
 def _alias_de(script):

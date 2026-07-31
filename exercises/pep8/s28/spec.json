@@ -1,0 +1,47 @@
+{
+  "id": "s28-clase",
+  "node": "s28",
+  "title": "Renombrar la clase a CapWords",
+  "description": "Renombrar la clase a CapWords.",
+  "intent": "Renombrar la clase siguiendo CapWords.",
+  "signature": "class CuentaCorriente:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "clase"
+    ],
+    "threshold": "cero clases fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia; lo que cambia es el nombre, y el oraculo esta escrito contra el nombre de destino.",
+    "El umbral de la regla queda en cero clases fuera de convencion."
+  ],
+  "examples": [
+    "`class cuenta_corriente` -> se lee como una funcion, en rojo.",
+    "`class CuentaCorriente` -> en verde.",
+    "Es un cambio de interfaz: quien importaba la clase por su nombre viejo deja de encontrarla, y el oraculo lo nota."
+  ],
+  "do": [
+    "Renombrar la clase a CapWords."
+  ],
+  "dont": [
+    "Dejar un alias con el nombre viejo: la clase seguiria declarada dos veces."
+  ],
+  "stop_if": [
+    "el nombre viejo es parte de una API publicada y renombrarlo rompe a terceros"
+  ]
+}

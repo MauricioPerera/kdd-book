@@ -1,0 +1,47 @@
+{
+  "id": "s15-operadores",
+  "node": "s15",
+  "title": "Poner los espacios del `=` segun donde este",
+  "description": "Poner los espacios del `=` segun donde este.",
+  "intent": "Espaciar el = de asignacion y pegar el de argumento con nombre.",
+  "signature": "def formato(valor, ancho=8):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "operadores"
+    ],
+    "threshold": "cero desviaciones"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero desviaciones."
+  ],
+  "examples": [
+    "`texto=str(valor)` -> una asignacion sin espacios, en rojo.",
+    "`ancho = 8` en la firma -> tambien en rojo: ahi el `=` va pegado.",
+    "Es el unico caso del documento donde el mismo caracter pide dos cosas opuestas segun el contexto."
+  ],
+  "do": [
+    "Espaciar el = de asignacion y pegar el de argumento con nombre."
+  ],
+  "dont": [
+    "Aplicar la misma regla en los dos lugares: son opuestas a proposito."
+  ],
+  "stop_if": [
+    "el archivo no tiene asignaciones ni argumentos con valor por omision"
+  ]
+}

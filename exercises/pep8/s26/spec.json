@@ -1,0 +1,47 @@
+{
+  "id": "s26-ascii",
+  "node": "s26",
+  "title": "Sacar del identificador los caracteres fuera de ASCII",
+  "description": "Sacar del identificador los caracteres fuera de ASCII.",
+  "intent": "Renombrar el identificador que sale de ASCII.",
+  "signature": "def promedio_anio(datos):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "ascii"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "Un identificador con enie -> en rojo: no todo editor ni toda terminal lo muestran igual.",
+    "El mismo sin acentos ni enies -> en verde.",
+    "Alcanza a los identificadores, no a las cadenas: el texto que ve el usuario puede tener lo que haga falta."
+  ],
+  "do": [
+    "Renombrar el identificador a ASCII."
+  ],
+  "dont": [
+    "Sacar los acentos de los textos: la regla habla de identificadores."
+  ],
+  "stop_if": [
+    "el archivo no declara identificadores fuera de ASCII"
+  ]
+}

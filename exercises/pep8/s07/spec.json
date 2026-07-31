@@ -1,0 +1,47 @@
+{
+  "id": "s07-operador",
+  "node": "s07",
+  "title": "Cortar la linea antes del operador binario",
+  "description": "Cortar la linea antes del operador binario.",
+  "intent": "Mover el operador al principio de la linea siguiente.",
+  "signature": "total = (base\n         + recargo)",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "operador"
+    ],
+    "threshold": "cero cortes despues del operador"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero cortes despues del operador."
+  ],
+  "examples": [
+    "Una linea que termina en `+` -> hay que leer hasta el final de la anterior para saber que operacion viene, en rojo.",
+    "La misma expresion con el `+` al principio de la linea siguiente -> en verde.",
+    "PEP 8 sigue a Knuth: el operador queda pegado a su operando derecho."
+  ],
+  "do": [
+    "Poner el operador al principio de la linea siguiente."
+  ],
+  "dont": [
+    "Meter todo en una linea para esquivar el corte: el largo lo mide g24."
+  ],
+  "stop_if": [
+    "la expresion entra en una linea y no hay corte que ordenar"
+  ]
+}

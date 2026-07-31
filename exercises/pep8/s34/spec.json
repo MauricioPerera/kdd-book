@@ -1,0 +1,47 @@
+{
+  "id": "s34-metodo",
+  "node": "s34",
+  "title": "Renombrar el metodo a minusculas con guion bajo",
+  "description": "Renombrar el metodo a minusculas con guion bajo.",
+  "intent": "Renombrar el metodo y el atributo siguiendo la convencion.",
+  "signature": "def agregar_item(self, precio):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "metodo"
+    ],
+    "threshold": "cero fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia; lo que cambia es el nombre, y el oraculo esta escrito contra el nombre de destino.",
+    "El umbral de la regla queda en cero fuera de convencion."
+  ],
+  "examples": [
+    "`def AgregarItem` -> en rojo.",
+    "`self.Items` -> tambien en rojo: la regla cubre los atributos que se asignan sobre self.",
+    "`def agregar_item` con `self.items` -> en verde."
+  ],
+  "do": [
+    "Renombrar el metodo y el atributo a minusculas con guion bajo."
+  ],
+  "dont": [
+    "Renombrar solo el metodo: el atributo esta en la misma seccion del documento."
+  ],
+  "stop_if": [
+    "el nombre viejo es parte de una API publicada"
+  ]
+}

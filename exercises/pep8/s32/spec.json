@@ -1,0 +1,47 @@
+{
+  "id": "s32-funcion",
+  "node": "s32",
+  "title": "Renombrar la funcion a minusculas con guion bajo",
+  "description": "Renombrar la funcion a minusculas con guion bajo.",
+  "intent": "Renombrar la funcion siguiendo la convencion.",
+  "signature": "def calcular_recargo(monto):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "cambio-de-interfaz",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "funcion"
+    ],
+    "threshold": "cero nombres fuera de convencion"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia; lo que cambia es el nombre, y el oraculo esta escrito contra el nombre de destino.",
+    "El umbral de la regla queda en cero nombres fuera de convencion."
+  ],
+  "examples": [
+    "`def CalcularRecargo` -> CapWords es para clases, en rojo.",
+    "`def calcular_recargo` -> en verde.",
+    "Los metodos los mide otra regla, para que un nombre mal puesto se reporte donde esta."
+  ],
+  "do": [
+    "Renombrar la funcion a minusculas con guion bajo."
+  ],
+  "dont": [
+    "Dejar el nombre viejo como alias: eso duplica la API en vez de arreglarla."
+  ],
+  "stop_if": [
+    "el nombre viejo es parte de una API publicada"
+  ]
+}

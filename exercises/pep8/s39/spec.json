@@ -1,0 +1,47 @@
+{
+  "id": "s39-anotafuncion",
+  "node": "s39",
+  "title": "Espaciar las anotaciones de la firma",
+  "description": "Espaciar las anotaciones de la firma.",
+  "intent": "Poner un espacio despues de los dos puntos de cada anotacion.",
+  "signature": "def dividir(a: float, b: float) -> float:",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "anotafuncion"
+    ],
+    "threshold": "cero anotaciones mal espaciadas"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero anotaciones mal espaciadas."
+  ],
+  "examples": [
+    "`a:float` -> los dos puntos de una anotacion siguen la regla de siempre, en rojo.",
+    "`a: float` y `-> float` con espacios -> en verde.",
+    "La flecha lleva un espacio a cada lado, como cualquier operador binario."
+  ],
+  "do": [
+    "Poner un espacio despues de los dos puntos y a cada lado de la flecha."
+  ],
+  "dont": [
+    "Sacar las anotaciones para esquivar la regla."
+  ],
+  "stop_if": [
+    "la funcion no esta anotada"
+  ]
+}

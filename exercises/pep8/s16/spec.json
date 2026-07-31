@@ -1,0 +1,47 @@
+{
+  "id": "s16-comafinal",
+  "node": "s16",
+  "title": "Agregar la coma final al literal que cierra en su propia linea",
+  "description": "Agregar la coma final al literal que cierra en su propia linea.",
+  "intent": "Agregar la coma final del ultimo elemento.",
+  "signature": "    \"amarillo\",\n]",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "comafinal"
+    ],
+    "threshold": "cero literales multilinea sin coma final"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero literales multilinea sin coma final."
+  ],
+  "examples": [
+    "El ultimo elemento sin coma -> agregar uno toca dos lineas y el diff miente sobre que cambio, en rojo.",
+    "Con la coma final -> en verde.",
+    "Un literal de una sola linea no pide nada, y uno vacio tampoco."
+  ],
+  "do": [
+    "Agregar la coma despues del ultimo elemento."
+  ],
+  "dont": [
+    "Subir el corchete de cierre a la ultima linea: eso esquiva la regla y pierde la ventaja."
+  ],
+  "stop_if": [
+    "el literal entra en una sola linea"
+  ]
+}

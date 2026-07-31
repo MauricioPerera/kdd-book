@@ -1,0 +1,47 @@
+{
+  "id": "s33-primerarg",
+  "node": "s33",
+  "title": "Nombrar `self` el primer argumento del metodo",
+  "description": "Nombrar `self` el primer argumento del metodo.",
+  "intent": "Renombrar a self el primer argumento de los metodos de instancia.",
+  "signature": "def total(self):",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "primerarg"
+    ],
+    "threshold": "cero primeros argumentos mal nombrados"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero primeros argumentos mal nombrados."
+  ],
+  "examples": [
+    "`def total(este)` -> en rojo: la convencion es tan fuerte que un nombre distinto se lee como un error.",
+    "`def total(self)` -> en verde.",
+    "Un metodo de clase pide `cls`, y uno estatico no pide ninguno de los dos."
+  ],
+  "do": [
+    "Renombrar a `self` el primer argumento de cada metodo de instancia."
+  ],
+  "dont": [
+    "Ponerle `self` a un metodo estatico: ahi el primer argumento es un argumento comun."
+  ],
+  "stop_if": [
+    "la clase no tiene metodos de instancia"
+  ]
+}

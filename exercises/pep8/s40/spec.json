@@ -1,0 +1,47 @@
+{
+  "id": "s40-anotavariable",
+  "node": "s40",
+  "title": "Espaciar la anotacion de la variable",
+  "description": "Espaciar la anotacion de la variable.",
+  "intent": "Poner un espacio despues de los dos puntos de la anotacion.",
+  "signature": "cupo: int = 10",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "anotavariable"
+    ],
+    "threshold": "cero anotaciones mal espaciadas"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero anotaciones mal espaciadas."
+  ],
+  "examples": [
+    "`cupo:int` -> en rojo.",
+    "`cupo: int` -> en verde.",
+    "Sin espacio antes de los dos puntos y con uno despues, igual que en un diccionario."
+  ],
+  "do": [
+    "Poner un espacio despues de los dos puntos."
+  ],
+  "dont": [
+    "Poner tambien uno antes: los dos puntos van pegados al nombre."
+  ],
+  "stop_if": [
+    "el modulo no tiene variables anotadas"
+  ]
+}

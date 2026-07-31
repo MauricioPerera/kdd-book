@@ -16,20 +16,20 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Siete fuentes, 473 nodos, 62 contratos ejecutables, 92 instrumentos en once
+Siete fuentes, 473 nodos, 88 contratos ejecutables, 92 instrumentos en once
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 204 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
-| PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 29 | 0 |
+| PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 29 | 26 |
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **473** | **143** | **126** | **120** | **62** |
+| **Total** | **473** | **143** | **126** | **120** | **88** |
 
 Cuatro de las siete no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -75,7 +75,7 @@ refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 Ademas: 17 tecnicas `proxy`, 175 en pila B (tecnica real sin propiedad medible)
 y 155 en pila C (conocimiento). 34 enlaces cruzan de una fuente a otra.
 
-Hay 143 tecnicas en pila A y 62 ejercicios, y la diferencia no es un pendiente:
+Hay 143 tecnicas en pila A y 88 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -580,7 +580,7 @@ formas, y solo una deja el oraculo en rojo:
 | Forma | Target | Oraculo sobre el seed |
 |---|---|---|
 | refactor | una funcion, una pagina, una plantilla, un archivo de despliegue | verde: no cambia el comportamiento |
-| cambio de interfaz | una firma | **rojo**: la tecnica cambia la firma |
+| cambio de interfaz | una firma, una clase, un metodo | **rojo**: la tecnica cambia el nombre y el oraculo tiene que notarlo |
 | nivel repo | el punto de entrada del proyecto | verde: la funcionalidad esta intacta |
 | multi-modulo | el archivo que cruza una capa | verde: la estructura no cambia el resultado |
 
@@ -600,6 +600,19 @@ benignos, `{{{autor}}}` y `{{autor}}` renderizan **exactamente lo mismo**: la
 diferencia aparece solo con contenido hostil, o sea justo con el caso que
 ninguna prueba escrita con datos de ejemplo va a cubrir. El oraculo esta ciego
 por construccion y el instrumento es lo unico que discrimina.
+
+Los 26 de PEP 8 son los que mas usan la forma **cambio de interfaz**, que hasta
+esta fuente casi no aparecia. Veintidos son refactorizaciones —sangria, espacios,
+comas, comentarios— donde el oraculo esta ciego por definicion. Los otros cuatro
+renombran algo que es API: una clase, una funcion, un metodo con su atributo, una
+excepcion. Ahi el oraculo esta escrito contra el nombre de destino y **se pone en
+rojo sobre el seed**, que es lo que esa forma existe para capturar: el nombre
+viejo deja de existir y quien lo importaba deja de encontrarlo.
+
+Uno de los 27 no admite la forma de ejercicio y esta declarado: `modulo` mide el
+nombre del archivo, y el arreglo es renombrarlo. `touch_only` cubre el contenido
+de un archivo, no su nombre — el mismo limite que ya tenian las cinco reglas de
+git, encontrado esta vez en otra familia.
 
 Los diez de accesibilidad son el caso donde **el oraculo tiene mas trabajo que
 de costumbre**, y no porque mire mas: porque casi todos estos arreglos tienen un
@@ -660,15 +673,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| `pep8_checks` sin ejercicio | 27 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
+| `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna es un instrumento que falte.** Las 143 tecnicas de pila A tienen
-instrumento. Lo unico pendiente son los 27 ejercicios de PEP 8; las otras filas
-son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Ninguna es un instrumento que falte ni un ejercicio pendiente.** Las 143
+tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
+ejercicio lo tiene. Las tres filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -687,7 +700,7 @@ Catorce suites, 204 pruebas, y cada suite existe por un error concreto que ya pa
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 62 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 88 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias de instrumentos, porque la lista escrita a mano quedo vieja tres veces y el bundle salia veinte reglas mas corto sin que nada fallara; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

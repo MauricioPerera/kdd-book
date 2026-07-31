@@ -1,0 +1,47 @@
+{
+  "id": "s12-comillas",
+  "node": "s12",
+  "title": "Usar la otra comilla en vez de escapar",
+  "description": "Usar la otra comilla en vez de escapar.",
+  "intent": "Delimitar con la comilla que no obliga a escapar.",
+  "signature": "MENSAJE = \"no se pudo abrir 'datos.csv'\"",
+  "target": "target.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "pep8_checks.py",
+    "args": [
+      "--rule",
+      "comillas"
+    ],
+    "threshold": "cero escapes evitables"
+  },
+  "invariants": [
+    "Lo que el modulo hace no cambia: el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero escapes evitables."
+  ],
+  "examples": [
+    "`'no se pudo abrir \\\\''` -> las barras tapan el contenido, en rojo.",
+    "`\"no se pudo abrir '\"` -> en verde: la otra comilla no pide escapar nada.",
+    "Si el texto trae las dos comillas, escapar es inevitable y la regla no pide nada."
+  ],
+  "do": [
+    "Delimitar con la comilla que no aparece en el contenido."
+  ],
+  "dont": [
+    "Cambiar el texto para que entre con las comillas que ya estaban."
+  ],
+  "stop_if": [
+    "el texto contiene los dos tipos de comilla"
+  ]
+}
