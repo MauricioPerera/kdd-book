@@ -8,14 +8,12 @@ bien pero corrompe el codigo es peor que no tenerlo.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import mutation_checks  # noqa: E402
+mutation_checks = contexto.instrumento('mutation_checks')
 
 
 FUENTE = 'def hay_lugar(capacidad, inscriptos):\n    return inscriptos < capacidad\n'

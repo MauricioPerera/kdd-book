@@ -36,7 +36,6 @@ Uso:
 import argparse
 import ast
 import io
-import keyword
 import os
 import re
 import sys
@@ -716,9 +715,20 @@ def check_metodo(fuente, opts):
 
     Cubre los metodos y los atributos que se asignan sobre `self`, que son las
     dos cosas que la seccion nombra.
+
+    El documento trae una excepcion y hay que respetarla: *"mixedCase se permite
+    solo donde ya es el estilo predominante, para conservar compatibilidad"*. Un
+    `setUp` no es un descuido, es la API de unittest, y renombrarlo no lo
+    arregla: lo rompe. Cual nombre viene impuesto de afuera lo declara el
+    proyecto con `--impuesto`, igual que declara sus capas o su motor de
+    plantillas — el instrumento no puede saber el estilo de una clase base que
+    no esta en el archivo.
     """
+    impuestos = set(getattr(opts, 'impuesto', None) or ())
     out = []
     for _clase, metodo in _metodos(fuente.arbol):
+        if metodo.name in impuestos:
+            continue
         if not SNAKE.match(metodo.name):
             out.append((metodo.lineno, 'el metodo {!r} no esta en minusculas con '
                                        'guion bajo'.format(metodo.name)))
@@ -856,6 +866,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--rule')
     parser.add_argument('--list', action='store_true')
+    parser.add_argument('--impuesto', action='append', default=[],
+                        help='nombre de metodo cuyo estilo impone un framework, '
+                             'repetible (p. ej. setUp)')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
 

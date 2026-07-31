@@ -9,14 +9,11 @@ sobre una plantilla que inyecta.
 """
 
 import argparse
-import os
-import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import template_checks as T  # noqa: E402
+T = contexto.instrumento('template_checks')
 
 
 def _opts(**kwargs):

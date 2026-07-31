@@ -221,7 +221,7 @@ def check_t1(target, opts):
     """T1: pruebas insuficientes, medido como cobertura de linea."""
     try:
         cubiertas, total = _coverage(target)
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         return [('no se pudo medir cobertura: {}'.format(exc), True)]
     if total == 0:
         return [('no hay lineas ejecutables que medir', True)]

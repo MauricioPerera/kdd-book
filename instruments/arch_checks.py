@@ -212,8 +212,8 @@ def check_isp(raiz, opts):
             for variable, tipo in sorted(anotados.items()):
                 usados = set()
                 for node in ast.walk(cliente):
-                    if isinstance(node, ast.Attribute) and \
-                            isinstance(node.value, ast.Name) and node.value.id == variable:
+                    if isinstance(node, ast.Attribute) \
+                            and isinstance(node.value, ast.Name) and node.value.id == variable:
                         usados.add(node.attr)
                 disponibles = metodos_por_clase[tipo]
                 sin_usar = disponibles - usados

@@ -7,14 +7,11 @@ grite sobre codigo conforme.
 """
 
 import ast
-import os
-import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import checks  # noqa: E402
+checks = contexto.instrumento('checks')
 
 
 # (regla, limite, fuente_roja, fuente_verde)
@@ -37,8 +34,8 @@ CASOS = [
      'class Servicio:\n    def usar(self):\n        return Config.TOPE\n'),
 
     ('metlineas', 5,
-     'def larga(n):\n' + ''.join('    n += {}\n'.format(i) for i in range(8)) +
-     '    return n\n',
+     'def larga(n):\n' + ''.join('    n += {}\n'.format(i) for i in range(8))
+     + '    return n\n',
      'def corta(n):\n    return n + 1\n'),
 
     ('c5', 0,
@@ -180,6 +177,33 @@ class InstrumentosTest(unittest.TestCase):
             with self.subTest(regla=rule):
                 self.assertEqual(self._correr(rule, verde, limit), [],
                                  'la regla {} grito sobre codigo conforme'.format(rule))
+
+    def test_g4_no_confunde_nombrar_un_marcador_con_usarlo(self):
+        """Un marcador adentro de una cadena es texto, no una supresion.
+
+        Regresion: la primera version leia lineas crudas y por eso `checks.py`
+        se marcaba a si mismo — la expresion regular que define los marcadores
+        contiene los marcadores. Es el mismo defecto que `daemonizar` tuvo con
+        `.pid`: confundir nombrar algo con hacerlo.
+        """
+        patron = 'MARCADORES = "@SuppressWarnings|# noqa"\n'
+        self.assertEqual(self._correr('g4', patron, 0),
+                         [], 'tomo por supresion un marcador que esta en una cadena')
+        self.assertTrue(self._correr('g4', 'import os  # noqa\n', 0),
+                        'una supresion de verdad sigue siendo un hallazgo')
+
+    def test_g12_perdona_el_import_marcado_con_noqa(self):
+        """Un import por su efecto no usa el nombre nunca: `# noqa` lo declara.
+
+        Aparecio arreglando este repositorio: las suites pasaron a importar un
+        modulo `contexto` que arma el camino de busqueda, y g12 las marcaba a
+        las doce. Sin manera de declarar la excepcion, el instrumento obliga a
+        elegir entre dos rojos.
+        """
+        self.assertTrue(self._correr('g12', 'import os\n', 0),
+                        'un import sin usar y sin marcar sigue siendo desorden')
+        self.assertEqual(self._correr('g12', 'import os  # noqa: F401\n', 0), [],
+                         'el import marcado a proposito no es desorden')
 
 
 if __name__ == '__main__':

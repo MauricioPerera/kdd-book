@@ -9,14 +9,12 @@ caso en que falta: ahi tienen que salir NO-VERIFICABLE y no verde.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import entorno_checks as E  # noqa: E402
+E = contexto.instrumento('entorno_checks')
 
 
 class EntornoChecksTest(unittest.TestCase):

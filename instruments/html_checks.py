@@ -147,7 +147,8 @@ def parsear(ruta):
     arbol = _Arbol()
     try:
         arbol.feed(contenido)
-    except Exception as exc:  # noqa: BLE001 - html.parser es tolerante; si falla, no medimos
+    # html.parser es tolerante: si igual falla, no hay arbol y no se mide.
+    except Exception as exc:
         raise NoVerificable('no se pudo parsear {}: {}'.format(ruta, exc))
     return arbol.todos
 

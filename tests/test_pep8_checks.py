@@ -14,14 +14,12 @@ continuacion— traen ademas su prueba propia.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import pep8_checks as P  # noqa: E402
+P = contexto.instrumento('pep8_checks')
 
 
 VERDE = '"""Modulo de prueba."""\n\n__all__ = []\n\nimport os\n\nCONSTANTE = 1\n'
@@ -76,8 +74,11 @@ class Pep8ChecksTest(unittest.TestCase):
             fh.write(codigo)
         return P.Fuente(ruta)
 
-    def _correr(self, regla, codigo, nombre='modulo.py'):
-        return P.RULES[regla][0](self._fuente(codigo, nombre), argparse.Namespace())
+    def _correr(self, regla, codigo, nombre='modulo.py', **opciones):
+        base = dict(impuesto=[])
+        base.update(opciones)
+        return P.RULES[regla][0](self._fuente(codigo, nombre),
+                                 argparse.Namespace(**base))
 
     # ------------------------------------------------------------ estructura
     def test_toda_regla_tiene_su_par(self):
@@ -159,6 +160,20 @@ class Pep8ChecksTest(unittest.TestCase):
     def test_primerarg_le_pide_cls_a_un_metodo_de_clase(self):
         codigo = 'class A:\n    @classmethod\n    def m(self):\n        pass\n'
         self.assertTrue(self._correr('primerarg', codigo))
+
+    def test_metodo_respeta_el_nombre_que_impone_un_framework(self):
+        """`setUp` no es un descuido: es la API de unittest.
+
+        El propio documento permite mixedCase donde ya es el estilo
+        predominante. Lo destapo correr la regla contra las pruebas de este
+        repositorio, donde marcaba los diez `setUp`. Cual nombre viene impuesto
+        lo declara el proyecto: el instrumento no puede saber el estilo de una
+        clase base que no esta en el archivo.
+        """
+        codigo = 'class A:\n    def setUp(self):\n        pass\n'
+        self.assertTrue(self._correr('metodo', codigo),
+                        'sin declararlo, mixedCase es una desviacion y se reporta')
+        self.assertEqual(self._correr('metodo', codigo, impuesto=['setUp']), [])
 
     def test_global_y_constante_no_se_contradicen(self):
         """Se reparten por el valor: literal es constante, lo demas es global.

@@ -332,7 +332,7 @@ def aplicar(memoria, archivo):
         partes = instrumento.split()
         cmd = [sys.executable, os.path.join(INSTRUMENTOS, partes[0])] + partes[1:] + [archivo]
         proc = subprocess.run(cmd, capture_output=True, text=True)
-        detalle = [l.strip() for l in proc.stdout.splitlines()[1:] if l.strip()]
+        detalle = [x.strip() for x in proc.stdout.splitlines()[1:] if x.strip()]
         out.append((instrumento, proc.returncode, detalle, sorted(ids)))
     return out
 

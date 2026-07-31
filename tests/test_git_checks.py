@@ -9,14 +9,12 @@ import argparse
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import git_checks  # noqa: E402
+git_checks = contexto.instrumento('git_checks')
 
 
 def _opts(**kwargs):

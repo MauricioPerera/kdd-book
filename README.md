@@ -18,7 +18,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 Siete fuentes, 473 nodos, 88 contratos ejecutables, 92 instrumentos en once
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 206 pruebas propias.
+`validate_test_commands` y las 209 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -669,6 +669,33 @@ tiene una obligacion extra: **no importa el instrumento**. Parsea con
 oraculo que usa el parser del instrumento le da la razon por construccion — si
 el parser se equivoca, los dos se equivocan igual y nadie lo nota.
 
+## El repositorio contra sus propios instrumentos
+
+Corriendo `checks` y `pep8_checks` sobre este mismo codigo aparecieron nueve
+cosas, y la mitad eran defectos de los instrumentos y no del codigo:
+
+| Que aparecio | Que era |
+|---|---|
+| `imports` marcaba `a11y_checks` | **regresion mia**: al agregar `ARTEFACTO` a las once familias parti el bloque de imports de una |
+| `metodo` marcaba los diez `setUp` | **defecto del instrumento**: PEP 8 permite mixedCase donde ya es el estilo predominante. Se declara con `--impuesto` |
+| `g4` marcaba `checks.py` | **defecto del instrumento**: leia lineas crudas, y la expresion regular que define los marcadores contiene los marcadores. Ahora lee comentarios y decoradores |
+| `imports` marcaba las doce suites | **real**: `sys.path.insert` antes del import deja una sentencia en medio del bloque |
+| `ambiguos`, `operador`, `g12` | **reales**: dos `l` de un caracter, nueve cortes despues del operador, una variable muerta |
+
+Lo mas interesante fue una contradiccion entre dos instrumentos del propio
+repositorio. Al arreglar `imports` con un modulo importado por su efecto, `g12`
+lo marcaba como import sin usar; al declararlo con `# noqa`, **`g4` lo marcaba
+como medida de seguridad cancelada**. Dos autores pidiendo cosas incompatibles
+sobre el mismo archivo, que es lo mismo que pasa entre J1 y PEP 8 con los
+imports con comodin. Se resolvio sin cancelar nada: el modulo expone una funcion
+y las suites la usan, asi que el nombre se usa de verdad.
+
+Quedan dos reglas en rojo y estan dichas, no escondidas: `docstring` (241) y
+`publica` (39). Las dos son lecturas correctas de PEP 8 y **167 de las 241 caen
+en la suite de pruebas**, donde escribir un docstring por metodo de prueba
+seria justo el relleno que uno de los ejercicios de este repositorio prohibe en
+su `dont`. Se dejan como estan, con el numero a la vista.
+
 ## Que falta, y por que
 
 `tests/test_cobertura.py` mantiene este inventario exacto: falla si aparece un
@@ -699,7 +726,7 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Catorce suites, 206 pruebas, y cada suite existe por un error concreto que ya paso.
+Catorce suites, 209 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|

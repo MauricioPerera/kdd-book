@@ -8,14 +8,12 @@ puede enganar con un proyecto de juguete, se puede enganar con uno real.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import repo_checks  # noqa: E402
+repo_checks = contexto.instrumento('repo_checks')
 
 
 TAREAS_COMPLETO = '''

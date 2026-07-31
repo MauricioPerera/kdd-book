@@ -9,14 +9,12 @@ falta: ahi tienen que salir NO-VERIFICABLE y no verde.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import html_checks as H  # noqa: E402
+H = contexto.instrumento('html_checks')
 
 
 def _opts(**kwargs):

@@ -113,16 +113,16 @@ def check_f2(tree, src, limit):
         for node in ast.walk(func):
             if isinstance(node, ast.Assign):
                 for target in node.targets:
-                    if isinstance(target, ast.Subscript) and \
-                            isinstance(target.value, ast.Name) and target.value.id in params:
+                    if isinstance(target, ast.Subscript) \
+                            and isinstance(target.value, ast.Name) and target.value.id in params:
                         out.append((node.lineno, 'muta el parametro {!r}'.format(target.value.id)))
-                    elif isinstance(target, ast.Attribute) and \
-                            isinstance(target.value, ast.Name) and target.value.id in params:
+                    elif isinstance(target, ast.Attribute) \
+                            and isinstance(target.value, ast.Name) and target.value.id in params:
                         out.append((node.lineno, 'muta el parametro {!r}'.format(target.value.id)))
             elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
                 base = node.func.value
-                if isinstance(base, ast.Name) and base.id in params and \
-                        node.func.attr in MUTATORS:
+                if isinstance(base, ast.Name) and base.id in params \
+                        and node.func.attr in MUTATORS:
                     out.append((node.lineno, 'muta el parametro {!r} con .{}()'.format(
                         base.id, node.func.attr)))
     return out
@@ -134,7 +134,6 @@ def check_f3(tree, src, limit):
     for func in _functions(tree):
         flags = set()
         spec = func.args
-        defaults = list(spec.defaults) + [d for d in spec.kw_defaults if d is not None]
         positional = spec.posonlyargs + spec.args
         for arg, default in zip(positional[len(positional) - len(spec.defaults):],
                                 spec.defaults):
@@ -144,7 +143,6 @@ def check_f3(tree, src, limit):
             annotation = getattr(arg, 'annotation', None)
             if isinstance(annotation, ast.Name) and annotation.id == 'bool':
                 flags.add(arg.arg)
-        del defaults
         params = set(_param_names(func))
         for node in ast.walk(func):
             test = getattr(node, 'test', None)
@@ -187,8 +185,8 @@ def check_g23(tree, src, limit):
         while isinstance(current, ast.If):
             seen.add(id(current))
             chain.append(current)
-            current = current.orelse[0] if (len(current.orelse) == 1 and
-                                            isinstance(current.orelse[0], ast.If)) else None
+            current = current.orelse[0] if (len(current.orelse) == 1
+                                            and isinstance(current.orelse[0], ast.If)) else None
         if len(chain) <= limit:
             continue
         discriminants = set()
@@ -394,7 +392,25 @@ def check_g9(tree, src, limit):
 
 
 def check_g12(tree, src, limit):
-    """G12 desorden: imports sin usar y locales asignados que nadie lee."""
+    """G12 desorden: imports sin usar y locales asignados que nadie lee.
+
+    Un import marcado con `# noqa` no cuenta. No es una excepcion de cortesia:
+    hay imports que se hacen **por su efecto** —registrar un plugin, preparar el
+    camino de busqueda— y ahi el nombre no se usa nunca por definicion. La regla
+    no puede decidir cual es cual leyendo el archivo, y `# noqa` es la marca que
+    ya usa todo el ecosistema para decir "esto es a proposito".
+
+    Aparecio al arreglar este mismo repositorio: las suites pasaron a importar un
+    modulo `contexto` que arma el camino de busqueda, y `g12` las marcaba a las
+    doce. Un instrumento sin manera de declarar la excepcion obliga a elegir
+    entre dos rojos.
+    """
+    lineas_crudas = src.splitlines()
+
+    def _perdonada(numero):
+        linea = lineas_crudas[numero - 1] if 0 < numero <= len(lineas_crudas) else ''
+        return 'noqa' in linea.split('#', 1)[-1] if '#' in linea else False
+
     out = []
     imported = {}
     for node in ast.walk(tree):
@@ -408,7 +424,7 @@ def check_g12(tree, src, limit):
               if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
     loaded |= {n.attr for n in ast.walk(tree) if isinstance(n, ast.Attribute)}
     for name, lineno in sorted(imported.items()):
-        if name not in loaded:
+        if name not in loaded and not _perdonada(lineno):
             out.append((lineno, 'import sin usar: {}'.format(name)))
     for func in _functions(tree):
         used = {n.id for n in ast.walk(func)
@@ -473,8 +489,8 @@ def check_c5(tree, src, limit):
             continue
         if parsed.body and not isinstance(parsed.body[0], ast.Expr):
             out.append((token.start[0], 'comentario que es codigo: {!r}'.format(text[:60])))
-        elif parsed.body and isinstance(parsed.body[0], ast.Expr) and \
-                isinstance(parsed.body[0].value, ast.Call):
+        elif parsed.body and isinstance(parsed.body[0], ast.Expr) \
+                and isinstance(parsed.body[0].value, ast.Call):
             out.append((token.start[0], 'comentario que es codigo: {!r}'.format(text[:60])))
     return out
 
@@ -551,9 +567,9 @@ def check_anatomia(tree, src, limit):
                 aserciones += 1
             elif isinstance(node, ast.With):
                 for item in node.items:
-                    if isinstance(item.context_expr, ast.Call) and \
-                            isinstance(item.context_expr.func, ast.Attribute) and \
-                            item.context_expr.func.attr.startswith('assertRaises'):
+                    if isinstance(item.context_expr, ast.Call) \
+                            and isinstance(item.context_expr.func, ast.Attribute) \
+                            and item.context_expr.func.attr.startswith('assertRaises'):
                         aserciones += 1
         if aserciones == 0:
             out.append((func.lineno,
@@ -599,14 +615,33 @@ _SUPPRESSIONS = re.compile(
 
 
 def check_g4(tree, src, limit):
-    """G4 medidas de seguridad canceladas: supresiones de linter o tests apagados."""
+    """G4 medidas de seguridad canceladas: supresiones de linter o tests apagados.
+
+    Mira **comentarios y decoradores**, no lineas crudas. Un marcador adentro de
+    una cadena no cancela nada: es texto. La primera version leia el archivo
+    linea por linea y por eso `checks.py` se marcaba a si mismo — la expresion
+    regular que define los marcadores contiene los marcadores. Es el mismo
+    defecto que `daemonizar` tuvo con `.pid`: confundir nombrar algo con hacerlo.
+    """
     out = []
-    for number, line in enumerate(src.splitlines(), start=1):
-        match = _SUPPRESSIONS.search(line)
+    try:
+        tokens = list(tokenize.generate_tokens(io.StringIO(src).readline))
+    except (tokenize.TokenError, IndentationError):
+        tokens = []
+    for t in tokens:
+        if t.type != tokenize.COMMENT:
+            continue
+        match = _SUPPRESSIONS.search(t.string)
         if match:
-            out.append((number, 'medida de seguridad cancelada: {!r}'.format(
+            out.append((t.start[0], 'medida de seguridad cancelada: {!r}'.format(
                 match.group(0).strip())))
-    return out
+    for nodo in ast.walk(tree):
+        for decorador in getattr(nodo, 'decorator_list', []):
+            texto = ast.unparse(decorador) if hasattr(ast, 'unparse') else ''
+            if _SUPPRESSIONS.search('@' + texto):
+                out.append((decorador.lineno,
+                            'medida de seguridad cancelada: {!r}'.format('@' + texto)))
+    return sorted(set(out))
 
 
 # ---------------------------------------------------------------------------

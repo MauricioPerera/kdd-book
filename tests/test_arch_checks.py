@@ -10,14 +10,12 @@ esta familia existe para no cometer.
 import argparse
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import arch_checks  # noqa: E402
+arch_checks = contexto.instrumento('arch_checks')
 
 
 def _opts(**kwargs):

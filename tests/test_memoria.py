@@ -11,10 +11,10 @@ import os
 import sys
 import unittest
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, RAIZ)
+import contexto
+M = contexto.instrumento('memoria')
 
-import memoria as M  # noqa: E402
+RAIZ = contexto.RAIZ
 
 
 def _tecnica(tid, titulo, pila='A', verification='instrumented',
@@ -196,7 +196,13 @@ class InventarioDeInstrumentosTest(unittest.TestCase):
         dejaba en verde. Ahora mira que instrumentos elige de verdad.
         """
         import json
-        with open(os.path.join(RAIZ, 'memoria.json'), encoding='utf-8') as fh:
+        import tempfile
+        # Se exporta a un temporal en vez de leer `memoria.json`, que es un
+        # artefacto generado y no se versiona: la primera version leia ese
+        # archivo y pasaba solo si alguien lo habia generado antes.
+        destino = os.path.join(tempfile.mkdtemp(prefix='kddbook-mem-'), 'm.json')
+        M.exportar(destino)
+        with open(destino, encoding='utf-8') as fh:
             memoria = json.load(fh)
         scripts = {i.split()[0] for i in M._seleccion(memoria)}
         self.assertIn('checks.py', scripts)

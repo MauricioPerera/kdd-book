@@ -11,14 +11,12 @@ import argparse
 import json
 import os
 import shutil
-import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                'instruments'))
+import contexto
 
-import a11y_checks as A  # noqa: E402
+A = contexto.instrumento('a11y_checks')
 
 
 class A11yChecksTest(unittest.TestCase):
