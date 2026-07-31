@@ -60,7 +60,7 @@ def check_cadencia(repo, opts):
                           'refs/tags')
     if codigo != 0:
         return [('no se pudieron leer los tags', True)]
-    lineas = [l for l in salida.splitlines() if l.strip()]
+    lineas = [x for x in salida.splitlines() if x.strip()]
     if len(lineas) < 2:
         return [('hay {} tag(s) de entrega: hacen falta al menos dos para medir '
                  'una cadencia'.format(len(lineas)), True)]
@@ -191,7 +191,7 @@ def check_releaseid(repo, opts):
     if codigo != 0:
         return [('no se pudieron leer los tags', True)]
 
-    lineas = [l for l in salida.splitlines() if l.strip()]
+    lineas = [x for x in salida.splitlines() if x.strip()]
     if not lineas:
         return [('no hay ninguna marca de release: ningun release tiene '
                  'identificador', False)]

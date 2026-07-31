@@ -16,20 +16,20 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Siete fuentes, 473 nodos, 62 contratos ejecutables, 65 instrumentos en diez
+Siete fuentes, 473 nodos, 62 contratos ejecutables, 92 instrumentos en once
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 175 pruebas propias.
+`validate_test_commands` y las 204 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
-| PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 2 | 0 |
+| PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 29 | 0 |
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **473** | **143** | **126** | **93** | **62** |
+| **Total** | **473** | **143** | **126** | **120** | **62** |
 
 Cuatro de las siete no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -247,7 +247,9 @@ y dos mas en `git_checks`, que tenia el artefacto correcto pero no las
 propiedades. La conclusion se afina: lo que no transfiere no es la capa de
 medicion **por idioma** sino **por artefacto**.
 
-**Y la septima corrigio tambien eso.** PEP 8 entro con la prediccion de que iba a
+**Y la septima corrigio tambien eso**, con un numero que despues quedo a la
+vista al escribir los instrumentos: `pep8_checks` tiene **27 reglas** y es la
+familia mas grande del repositorio, mas que las 22 de `checks.py`. PEP 8 entro con la prediccion de que iba a
 ser la primera fuente con reuso alto: habla del **mismo artefacto** que Codigo
 Limpio —el AST y el texto de un archivo Python— y habia 22 reglas escritas
 esperandola. De sus 29 tecnicas medibles, **dos** reusan una regla existente.
@@ -347,7 +349,7 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 473 tecnicas, 67 instrumentos
+python memoria.py exportar          # -> memoria.json: 473 tecnicas, 94 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
@@ -472,7 +474,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-65 reglas en diez familias. Que varias tecnicas compartan una no es un atajo: es
+92 reglas en once familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -483,6 +485,7 @@ que preguntan lo mismo.
 | `git_checks.py` | 5 | el historial | cadencia de entregas, ramas sin integrar, identificador de release |
 | `entorno_checks.py` | 8 | la forma del proyecto | dependencias declaradas, config en el entorno, logs a stdout |
 | `a11y_checks.py` | 10 | el DOM y valores renderizados | idioma, etiquetas, contraste, area de toque |
+| `pep8_checks.py` | 27 | la forma de un archivo Python | sangria, lineas en blanco, imports, CapWords |
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
 | `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
@@ -657,15 +660,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| PEP 8 sin instrumento | 27 | la fuente entro recien y solo dos de sus 29 medibles reusan una regla existente. Es lo unico de esta lista que se arregla trabajando |
+| `pep8_checks` sin ejercicio | 27 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Solo la primera es un instrumento que falte.** Las seis medibles de htmx, las
-diez de los doce factores y las doce de WCAG tienen instrumento, y toda regla que
-admite la forma de ejercicio lo tiene. Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Ninguna es un instrumento que falte.** Las 143 tecnicas de pila A tienen
+instrumento. Lo unico pendiente son los 27 ejercicios de PEP 8; las otras filas
+son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -679,11 +682,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Trece suites, 175 pruebas, y cada suite existe por un error concreto que ya paso.
+Catorce suites, 204 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 62 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias de instrumentos, porque la lista escrita a mano quedo vieja tres veces y el bundle salia veinte reglas mas corto sin que nada fallara; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |

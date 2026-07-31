@@ -14,8 +14,9 @@ del manifiesto (62,5%).
 **Prediccion 2: iba a ser la primera fuente con reuso alto de instrumentos.**
 Las seis anteriores obligaron a inventar familias nuevas, y esta habla del mismo
 artefacto que Codigo Limpio —el AST y el texto de un archivo Python— con 22
-reglas ya escritas esperando. Fallo: de sus 29 tecnicas medibles, **una sola**
-reusa una regla existente.
+reglas ya escritas esperando. Fallo: de sus 29 tecnicas medibles, **dos nodos
+reusan una sola regla existente** y las otras 27 necesitaron una familia nueva,
+`pep8_checks`, que resulto ser la mas grande del repositorio.
 
 Y el fallo deja el hallazgo mas util de esta fuente. `checks.py` mide
 duplicacion, numeros magicos, codigo muerto, envidia de caracteristicas: habla
@@ -65,88 +66,69 @@ SECCIONES = [
 
 # Pila A: (instrumento, umbral). 29 de 42.
 #
-# Una sola reusa: `g24`, que ya media largo de linea, tabuladores y espacios al
-# final. Las otras 28 nombran el instrumento que haria falta, igual que las 53
-# de htmx y los doce factores en su momento.
+# Dos reusan `g24`, que ya media largo de linea, tabuladores y espacios al
+# final. Las otras 27 estan en `pep8_checks`, familia nueva y la mas grande del
+# repositorio — que es justo el hallazgo de esta fuente: comparte artefacto con
+# Codigo Limpio y no comparte casi ninguna medicion.
 A_NODES = {
-    4: ('pep8_checks: sangria multiplo de cuatro espacios (sin implementar)',
+    4: ('pep8_checks.py --rule sangria',
         'cuatro espacios por nivel'),
     5: ('repo_checks.py --rule g24',
         'cero tabuladores de indentacion'),
     6: ('repo_checks.py --rule g24 --max-line 79',
         '79 caracteres, 72 para comentarios y docstrings'),
-    7: ('pep8_checks: el corte de linea cae ANTES del operador binario '
-        '(sin implementar)',
+    7: ('pep8_checks.py --rule operador',
         'cero cortes despues del operador'),
-    8: ('pep8_checks: lineas en blanco entre definiciones (sin implementar)',
+    8: ('pep8_checks.py --rule blancos',
         'dos entre definiciones de nivel superior, una entre metodos'),
-    9: ('pep8_checks: el archivo decodifica como UTF-8 y no repite la '
-        'declaracion de codificacion (sin implementar)',
+    9: ('pep8_checks.py --rule codificacion',
         'UTF-8 sin cookie redundante'),
-    10: ('pep8_checks: un import por linea, agrupados por origen, sin comodines '
-         '(sin implementar)',
-         'cero imports con comodin y cero grupos fuera de orden'),
-    11: ('pep8_checks: los dunder de modulo van despues del docstring y antes de '
-         'los imports (sin implementar)',
-         'cero dunder fuera de lugar'),
-    12: ('pep8_checks: cadenas que escapan una comilla pudiendo usar la otra '
-         '(sin implementar)',
-         'cero escapes evitables'),
-    14: ('pep8_checks: espacios sobrantes dentro de parentesis y antes de coma o '
-         'dos puntos (sin implementar)',
-         'cero'),
-    15: ('pep8_checks: un espacio a cada lado de los operadores, ninguno '
-         'alrededor del `=` de un argumento con nombre (sin implementar)',
-         'cero desviaciones'),
-    16: ('pep8_checks: coma final en los literales que cierran en su propia '
-         'linea (sin implementar)',
-         'cero literales multilinea sin coma final'),
-    18: ('pep8_checks: los comentarios de bloque empiezan con `# ` y se sangran '
-         'al nivel del codigo (sin implementar)',
-         'cero comentarios mal formados'),
-    19: ('pep8_checks: dos espacios antes del `#` de un comentario en linea '
-         '(sin implementar)',
-         'cero comentarios en linea pegados al codigo'),
-    20: ('pep8_checks: toda API publica tiene docstring y las multilinea cierran '
-         'en su propia linea (sin implementar)',
-         'cero publicas sin docstring'),
-    25: ('pep8_checks: identificadores de un solo caracter `l`, `O` o `I` '
-         '(sin implementar)',
-         'cero'),
-    26: ('pep8_checks: identificadores fuera de ASCII (sin implementar)',
-         'cero'),
-    27: ('pep8_checks: modulos en minusculas (sin implementar)',
-         'cero nombres de modulo fuera de convencion'),
-    28: ('pep8_checks: clases en CapWords (sin implementar)',
-         'cero clases fuera de convencion'),
-    29: ('pep8_checks: variables de tipo en CapWords, con sufijo de varianza '
-         'cuando corresponde (sin implementar)',
-         'cero variables de tipo fuera de convencion'),
-    30: ('pep8_checks: las excepciones son clases en CapWords y terminan en '
-         '"Error" (sin implementar)',
-         'cero excepciones fuera de convencion'),
-    31: ('pep8_checks: globales en minusculas con guion bajo (sin implementar)',
-         'cero globales fuera de convencion'),
-    32: ('pep8_checks: funciones y variables en minusculas con guion bajo '
-         '(sin implementar)',
-         'cero nombres fuera de convencion'),
-    33: ('pep8_checks: `self` en los metodos de instancia y `cls` en los de '
-         'clase (sin implementar)',
-         'cero primeros argumentos mal nombrados'),
-    34: ('pep8_checks: metodos y atributos en minusculas, con un guion bajo '
-         'inicial los no publicos (sin implementar)',
-         'cero fuera de convencion'),
-    35: ('pep8_checks: constantes de modulo en mayusculas (sin implementar)',
-         'cero constantes fuera de convencion'),
-    37: ('pep8_checks: el modulo declara su superficie publica y prefija con '
-         'guion bajo lo interno (sin implementar)',
-         'toda API publica declarada'),
-    39: ('pep8_checks: espacios alrededor de `->` y en los dos puntos de '
-         'anotacion (sin implementar)',
-         'cero anotaciones mal espaciadas'),
-    40: ('pep8_checks: espacios en la anotacion de una asignacion '
-         '(sin implementar)',
-         'cero anotaciones mal espaciadas'),
+    10: ('pep8_checks.py --rule imports',
+        'cero imports con comodin y cero grupos fuera de orden'),
+    11: ('pep8_checks.py --rule dunder',
+        'cero dunder fuera de lugar'),
+    12: ('pep8_checks.py --rule comillas',
+        'cero escapes evitables'),
+    14: ('pep8_checks.py --rule espacios',
+        'cero'),
+    15: ('pep8_checks.py --rule operadores',
+        'cero desviaciones'),
+    16: ('pep8_checks.py --rule comafinal',
+        'cero literales multilinea sin coma final'),
+    18: ('pep8_checks.py --rule bloque',
+        'cero comentarios mal formados'),
+    19: ('pep8_checks.py --rule enlinea',
+        'cero comentarios en linea pegados al codigo'),
+    20: ('pep8_checks.py --rule docstring',
+        'cero publicas sin docstring'),
+    25: ('pep8_checks.py --rule ambiguos',
+        'cero'),
+    26: ('pep8_checks.py --rule ascii',
+        'cero'),
+    27: ('pep8_checks.py --rule modulo',
+        'cero nombres de modulo fuera de convencion'),
+    28: ('pep8_checks.py --rule clase',
+        'cero clases fuera de convencion'),
+    29: ('pep8_checks.py --rule tipovar',
+        'cero variables de tipo fuera de convencion'),
+    30: ('pep8_checks.py --rule excepcion',
+        'cero excepciones fuera de convencion'),
+    31: ('pep8_checks.py --rule global',
+        'cero globales fuera de convencion'),
+    32: ('pep8_checks.py --rule funcion',
+        'cero nombres fuera de convencion'),
+    33: ('pep8_checks.py --rule primerarg',
+        'cero primeros argumentos mal nombrados'),
+    34: ('pep8_checks.py --rule metodo',
+        'cero fuera de convencion'),
+    35: ('pep8_checks.py --rule constante',
+        'cero constantes fuera de convencion'),
+    37: ('pep8_checks.py --rule publica',
+        'toda API publica declarada'),
+    39: ('pep8_checks.py --rule anotafuncion',
+        'cero anotaciones mal espaciadas'),
+    40: ('pep8_checks.py --rule anotavariable',
+        'cero anotaciones mal espaciadas'),
 }
 
 # Pila C: lo que no es una tecnica. Titulos contenedores y cierre del documento.
@@ -353,12 +335,17 @@ def main(argv=None):
     pilas = {'A': 0, 'B': 0, 'C': 0}
     for n in spec['nodes']:
         pilas[n['pile']] += 1
+    # Reuso quiere decir "una familia que ya existia ANTES de esta fuente".
+    # Contar cualquier `.py` daria 29 de 29 en cuanto se escriba `pep8_checks`,
+    # que es justo lo contrario de lo que el numero esta midiendo.
     reusa = sum(1 for n in spec['nodes']
-                if n['pile'] == 'A' and n['instrument'].split()[0].endswith('.py'))
+                if n['pile'] == 'A'
+                and not n['instrument'].startswith('pep8_checks'))
     print('OK: {} nodos -> {}'.format(total, args.out))
     print('  A={} ({:.1f}%)  B={}  C={}'.format(
         pilas['A'], 100.0 * pilas['A'] / total, pilas['B'], pilas['C']))
-    print('  reusan un instrumento que ya existia: {} de {}'.format(reusa, pilas['A']))
+    print('  reusan una familia anterior a esta fuente: {} de {}'
+          .format(reusa, pilas['A']))
     for desde, hasta, nombre in SECCIONES:
         de_la = [i for i in entradas if desde <= i <= hasta]
         a = sum(1 for i in de_la if i in A_NODES)

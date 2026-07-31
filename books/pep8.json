@@ -86,7 +86,7 @@
         "cuatro espacios"
       ],
       "links": [],
-      "instrument": "pep8_checks: sangria multiplo de cuatro espacios (sin implementar)",
+      "instrument": "pep8_checks.py --rule sangria",
       "threshold": "cuatro espacios por nivel"
     },
     {
@@ -158,7 +158,7 @@
         "line break binary operator"
       ],
       "links": [],
-      "instrument": "pep8_checks: el corte de linea cae ANTES del operador binario (sin implementar)",
+      "instrument": "pep8_checks.py --rule operador",
       "threshold": "cero cortes despues del operador"
     },
     {
@@ -180,7 +180,7 @@
         "blank lines"
       ],
       "links": [],
-      "instrument": "pep8_checks: lineas en blanco entre definiciones (sin implementar)",
+      "instrument": "pep8_checks.py --rule blancos",
       "threshold": "dos entre definiciones de nivel superior, una entre metodos"
     },
     {
@@ -203,7 +203,7 @@
         "utf-8"
       ],
       "links": [],
-      "instrument": "pep8_checks: el archivo decodifica como UTF-8 y no repite la declaracion de codificacion (sin implementar)",
+      "instrument": "pep8_checks.py --rule codificacion",
       "threshold": "UTF-8 sin cookie redundante"
     },
     {
@@ -229,7 +229,7 @@
         "codigo-limpio/j1",
         "codigo-limpio/g12"
       ],
-      "instrument": "pep8_checks: un import por linea, agrupados por origen, sin comodines (sin implementar)",
+      "instrument": "pep8_checks.py --rule imports",
       "threshold": "cero imports con comodin y cero grupos fuera de orden",
       "body": "Aca los dos autores se contradicen, y el grafo lo sostiene sin elegir. J1 de Codigo Limpio aconseja **usar imports con comodin** para evitar listas largas; PEP 8 los prohibe porque borran que nombres entran al espacio de nombres. J1 esta en el grafo sin instrumento por ese motivo: implementarla invirtiendo el consejo seria tergiversar al autor. Con esta fuente adentro, la contradiccion deja de ser una nota al pie y pasa a ser un enlace: dos nodos, dos autores, umbrales opuestos sobre el mismo artefacto."
     },
@@ -252,7 +252,7 @@
         "module level dunder names"
       ],
       "links": [],
-      "instrument": "pep8_checks: los dunder de modulo van despues del docstring y antes de los imports (sin implementar)",
+      "instrument": "pep8_checks.py --rule dunder",
       "threshold": "cero dunder fuera de lugar"
     },
     {
@@ -274,7 +274,7 @@
         "string quotes"
       ],
       "links": [],
-      "instrument": "pep8_checks: cadenas que escapan una comilla pudiendo usar la otra (sin implementar)",
+      "instrument": "pep8_checks.py --rule comillas",
       "threshold": "cero escapes evitables"
     },
     {
@@ -313,7 +313,7 @@
         "whitespace"
       ],
       "links": [],
-      "instrument": "pep8_checks: espacios sobrantes dentro de parentesis y antes de coma o dos puntos (sin implementar)",
+      "instrument": "pep8_checks.py --rule espacios",
       "threshold": "cero"
     },
     {
@@ -335,7 +335,7 @@
         "other recommendations"
       ],
       "links": [],
-      "instrument": "pep8_checks: un espacio a cada lado de los operadores, ninguno alrededor del `=` de un argumento con nombre (sin implementar)",
+      "instrument": "pep8_checks.py --rule operadores",
       "threshold": "cero desviaciones"
     },
     {
@@ -357,7 +357,7 @@
         "trailing commas"
       ],
       "links": [],
-      "instrument": "pep8_checks: coma final en los literales que cierran en su propia linea (sin implementar)",
+      "instrument": "pep8_checks.py --rule comafinal",
       "threshold": "cero literales multilinea sin coma final"
     },
     {
@@ -398,7 +398,7 @@
         "s19",
         "s20"
       ],
-      "instrument": "pep8_checks: los comentarios de bloque empiezan con `# ` y se sangran al nivel del codigo (sin implementar)",
+      "instrument": "pep8_checks.py --rule bloque",
       "threshold": "cero comentarios mal formados"
     },
     {
@@ -420,7 +420,7 @@
         "inline comments"
       ],
       "links": [],
-      "instrument": "pep8_checks: dos espacios antes del `#` de un comentario en linea (sin implementar)",
+      "instrument": "pep8_checks.py --rule enlinea",
       "threshold": "cero comentarios en linea pegados al codigo"
     },
     {
@@ -442,7 +442,7 @@
         "documentation strings"
       ],
       "links": [],
-      "instrument": "pep8_checks: toda API publica tiene docstring y las multilinea cierran en su propia linea (sin implementar)",
+      "instrument": "pep8_checks.py --rule docstring",
       "threshold": "cero publicas sin docstring"
     },
     {
@@ -537,7 +537,7 @@
       "links": [
         "codigo-limpio/n6"
       ],
-      "instrument": "pep8_checks: identificadores de un solo caracter `l`, `O` o `I` (sin implementar)",
+      "instrument": "pep8_checks.py --rule ambiguos",
       "threshold": "cero",
       "body": "N6 de Codigo Limpio (\"evitar codificaciones\") y esta son la misma familia de defecto —un nombre que no se puede leer— por dos motivos distintos: Martin habla de prefijos que codifican el tipo, PEP 8 de caracteres que se confunden con digitos en la pantalla. Las dos son medibles y necesitan instrumentos distintos."
     },
@@ -560,7 +560,7 @@
         "ascii compatibility"
       ],
       "links": [],
-      "instrument": "pep8_checks: identificadores fuera de ASCII (sin implementar)",
+      "instrument": "pep8_checks.py --rule ascii",
       "threshold": "cero"
     },
     {
@@ -582,7 +582,7 @@
         "package and module names"
       ],
       "links": [],
-      "instrument": "pep8_checks: modulos en minusculas (sin implementar)",
+      "instrument": "pep8_checks.py --rule modulo",
       "threshold": "cero nombres de modulo fuera de convencion"
     },
     {
@@ -605,7 +605,7 @@
         "CapWords"
       ],
       "links": [],
-      "instrument": "pep8_checks: clases en CapWords (sin implementar)",
+      "instrument": "pep8_checks.py --rule clase",
       "threshold": "cero clases fuera de convencion"
     },
     {
@@ -627,7 +627,7 @@
         "type variable names"
       ],
       "links": [],
-      "instrument": "pep8_checks: variables de tipo en CapWords, con sufijo de varianza cuando corresponde (sin implementar)",
+      "instrument": "pep8_checks.py --rule tipovar",
       "threshold": "cero variables de tipo fuera de convencion"
     },
     {
@@ -649,7 +649,7 @@
         "exception names"
       ],
       "links": [],
-      "instrument": "pep8_checks: las excepciones son clases en CapWords y terminan en \"Error\" (sin implementar)",
+      "instrument": "pep8_checks.py --rule excepcion",
       "threshold": "cero excepciones fuera de convencion"
     },
     {
@@ -671,7 +671,7 @@
         "global variable names"
       ],
       "links": [],
-      "instrument": "pep8_checks: globales en minusculas con guion bajo (sin implementar)",
+      "instrument": "pep8_checks.py --rule global",
       "threshold": "cero globales fuera de convencion"
     },
     {
@@ -696,7 +696,7 @@
       "links": [
         "codigo-limpio/n5"
       ],
-      "instrument": "pep8_checks: funciones y variables en minusculas con guion bajo (sin implementar)",
+      "instrument": "pep8_checks.py --rule funcion",
       "threshold": "cero nombres fuera de convencion"
     },
     {
@@ -718,7 +718,7 @@
         "self y cls"
       ],
       "links": [],
-      "instrument": "pep8_checks: `self` en los metodos de instancia y `cls` en los de clase (sin implementar)",
+      "instrument": "pep8_checks.py --rule primerarg",
       "threshold": "cero primeros argumentos mal nombrados"
     },
     {
@@ -740,7 +740,7 @@
         "method names and instance variables"
       ],
       "links": [],
-      "instrument": "pep8_checks: metodos y atributos en minusculas, con un guion bajo inicial los no publicos (sin implementar)",
+      "instrument": "pep8_checks.py --rule metodo",
       "threshold": "cero fuera de convencion"
     },
     {
@@ -762,7 +762,7 @@
         "constants"
       ],
       "links": [],
-      "instrument": "pep8_checks: constantes de modulo en mayusculas (sin implementar)",
+      "instrument": "pep8_checks.py --rule constante",
       "threshold": "cero constantes fuera de convencion"
     },
     {
@@ -807,7 +807,7 @@
       "links": [
         "codigo-limpio/g8"
       ],
-      "instrument": "pep8_checks: el modulo declara su superficie publica y prefija con guion bajo lo interno (sin implementar)",
+      "instrument": "pep8_checks.py --rule publica",
       "threshold": "toda API publica declarada",
       "body": "G8 de Codigo Limpio mide el exceso de superficie publica y esta pide que la superficie **este declarada**. Son complementarias y las dos terminan mirando `__all__`, que es tambien lo que `check_g9` exige antes de hablar de codigo muerto: sin saber que es publico, no se puede decir que sobra."
     },
@@ -847,7 +847,7 @@
         "function annotations"
       ],
       "links": [],
-      "instrument": "pep8_checks: espacios alrededor de `->` y en los dos puntos de anotacion (sin implementar)",
+      "instrument": "pep8_checks.py --rule anotafuncion",
       "threshold": "cero anotaciones mal espaciadas"
     },
     {
@@ -869,7 +869,7 @@
         "variable annotations"
       ],
       "links": [],
-      "instrument": "pep8_checks: espacios en la anotacion de una asignacion (sin implementar)",
+      "instrument": "pep8_checks.py --rule anotavariable",
       "threshold": "cero anotaciones mal espaciadas"
     },
     {
