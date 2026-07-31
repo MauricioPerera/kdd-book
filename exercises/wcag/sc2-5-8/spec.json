@@ -1,0 +1,50 @@
+{
+  "id": "sc2-5-8-area-de-toque",
+  "node": "sc2-5-8",
+  "title": "Llevar el area de toque al minimo",
+  "description": "Agrandar el objetivo que hoy es mas chico que el minimo.",
+  "intent": "Llevar el area de toque al minimo exigido.",
+  "signature": "style=\"width:24px;height:24px\"",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "toque",
+      "--min",
+      "24"
+    ],
+    "threshold": "24 por 24 pixeles CSS"
+  },
+  "invariants": [
+    "Las acciones van a donde iban y dicen lo mismo: el oraculo pasa igual antes y despues.",
+    "Las dos siguen declarando su medida.",
+    "Todo objetivo llega al minimo."
+  ],
+  "examples": [
+    "Dos objetivos de 16 por 16 pegados -> quien tiene pulso poco firme aprieta el de al lado, en rojo.",
+    "Los mismos de 24 por 24 -> en verde.",
+    "El nivel AAA pide 44 por 44, y es el mismo instrumento con otro umbral."
+  ],
+  "do": [
+    "Agrandar el objetivo hasta el minimo."
+  ],
+  "dont": [
+    "Borrar la medida: sin nada que medir el instrumento sale con exit 2, que no es verde."
+  ],
+  "stop_if": [
+    "el objetivo esta en linea con el texto: el criterio lo exceptua y el instrumento no lo distingue"
+  ]
+}

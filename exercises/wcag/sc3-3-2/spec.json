@@ -1,0 +1,48 @@
+{
+  "id": "sc3-3-2-etiquetas",
+  "node": "sc3-3-2",
+  "title": "Asociar al campo la etiqueta que ya se ve",
+  "description": "Convertir en etiqueta el texto que hoy acompania al campo sin estar asociado.",
+  "intent": "Asociar cada etiqueta visible con su control.",
+  "signature": "<label for=\"cupon\">Codigo de cupon</label>",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "etiqueta"
+    ],
+    "threshold": "cero controles sin etiqueta"
+  },
+  "invariants": [
+    "El formulario pide lo mismo y se lee igual: el oraculo pasa igual antes y despues.",
+    "El texto visible no cambia.",
+    "Todo control que pide datos tiene nombre accesible."
+  ],
+  "examples": [
+    "Un `<span>` al lado del campo -> se ve la etiqueta y el lector de pantalla anuncia \"cuadro de edicion\", en rojo.",
+    "`<label for=\"cupon\">` con ese id existiendo -> en verde.",
+    "Un `placeholder` no alcanza: desaparece al escribir."
+  ],
+  "do": [
+    "Convertir el texto que ya se ve en la etiqueta del campo."
+  ],
+  "dont": [
+    "Usar el placeholder como etiqueta: es una pista y se borra al escribir."
+  ],
+  "stop_if": [
+    "el control no tiene ningun texto cerca que pueda ser su etiqueta"
+  ]
+}

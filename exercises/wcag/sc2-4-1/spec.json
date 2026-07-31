@@ -1,0 +1,48 @@
+{
+  "id": "sc2-4-1-saltar-bloques",
+  "node": "sc2-4-1",
+  "title": "Dar como saltear los bloques repetidos",
+  "description": "Marcar como region principal el contenido que hoy es un div cualquiera.",
+  "intent": "Ofrecer un mecanismo para saltear el encabezado repetido.",
+  "signature": "<main id=\"contenido\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "saltar"
+    ],
+    "threshold": "al menos un mecanismo de salto por pagina"
+  },
+  "invariants": [
+    "La pagina navega y dice lo mismo: el oraculo pasa igual antes y despues.",
+    "El contenedor conserva su id.",
+    "Hay un mecanismo de salto: una region principal o un enlace con destino existente."
+  ],
+  "examples": [
+    "Un menu repetido en cada pagina y ningun salto -> quien navega con teclado lo recorre entero cada vez, en rojo.",
+    "`<main id=\"contenido\">` -> en verde.",
+    "`<a href=\"#contenido\">Saltar al contenido</a>` con ese id existiendo -> en verde tambien."
+  ],
+  "do": [
+    "Marcar el contenido como region principal."
+  ],
+  "dont": [
+    "Poner un enlace de salto a un ancla que no existe: no saltea a ningun lado."
+  ],
+  "stop_if": [
+    "la pagina no tiene bloques repetidos y el criterio no aplica"
+  ]
+}

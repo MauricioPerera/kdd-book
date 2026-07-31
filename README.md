@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Seis fuentes, 431 nodos, 52 contratos ejecutables, 65 instrumentos en diez
+Seis fuentes, 431 nodos, 62 contratos ejecutables, 65 instrumentos en diez
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 173 pruebas propias.
 
@@ -26,9 +26,9 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
-| WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 0 |
+| WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **431** | **114** | **97** | **91** | **52** |
+| **Total** | **431** | **114** | **97** | **91** | **62** |
 
 Tres de las seis no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -60,7 +60,7 @@ refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 Ademas: 17 tecnicas `proxy`, 171 en pila B (tecnica real sin propiedad medible)
 y 146 en pila C (conocimiento). 25 enlaces cruzan de una fuente a otra.
 
-Hay 114 tecnicas en pila A y 52 ejercicios, y la diferencia no es un pendiente:
+Hay 114 tecnicas en pila A y 62 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -550,6 +550,26 @@ diferencia aparece solo con contenido hostil, o sea justo con el caso que
 ninguna prueba escrita con datos de ejemplo va a cubrir. El oraculo esta ciego
 por construccion y el instrumento es lo unico que discrimina.
 
+Los diez de accesibilidad son el caso donde **el oraculo tiene mas trabajo que
+de costumbre**, y no porque mire mas: porque casi todos estos arreglos tienen un
+atajo que pone el instrumento en verde sin arreglar nada. Borrar la animacion
+deja `movimiento` contento, borrar el estilo deja a `contraste` sin nada que
+medir, borrar la medida hace lo mismo con `toque`, y cambiar el texto visible
+del boton "arregla" `etiquetaennombre` cambiando lo que la persona lee. Los
+cinco atajos estan escritos en el `dont` de su spec **y frenados por el
+oraculo**, comprobado uno por uno.
+
+Dos de ellos muestran de paso una distincion del propio instrumento: borrar el
+estilo no lo pone en rojo, lo pone en **exit 2**. Que no es verde, y ahi esta la
+diferencia entre "no cumple" y "no puedo saber".
+
+El de etiquetas es el mas fiel a lo que pasa en un repositorio real: el seed ya
+muestra "Codigo de cupon", solo que en un `<span>` que no esta asociado a nada.
+El arreglo no agrega una palabra a la pantalla — **para quien ve, antes y
+despues son identicos**— y el lector de pantalla pasa de anunciar "cuadro de
+edicion" a anunciar el campo. Es el ejemplo mas limpio de por que el oraculo no
+alcanza.
+
 Los ocho de entorno mueven el oraculo **fuera** de `proyecto/`, y no es un
 detalle de organizacion: `entorno_checks` mide todos los `.py` del proyecto, asi
 que un oraculo adentro seria medido como si fuera codigo de la app. En varias
@@ -589,15 +609,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| `a11y_checks` sin ejercicio | 10 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna es un instrumento que falte.** Las seis medibles de htmx, las diez de
-los doce factores y las doce de WCAG tienen instrumento. Lo unico pendiente son
-los diez ejercicios de accesibilidad; las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Ninguna es un instrumento que falte ni un ejercicio pendiente.** Las seis
+medibles de htmx, las diez de los doce factores y las doce de WCAG tienen
+instrumento, y toda regla que admite la forma de ejercicio lo tiene. Las tres
+filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -616,7 +636,7 @@ Trece suites, 173 pruebas, y cada suite existe por un error concreto que ya paso
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 52 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 62 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

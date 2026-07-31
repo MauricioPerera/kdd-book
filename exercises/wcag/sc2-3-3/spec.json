@@ -1,0 +1,48 @@
+{
+  "id": "sc2-3-3-animacion-por-interaccion",
+  "node": "sc2-3-3",
+  "title": "Dar alternativa a quien pide menos movimiento",
+  "description": "Agregar el bloque que apaga la animacion cuando el sistema lo pide.",
+  "intent": "Respetar prefers-reduced-motion en las animaciones de interaccion.",
+  "signature": "@media (prefers-reduced-motion: reduce)",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "movimiento"
+    ],
+    "threshold": "cero animaciones de interaccion sin alternativa reducida"
+  },
+  "invariants": [
+    "La tarjeta dice lo mismo y sigue animandose: el oraculo pasa igual antes y despues.",
+    "La animacion original sigue declarada.",
+    "Hay un bloque prefers-reduced-motion: reduce."
+  ],
+  "examples": [
+    "Una `transition` sin bloque de movimiento reducido -> quien pidio menos movimiento igual lo recibe, en rojo.",
+    "La misma transicion con `@media (prefers-reduced-motion: reduce)` -> en verde.",
+    "Una hoja sin animaciones no pide nada: no hay movimiento del que dar alternativa."
+  ],
+  "do": [
+    "Agregar el bloque que apaga la animacion cuando el sistema lo pide."
+  ],
+  "dont": [
+    "Borrar la animacion: el criterio pide una alternativa, no renunciar al movimiento."
+  ],
+  "stop_if": [
+    "la hoja de estilos no esta en el proyecto y nadie la declaro"
+  ]
+}

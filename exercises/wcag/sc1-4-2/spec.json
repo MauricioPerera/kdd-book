@@ -1,0 +1,48 @@
+{
+  "id": "sc1-4-2-control-de-audio",
+  "node": "sc1-4-2",
+  "title": "Dar como parar el audio que arranca solo",
+  "description": "Agregar controles al medio que empieza a sonar sin que nadie lo pida.",
+  "intent": "Ofrecer un control para parar el audio que arranca solo.",
+  "signature": "<audio autoplay controls src=\"/bienvenida.mp3\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "autoplay"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La pagina dice lo mismo y suena lo mismo: el oraculo pasa igual antes y despues.",
+    "El medio sigue siendo el mismo archivo.",
+    "Nada suena solo sin manera de pararlo."
+  ],
+  "examples": [
+    "`<audio autoplay>` sin controles -> arranca encima de un lector de pantalla y no hay como callarlo, en rojo.",
+    "`<audio autoplay controls>` -> en verde.",
+    "`<audio autoplay muted>` -> en verde tambien: si no suena, no tapa nada."
+  ],
+  "do": [
+    "Agregar el control que permite pararlo."
+  ],
+  "dont": [
+    "Confiar en que el usuario baje el volumen del sistema: eso apaga todo, no el audio de la pagina."
+  ],
+  "stop_if": [
+    "el audio dura menos de tres segundos: el criterio no lo alcanza y el instrumento marca de mas"
+  ]
+}

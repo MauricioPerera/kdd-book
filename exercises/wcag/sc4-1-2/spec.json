@@ -1,0 +1,49 @@
+{
+  "id": "sc4-1-2-nombre-rol-valor",
+  "node": "sc4-1-2",
+  "title": "Darle nombre al componente que declara un rol",
+  "description": "Corregir el componente sin nombre accesible y el atributo aria que no existe.",
+  "intent": "Dar nombre accesible al componente y usar un atributo aria valido.",
+  "signature": "<div role=\"button\" aria-label=\"Cerrar el aviso\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "nombrerol"
+    ],
+    "threshold": "cero componentes sin nombre y cero aria invalido para el rol"
+  },
+  "invariants": [
+    "El aviso dice lo mismo y conserva sus roles: el oraculo pasa igual antes y despues.",
+    "El boton de cerrar sigue siendo enfocable.",
+    "Todo componente con rol tiene nombre accesible y usa aria que existe."
+  ],
+  "examples": [
+    "`<div role=\"button\">` vacio -> se anuncia como \"boton\" y nada mas, en rojo.",
+    "`aria-etiqueta=\"Cerrar\"` -> en rojo: ese atributo no existe, no hace nada y nadie avisa.",
+    "`aria-label=\"Cerrar el aviso\"` -> en verde."
+  ],
+  "do": [
+    "Dar nombre accesible al componente.",
+    "Usar el atributo aria que existe de verdad."
+  ],
+  "dont": [
+    "Sacar el rol para que la regla no mire: el componente sigue siendo un boton para quien lo usa."
+  ],
+  "stop_if": [
+    "el rol declarado no es de los que se anuncian por su nombre"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "sc1-4-3-contraste-minimo",
+  "node": "sc1-4-3",
+  "title": "Llevar el texto al contraste minimo",
+  "description": "Oscurecer el texto gris hasta llegar a la razon que pide el criterio.",
+  "intent": "Llevar la razon de contraste al minimo exigido.",
+  "signature": "style=\"color:#595959;background-color:#ffffff\"",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "contraste",
+      "--min",
+      "4.5",
+      "--min-grande",
+      "3.0"
+    ],
+    "threshold": "4.5:1 para texto normal, 3:1 para texto grande"
+  },
+  "invariants": [
+    "La pagina dice lo mismo: el oraculo pasa igual antes y despues.",
+    "Los dos elementos siguen declarando su color.",
+    "Toda combinacion de colores llega al minimo."
+  ],
+  "examples": [
+    "`#999999` sobre blanco da 2.85:1 -> no llega a 4.5:1, en rojo.",
+    "`#595959` sobre blanco da 7.0:1 -> en verde.",
+    "`#949494` da 3.03:1: alcanza para texto grande y no para texto normal, asi que el mismo color esta bien en el titulo y mal en el parrafo."
+  ],
+  "do": [
+    "Oscurecer el texto hasta llegar al minimo."
+  ],
+  "dont": [
+    "Borrar el estilo: sin colores que leer el instrumento sale con exit 2, que no es verde."
+  ],
+  "stop_if": [
+    "los colores no estan en el HTML y el proyecto no declaro sus medidas"
+  ]
+}

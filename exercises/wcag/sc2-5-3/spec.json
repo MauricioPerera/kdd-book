@@ -1,0 +1,48 @@
+{
+  "id": "sc2-5-3-etiqueta-en-el-nombre",
+  "node": "sc2-5-3",
+  "title": "Hacer que el nombre accesible contenga la etiqueta visible",
+  "description": "Corregir el aria-label que no contiene lo que el boton dice.",
+  "intent": "Incluir la etiqueta visible dentro del nombre accesible.",
+  "signature": "aria-label=\"Buscar en el catalogo\"",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "etiquetaennombre"
+    ],
+    "threshold": "cero controles cuyo nombre accesible no contenga su etiqueta visible"
+  },
+  "invariants": [
+    "El boton dice lo mismo y busca en el mismo lado: el oraculo pasa igual antes y despues.",
+    "La etiqueta visible del boton no cambia.",
+    "El nombre accesible contiene la etiqueta visible."
+  ],
+  "examples": [
+    "Se ve \"Buscar\" y el nombre accesible dice \"Enviar el formulario\" -> quien lo nombra en voz alta no lo activa, en rojo.",
+    "`aria-label=\"Buscar en el catalogo\"` -> en verde: contiene \"Buscar\".",
+    "Un control sin texto visible no se compara: no hay dos cadenas que confrontar."
+  ],
+  "do": [
+    "Empezar el nombre accesible por la etiqueta visible."
+  ],
+  "dont": [
+    "Cambiar el texto visible para que coincida con el aria-label: eso arregla la comparacion cambiando lo que la persona lee."
+  ],
+  "stop_if": [
+    "el control no tiene texto visible y no hay nada que comparar"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "sc3-1-1-idioma-de-la-pagina",
+  "node": "sc3-1-1",
+  "title": "Declarar el idioma de la pagina",
+  "description": "Poner en el elemento raiz la etiqueta de idioma que falta.",
+  "intent": "Declarar el idioma de la pagina en el elemento raiz.",
+  "signature": "<html lang=\"es-AR\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "idioma"
+    ],
+    "threshold": "un lang valido por pagina"
+  },
+  "invariants": [
+    "La pagina dice lo mismo: el oraculo pasa igual antes y despues.",
+    "El titulo del documento no cambia.",
+    "El elemento raiz declara una etiqueta de idioma bien formada."
+  ],
+  "examples": [
+    "`<html>` sin lang -> el lector de pantalla lee castellano con la fonetica que tenga puesta, en rojo.",
+    "`<html lang=\"es-AR\">` -> en verde.",
+    "`lang=\"espanol\"` o `lang=\"es_AR\"` -> en rojo: no tienen forma de etiqueta de idioma."
+  ],
+  "do": [
+    "Declarar el idioma en el elemento raiz."
+  ],
+  "dont": [
+    "Escribir el nombre del idioma: la etiqueta es un codigo, no una palabra."
+  ],
+  "stop_if": [
+    "el archivo es un fragmento y no tiene elemento raiz"
+  ]
+}

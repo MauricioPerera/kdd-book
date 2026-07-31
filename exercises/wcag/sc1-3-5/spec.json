@@ -1,0 +1,48 @@
+{
+  "id": "sc1-3-5-proposito-del-campo",
+  "node": "sc1-3-5",
+  "title": "Declarar el proposito de los campos de datos personales",
+  "description": "Agregar el token de autocomplete que el criterio enumera.",
+  "intent": "Declarar el autocomplete de cada campo de datos personales.",
+  "signature": "<input type=\"email\" autocomplete=\"email\">",
+  "target": "target.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "a11y_checks.py",
+    "args": [
+      "--rule",
+      "autocomplete"
+    ],
+    "threshold": "cero campos de datos personales sin token de autocomplete"
+  },
+  "invariants": [
+    "El formulario pide lo mismo y va al mismo lado: el oraculo pasa igual antes y despues.",
+    "Los campos conservan su nombre y su tipo.",
+    "Todo campo de datos personales declara su autocomplete."
+  ],
+  "examples": [
+    "`<input type=\"email\">` sin autocomplete -> el navegador no puede completarlo y quien depende de eso escribe todo a mano, en rojo.",
+    "`<input type=\"email\" autocomplete=\"email\">` -> en verde.",
+    "`autocomplete=\"nombre-completo\"` -> en rojo igual: el criterio enumera los tokens y ese no esta en la lista."
+  ],
+  "do": [
+    "Agregar el token que corresponde a cada campo."
+  ],
+  "dont": [
+    "Inventar un token que suene bien: la lista es cerrada y esta en el criterio."
+  ],
+  "stop_if": [
+    "un campo pide un dato personal y su tipo no lo dice: el instrumento no lo ve y hay que decidirlo a mano"
+  ]
+}
