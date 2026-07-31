@@ -18,7 +18,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 Siete fuentes, 473 nodos, 88 contratos ejecutables, 92 instrumentos en once
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 204 pruebas propias.
+`validate_test_commands` y las 206 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -356,13 +356,17 @@ python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **433 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **476 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
-PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
-cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
-—sobre una funcion de ejemplo, 6: cadena de Demeter, variable lejos de su uso,
-import sin usar, numeros magicos, expresion de limite repetida y exceso de
-parametros—.
+PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
+cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
+
+Que familia puede correr sobre que **lo declara cada familia**, en una constante
+`ARTEFACTO`, y no una lista en `memoria.py`. La lista existio y quedo vieja: con
+`pep8_checks` escrito —27 reglas que miden exactamente un archivo `.py` suelto—
+`aplicar` siguio corriendo las mismas 26 de siempre sin que nada fallara. Es el
+segundo defecto de esa forma en el mismo archivo, y por eso esta vez el dato vive
+donde se sabe.
 
 Cada tecnica exportada lleva su pila, su instrumento y su umbral, sus enlaces
 —incluidos los que cruzan de libro—, su ubicacion en la fuente, su nombre
@@ -695,13 +699,13 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Catorce suites, 204 pruebas, y cada suite existe por un error concreto que ya paso.
+Catorce suites, 206 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 88 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
-| `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias de instrumentos, porque la lista escrita a mano quedo vieja tres veces y el bundle salia veinte reglas mas corto sin que nada fallara; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
+| `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
 Los errores que las hicieron nacer:

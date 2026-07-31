@@ -32,6 +32,14 @@ import html.parser
 import os
 import sys
 
+# Sobre que mide esta familia: una pagina HTML.
+#
+# Lo declara cada familia y no una lista en `memoria.py`, porque esa lista
+# ya quedo vieja dos veces. `aplicar` elige por este campo que instrumentos
+# puede correr sobre lo que le dieron; sin el, agregar una familia la deja
+# afuera en silencio y nada falla.
+ARTEFACTO = 'html'
+
 
 # Atributos que hacen que un elemento emita una peticion.
 VERBOS = ('hx-get', 'hx-post', 'hx-put', 'hx-patch', 'hx-delete')

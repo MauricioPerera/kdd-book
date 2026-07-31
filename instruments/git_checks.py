@@ -36,6 +36,14 @@ import os
 import subprocess
 import sys
 
+# Sobre que mide esta familia: el historial de un repositorio.
+#
+# Lo declara cada familia y no una lista en `memoria.py`, porque esa lista
+# ya quedo vieja dos veces. `aplicar` elige por este campo que instrumentos
+# puede correr sobre lo que le dieron; sin el, agregar una familia la deja
+# afuera en silencio y nada falla.
+ARTEFACTO = 'repositorio-git'
+
 
 def _git(repo, *args):
     """Corre git en `repo`. Devuelve (codigo, stdout)."""

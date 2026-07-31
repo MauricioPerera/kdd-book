@@ -163,3 +163,45 @@ class InventarioDeInstrumentosTest(unittest.TestCase):
             for regla in getattr(modulo, 'RULES', {}):
                 with self.subTest(script=os.path.basename(ruta), regla=regla):
                     self.assertIn((os.path.basename(ruta), regla), exportadas)
+
+    def test_toda_familia_declara_sobre_que_mide(self):
+        """Sin `ARTEFACTO`, `aplicar` deja la familia afuera en silencio.
+
+        Es el segundo defecto de la misma forma en `memoria.py`. El primero fue
+        la lista de familias de `_reglas_disponibles`; el segundo,
+        `DE_ARCHIVO_UNICO`, que nombraba a mano las familias que miden un
+        archivo suelto: se agregaron las 27 reglas de `pep8_checks`, que mide
+        exactamente eso, y `aplicar` siguio corriendo las mismas de siempre.
+
+        Por eso el dato ya no vive en una lista sino en cada familia, y esta
+        prueba obliga a que ninguna se olvide de declararlo.
+        """
+        import glob
+        sys.path.insert(0, os.path.join(RAIZ, 'instruments'))
+        for ruta in sorted(glob.glob(os.path.join(RAIZ, 'instruments', '*.py'))):
+            nombre = os.path.basename(ruta)
+            if nombre in ('gate.py',):
+                continue
+            with self.subTest(familia=nombre):
+                self.assertIsNotNone(
+                    M._artefacto_de(nombre),
+                    'la familia no declara ARTEFACTO: `aplicar` no sabe si puede '
+                    'correrla y la saltea sin avisar')
+
+    def test_aplicar_usa_los_instrumentos_de_archivo_suelto(self):
+        """Se mira la SELECCION, no el helper.
+
+        La primera version de esta prueba comprobaba `_artefacto_de` y por eso
+        no tenia dientes: volver la seleccion a la lista escrita a mano la
+        dejaba en verde. Ahora mira que instrumentos elige de verdad.
+        """
+        import json
+        with open(os.path.join(RAIZ, 'memoria.json'), encoding='utf-8') as fh:
+            memoria = json.load(fh)
+        scripts = {i.split()[0] for i in M._seleccion(memoria)}
+        self.assertIn('checks.py', scripts)
+        self.assertIn('pep8_checks.py', scripts,
+                      'pep8_checks mide un archivo .py suelto y quedo afuera')
+        self.assertNotIn('git_checks.py', scripts,
+                         'un instrumento de historial no se corre sobre un archivo')
+        self.assertNotIn('entorno_checks.py', scripts)

@@ -55,6 +55,14 @@ import os
 import re
 import sys
 
+# Sobre que mide esta familia: una pagina HTML.
+#
+# Lo declara cada familia y no una lista en `memoria.py`, porque esa lista
+# ya quedo vieja dos veces. `aplicar` elige por este campo que instrumentos
+# puede correr sobre lo que le dieron; sin el, agregar una familia la deja
+# afuera en silencio y nada falla.
+ARTEFACTO = 'html'
+
 from html_checks import NoVerificable, parsear  # noqa: F401
 
 

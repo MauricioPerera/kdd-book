@@ -22,6 +22,14 @@ import argparse
 import ast
 import sys
 
+# Sobre que mide esta familia: un archivo .py suelto: no necesita contexto.
+#
+# Lo declara cada familia y no una lista en `memoria.py`, porque esa lista
+# ya quedo vieja dos veces. `aplicar` elige por este campo que instrumentos
+# puede correr sobre lo que le dieron; sin el, agregar una familia la deja
+# afuera en silencio y nada falla.
+ARTEFACTO = 'archivo-python'
+
 
 def count_params(func):
     """Parametros declarados, sin contar `self` ni `cls`."""

@@ -47,10 +47,27 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 INSTRUMENTOS = os.path.join(AQUI, 'instruments')
 POR_DEFECTO = os.path.join(AQUI, 'memoria.json')
 
-# Familias cuyo instrumento mide UN archivo suelto: son las que `aplicar` puede
-# correr sobre codigo ajeno. Las demas necesitan un proyecto, un repositorio git
-# o una suite, o sea contexto que un archivo no trae.
-DE_ARCHIVO_UNICO = ('checks.py', 'chain_depth.py', 'params_max.py')
+# `aplicar` corre sobre un archivo suelto, asi que solo puede usar los
+# instrumentos que miden eso. Cual es cual **lo declara cada familia** en su
+# constante `ARTEFACTO`, no una lista aca.
+#
+# Estuvo escrito como lista y quedo viejo: `pep8_checks` mide un archivo .py
+# suelto igual que `checks.py`, se agregaron 27 reglas y `aplicar` siguio
+# corriendo las mismas de siempre sin que nada fallara. Es el segundo defecto
+# de esta forma en este archivo — el primero fue la lista de familias de
+# `_reglas_disponibles`— y por eso esta vez el dato vive donde se sabe.
+ARTEFACTO_DE_ARCHIVO = 'archivo-python'
+
+
+def _artefacto_de(script):
+    """El artefacto que declara la familia, o None si no declara ninguno."""
+    sys.path.insert(0, INSTRUMENTOS)
+    if not script.endswith('.py'):
+        return None
+    try:
+        return getattr(__import__(script[:-3]), 'ARTEFACTO', None)
+    except ImportError:
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -287,16 +304,28 @@ def fusionar(memorias):
     }, conflictos
 
 
+def _seleccion(memoria):
+    """{instrumento: [tecnicas que lo citan]} de los que miden un archivo suelto.
+
+    Vive en su propia funcion para que se pueda probar sin correr 53
+    subprocesos. Cuando la seleccion estaba adentro de `aplicar`, la prueba solo
+    llegaba a mirar el helper `_artefacto_de` y no la eleccion de verdad:
+    volver a la lista escrita a mano no rompia nada.
+    """
+    por_instrumento = {}
+    for t in medibles(memoria):
+        script = t['instrumento'].split()[0]
+        if _artefacto_de(script) == ARTEFACTO_DE_ARCHIVO:
+            por_instrumento.setdefault(t['instrumento'], []).append(t['id'])
+    return por_instrumento
+
+
 def aplicar(memoria, archivo):
     """Corre sobre `archivo` todo instrumento de archivo unico y reporta.
 
     Devuelve [(instrumento, exit_code, detalle, [tecnicas que lo citan])].
     """
-    por_instrumento = {}
-    for t in medibles(memoria):
-        script = t['instrumento'].split()[0]
-        if script in DE_ARCHIVO_UNICO:
-            por_instrumento.setdefault(t['instrumento'], []).append(t['id'])
+    por_instrumento = _seleccion(memoria)
 
     out = []
     for instrumento, ids in sorted(por_instrumento.items()):

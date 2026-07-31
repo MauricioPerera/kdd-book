@@ -32,6 +32,14 @@ import json
 import os
 import sys
 
+# Sobre que mide esta familia: el proyecto entero: manifiesto, punto de entrada o suite.
+#
+# Lo declara cada familia y no una lista en `memoria.py`, porque esa lista
+# ya quedo vieja dos veces. `aplicar` elige por este campo que instrumentos
+# puede correr sobre lo que le dieron; sin el, agregar una familia la deja
+# afuera en silencio y nada falla.
+ARTEFACTO = 'proyecto'
+
 
 class NoVerificable(Exception):
     """Falta la declaracion sin la cual la regla no se puede evaluar (exit 2)."""
