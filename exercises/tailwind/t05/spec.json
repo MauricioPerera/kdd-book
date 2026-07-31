@@ -1,0 +1,47 @@
+{
+  "id": "t05-referencia",
+  "node": "t05",
+  "title": "Declarar @reference en un <style> que usa @apply",
+  "description": "Declarar @reference en un <style> que usa @apply.",
+  "intent": "Agregar @reference al bloque <style> que usa @apply.",
+  "signature": "@reference \"../app.css\";",
+  "target": "proyecto/Alert.vue",
+  "oracle": "oracle_test.py",
+  "seed": "seed_Alert.vue",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "referencia"
+    ],
+    "threshold": "cero bloques de estilo sin @reference"
+  },
+  "invariants": [
+    "El componente sigue mostrando el mismo mensaje: el oraculo pasa igual antes y despues.",
+    "Todo bloque <style> que usa @apply o @variant declara @reference."
+  ],
+  "examples": [
+    "`<style>` con `@apply flex` y sin `@reference` -> el bloque no sabe de donde tomar el tema, en rojo.",
+    "El mismo bloque con `@reference \"../app.css\";` -> en verde.",
+    "Un `<style scoped>` sin `@apply` ni `@variant` no se mide: no necesita el tema."
+  ],
+  "do": [
+    "Agregar `@reference` al principio del bloque `<style>`."
+  ],
+  "dont": [
+    "Sacar el `@apply` en vez de declarar la referencia: cambia la tecnica usada, no la arregla."
+  ],
+  "stop_if": [
+    "el proyecto no usa componentes .vue ni .svelte"
+  ]
+}

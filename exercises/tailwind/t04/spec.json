@@ -1,0 +1,47 @@
+{
+  "id": "t04-preprocesadores",
+  "node": "t04",
+  "title": "Sacar Sass de un proyecto que usa Tailwind v4",
+  "description": "Sacar Sass de un proyecto que usa Tailwind v4.",
+  "intent": "Sacar la dependencia de Sass del manifiesto.",
+  "signature": "\"dependencies\": { \"tailwindcss\": \"^4.0.0\" }",
+  "target": "proyecto/package.json",
+  "oracle": "oracle_test.py",
+  "seed": "seed_package.json",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "preprocesadores"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "El proyecto sigue llamandose igual y con la misma version de Tailwind: el oraculo pasa igual antes y despues.",
+    "Cero dependencias de Sass, Less o Stylus."
+  ],
+  "examples": [
+    "`sass` en `dependencies` junto con `tailwindcss` -> \"v4.0 no esta disenado para usarse con preprocesadores\", en rojo.",
+    "Sin esa dependencia -> en verde.",
+    "Un proyecto que no declara `tailwindcss` no se mide: la regla es sobre la combinacion de las dos cosas."
+  ],
+  "do": [
+    "Sacar la dependencia del preprocesador del manifiesto."
+  ],
+  "dont": [
+    "Sacar tambien `tailwindcss` para que la regla no aplique: eso no arregla el proyecto, lo saca de la fuente."
+  ],
+  "stop_if": [
+    "el proyecto todavia no migro a Tailwind v4 y sigue en v3, donde los preprocesadores si son compatibles"
+  ]
+}

@@ -1,0 +1,4 @@
+@theme {
+  --brand: oklch(0.6 0.2 30);
+  --spacing-card: 1.5rem;
+}

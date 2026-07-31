@@ -1,0 +1,47 @@
+{
+  "id": "t20-clases-dinamicas",
+  "node": "t20",
+  "title": "Reemplazar la clase interpolada por un mapa de variantes estaticas",
+  "description": "Reemplazar la clase interpolada por un mapa de variantes estaticas.",
+  "intent": "Mapear la prop a nombres de clase completos en vez de interpolarla.",
+  "signature": "const COLOR_VARIANTS = { blue: \"...\", red: \"...\" };",
+  "target": "proyecto/Card.jsx",
+  "oracle": "oracle_test.py",
+  "seed": "seed_Card.jsx",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "clases-dinamicas"
+    ],
+    "threshold": "cero clases dinamicas"
+  },
+  "invariants": [
+    "La tarjeta sigue mostrando el mismo texto: el oraculo pasa igual antes y despues.",
+    "Cero nombres de clase construidos por concatenacion o interpolacion."
+  ],
+  "examples": [
+    "`` `bg-${color}-600` `` -> Tailwind trata los archivos como texto plano, no ve la clase completa, en rojo.",
+    "Un mapa que asocia cada valor de `color` a una clase completa -> en verde.",
+    "`className=\"bg-blue-600 hover:bg-blue-500\"` no se marca: son clases completas, sin interpolacion."
+  ],
+  "do": [
+    "Mapear cada valor posible a un nombre de clase completo."
+  ],
+  "dont": [
+    "Agregar todas las clases posibles con `safelist` para esquivar la regla: sigue sin ser legible en el archivo fuente, solo mueve el problema a la configuracion."
+  ],
+  "stop_if": [
+    "los valores posibles de la prop no se conocen de antemano (vienen de una API externa)"
+  ]
+}

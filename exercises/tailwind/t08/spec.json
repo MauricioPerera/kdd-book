@@ -1,0 +1,47 @@
+{
+  "id": "t08-utilidades-removidas",
+  "node": "t08",
+  "title": "Reemplazar bg-opacity-* por el modificador de opacidad",
+  "description": "Reemplazar bg-opacity-* por el modificador de opacidad.",
+  "intent": "Reemplazar la utilidad de opacidad removida por el modificador /valor.",
+  "signature": "bg-blue-600/50",
+  "target": "proyecto/index.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed_index.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "utilidades-removidas"
+    ],
+    "threshold": "cero apariciones de la lista de utilidades removidas o renombradas"
+  },
+  "invariants": [
+    "El boton sigue diciendo lo mismo y con el mismo relleno: el oraculo pasa igual antes y despues.",
+    "Cero utilidades removidas en v4."
+  ],
+  "examples": [
+    "`bg-opacity-50` -> removida en v4, en rojo.",
+    "`bg-blue-600/50` -> el modificador de opacidad la reemplaza, en verde.",
+    "`shadow` o `rounded` no se marcan: siguen siendo clases validas en v4, solo que con otra escala."
+  ],
+  "do": [
+    "Reemplazar la utilidad removida por el modificador `/valor` sobre el color."
+  ],
+  "dont": [
+    "Sacar la clase de color entera para que no quede ninguna utilidad de opacidad: el boton pierde su color."
+  ],
+  "stop_if": [
+    "el proyecto todavia esta en Tailwind v3, donde bg-opacity-* si existe"
+  ]
+}

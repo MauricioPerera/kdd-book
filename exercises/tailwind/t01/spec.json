@@ -1,0 +1,47 @@
+{
+  "id": "t01-instalacion",
+  "node": "t01",
+  "title": "Declarar el plugin de Tailwind en la configuracion de Vite",
+  "description": "Declarar el plugin de Tailwind en la configuracion de Vite.",
+  "intent": "Agregar el plugin oficial de Tailwind a la configuracion de Vite.",
+  "signature": "plugins: [tailwindcss()]",
+  "target": "proyecto/vite.config.ts",
+  "oracle": "oracle_test.py",
+  "seed": "seed_vite.config.ts",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "instalacion"
+    ],
+    "threshold": "el plugin y el import estan declarados"
+  },
+  "invariants": [
+    "La configuracion de Vite sigue siendo valida: el oraculo pasa igual antes y despues.",
+    "El plugin y el import de Tailwind quedan declarados."
+  ],
+  "examples": [
+    "Un `vite.config.ts` sin el plugin -> Tailwind no procesa nada, en rojo.",
+    "El mismo archivo con `tailwindcss()` en `plugins` -> en verde.",
+    "Sin ningun `vite.config.*` en el proyecto la regla no aplica: la tecnica es especifica de Vite, no de todo bundler."
+  ],
+  "do": [
+    "Importar el plugin oficial y agregarlo a `plugins`."
+  ],
+  "dont": [
+    "Renombrar el archivo a otra extension para que la regla no lo encuentre: sigue siendo la configuracion real de Vite."
+  ],
+  "stop_if": [
+    "el proyecto no usa Vite, sino la CLI de Tailwind o PostCSS directo"
+  ]
+}

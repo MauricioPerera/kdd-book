@@ -1,0 +1,47 @@
+{
+  "id": "t11-utilidades-en-conflicto",
+  "node": "t11",
+  "title": "Sacar la utilidad de display que sobra",
+  "description": "Sacar la utilidad de display que sobra.",
+  "intent": "Dejar una sola utilidad de display sobre el elemento.",
+  "signature": "<div class=\"flex\">",
+  "target": "proyecto/index.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed_index.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "utilidades-en-conflicto"
+    ],
+    "threshold": "cero conflictos por elemento"
+  },
+  "invariants": [
+    "El contenido del panel sigue siendo el mismo: el oraculo pasa igual antes y despues.",
+    "Cero elementos con dos utilidades que fijan la misma propiedad CSS."
+  ],
+  "examples": [
+    "`class=\"flex hidden\"` -> las dos fijan `display`, gana la que queda mas tarde en la hoja generada, no la de la derecha en el atributo, en rojo.",
+    "`class=\"flex\"` -> una sola, en verde.",
+    "`class=\"flex md:hidden\"` no se marca: aplican en breakpoints distintos, no compiten."
+  ],
+  "do": [
+    "Sacar la utilidad de display que no corresponde."
+  ],
+  "dont": [
+    "Borrar todo el contenido del elemento para que no importe cual display gane: el panel deja de mostrar lo que mostraba."
+  ],
+  "stop_if": [
+    "las dos utilidades estan pensadas para variantes distintas y el conflicto es aparente, no real"
+  ]
+}

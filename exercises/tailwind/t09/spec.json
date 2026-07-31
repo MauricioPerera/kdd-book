@@ -1,0 +1,47 @@
+{
+  "id": "t09-modificador-important",
+  "node": "t09",
+  "title": "Mover el modificador important al final de la clase",
+  "description": "Mover el modificador important al final de la clase.",
+  "intent": "Mover el ! de important al final de la utilidad.",
+  "signature": "text-red-600!",
+  "target": "proyecto/index.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed_index.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "modificador-important"
+    ],
+    "threshold": "cero clases con el modificador antepuesto"
+  },
+  "invariants": [
+    "El aviso sigue diciendo lo mismo: el oraculo pasa igual antes y despues.",
+    "El modificador important va como sufijo, no como prefijo."
+  ],
+  "examples": [
+    "`!text-red-600` -> sintaxis de v3, en rojo.",
+    "`text-red-600!` -> sintaxis de v4, en verde.",
+    "`!hover:bg-red-500` tambien se marca: el prefijo puede ir delante de una variante entera, no solo de la utilidad."
+  ],
+  "do": [
+    "Mover el `!` al final del token."
+  ],
+  "dont": [
+    "Sacar el modificador important en vez de reubicarlo: cambia si el estilo gana la especificidad, no solo la sintaxis."
+  ],
+  "stop_if": [
+    "el proyecto todavia esta en Tailwind v3, donde el prefijo es la sintaxis correcta"
+  ]
+}

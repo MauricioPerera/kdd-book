@@ -47,32 +47,12 @@ SIN_EJERCICIO = {
 #
 # Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {
-    ('tailwind_checks.py', 'clases-dinamicas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'instalacion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'mobile-first'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'modificador-important'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'namespace-color'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'preprocesadores'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'referencia'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'theme-variables'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'utilidades-en-conflicto'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('tailwind_checks.py', 'utilidades-removidas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-}
+PENDIENTE = {}
 
 
 def _alias_de(script):

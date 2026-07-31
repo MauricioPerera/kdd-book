@@ -1,0 +1,47 @@
+{
+  "id": "t17-theme-variables",
+  "node": "t17",
+  "title": "Declarar el token de tema con @theme, no con :root",
+  "description": "Declarar el token de tema con @theme, no con :root.",
+  "intent": "Mover la declaracion del token de :root a @theme.",
+  "signature": "@theme { --color-brand: oklch(0.7 0.15 250); }",
+  "target": "proyecto/app.css",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.css",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "theme-variables"
+    ],
+    "threshold": "cero tokens declarados con :root o anidados"
+  },
+  "invariants": [
+    "El color que usa el body sigue siendo el mismo: el oraculo pasa igual antes y despues.",
+    "Los tokens de tema se declaran con @theme, en el nivel superior."
+  ],
+  "examples": [
+    "`--color-brand` declarada en `:root` -> Tailwind no lo trata como token de tema, en rojo.",
+    "La misma variable en `@theme` -> en verde.",
+    "`@theme` anidado dentro de un `@media` tambien se marca: tiene que estar en el nivel superior de la hoja."
+  ],
+  "do": [
+    "Mover la declaracion de `:root` a `@theme`."
+  ],
+  "dont": [
+    "Cambiar el valor del color de paso: la tecnica es donde se declara, no que color es."
+  ],
+  "stop_if": [
+    "la variable no es un token de diseno de Tailwind sino una variable CSS de proposito general"
+  ]
+}

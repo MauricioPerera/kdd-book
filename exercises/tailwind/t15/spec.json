@@ -1,0 +1,47 @@
+{
+  "id": "t15-mobile-first",
+  "node": "t15",
+  "title": "Agregar la utilidad sin prefijo para mobile",
+  "description": "Agregar la utilidad sin prefijo para mobile.",
+  "intent": "Agregar la version sin prefijo de la utilidad, para mobile.",
+  "signature": "text-center sm:text-left",
+  "target": "proyecto/index.html",
+  "oracle": "oracle_test.py",
+  "seed": "seed_index.html",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "mobile-first"
+    ],
+    "threshold": "cero utilidades \"mobile\" declaradas solo bajo un breakpoint"
+  },
+  "invariants": [
+    "El titulo sigue diciendo lo mismo: el oraculo pasa igual antes y despues.",
+    "Toda propiedad tiene una utilidad sin prefijo ademas de las que llevan breakpoint."
+  ],
+  "examples": [
+    "`sm:text-center` solo -> sin estilo de alineacion por debajo de 640px, en rojo.",
+    "`text-center sm:text-left` -> mobile alineado al centro, desde 640px a la izquierda, en verde.",
+    "Solo mide las propiedades del mapa declarado: una utilidad fuera de el no se aprueba ni se rechaza."
+  ],
+  "do": [
+    "Agregar la utilidad sin prefijo para la version mobile."
+  ],
+  "dont": [
+    "Sacar el prefijo `sm:` en vez de agregar la base: pierde el comportamiento distinto en el breakpoint."
+  ],
+  "stop_if": [
+    "la propiedad usa una utilidad fuera del mapa declarado con --propiedades"
+  ]
+}

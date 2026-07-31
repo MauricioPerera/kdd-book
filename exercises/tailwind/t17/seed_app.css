@@ -1,0 +1,7 @@
+:root {
+  --color-brand: oklch(0.7 0.15 250);
+}
+
+body {
+  background-color: var(--color-brand);
+}

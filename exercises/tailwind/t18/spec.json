@@ -1,0 +1,47 @@
+{
+  "id": "t18-namespace-color",
+  "node": "t18",
+  "title": "Poner el color custom en el namespace --color-*",
+  "description": "Poner el color custom en el namespace --color-*.",
+  "intent": "Renombrar la variable de color al namespace --color-*.",
+  "signature": "--color-brand: oklch(0.6 0.2 30);",
+  "target": "proyecto/app.css",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.css",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "tailwind_checks.py",
+    "args": [
+      "--rule",
+      "namespace-color"
+    ],
+    "threshold": "cero colores custom fuera del namespace"
+  },
+  "invariants": [
+    "El valor del color y del espaciado no cambian: el oraculo pasa igual antes y despues.",
+    "Los colores custom usan el namespace --color-*."
+  ],
+  "examples": [
+    "`--brand: oklch(...)` -> tiene forma de color y no esta en el namespace, en rojo.",
+    "`--color-brand: oklch(...)` -> en verde.",
+    "`--spacing-card` no se marca: su valor no tiene forma de color."
+  ],
+  "do": [
+    "Renombrar la variable para que empiece con --color-."
+  ],
+  "dont": [
+    "Cambiar el valor oklch de paso: la tecnica es el nombre, no el color que representa."
+  ],
+  "stop_if": [
+    "no hay ninguna variable con forma de color en la hoja"
+  ]
+}

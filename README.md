@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Nueve fuentes, 574 nodos, 130 contratos ejecutables, 146 instrumentos en trece
+Nueve fuentes, 574 nodos, 140 contratos ejecutables, 146 instrumentos en trece
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 256 pruebas propias.
 
@@ -26,12 +26,12 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Google developer documentation style guide | 80 | 52,5% | **52,5%** | 42 | 42 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
-| Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 10 | 0 |
+| Tailwind CSS Docs (seleccion curada)\* | 21 | 47,6% | **47,6%** | 10 | 10 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **574** | **195** | **178** | **162** | **130** |
+| **Total** | **574** | **195** | **178** | **172** | **140** |
 
 \* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
 otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
@@ -111,14 +111,13 @@ refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 Ademas: 17 tecnicas `proxy`, 204 en pila B (tecnica real sin propiedad medible)
 y 175 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
-Hay 195 tecnicas en pila A y 130 ejercicios. Parte de la diferencia no es un
-pendiente: **la cobertura se cuenta por regla, no por nodo**, porque un
-instrumento no mejora por ejercitarse dos veces. DRY aparece en cinco nodos de
-tres fuentes y las cinco corren `checks.py --rule g5`: un ejercicio las cubre.
-El resto de la diferencia si es un pendiente declarado: las 10 reglas de
-`tailwind_checks`, recien escritas, todavia no tienen ejercicio. Nada de esto
-se afirma de memoria: `test_cobertura` compara el conjunto exacto y falla tanto
-si falta un ejercicio como si sobra una excepcion declarada.
+Hay 195 tecnicas en pila A y 140 ejercicios, y la diferencia no es un pendiente:
+**la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
+mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
+las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
+cuyo instrumento admite la forma de ejercicio lo tiene**, y eso no se afirma de
+memoria: `test_cobertura` compara el conjunto exacto y falla tanto si falta un
+ejercicio como si sobra una excepcion declarada.
 
 **La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
 diferencia es si el instrumento lee el artefacto del que trata la tecnica
@@ -808,6 +807,19 @@ contrato. `validate_okf` la leyo como un enlace real a un archivo que no existe.
 Un `signature` describe la interfaz, no es markdown ejecutable — se reescribio
 como texto plano.
 
+Los diez de Tailwind son los primeros cuyo artefacto es **un proyecto entero**
+y no un archivo suelto: solo UNO de sus archivos cambia entre el seed y la
+solucion —el `vite.config.ts`, el `package.json`, la hoja de estilos— y el
+resto queda fijo como contexto, igual que los ejercicios de `entorno_checks`.
+El oraculo lee ese unico archivo y afirma lo que no depende de la tecnica: que
+el `package.json` sigue declarando el mismo nombre y la misma version de
+Tailwind, que el color del tema sigue siendo el mismo `oklch(...)`, que la
+tarjeta sigue mostrando el mismo texto. Se comprobo que frena los atajos que su
+`dont` prohibe: sacar `tailwindcss` del manifiesto en vez de sacar Sass, borrar
+el contenido de un panel en vez de resolver el conflicto de utilidades, y
+cambiar el valor del color en vez de solo su namespace — los tres ponen el
+oraculo en rojo.
+
 ## El repositorio contra sus propios instrumentos
 
 Corriendo `checks` y `pep8_checks` sobre este mismo codigo aparecieron nueve
@@ -856,16 +868,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| `tailwind_checks` sin ejercicio | 10 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna fila es un instrumento que falte.** Las 195 tecnicas de pila A tienen
-instrumento; lo unico pendiente son los 10 ejercicios de Tailwind. El resto son
-limites, no deudas: un artefacto que este
+**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 195
+tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
+ejercicio lo tiene. El resto son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
@@ -882,7 +893,7 @@ Dieciseis suites, 256 pruebas, y cada suite existe por un error concreto que ya 
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 130 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 140 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
