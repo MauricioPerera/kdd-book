@@ -1,0 +1,47 @@
+{
+  "id": "e62-unidades",
+  "node": "e62",
+  "title": "Separar el numero de la unidad con un espacio",
+  "description": "Separar el numero de la unidad con un espacio.",
+  "intent": "Poner un espacio entre el numero y la unidad.",
+  "signature": "The file is 10 kg heavier than expected.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "unidades"
+    ],
+    "threshold": "cero unidades pegadas"
+  },
+  "invariants": [
+    "El dato no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero unidades pegadas."
+  ],
+  "examples": [
+    "\"10kg\" -> pegado, en rojo.",
+    "\"10 kg\" -> con espacio, en verde.",
+    "El simbolo de porcentaje es la excepcion mas conocida en otras guias, pero esta no la exceptua: \"%\" sigue pidiendo el espacio."
+  ],
+  "do": [
+    "Agregar el espacio entre el numero y la unidad."
+  ],
+  "dont": [
+    "Escribir la unidad completa (\"kilograms\") pegada igual: el problema es el espacio, no la abreviatura."
+  ],
+  "stop_if": [
+    "el numero y la unidad son parte de un identificador tecnico, como un nombre de modelo"
+  ]
+}

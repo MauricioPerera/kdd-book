@@ -1,0 +1,49 @@
+{
+  "id": "e56-avisos-tipo",
+  "node": "e56",
+  "title": "Usar un tipo de aviso declarado",
+  "description": "Usar un tipo de aviso declarado.",
+  "intent": "Usar uno de los tipos de aviso que el proyecto declara.",
+  "signature": "**Note:** this may take a while.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "avisos-tipo",
+      "--avisos",
+      "avisos.json"
+    ],
+    "threshold": "cero avisos de tipo inventado"
+  },
+  "invariants": [
+    "El aviso dice lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero avisos de tipo inventado."
+  ],
+  "examples": [
+    "\"**Heads up:**\" -> no esta en los tipos declarados, en rojo.",
+    "\"**Note:**\" -> en verde.",
+    "La guia nombra Note, Important, Caution, Warning y Tip; el proyecto declara cuales usa."
+  ],
+  "do": [
+    "Usar uno de los tipos de aviso declarados."
+  ],
+  "dont": [
+    "Inventar un tipo nuevo porque suena mejor: la lista la fija el proyecto."
+  ],
+  "stop_if": [
+    "el proyecto no declaro sus tipos de aviso"
+  ]
+}

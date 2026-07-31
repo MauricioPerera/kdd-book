@@ -1,0 +1,47 @@
+{
+  "id": "e64-texto-enlace",
+  "node": "e64",
+  "title": "Escribir un texto de enlace descriptivo",
+  "description": "Escribir un texto de enlace descriptivo.",
+  "intent": "Reemplazar el texto de enlace generico por uno descriptivo.",
+  "signature": "[configuration guide](https://example.com/docs)",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "texto-enlace"
+    ],
+    "threshold": "cero enlaces sin texto util"
+  },
+  "invariants": [
+    "El enlace sigue apuntando al mismo lado. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero enlaces sin texto util."
+  ],
+  "examples": [
+    "\"[here](...)\" -> no dice a donde lleva fuera de contexto, en rojo.",
+    "\"[configuration guide](...)\" -> en verde.",
+    "Una URL pegada sin corchetes (\"https://...\") tambien la marca: es la otra mitad de la misma regla."
+  ],
+  "do": [
+    "Describir el destino en el texto del enlace."
+  ],
+  "dont": [
+    "Poner el titulo entero de la pagina destino como texto: descriptivo no es lo mismo que largo."
+  ],
+  "stop_if": [
+    "el enlace de verdad no tiene un destino describible, como un ancla de vuelta al principio"
+  ]
+}

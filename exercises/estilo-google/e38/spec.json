@@ -1,0 +1,47 @@
+{
+  "id": "e38-coma-serial",
+  "node": "e38",
+  "title": "Agregar la coma serial",
+  "description": "Agregar la coma serial.",
+  "intent": "Agregar la coma antes de la conjuncion en la enumeracion.",
+  "signature": "The output has apples, bananas, and cherries.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "coma-serial"
+    ],
+    "threshold": "cero enumeraciones sin coma serial"
+  },
+  "invariants": [
+    "Los tres elementos siguen estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero enumeraciones sin coma serial."
+  ],
+  "examples": [
+    "\"apples, bananas and cherries\" -> sin la coma serial, en rojo.",
+    "\"apples, bananas, and cherries\" -> en verde.",
+    "Con dos elementos no aplica: \"apples and bananas\" no es una enumeracion de tres o mas."
+  ],
+  "do": [
+    "Agregar la coma antes de \"and\"/\"or\"."
+  ],
+  "dont": [
+    "Sacar la conjuncion en vez de agregar la coma: cambia la enumeracion, no la puntua."
+  ],
+  "stop_if": [
+    "la enumeracion tiene solo dos elementos"
+  ]
+}

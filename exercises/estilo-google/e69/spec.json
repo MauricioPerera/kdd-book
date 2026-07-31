@@ -1,0 +1,47 @@
+{
+  "id": "e69-bloques-codigo",
+  "node": "e69",
+  "title": "Cortar la linea de codigo larga",
+  "description": "Cortar la linea de codigo larga.",
+  "intent": "Cortar la llamada en varias lineas para no superar el ancho declarado.",
+  "signature": "some_function_call_with_a_very_long_name_that_goes_on_and_on(",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "bloques-codigo"
+    ],
+    "threshold": "cero lineas de codigo fuera de largo"
+  },
+  "invariants": [
+    "Los tres argumentos siguen estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero lineas de codigo fuera de largo."
+  ],
+  "examples": [
+    "Una sola linea de mas de 80 caracteres -> en rojo.",
+    "La misma llamada cortada en dos lineas -> en verde.",
+    "Una elision con puntos suspensivos (\"# ...\") tambien la marca: cortar no es lo mismo que omitir."
+  ],
+  "do": [
+    "Cortar la llamada en el parentesis, respetando el ancho declarado."
+  ],
+  "dont": [
+    "Abreviar los nombres de los argumentos para que entren en una linea: cambia el ejemplo, no lo formatea."
+  ],
+  "stop_if": [
+    "el bloque de codigo es la salida literal de un comando y no se puede reformatear"
+  ]
+}

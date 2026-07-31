@@ -1,0 +1,47 @@
+{
+  "id": "e40-puntos-suspensivos",
+  "node": "e40",
+  "title": "Usar el caracter de elipsis",
+  "description": "Usar el caracter de elipsis.",
+  "intent": "Reemplazar los tres puntos sueltos por el caracter de elipsis.",
+  "signature": "The list continues…",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "puntos-suspensivos"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La frase no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"continues...\" -> tres puntos sueltos, en rojo.",
+    "\"continues…\" -> en verde: el caracter unico de elipsis.",
+    "Cuatro puntos seguidos (fin de oracion mas elipsis) no los mide esta regla: son dos signos distintos superpuestos."
+  ],
+  "do": [
+    "Usar el caracter de elipsis."
+  ],
+  "dont": [
+    "Agregar un cuarto punto para \"distinguirlo\" de una elipsis real: sigue siendo puntos sueltos."
+  ],
+  "stop_if": [
+    "el documento cita texto de un tercero que ya usaba tres puntos"
+  ]
+}

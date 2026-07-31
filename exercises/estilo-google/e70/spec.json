@@ -1,0 +1,47 @@
+{
+  "id": "e70-sintaxis-cli",
+  "node": "e70",
+  "title": "Marcar lo opcional con corchetes",
+  "description": "Marcar lo opcional con corchetes.",
+  "intent": "Usar corchetes para marcar el argumento opcional.",
+  "signature": "gcloud deploy [--region REGION]",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "sintaxis-cli"
+    ],
+    "threshold": "cero desviaciones"
+  },
+  "invariants": [
+    "El comando sigue siendo el mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero desviaciones."
+  ],
+  "examples": [
+    "\"--region (optional)\" -> la palabra en vez de la convencion, en rojo.",
+    "\"[--region REGION]\" -> corchetes para lo opcional, angulos o mayusculas para el valor, en verde.",
+    "\"(required)\" tambien lo marca: lo requerido no se anota, se deja sin corchetes."
+  ],
+  "do": [
+    "Usar corchetes para lo opcional."
+  ],
+  "dont": [
+    "Poner el argumento requerido tambien entre corchetes: pierde la distincion que los corchetes existen para marcar."
+  ],
+  "stop_if": [
+    "la herramienta de linea de comandos ya define su propia convencion de ayuda, distinta de esta"
+  ]
+}

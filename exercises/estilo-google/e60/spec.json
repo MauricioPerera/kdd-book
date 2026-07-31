@@ -1,0 +1,47 @@
+{
+  "id": "e60-procedimientos",
+  "node": "e60",
+  "title": "Empezar el paso con un verbo",
+  "description": "Empezar el paso con un verbo.",
+  "intent": "Reescribir el paso empezando con el verbo de la accion.",
+  "signature": "1. Open the console.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "procedimientos"
+    ],
+    "threshold": "cero pasos que no empiecen con verbo"
+  },
+  "invariants": [
+    "Los dos pasos siguen estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero pasos que no empiecen con verbo."
+  ],
+  "examples": [
+    "\"You open the console\" -> empieza con el sujeto, no el verbo, en rojo.",
+    "\"Open the console\" -> imperativo, en verde.",
+    "\"The system opens...\" tampoco pasa: \"The\" es sujeto igual que \"You\"."
+  ],
+  "do": [
+    "Empezar el paso con el verbo en imperativo."
+  ],
+  "dont": [
+    "Sacar el sujeto pero dejar el verbo conjugado (\"opens the console\"): sigue sin ser imperativo."
+  ],
+  "stop_if": [
+    "el paso describe algo que el sistema hace solo, no una accion del lector"
+  ]
+}

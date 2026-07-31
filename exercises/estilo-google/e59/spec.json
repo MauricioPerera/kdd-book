@@ -1,0 +1,47 @@
+{
+  "id": "e59-telefonos",
+  "node": "e59",
+  "title": "Usar un telefono de ejemplo del rango reservado",
+  "description": "Usar un telefono de ejemplo del rango reservado.",
+  "intent": "Reemplazar el telefono de ejemplo por uno del rango reservado.",
+  "signature": "Call us at 415-555-0123.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "telefonos"
+    ],
+    "threshold": "cero telefonos reales"
+  },
+  "invariants": [
+    "La instruccion de contacto no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero telefonos reales."
+  ],
+  "examples": [
+    "\"415-555-2671\" -> parece un numero real, en rojo.",
+    "\"415-555-0123\" -> dentro del rango 555-0100 a 555-0199, reservado para ejemplos, en verde.",
+    "El rango lo reserva el plan de numeracion norteamericano para ficcion: no hace falta declararlo, es publico."
+  ],
+  "do": [
+    "Usar un numero del rango 555-01XX."
+  ],
+  "dont": [
+    "Inventar un numero que \"suene\" a ejemplo sin usar el rango reservado: podria ser el numero real de alguien."
+  ],
+  "stop_if": [
+    "el documento necesita un formato de telefono de otro pais, sin rango reservado equivalente"
+  ]
+}

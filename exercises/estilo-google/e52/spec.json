@@ -1,0 +1,47 @@
+{
+  "id": "e52-encabezados-unicos",
+  "node": "e52",
+  "title": "Renombrar el encabezado repetido",
+  "description": "Renombrar el encabezado repetido.",
+  "intent": "Dar un nombre distinto al segundo encabezado repetido.",
+  "signature": "# Configuration",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "encabezados-unicos"
+    ],
+    "threshold": "cero encabezados fuera de convencion"
+  },
+  "invariants": [
+    "La seccion de opciones sigue estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero encabezados fuera de convencion."
+  ],
+  "examples": [
+    "Dos encabezados \"# Setup\" -> repetido, en rojo.",
+    "\"# Setup\" y \"# Configuration\" -> unicos, en verde.",
+    "Un encabezado que termina en punto tambien lo marca esta regla, aunque no se repita."
+  ],
+  "do": [
+    "Renombrar uno de los dos encabezados repetidos."
+  ],
+  "dont": [
+    "Borrar el segundo encabezado: si tenia contenido propio, lo deja sin titulo."
+  ],
+  "stop_if": [
+    "los dos encabezados repetidos estan en documentos distintos y no en el mismo"
+  ]
+}

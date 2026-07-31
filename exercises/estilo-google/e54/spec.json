@@ -1,0 +1,47 @@
+{
+  "id": "e54-items-lista",
+  "node": "e54",
+  "title": "Poner mayuscula inicial en el item de lista",
+  "description": "Poner mayuscula inicial en el item de lista.",
+  "intent": "Poner mayuscula inicial en todos los items de la lista.",
+  "signature": "- First item",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "items-lista"
+    ],
+    "threshold": "cero listas incoherentes"
+  },
+  "invariants": [
+    "Los dos items siguen estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero listas incoherentes."
+  ],
+  "examples": [
+    "\"- first item\" -> minuscula inicial, en rojo.",
+    "\"- First item\" -> en verde.",
+    "Una lista con unos items terminados en punto y otros no tambien la marca: la puntuacion final tiene que ser coherente."
+  ],
+  "do": [
+    "Poner mayuscula inicial en cada item."
+  ],
+  "dont": [
+    "Poner mayuscula solo en el primer item: la coherencia es de toda la lista."
+  ],
+  "stop_if": [
+    "los items son fragmentos de una oracion que continua fuera de la lista"
+  ]
+}

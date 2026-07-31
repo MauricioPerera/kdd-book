@@ -1,0 +1,47 @@
+{
+  "id": "e48-fechas",
+  "node": "e48",
+  "title": "Sacar el ordinal de la fecha",
+  "description": "Sacar el ordinal de la fecha.",
+  "intent": "Escribir la fecha sin sufijo ordinal.",
+  "signature": "The change ships on July 1.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "fechas"
+    ],
+    "threshold": "cero fechas fuera de formato"
+  },
+  "invariants": [
+    "La fecha no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero fechas fuera de formato."
+  ],
+  "examples": [
+    "\"July 1st\" -> ordinal, en rojo.",
+    "\"July 1\" -> en verde.",
+    "\"1st\", \"2nd\", \"3rd\", \"4th\": el sufijo es lo que se saca, no el numero."
+  ],
+  "do": [
+    "Sacar el sufijo ordinal."
+  ],
+  "dont": [
+    "Escribir el numero en palabras (\"July first\"): la guia pide el numeral, no la ordinal en palabras."
+  ],
+  "stop_if": [
+    "la fecha viene de una cita textual"
+  ]
+}

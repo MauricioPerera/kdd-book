@@ -1,0 +1,47 @@
+{
+  "id": "e22-abreviaturas-latinas",
+  "node": "e22",
+  "title": "Escribir la abreviatura latina en palabras",
+  "description": "Escribir la abreviatura latina en palabras.",
+  "intent": "Escribir la abreviatura latina en palabras.",
+  "signature": "Use a config file, for example config.yaml.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "abreviaturas-latinas"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue senalando el mismo archivo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"e.g.\" -> abreviatura latina, en rojo.",
+    "\"for example\" -> en verde.",
+    "Tambien alcanza a \"i.e.\" y \"etc.\": \"that is\" y \"and so on\" son las alternativas."
+  ],
+  "do": [
+    "Escribir la abreviatura en palabras."
+  ],
+  "dont": [
+    "Dejarla y agregar una nota al pie explicandola: las notas al pie tienen su propia regla, y no resuelve esta."
+  ],
+  "stop_if": [
+    "la abreviatura aparece dentro de una cita textual que no se puede alterar"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "e65-anclas",
+  "node": "e65",
+  "title": "Agregar el encabezado al que apunta el enlace interno",
+  "description": "Agregar el encabezado al que apunta el enlace interno.",
+  "intent": "Agregar el encabezado que el enlace interno necesita.",
+  "signature": "## Options",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "anclas"
+    ],
+    "threshold": "cero anclas rotas"
+  },
+  "invariants": [
+    "El enlace interno sigue escrito igual. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero anclas rotas."
+  ],
+  "examples": [
+    "El enlace sin el encabezado correspondiente -> ancla rota, en rojo.",
+    "Con \"## Options\" en el documento -> en verde.",
+    "El slug se arma como en GitHub: minusculas, espacios a guion. Un encabezado con mayusculas distinta no calza si el enlace no coincide."
+  ],
+  "do": [
+    "Agregar el encabezado que falta."
+  ],
+  "dont": [
+    "Cambiar el enlace para que apunte a otro encabezado que si existe pero no es el tema: resuelve la regla, no la navegacion."
+  ],
+  "stop_if": [
+    "el destino esta en otro documento del sitio y el enlace deberia ser externo"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "e08-nombres-producto",
+  "node": "e08",
+  "title": "Escribir el nombre de producto como el proyecto lo declara",
+  "description": "Escribir el nombre de producto como el proyecto lo declara.",
+  "intent": "Escribir el nombre de producto con la grafia declarada.",
+  "signature": "Deploy it on Google Cloud.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "nombres-producto",
+      "--productos",
+      "productos.json"
+    ],
+    "threshold": "cero nombres de producto mal escritos"
+  },
+  "invariants": [
+    "La instruccion sigue diciendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero nombres de producto mal escritos."
+  ],
+  "examples": [
+    "\"google cloud\" -> no coincide con la grafia declarada, en rojo.",
+    "\"Google Cloud\" -> en verde.",
+    "Sin --productos declarado no hay grafia contra la que comparar."
+  ],
+  "do": [
+    "Escribir el nombre de producto con mayusculas donde el proyecto las declara."
+  ],
+  "dont": [
+    "Declarar una grafia nueva en vez de usar la que el proyecto ya fijo."
+  ],
+  "stop_if": [
+    "el proyecto no declaro sus nombres de producto"
+  ]
+}

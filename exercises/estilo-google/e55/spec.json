@@ -1,0 +1,47 @@
+{
+  "id": "e55-notacion-matematica",
+  "node": "e55",
+  "title": "Usar un solo estilo de notacion matematica",
+  "description": "Usar un solo estilo de notacion matematica.",
+  "intent": "Sacar la notacion con asterisco cuando el documento ya usa LaTeX.",
+  "signature": "The area is $a \\times b$.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "notacion-matematica"
+    ],
+    "threshold": "cero expresiones fuera de formato"
+  },
+  "invariants": [
+    "La formula no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero expresiones fuera de formato."
+  ],
+  "examples": [
+    "\"$a \\\\times b$ or 3 * 4\" -> mezcla LaTeX con asterisco, en rojo.",
+    "Solo la notacion LaTeX -> en verde.",
+    "Un documento que nunca usa LaTeX no dispara nada: la regla solo mide la mezcla, no elige un estilo por el proyecto."
+  ],
+  "do": [
+    "Sacar el ejemplo con asterisco, o pasarlo tambien a LaTeX."
+  ],
+  "dont": [
+    "Agregar un tercer estilo (texto plano \"3 times 4\"): suma un estilo mas en vez de unificar."
+  ],
+  "stop_if": [
+    "el documento cita una formula de una fuente externa que ya viene con asterisco"
+  ]
+}

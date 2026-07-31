@@ -45,96 +45,12 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {
-    ('prosa_checks.py', 'abreviaturas-latinas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'alt-texto'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'anclas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'and-or'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'avisos-tipo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'bloques-codigo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'coma-serial'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'comillas-puntuacion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'dominios'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'encabezados-caja'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'encabezados-unicos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'fechas'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'html-en-markdown'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'inclusivo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'items-lista'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'jerga'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'lista-palabras'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'marcadores'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'mayuscula-dos-puntos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'minimizadores'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'nombres-archivo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'nombres-producto'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'notacion-matematica'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'notas-pie'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'numeros-chicos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'parentesis-anidados'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'plural-parentesis'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'posesivo-producto'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'primera-persona'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'procedimientos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'pronombres-genero'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'punto-final'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'puntos-suspensivos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'raya'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'sintaxis-cli'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'tablas-encabezado'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'telefonos'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'texto-enlace'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'tiempo-futuro'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'tiempo-relativo'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'unidades'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-    ('prosa_checks.py', 'verbos-interaccion'): (
-        'el instrumento esta escrito y probado; falta el ejercicio'),
-}
+PENDIENTE = {}
 
 
 def _alias_de(script):

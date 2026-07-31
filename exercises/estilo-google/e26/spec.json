@@ -1,0 +1,47 @@
+{
+  "id": "e26-encabezados-caja",
+  "node": "e26",
+  "title": "Poner el encabezado en minuscula de oracion",
+  "description": "Poner el encabezado en minuscula de oracion.",
+  "intent": "Poner el encabezado en minuscula de oracion.",
+  "signature": "## Setting up your development environment",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "encabezados-caja"
+    ],
+    "threshold": "cero encabezados fuera de convencion"
+  },
+  "invariants": [
+    "El encabezado sigue hablando de lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero encabezados fuera de convencion."
+  ],
+  "examples": [
+    "\"Setting Up Your Development Environment\" -> Title Case, en rojo.",
+    "\"Setting up your development environment\" -> en verde.",
+    "La heuristica no distingue nombres propios ni siglas: un encabezado con varios nombres propios puede marcar de mas."
+  ],
+  "do": [
+    "Bajar a minuscula toda palabra que no sea la primera ni un nombre propio."
+  ],
+  "dont": [
+    "Escribirlo TODO en mayusculas para \"resolver\" la ambiguedad: eso tampoco es minuscula de oracion."
+  ],
+  "stop_if": [
+    "el encabezado es en efecto un nombre propio completo"
+  ]
+}

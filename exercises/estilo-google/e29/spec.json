@@ -1,0 +1,49 @@
+{
+  "id": "e29-posesivo-producto",
+  "node": "e29",
+  "title": "Sacar el posesivo de un nombre de producto",
+  "description": "Sacar el posesivo de un nombre de producto.",
+  "intent": "Usar el nombre de producto en aposicion, sin posesivo.",
+  "signature": "Open the Google Docs sharing menu.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "posesivo-producto",
+      "--productos",
+      "productos.json"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue abriendo el mismo menu. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"Google Docs's\" -> un nombre de producto no posee nada, en rojo.",
+    "\"the Google Docs sharing menu\" -> en verde: aposicion, no posesivo.",
+    "Comparte la lista de productos con la regla 8: son las dos caras de nombrar un producto bien."
+  ],
+  "do": [
+    "Usar el nombre de producto en aposicion."
+  ],
+  "dont": [
+    "Sacar el nombre de producto para esquivar la regla: la tecnica es no posesivizarlo, no omitirlo."
+  ],
+  "stop_if": [
+    "el proyecto no declaro sus nombres de producto"
+  ]
+}

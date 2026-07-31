@@ -1,0 +1,47 @@
+{
+  "id": "e32-pronombres-genero",
+  "node": "e32",
+  "title": "Sacar el pronombre de genero",
+  "description": "Sacar el pronombre de genero.",
+  "intent": "Reemplazar el pronombre de genero por uno neutro.",
+  "signature": "Ask the user for their password.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "pronombres-genero"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"his\" -> asume un genero que no se conoce, en rojo.",
+    "\"their\" -> en verde.",
+    "Alcanza tambien a \"he\", \"she\", \"him\", \"her\": la lista es la que da la guia."
+  ],
+  "do": [
+    "Reemplazar por \"their\"/\"they\"."
+  ],
+  "dont": [
+    "Escribir \"his/her\": sigue asumiendo que solo hay dos generos."
+  ],
+  "stop_if": [
+    "el texto se refiere a una persona real cuyo genero se conoce"
+  ]
+}

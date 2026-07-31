@@ -1,0 +1,47 @@
+{
+  "id": "e46-and-or",
+  "node": "e46",
+  "title": "Reemplazar la barra usada como \"o\"",
+  "description": "Reemplazar la barra usada como \"o\".",
+  "intent": "Escribir \"or\" en vez de una barra entre dos palabras.",
+  "signature": "Use a cat or dog picture for testing.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "and-or"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"cat/dog\" -> la barra como \"o\" es ambigua, en rojo.",
+    "\"cat or dog\" -> en verde.",
+    "\"and/or\" tiene su propio mensaje: es ambiguo en las dos direcciones, no solo la barra."
+  ],
+  "do": [
+    "Escribir \"or\" en vez de la barra."
+  ],
+  "dont": [
+    "Cambiar la barra por una coma: sigue sin decir si es \"o\" inclusivo o exclusivo."
+  ],
+  "stop_if": [
+    "la barra es de verdad una fraccion o una ruta, no una conjuncion"
+  ]
+}

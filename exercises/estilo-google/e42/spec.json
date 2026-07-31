@@ -1,0 +1,47 @@
+{
+  "id": "e42-parentesis-anidados",
+  "node": "e42",
+  "title": "Sacar el parentesis anidado",
+  "description": "Sacar el parentesis anidado.",
+  "intent": "Reescribir sin anidar un parentesis dentro de otro.",
+  "signature": "The value (in seconds, approximately) varies.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "parentesis-anidados"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "El dato no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"(in seconds (approximately))\" -> parentesis dentro de parentesis, en rojo.",
+    "\"(in seconds, approximately)\" -> en verde: una coma reemplaza al parentesis interno.",
+    "Dos parentesis seguidos y no anidados —\"(a) (b)\"— no los marca: la regla cuenta profundidad, no cantidad."
+  ],
+  "do": [
+    "Reemplazar el parentesis interno por una coma."
+  ],
+  "dont": [
+    "Sacar el parentesis externo en vez del interno: cambia que informacion queda entre parentesis."
+  ],
+  "stop_if": [
+    "la nota entre parentesis internos es una cita que no se puede reformular"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "e33-primera-persona",
+  "node": "e33",
+  "title": "Escribir la instruccion en segunda persona",
+  "description": "Escribir la instruccion en segunda persona.",
+  "intent": "Escribir la instruccion dirigida al lector, no en primera persona.",
+  "signature": "You should restart the service.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "primera-persona"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"We recommend that we\" -> el autor habla de si mismo en vez de instruir al lector, en rojo.",
+    "\"You should\" -> en verde.",
+    "Es el complemento de \"Second person\": la guia pide dirigirse al lector, no incluirse el autor."
+  ],
+  "do": [
+    "Dirigir la instruccion al lector con \"you\"."
+  ],
+  "dont": [
+    "Cambiar a \"one should\": formal y evita el \"you\", pero sigue sin ser segunda persona directa."
+  ],
+  "stop_if": [
+    "el texto describe una decision de equipo y no una instruccion al lector"
+  ]
+}

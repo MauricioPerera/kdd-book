@@ -1,0 +1,47 @@
+{
+  "id": "e12-minimizadores",
+  "node": "e12",
+  "title": "Sacar el adjetivo que minimiza el esfuerzo",
+  "description": "Sacar el adjetivo que minimiza el esfuerzo.",
+  "intent": "Sacar el adjetivo que minimiza el esfuerzo del lector.",
+  "signature": "Click the button to continue.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "minimizadores"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"Simply click\" -> si no le resulto simple al lector, la palabra lo hace sentir torpe, en rojo.",
+    "\"Click\" -> en verde.",
+    "La lista —simply, just, easy, obviously— es la que la guia usa de ejemplo."
+  ],
+  "do": [
+    "Sacar el adjetivo."
+  ],
+  "dont": [
+    "Cambiarlo por un sinonimo de la misma lista: \"easily\" tampoco pasa."
+  ],
+  "stop_if": [
+    "el adjetivo describe de verdad la dificultad, no la minimiza"
+  ]
+}

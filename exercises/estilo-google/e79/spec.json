@@ -1,0 +1,47 @@
+{
+  "id": "e79-nombres-archivo",
+  "node": "e79",
+  "title": "Renombrar el archivo a minusculas con guiones",
+  "description": "Renombrar el archivo a minusculas con guiones.",
+  "intent": "Renombrar el archivo de ejemplo a minusculas con guiones.",
+  "signature": "my-config.md",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "nombres-archivo"
+    ],
+    "threshold": "cero nombres fuera de convencion"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero nombres fuera de convencion."
+  ],
+  "examples": [
+    "\"My_Config.md\" -> mayuscula y guion bajo, en rojo.",
+    "\"my-config.md\" -> minusculas con guiones, en verde.",
+    "Un `.py` con guion bajo no lo marca: la convencion de nombres de codigo la fija el lenguaje, no esta guia."
+  ],
+  "do": [
+    "Renombrar a minusculas con guiones."
+  ],
+  "dont": [
+    "Dejar el guion bajo porque \"total_check.py\" tambien lo usa: esta regla es para archivos de documentacion y recursos, no de codigo."
+  ],
+  "stop_if": [
+    "el nombre de archivo esta fijado por una herramienta externa que no acepta guiones"
+  ]
+}

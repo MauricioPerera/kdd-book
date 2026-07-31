@@ -1,0 +1,49 @@
+{
+  "id": "e07-lista-palabras",
+  "node": "e07",
+  "title": "Reemplazar un termino por el que declara el proyecto",
+  "description": "Reemplazar un termino por el que declara el proyecto.",
+  "intent": "Usar el termino que el proyecto declara en su lista.",
+  "signature": "Please log in to continue.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "lista-palabras",
+      "--lista",
+      "lista.json"
+    ],
+    "threshold": "cero terminos desaconsejados"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero terminos desaconsejados."
+  ],
+  "examples": [
+    "\"sign in\" -> el proyecto declaro \"log in\" como termino preferido, en rojo.",
+    "\"log in\" -> en verde.",
+    "Sin --lista declarado el instrumento no mide: el vocabulario es del proyecto, no de la guia."
+  ],
+  "do": [
+    "Reemplazar el termino por el que declara la lista del proyecto."
+  ],
+  "dont": [
+    "Inventar un termino propio: la lista la declara el proyecto, no el que escribe."
+  ],
+  "stop_if": [
+    "el proyecto no declaro una lista de terminos"
+  ]
+}

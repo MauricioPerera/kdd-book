@@ -1,0 +1,47 @@
+{
+  "id": "e31-tiempo-futuro",
+  "node": "e31",
+  "title": "Escribir en presente en vez de futuro",
+  "description": "Escribir en presente en vez de futuro.",
+  "intent": "Describir el comportamiento en presente.",
+  "signature": "The server returns an error.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "tiempo-futuro"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "El comportamiento descrito no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"will return\" -> tiempo futuro para algo que ya pasa siempre, en rojo.",
+    "\"returns\" -> en verde.",
+    "La regla marca todo \"will\": no distingue un futuro real de una descripcion, asi que puede marcar de mas."
+  ],
+  "do": [
+    "Poner el verbo en presente."
+  ],
+  "dont": [
+    "Cambiar \"will\" por \"would\": sigue sin ser presente."
+  ],
+  "stop_if": [
+    "la frase describe de verdad un evento futuro y no un comportamiento constante"
+  ]
+}

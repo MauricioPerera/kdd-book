@@ -1,0 +1,47 @@
+{
+  "id": "e19-tiempo-relativo",
+  "node": "e19",
+  "title": "Sacar la marca de tiempo relativa al momento de escribir",
+  "description": "Sacar la marca de tiempo relativa al momento de escribir.",
+  "intent": "Sacar la marca de tiempo relativa al momento de escribir.",
+  "signature": "This feature is in beta.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "tiempo-relativo"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La funcionalidad sigue en el mismo estado. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"currently\" -> lo que es cierto hoy puede no serlo cuando se lea el documento, en rojo.",
+    "Sin la marca -> en verde.",
+    "Tambien alcanza a \"now\", \"soon\", \"recently\": todas fechan el texto respecto de cuando se escribio."
+  ],
+  "do": [
+    "Sacar la marca de tiempo relativa."
+  ],
+  "dont": [
+    "Cambiarla por una fecha fija que quede vieja igual: la tecnica es no fechar el texto, no re-fecharlo."
+  ],
+  "stop_if": [
+    "el documento es de verdad un registro de un momento (un changelog) y fecharlo es la tecnica"
+  ]
+}

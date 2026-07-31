@@ -1,0 +1,47 @@
+{
+  "id": "e51-notas-pie",
+  "node": "e51",
+  "title": "Poner la aclaracion en el texto en vez de una nota al pie",
+  "description": "Poner la aclaracion en el texto en vez de una nota al pie.",
+  "intent": "Traer la aclaracion de la nota al pie al cuerpo del texto.",
+  "signature": "The API is stable, per the changelog.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "notas-pie"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La afirmacion sobre la API no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"stable.[^1]\" -> nota al pie, en rojo.",
+    "La aclaracion incorporada al texto -> en verde.",
+    "La guia las desaconseja porque interrumpen la lectura lineal de la documentacion en pantalla."
+  ],
+  "do": [
+    "Incorporar la aclaracion al texto principal."
+  ],
+  "dont": [
+    "Convertir la nota al pie en un parentesis larguisimo: mueve el problema, no lo resuelve."
+  ],
+  "stop_if": [
+    "el documento es una referencia legal o academica que exige notas al pie"
+  ]
+}

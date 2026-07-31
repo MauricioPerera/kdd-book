@@ -1,0 +1,47 @@
+{
+  "id": "e44-comillas-puntuacion",
+  "node": "e44",
+  "title": "Mover la puntuacion adentro de las comillas",
+  "description": "Mover la puntuacion adentro de las comillas.",
+  "intent": "Poner la coma o el punto adentro de las comillas de cierre.",
+  "signature": "Set the mode to \"auto.\"",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "comillas-puntuacion"
+    ],
+    "threshold": "cero desviaciones"
+  },
+  "invariants": [
+    "La instruccion sigue fijando el mismo modo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero desviaciones."
+  ],
+  "examples": [
+    "\"auto\".-> el punto queda afuera de las comillas, en rojo.",
+    "\"auto.\"-> el punto adentro, en verde.",
+    "Es la convencion estadounidense; otras variantes del ingles hacen lo contrario, y esta regla mide la que usa la guia."
+  ],
+  "do": [
+    "Mover la coma o el punto adentro de las comillas."
+  ],
+  "dont": [
+    "Sacar las comillas para esquivar la regla: la palabra citada deja de marcarse como literal."
+  ],
+  "stop_if": [
+    "el documento sigue una convencion tipografica distinta declarada explicitamente"
+  ]
+}

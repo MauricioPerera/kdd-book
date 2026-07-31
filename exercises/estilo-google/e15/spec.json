@@ -1,0 +1,49 @@
+{
+  "id": "e15-inclusivo",
+  "node": "e15",
+  "title": "Reemplazar un termino no inclusivo",
+  "description": "Reemplazar un termino no inclusivo.",
+  "intent": "Reemplazar el termino de la lista no inclusiva declarada.",
+  "signature": "Add the domain to the allowlist.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "inclusivo",
+      "--inclusivo",
+      "inclusivo.json"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"whitelist\" -> esta en la lista declarada, en rojo.",
+    "\"allowlist\" -> en verde.",
+    "La guia da ejemplos y dice extender segun el dominio: por eso se declara con --inclusivo."
+  ],
+  "do": [
+    "Reemplazar el termino por su alternativa neutra."
+  ],
+  "dont": [
+    "Dejar el termino y agregar una nota aclaratoria: eso no lo reemplaza."
+  ],
+  "stop_if": [
+    "el proyecto no declaro su lista de terminos no inclusivos"
+  ]
+}

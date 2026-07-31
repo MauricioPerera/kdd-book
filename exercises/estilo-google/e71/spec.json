@@ -1,0 +1,47 @@
+{
+  "id": "e71-marcadores",
+  "node": "e71",
+  "title": "Escribir el marcador de posicion en minusculas dentro de angulos",
+  "description": "Escribir el marcador de posicion en minusculas dentro de angulos.",
+  "intent": "Reescribir el marcador en minusculas con guiones, entre angulos.",
+  "signature": "<project-id>",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "marcadores"
+    ],
+    "threshold": "cero marcadores fuera de formato"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero marcadores fuera de formato."
+  ],
+  "examples": [
+    "\"YOUR_PROJECT_ID\" -> mayusculas sueltas, en rojo.",
+    "\"<project-id>\" -> minusculas con guiones entre angulos, en verde.",
+    "Una sigla real como \"URL\" o \"HTML\" puede marcarse de mas: la heuristica no distingue una sigla de un marcador."
+  ],
+  "do": [
+    "Reescribir el marcador en minusculas con guiones, entre angulos."
+  ],
+  "dont": [
+    "Sacar los angulos y dejarlo en minusculas sueltas: sin ellos no se distingue un marcador de una palabra comun."
+  ],
+  "stop_if": [
+    "el marcador es en realidad una constante literal que el lector tiene que escribir tal cual"
+  ]
+}

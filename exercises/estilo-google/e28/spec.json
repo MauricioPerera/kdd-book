@@ -1,0 +1,47 @@
+{
+  "id": "e28-plural-parentesis",
+  "node": "e28",
+  "title": "Sacar el plural entre parentesis",
+  "description": "Sacar el plural entre parentesis.",
+  "intent": "Reescribir el plural sin parentesis.",
+  "signature": "Delete the files you no longer need.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "plural-parentesis"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"file(s)\" -> en rojo.",
+    "\"files\" -> en verde: el plural liso resuelve el mismo caso sin parentesis.",
+    "Si de verdad puede ser uno o varios, el plural simple ya cubre los dos casos."
+  ],
+  "do": [
+    "Usar el plural simple."
+  ],
+  "dont": [
+    "Cambiarlo a \"file or files\": mas verboso sin necesidad."
+  ],
+  "stop_if": [
+    "la distincion singular/plural cambia el sentido de la instruccion"
+  ]
+}

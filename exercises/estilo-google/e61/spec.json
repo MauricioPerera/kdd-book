@@ -1,0 +1,47 @@
+{
+  "id": "e61-tablas-encabezado",
+  "node": "e61",
+  "title": "Agregar la fila separadora de encabezado",
+  "description": "Agregar la fila separadora de encabezado.",
+  "intent": "Agregar la fila separadora entre el encabezado y los datos.",
+  "signature": "|---|---|",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "tablas-encabezado"
+    ],
+    "threshold": "cero tablas sin encabezado"
+  },
+  "invariants": [
+    "Los datos de la tabla no cambian. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero tablas sin encabezado."
+  ],
+  "examples": [
+    "Encabezado seguido directo por los datos -> sin fila separadora, en rojo.",
+    "Con `|---|---|` entre medio -> en verde.",
+    "Sin la fila separadora Markdown ni siquiera renderiza la tabla como tabla: es forma, no solo estilo."
+  ],
+  "do": [
+    "Agregar la fila separadora despues del encabezado."
+  ],
+  "dont": [
+    "Poner la fila separadora antes del encabezado: no marca lo mismo."
+  ],
+  "stop_if": [
+    "el bloque de barras no es una tabla, es texto con barras literales"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "e76-html-en-markdown",
+  "node": "e76",
+  "title": "Sacar la etiqueta HTML cruda del documento Markdown",
+  "description": "Sacar la etiqueta HTML cruda del documento Markdown.",
+  "intent": "Reescribir sin etiquetas HTML crudas.",
+  "signature": "Some text and no raw tag.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "html-en-markdown"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "El parrafo sigue empezando igual. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"<div>...</div>\" -> HTML crudo en un documento Markdown, en rojo.",
+    "Sin la etiqueta -> en verde.",
+    "La regla solo mide archivos `.md`: sobre un `.html` de proposito no aplica y sale con exit 2."
+  ],
+  "do": [
+    "Reescribir el contenido con sintaxis Markdown, o sacar la etiqueta si no aportaba nada."
+  ],
+  "dont": [
+    "Comentar la etiqueta HTML en vez de sacarla: sigue siendo HTML crudo, solo que invisible al render."
+  ],
+  "stop_if": [
+    "el documento necesita una construccion que Markdown no puede expresar, como una tabla con celdas combinadas"
+  ]
+}

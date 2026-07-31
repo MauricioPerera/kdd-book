@@ -1,0 +1,49 @@
+{
+  "id": "e16-jerga",
+  "node": "e16",
+  "title": "Explicar la jerga en vez de usarla",
+  "description": "Explicar la jerga en vez de usarla.",
+  "intent": "Reemplazar el termino de jerga por una explicacion en lenguaje llano.",
+  "signature": "Running the operation twice has the same effect as running it once.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "jerga",
+      "--jerga",
+      "jerga.json"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "Sigue hablando de la misma operacion. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"idempotent\" -> esta en la lista de jerga declarada, en rojo.",
+    "La explicacion en lenguaje llano -> en verde.",
+    "La jerga es especifica de cada dominio: por eso se declara con --jerga y no viene fija en la guia."
+  ],
+  "do": [
+    "Explicar la propiedad en vez de nombrarla con jerga."
+  ],
+  "dont": [
+    "Agregar un glosario aparte y dejar la jerga en el texto: el lector sigue topandose con ella."
+  ],
+  "stop_if": [
+    "el proyecto no declaro su lista de jerga"
+  ]
+}

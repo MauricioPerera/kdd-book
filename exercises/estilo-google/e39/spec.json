@@ -1,0 +1,47 @@
+{
+  "id": "e39-raya",
+  "node": "e39",
+  "title": "Sacar los espacios alrededor de la raya",
+  "description": "Sacar los espacios alrededor de la raya.",
+  "intent": "Pegar la raya a las palabras que separa.",
+  "signature": "The result—unexpected—surprised everyone.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "raya"
+    ],
+    "threshold": "cero rayas mal espaciadas"
+  },
+  "invariants": [
+    "La oracion no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero rayas mal espaciadas."
+  ],
+  "examples": [
+    "\"result — unexpected —\" -> con espacios alrededor, en rojo.",
+    "\"result—unexpected—\" -> en verde.",
+    "Es la convencion de la guia y no universal: otros manuales piden espacios; esta regla mide la de Google."
+  ],
+  "do": [
+    "Sacar el espacio antes y despues de la raya."
+  ],
+  "dont": [
+    "Cambiar la raya por una coma: resuelve la regla borrando la puntuacion que mide, no arreglandola."
+  ],
+  "stop_if": [
+    "el documento sigue otro manual de estilo declarado explicitamente"
+  ]
+}

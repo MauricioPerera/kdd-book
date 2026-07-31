@@ -1,0 +1,47 @@
+{
+  "id": "e57-numeros-chicos",
+  "node": "e57",
+  "title": "Escribir con letra el numero menor a diez",
+  "description": "Escribir con letra el numero menor a diez.",
+  "intent": "Escribir con letra el numero, cuando no va pegado a una unidad.",
+  "signature": "Wait three seconds before retrying.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "numeros-chicos"
+    ],
+    "threshold": "cero numeros fuera de convencion"
+  },
+  "invariants": [
+    "La espera no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero numeros fuera de convencion."
+  ],
+  "examples": [
+    "\"Wait 3 seconds\" -> numero chico suelto, en rojo.",
+    "\"Wait three seconds\" -> en verde.",
+    "\"10 kg\" no se marca: el numero pegado a la unidad es la excepcion que la guia declara."
+  ],
+  "do": [
+    "Escribir el numero con letra."
+  ],
+  "dont": [
+    "Pegarlo a una palabra cualquiera para que la regla no lo vea: la excepcion es para unidades de medida, no un atajo."
+  ],
+  "stop_if": [
+    "el numero es parte de un identificador o una version, no texto corrido"
+  ]
+}

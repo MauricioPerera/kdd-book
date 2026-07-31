@@ -1,0 +1,47 @@
+{
+  "id": "e78-dominios",
+  "node": "e78",
+  "title": "Usar un dominio de ejemplo reservado",
+  "description": "Usar un dominio de ejemplo reservado.",
+  "intent": "Reemplazar el dominio real por uno reservado para ejemplos.",
+  "signature": "Visit example.com for pricing.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "dominios"
+    ],
+    "threshold": "cero ejemplos con dominios reales"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero ejemplos con dominios reales."
+  ],
+  "examples": [
+    "\"acmecorp.com\" -> parece un dominio real, en rojo.",
+    "\"example.com\" -> reservado por IANA para documentacion, en verde.",
+    "\".org\", \".net\" y \".edu\" del mismo dominio \"example\" tambien valen: son los cuatro que la IANA reserva."
+  ],
+  "do": [
+    "Usar example.com, .org, .net o .edu."
+  ],
+  "dont": [
+    "Inventar un dominio que \"suene\" a ficticio sin usar el reservado: alguien podria haberlo registrado de verdad."
+  ],
+  "stop_if": [
+    "el ejemplo necesita mostrar un dominio de un tercero real con su permiso explicito"
+  ]
+}

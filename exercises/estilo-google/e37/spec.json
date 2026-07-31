@@ -1,0 +1,47 @@
+{
+  "id": "e37-mayuscula-dos-puntos",
+  "node": "e37",
+  "title": "Poner mayuscula tras los dos puntos cuando sigue una oracion completa",
+  "description": "Poner mayuscula tras los dos puntos cuando sigue una oracion completa.",
+  "intent": "Poner mayuscula al inicio de la oracion que sigue a los dos puntos.",
+  "signature": "Note: This happens because the cache was not cleared.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "mayuscula-dos-puntos"
+    ],
+    "threshold": "cero desviaciones"
+  },
+  "invariants": [
+    "La explicacion no cambia. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero desviaciones."
+  ],
+  "examples": [
+    "\"Note: this happens...\" -> oracion completa tras los dos puntos sin mayuscula, en rojo.",
+    "\"Note: This happens...\" -> en verde.",
+    "Una frase corta despues de los dos puntos no lo exige: ahi la guia deja lugar al criterio."
+  ],
+  "do": [
+    "Poner mayuscula inicial a la oracion completa que sigue."
+  ],
+  "dont": [
+    "Partir en dos oraciones con punto en vez de dos puntos: cambia la puntuacion que la regla mide, no la resuelve."
+  ],
+  "stop_if": [
+    "lo que sigue a los dos puntos es una lista o una frase corta, no una oracion completa"
+  ]
+}

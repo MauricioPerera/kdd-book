@@ -1,0 +1,47 @@
+{
+  "id": "e72-verbos-interaccion",
+  "node": "e72",
+  "title": "Sacar el \"on\" sobrante de \"click on\"",
+  "description": "Sacar el \"on\" sobrante de \"click on\".",
+  "intent": "Usar \"click\" solo, sin la preposicion.",
+  "signature": "Click Save to continue.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "verbos-interaccion"
+    ],
+    "threshold": "cero"
+  },
+  "invariants": [
+    "La instruccion sigue pidiendo lo mismo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero."
+  ],
+  "examples": [
+    "\"Click on Save\" -> preposicion sobrante, en rojo.",
+    "\"Click Save\" -> en verde.",
+    "\"hit enter\" y \"press the button\" tambien estan en la lista: \"click\" o \"select\" son las alternativas."
+  ],
+  "do": [
+    "Sacar la preposicion \"on\"."
+  ],
+  "dont": [
+    "Cambiar \"Click\" por \"Press\": esta en la misma lista de verbos desaconsejados."
+  ],
+  "stop_if": [
+    "\"click on\" se refiere a hacer click sobre un area mas grande que el propio control, donde la preposicion si aporta"
+  ]
+}

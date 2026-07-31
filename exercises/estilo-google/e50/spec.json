@@ -1,0 +1,47 @@
+{
+  "id": "e50-alt-texto",
+  "node": "e50",
+  "title": "Agregar el texto alternativo de la imagen",
+  "description": "Agregar el texto alternativo de la imagen.",
+  "intent": "Agregar un texto alternativo que describa la imagen.",
+  "signature": "alt=\"Architecture diagram\"",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "alt-texto"
+    ],
+    "threshold": "cero imagenes sin alt"
+  },
+  "invariants": [
+    "La imagen sigue siendo el mismo archivo. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero imagenes sin alt."
+  ],
+  "examples": [
+    "`![](diagram.png)` -> sin texto alternativo, en rojo.",
+    "`![Architecture diagram](diagram.png)` -> en verde.",
+    "Es la mitad medible de \"Accessibility\": que el alt EXISTA, no que describa bien la imagen."
+  ],
+  "do": [
+    "Agregar un texto alternativo breve y descriptivo."
+  ],
+  "dont": [
+    "Repetir el nombre del archivo como alt (\"diagram.png\"): no describe la imagen, describe el archivo."
+  ],
+  "stop_if": [
+    "la imagen es puramente decorativa y no aporta informacion"
+  ]
+}

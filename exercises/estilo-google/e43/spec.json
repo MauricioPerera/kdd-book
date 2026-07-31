@@ -1,0 +1,47 @@
+{
+  "id": "e43-punto-final",
+  "node": "e43",
+  "title": "Dejar un solo espacio despues del punto",
+  "description": "Dejar un solo espacio despues del punto.",
+  "intent": "Dejar un solo espacio entre oraciones.",
+  "signature": "First step. Second step.",
+  "target": "target.md",
+  "oracle": "oracle_test.py",
+  "seed": "seed.md",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "prosa_checks.py",
+    "args": [
+      "--rule",
+      "punto-final"
+    ],
+    "threshold": "cero desviaciones"
+  },
+  "invariants": [
+    "Los dos pasos siguen estando. el oraculo pasa igual antes y despues.",
+    "El umbral de la regla queda en cero desviaciones."
+  ],
+  "examples": [
+    "\"First step.  Second step.\"—dos espacios—, en rojo.",
+    "\"First step. Second step.\"—uno—, en verde.",
+    "El punto final de un encabezado lo mide otra regla (Headings and titles), no esta."
+  ],
+  "do": [
+    "Dejar un espacio."
+  ],
+  "dont": [
+    "Juntar las dos oraciones en una sin punto: cambia la puntuacion en vez de espaciarla bien."
+  ],
+  "stop_if": [
+    "los espacios dobles vienen de una fuente citada tal cual"
+  ]
+}
