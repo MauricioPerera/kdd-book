@@ -16,21 +16,21 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Ocho fuentes, 553 nodos, 88 contratos ejecutables, 92 instrumentos en once
+Ocho fuentes, 553 nodos, 130 contratos ejecutables, 134 instrumentos en doce
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 209 pruebas propias.
+`validate_test_commands` y las 227 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
 | PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 29 | 26 |
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
-| Google developer documentation style guide | 80 | 52,5% | **52,5%** | 0 | 0 |
+| Google developer documentation style guide | 80 | 52,5% | **52,5%** | 42 | 42 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **553** | **185** | **168** | **120** | **88** |
+| **Total** | **553** | **185** | **168** | **162** | **130** |
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -105,7 +105,7 @@ refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 Ademas: 17 tecnicas `proxy`, 198 en pila B (tecnica real sin propiedad medible)
 y 170 en pila C (conocimiento). 38 enlaces cruzan de una fuente a otra.
 
-Hay 185 tecnicas en pila A y 88 ejercicios, y la diferencia no es un pendiente:
+Hay 185 tecnicas en pila A y 130 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -390,14 +390,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 553 tecnicas, 94 instrumentos
+python memoria.py exportar          # -> memoria.json: 553 tecnicas, 136 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **476 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **570 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -519,8 +519,8 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-92 reglas en once familias. Que varias tecnicas compartan una no es un atajo: es
-que preguntan lo mismo.
+134 reglas en doce familias. Que varias tecnicas compartan una no es un atajo:
+es que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
 |---|---|---|---|
@@ -725,6 +725,25 @@ tiene una obligacion extra: **no importa el instrumento**. Parsea con
 oraculo que usa el parser del instrumento le da la razon por construccion — si
 el parser se equivoca, los dos se equivocan igual y nadie lo nota.
 
+Los 42 de la guia de Google son los que mas dependen del oraculo para no
+confundir **cambio de redaccion** con **cambio de significado**. Arreglar
+"Simply click the button" a "Click the button" cambia cada palabra del
+enunciado salvo dos, y el oraculo tiene que quedar ciego a esa diferencia y
+sensible solo al dato que importa: que sigue siendo el mismo boton. Por eso cada
+oraculo afirma un hecho observable —una palabra clave, un dato, una estructura—
+y no una cadena exacta; el mismo assert vale sobre el seed y sobre la solucion
+por construccion, que es lo que la forma `refactor` exige. Seis de ellos traen
+ademas el JSON con el vocabulario declarado —terminos, nombres de producto,
+lenguaje inclusivo, jerga, tipos de aviso— que el instrumento exige por
+`--lista`/`--productos`/`--inclusivo`/`--jerga`/`--avisos`.
+
+Emitirlos junto con el resto del grafo destapo un defecto de forma: el
+`signature` de uno de ellos era literalmente sintaxis de imagen Markdown
+(`![Architecture diagram](diagram.png)`), y el emisor la escribe tal cual en el
+contrato. `validate_okf` la leyo como un enlace real a un archivo que no existe.
+Un `signature` describe la interfaz, no es markdown ejecutable — se reescribio
+como texto plano.
+
 ## El repositorio contra sus propios instrumentos
 
 Corriendo `checks` y `pep8_checks` sobre este mismo codigo aparecieron nueve
@@ -773,16 +792,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| guia de Google sin instrumento | 42 | la fuente entro recien. Sus 42 medibles leen prosa, un artefacto que ninguna de las once familias toca todavia: haria falta una `prosa_checks` |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Solo la primera es un instrumento que falte.** Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
-que no aplica, una prohibicion del proyecto y un consejo que en Python no se
-puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
+**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 185
+tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
+ejercicio lo tiene. Lo que queda son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
@@ -794,12 +812,12 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Catorce suites, 209 pruebas, y cada suite existe por un error concreto que ya paso.
+Quince suites, 227 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 88 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 130 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
