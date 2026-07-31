@@ -1,0 +1,88 @@
+# Volcado de titulos de la Google developer documentation style guide
+# (developers.google.com/style).
+#
+# Corpus del autor, literal: los 10 grupos de la navegacion y las 70 paginas
+# que cuelgan de ellos.
+#
+# Formato:  <indice>| H<nivel> | <grupo> | <titulo>
+
+  1| H1 | introduction | Introduction
+  2| H2 | introduction | About this guide
+  3| H2 | introduction | Highlights
+  4| H2 | introduction | What's new
+  5| H2 | introduction | Philosophy of this guide
+  6| H1 | key-resources | Key resources
+  7| H2 | key-resources | Word list
+  8| H2 | key-resources | Product names
+  9| H2 | key-resources | Text-formatting summary
+ 10| H1 | general-principles | General principles
+ 11| H2 | general-principles | Accessibility
+ 12| H2 | general-principles | Excessive claims
+ 13| H2 | general-principles | Future features
+ 14| H2 | general-principles | Global audience
+ 15| H2 | general-principles | Inclusive language
+ 16| H2 | general-principles | Jargon
+ 17| H2 | general-principles | Prescriptive documentation
+ 18| H2 | general-principles | Third-party content
+ 19| H2 | general-principles | Timeless documentation
+ 20| H2 | general-principles | Voice and tone
+ 21| H1 | language-and-grammar | Language and grammar
+ 22| H2 | language-and-grammar | Abbreviations
+ 23| H2 | language-and-grammar | Active voice
+ 24| H2 | language-and-grammar | Anthropomorphism
+ 25| H2 | language-and-grammar | Articles (a, an, the)
+ 26| H2 | language-and-grammar | Capitalization
+ 27| H2 | language-and-grammar | Contractions
+ 28| H2 | language-and-grammar | Pluralization
+ 29| H2 | language-and-grammar | Possessives
+ 30| H2 | language-and-grammar | Prepositions
+ 31| H2 | language-and-grammar | Present tense
+ 32| H2 | language-and-grammar | Pronouns
+ 33| H2 | language-and-grammar | Second person
+ 34| H2 | language-and-grammar | Sentence structure
+ 35| H2 | language-and-grammar | Verbs in reference documents
+ 36| H1 | punctuation | Punctuation
+ 37| H2 | punctuation | Colons
+ 38| H2 | punctuation | Commas
+ 39| H2 | punctuation | Dashes
+ 40| H2 | punctuation | Ellipses
+ 41| H2 | punctuation | Hyphens
+ 42| H2 | punctuation | Parentheses
+ 43| H2 | punctuation | Periods and end punctuation
+ 44| H2 | punctuation | Quotation marks
+ 45| H2 | punctuation | Semicolons
+ 46| H2 | punctuation | Slashes
+ 47| H1 | formatting | Formatting and organization
+ 48| H2 | formatting | Dates and times
+ 49| H2 | formatting | Examples
+ 50| H2 | formatting | Figures and other images
+ 51| H2 | formatting | Footnotes
+ 52| H2 | formatting | Headings and titles
+ 53| H2 | formatting | Italics with terms
+ 54| H2 | formatting | Lists
+ 55| H2 | formatting | Mathematical notation
+ 56| H2 | formatting | Notes and other notices
+ 57| H2 | formatting | Numbers
+ 58| H2 | formatting | Paragraphs
+ 59| H2 | formatting | Phone numbers
+ 60| H2 | formatting | Procedures
+ 61| H2 | formatting | Tables
+ 62| H2 | formatting | Units of measurement
+ 63| H1 | linking | Linking
+ 64| H2 | linking | Cross-references and linking
+ 65| H2 | linking | Headings as link targets
+ 66| H1 | computer-interfaces | Computer interfaces
+ 67| H2 | computer-interfaces | API reference code comments
+ 68| H2 | computer-interfaces | Code in text
+ 69| H2 | computer-interfaces | Code samples
+ 70| H2 | computer-interfaces | Command-line syntax
+ 71| H2 | computer-interfaces | Placeholder formatting
+ 72| H2 | computer-interfaces | UI elements and interaction
+ 73| H1 | html-and-css | HTML and CSS
+ 74| H2 | html-and-css | HTML and semantic tagging
+ 75| H2 | html-and-css | HTML formatting
+ 76| H2 | html-and-css | Markdown versus HTML
+ 77| H1 | names-and-naming | Names and naming
+ 78| H2 | names-and-naming | Example domains and names
+ 79| H2 | names-and-naming | Filenames
+ 80| H2 | names-and-naming | Trademarks

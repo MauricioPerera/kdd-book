@@ -1,0 +1,1602 @@
+{
+  "source": {
+    "slug": "estilo-google",
+    "title": "Google developer documentation style guide",
+    "author": "Google",
+    "file": "developers.google.com/style",
+    "pages": 0,
+    "extracted_with": "navegacion del sitio, verificada contra la fuente",
+    "tags": [
+      "fuente",
+      "guia-de-estilo",
+      "prosa"
+    ],
+    "corpus": "Los 10 grupos de la navegacion y las 70 paginas que cuelgan de ellos. Cada pagina es una seccion con sus propias reglas, asi que el corpus por titulo subestima igual que en PEP 8: \"Commas\" es un titulo y adentro trae media docena de reglas."
+  },
+  "nodes": [
+    {
+      "id": "e01",
+      "title": "Introduction",
+      "description": "Introduction (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (introduction)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e02",
+      "title": "About this guide",
+      "description": "About this guide (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (introduction)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e03",
+      "title": "Highlights",
+      "description": "Highlights (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (introduction)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e04",
+      "title": "What's new",
+      "description": "What's new (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (introduction)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e05",
+      "title": "Philosophy of this guide",
+      "description": "Philosophy of this guide (seccion: introduccion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "introduccion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (introduction)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e06",
+      "title": "Key resources",
+      "description": "Key resources (seccion: recursos).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "recursos",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (key-resources)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e07",
+      "title": "Word list",
+      "description": "Word list (seccion: recursos).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "recursos",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (key-resources)",
+      "alias": [
+        "lista de palabras",
+        "word list",
+        "terminologia"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: terminos fuera de la lista de palabras declarada (sin implementar, lista declarada)",
+      "threshold": "cero terminos desaconsejados"
+    },
+    {
+      "id": "e08",
+      "title": "Product names",
+      "description": "Product names (seccion: recursos).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "recursos",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (key-resources)",
+      "alias": [
+        "nombres de producto",
+        "product names"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: nombres de producto escritos como los declara el proyecto (sin implementar, lista declarada)",
+      "threshold": "cero nombres de producto mal escritos"
+    },
+    {
+      "id": "e09",
+      "title": "Text-formatting summary",
+      "description": "Text-formatting summary (seccion: recursos).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "recursos",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (key-resources)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e10",
+      "title": "General principles",
+      "description": "General principles (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e11",
+      "title": "Accessibility",
+      "description": "Accessibility (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [
+        "accesibilidad",
+        "accessibility"
+      ],
+      "links": [],
+      "why_not": "escribir accesible es mucho mas que poner un `alt`: es decidir si el texto se entiende sin ver la figura. La mitad medible ya esta en la 50"
+    },
+    {
+      "id": "e12",
+      "title": "Excessive claims",
+      "description": "Excessive claims (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [
+        "claims excesivos",
+        "excessive claims",
+        "simply",
+        "just"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: adjetivos que minimizan el esfuerzo (\"simply\", \"just\", \"easy\") (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e13",
+      "title": "Future features",
+      "description": "Future features (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e14",
+      "title": "Global audience",
+      "description": "Global audience (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": [],
+      "why_not": "\"escribir para una audiencia global\" pide reconocer modismos y referencias culturales, que es entender el texto y no contarlo"
+    },
+    {
+      "id": "e15",
+      "title": "Inclusive language",
+      "description": "Inclusive language (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [
+        "lenguaje inclusivo",
+        "inclusive language"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: terminos no inclusivos de la lista declarada (sin implementar, lista declarada)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e16",
+      "title": "Jargon",
+      "description": "Jargon (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [
+        "jerga",
+        "jargon"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: jerga de la lista declarada (sin implementar, lista declarada)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e17",
+      "title": "Prescriptive documentation",
+      "description": "Prescriptive documentation (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e18",
+      "title": "Third-party content",
+      "description": "Third-party content (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e19",
+      "title": "Timeless documentation",
+      "description": "Timeless documentation (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [
+        "documentacion sin fecha",
+        "timeless documentation"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: marcas de tiempo relativas (\"currently\", \"new\", \"soon\") (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e20",
+      "title": "Voice and tone",
+      "description": "Voice and tone (seccion: principios generales).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "principios-generales",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (general-principles)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e21",
+      "title": "Language and grammar",
+      "description": "Language and grammar (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e22",
+      "title": "Abbreviations",
+      "description": "Abbreviations (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "abreviaturas",
+        "abbreviations"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: abreviaturas latinas (\"e.g.\", \"i.e.\", \"etc.\") (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e23",
+      "title": "Active voice",
+      "description": "Active voice (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "voz activa",
+        "active voice"
+      ],
+      "links": [],
+      "why_not": "la guia pide voz activa \"todo lo posible\" y admite la pasiva cuando el agente no importa. Sin umbral no hay regla: detectar pasivas es facil, decidir cuales sobran no"
+    },
+    {
+      "id": "e24",
+      "title": "Anthropomorphism",
+      "description": "Anthropomorphism (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "el antropomorfismo es una figura, no una palabra. \"El sistema quiere\" y \"el sistema espera\" difieren en sentido, no en forma"
+    },
+    {
+      "id": "e25",
+      "title": "Articles (a, an, the)",
+      "description": "Articles (a, an, the) (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "la eleccion entre \"a\" y \"an\" va por SONIDO y no por letra, y la de usar articulo o no depende de que se este nombrando"
+    },
+    {
+      "id": "e26",
+      "title": "Capitalization",
+      "description": "Capitalization (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "mayusculas",
+        "capitalization",
+        "sentence case"
+      ],
+      "links": [
+        "e52"
+      ],
+      "instrument": "prosa_checks: encabezados y titulos en minuscula de oracion (sin implementar)",
+      "threshold": "cero encabezados fuera de convencion"
+    },
+    {
+      "id": "e27",
+      "title": "Contractions",
+      "description": "Contractions (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "dice usar contracciones \"cuando suenen naturales\". Es registro, y el registro no tiene umbral"
+    },
+    {
+      "id": "e28",
+      "title": "Pluralization",
+      "description": "Pluralization (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "pluralizacion",
+        "pluralization"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: plurales escritos \"(s)\" (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e29",
+      "title": "Possessives",
+      "description": "Possessives (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "posesivos",
+        "possessives"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: posesivo sobre un nombre de producto (sin implementar, lista declarada)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e30",
+      "title": "Prepositions",
+      "description": "Prepositions (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "la seccion desarma un mito —que no se puede terminar en preposicion— y lo que queda es criterio de lectura"
+    },
+    {
+      "id": "e31",
+      "title": "Present tense",
+      "description": "Present tense (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "presente",
+        "present tense"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: tiempo futuro (\"will\") fuera de las excepciones (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e32",
+      "title": "Pronouns",
+      "description": "Pronouns (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "pronombres",
+        "pronouns"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: pronombres de genero (\"he\", \"she\", \"his\", \"her\") (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e33",
+      "title": "Second person",
+      "description": "Second person (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [
+        "segunda persona",
+        "second person"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: primera persona (\"we\", \"our\", \"us\") en instrucciones (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e34",
+      "title": "Sentence structure",
+      "description": "Sentence structure (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "\"oraciones cortas y claras\" sin numero. Contar palabras seria inventar un umbral que el autor no dio"
+    },
+    {
+      "id": "e35",
+      "title": "Verbs in reference documents",
+      "description": "Verbs in reference documents (seccion: lengua y gramatica).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "lengua-y-gramatica",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (language-and-grammar)",
+      "alias": [],
+      "links": [],
+      "why_not": "depende de saber que el documento ES una referencia, y eso no esta en el texto"
+    },
+    {
+      "id": "e36",
+      "title": "Punctuation",
+      "description": "Punctuation (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e37",
+      "title": "Colons",
+      "description": "Colons (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "dos puntos",
+        "colons"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: mayuscula despues de dos puntos solo si sigue una oracion completa (sin implementar)",
+      "threshold": "cero desviaciones"
+    },
+    {
+      "id": "e38",
+      "title": "Commas",
+      "description": "Commas (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "coma serial",
+        "serial comma",
+        "oxford comma"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: coma serial en toda enumeracion de tres o mas (sin implementar)",
+      "threshold": "cero enumeraciones sin coma serial"
+    },
+    {
+      "id": "e39",
+      "title": "Dashes",
+      "description": "Dashes (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "raya",
+        "guion largo",
+        "dashes",
+        "em dash"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: raya larga sin espacios alrededor (sin implementar)",
+      "threshold": "cero rayas mal espaciadas"
+    },
+    {
+      "id": "e40",
+      "title": "Ellipses",
+      "description": "Ellipses (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "puntos suspensivos",
+        "ellipses"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: puntos suspensivos escritos con tres puntos sueltos (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e41",
+      "title": "Hyphens",
+      "description": "Hyphens (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [],
+      "links": [],
+      "why_not": "la guia hifena \"cuando ayuda a la claridad\". Las dos reglas mecanicas —nada de guion tras un adverbio en -ly, prefijos comunes sin guion— son una parte, y confundir la parte con la seccion daria verde de mas"
+    },
+    {
+      "id": "e42",
+      "title": "Parentheses",
+      "description": "Parentheses (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "parentesis",
+        "parentheses"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: parentesis anidados (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e43",
+      "title": "Periods and end punctuation",
+      "description": "Periods and end punctuation (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "punto final",
+        "periods",
+        "end punctuation"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: un espacio despues del punto y cero puntos al final de un encabezado (sin implementar)",
+      "threshold": "cero desviaciones"
+    },
+    {
+      "id": "e44",
+      "title": "Quotation marks",
+      "description": "Quotation marks (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "comillas",
+        "quotation marks"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: coma y punto adentro de las comillas (sin implementar)",
+      "threshold": "cero desviaciones"
+    },
+    {
+      "id": "e45",
+      "title": "Semicolons",
+      "description": "Semicolons (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [],
+      "links": [],
+      "why_not": "recomienda preferir dos oraciones, sin prohibir el punto y coma"
+    },
+    {
+      "id": "e46",
+      "title": "Slashes",
+      "description": "Slashes (seccion: puntuacion).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "puntuacion",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (punctuation)",
+      "alias": [
+        "and/or",
+        "barras",
+        "slashes"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: \"and/or\" y la barra usada como \"o\" (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e47",
+      "title": "Formatting and organization",
+      "description": "Formatting and organization (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e48",
+      "title": "Dates and times",
+      "description": "Dates and times (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "fechas y horas",
+        "dates and times"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: fechas en el formato declarado y sin ordinales (sin implementar)",
+      "threshold": "cero fechas fuera de formato"
+    },
+    {
+      "id": "e49",
+      "title": "Examples",
+      "description": "Examples (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [],
+      "links": [],
+      "why_not": "\"escribir ejemplos utiles\" es juicio. La parte mecanica —usar dominios reservados— es la 78, y esta contada ahi"
+    },
+    {
+      "id": "e50",
+      "title": "Figures and other images",
+      "description": "Figures and other images (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "texto alternativo",
+        "alt text",
+        "figures"
+      ],
+      "links": [
+        "wcag/sc1-1-1"
+      ],
+      "instrument": "prosa_checks: toda imagen tiene texto alternativo (sin implementar)",
+      "threshold": "cero imagenes sin alt",
+      "body": "El mismo `alt` en dos fuentes y en dos pilas. WCAG 1.1.1 pide una alternativa textual que cumpla **el proposito equivalente**, y la equivalencia no la decide ninguna medicion: por eso esta en pila B. Google pide que la imagen **tenga** texto alternativo, que es presencia y se cuenta. No es que una guia sea mejor: la que nombra el mecanismo se puede instrumentar, y la que nombra la cualidad no. Es el mismo par que htmx/20 con el criterio de teclado."
+    },
+    {
+      "id": "e51",
+      "title": "Footnotes",
+      "description": "Footnotes (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "notas al pie",
+        "footnotes"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: notas al pie (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e52",
+      "title": "Headings and titles",
+      "description": "Headings and titles (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "encabezados",
+        "headings and titles"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: encabezados unicos, en minuscula de oracion y sin punto final (sin implementar)",
+      "threshold": "cero encabezados fuera de convencion"
+    },
+    {
+      "id": "e53",
+      "title": "Italics with terms",
+      "description": "Italics with terms (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [],
+      "links": [],
+      "why_not": "hay que saber que una palabra es un TERMINO que se introduce, y eso es una decision sobre el contenido"
+    },
+    {
+      "id": "e54",
+      "title": "Lists",
+      "description": "Lists (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "listas",
+        "lists"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: items de lista con mayuscula inicial y puntuacion coherente (sin implementar)",
+      "threshold": "cero listas incoherentes"
+    },
+    {
+      "id": "e55",
+      "title": "Mathematical notation",
+      "description": "Mathematical notation (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "notacion matematica",
+        "mathematical notation"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: notacion matematica en el formato declarado (sin implementar)",
+      "threshold": "cero expresiones fuera de formato"
+    },
+    {
+      "id": "e56",
+      "title": "Notes and other notices",
+      "description": "Notes and other notices (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "avisos",
+        "notes and other notices",
+        "callouts"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: los avisos usan uno de los tipos declarados (sin implementar, lista declarada)",
+      "threshold": "cero avisos de tipo inventado"
+    },
+    {
+      "id": "e57",
+      "title": "Numbers",
+      "description": "Numbers (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "numeros",
+        "numbers"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: numeros menores a diez escritos con letra fuera de medidas (sin implementar)",
+      "threshold": "cero numeros fuera de convencion"
+    },
+    {
+      "id": "e58",
+      "title": "Paragraphs",
+      "description": "Paragraphs (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [],
+      "links": [],
+      "why_not": "parrafos cortos, sin numero"
+    },
+    {
+      "id": "e59",
+      "title": "Phone numbers",
+      "description": "Phone numbers (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "telefonos de ejemplo",
+        "phone numbers"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: telefonos de ejemplo del rango reservado (sin implementar)",
+      "threshold": "cero telefonos reales"
+    },
+    {
+      "id": "e60",
+      "title": "Procedures",
+      "description": "Procedures (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "procedimientos",
+        "procedures",
+        "pasos numerados"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: los procedimientos son listas numeradas y cada paso empieza con un verbo (sin implementar)",
+      "threshold": "cero pasos que no empiecen con verbo"
+    },
+    {
+      "id": "e61",
+      "title": "Tables",
+      "description": "Tables (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "tablas",
+        "tables"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: toda tabla tiene fila de encabezado (sin implementar)",
+      "threshold": "cero tablas sin encabezado"
+    },
+    {
+      "id": "e62",
+      "title": "Units of measurement",
+      "description": "Units of measurement (seccion: formato).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "formato",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (formatting)",
+      "alias": [
+        "unidades",
+        "units of measurement"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: espacio entre el numero y la unidad (sin implementar)",
+      "threshold": "cero unidades pegadas"
+    },
+    {
+      "id": "e63",
+      "title": "Linking",
+      "description": "Linking (seccion: enlaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "enlaces",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (linking)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e64",
+      "title": "Cross-references and linking",
+      "description": "Cross-references and linking (seccion: enlaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "enlaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (linking)",
+      "alias": [
+        "texto de enlace",
+        "link text",
+        "click here"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: texto de enlace descriptivo, cero \"click here\" y cero URL desnudas (sin implementar)",
+      "threshold": "cero enlaces sin texto util"
+    },
+    {
+      "id": "e65",
+      "title": "Headings as link targets",
+      "description": "Headings as link targets (seccion: enlaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "enlaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (linking)",
+      "alias": [
+        "anclas de encabezado",
+        "headings as link targets"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: todo enlace interno apunta a un encabezado que existe (sin implementar)",
+      "threshold": "cero anclas rotas"
+    },
+    {
+      "id": "e66",
+      "title": "Computer interfaces",
+      "description": "Computer interfaces (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e67",
+      "title": "API reference code comments",
+      "description": "API reference code comments (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [],
+      "links": [],
+      "why_not": "escribir buenos comentarios de referencia es la misma clase de juicio que N1 de Codigo Limpio: se mide que esten, no que sirvan"
+    },
+    {
+      "id": "e68",
+      "title": "Code in text",
+      "description": "Code in text (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [],
+      "links": [],
+      "why_not": "pide poner en fuente de codigo lo que ES codigo, y decidir eso en medio de una oracion es entender la oracion"
+    },
+    {
+      "id": "e69",
+      "title": "Code samples",
+      "description": "Code samples (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [
+        "ejemplos de codigo",
+        "code samples"
+      ],
+      "links": [
+        "pep8/s06"
+      ],
+      "instrument": "prosa_checks: largo de linea de los bloques de codigo y cero elisiones con puntos suspensivos (sin implementar)",
+      "threshold": "cero lineas de codigo fuera de largo",
+      "body": "El largo de linea de un bloque de codigo dentro de la documentacion es el mismo umbral que PEP 8 pone sobre el archivo, y lo mide el mismo tipo de instrumento. Cambia el envase, no la medicion — que es la excepcion que confirma el hallazgo 3: aca la propiedad SI es la misma."
+    },
+    {
+      "id": "e70",
+      "title": "Command-line syntax",
+      "description": "Command-line syntax (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [
+        "sintaxis de linea de comandos",
+        "command-line syntax"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: la sintaxis de linea de comandos usa la convencion declarada para opcional y repetible (sin implementar)",
+      "threshold": "cero desviaciones"
+    },
+    {
+      "id": "e71",
+      "title": "Placeholder formatting",
+      "description": "Placeholder formatting (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [
+        "marcadores de posicion",
+        "placeholder formatting"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: los marcadores de posicion usan el formato declarado (sin implementar)",
+      "threshold": "cero marcadores fuera de formato"
+    },
+    {
+      "id": "e72",
+      "title": "UI elements and interaction",
+      "description": "UI elements and interaction (seccion: interfaces).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "interfaces",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (computer-interfaces)",
+      "alias": [
+        "elementos de interfaz",
+        "ui elements",
+        "click on"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: verbos de interaccion prohibidos (\"click on\", \"hit\", \"press\") (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e73",
+      "title": "HTML and CSS",
+      "description": "HTML and CSS (seccion: html).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "html",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (html-and-css)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e74",
+      "title": "HTML and semantic tagging",
+      "description": "HTML and semantic tagging (seccion: html).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "html",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (html-and-css)",
+      "alias": [],
+      "links": [
+        "wcag/sc1-1-1"
+      ],
+      "why_not": "\"usar la etiqueta semantica correcta\" pide saber que significa el contenido; es el mismo limite que 1.3.1 de WCAG"
+    },
+    {
+      "id": "e75",
+      "title": "HTML formatting",
+      "description": "HTML formatting (seccion: html).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "html",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (html-and-css)",
+      "alias": [],
+      "links": [],
+      "why_not": "convenciones de sangria y quiebre para HTML escrito a mano, que en un flujo de Markdown casi no aparece"
+    },
+    {
+      "id": "e76",
+      "title": "Markdown versus HTML",
+      "description": "Markdown versus HTML (seccion: html).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "html",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (html-and-css)",
+      "alias": [
+        "markdown contra html",
+        "markdown versus html"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: HTML crudo dentro de un documento Markdown (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "e77",
+      "title": "Names and naming",
+      "description": "Names and naming (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "nombres",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "developers.google.com/style (names-and-naming)",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "e78",
+      "title": "Example domains and names",
+      "description": "Example domains and names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (names-and-naming)",
+      "alias": [
+        "dominios de ejemplo",
+        "example domains"
+      ],
+      "links": [],
+      "instrument": "prosa_checks: dominios y nombres de ejemplo del rango reservado (sin implementar)",
+      "threshold": "cero ejemplos con dominios reales"
+    },
+    {
+      "id": "e79",
+      "title": "Filenames",
+      "description": "Filenames (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "developers.google.com/style (names-and-naming)",
+      "alias": [
+        "nombres de archivo",
+        "filenames"
+      ],
+      "links": [
+        "pep8/s27"
+      ],
+      "instrument": "prosa_checks: nombres de archivo en minusculas y con guiones (sin implementar)",
+      "threshold": "cero nombres fuera de convencion",
+      "body": "Minusculas y guiones para nombrar un archivo, dicho por dos autores sobre dos clases de archivo. Las dos son medibles por el mismo motivo: el nombre esta a la vista y la convencion es cerrada."
+    },
+    {
+      "id": "e80",
+      "title": "Trademarks",
+      "description": "Trademarks (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "estilo-google",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "developers.google.com/style (names-and-naming)",
+      "alias": [],
+      "links": [],
+      "why_not": "el uso correcto de una marca depende de la relacion legal con su duenio, que no esta en el documento"
+    }
+  ]
+}

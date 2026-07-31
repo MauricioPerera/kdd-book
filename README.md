@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Siete fuentes, 473 nodos, 88 contratos ejecutables, 92 instrumentos en once
+Ocho fuentes, 553 nodos, 88 contratos ejecutables, 92 instrumentos en once
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 209 pruebas propias.
 
@@ -24,14 +24,15 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 |---|---|---|---|---|---|
 | PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 29 | 26 |
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
+| Google developer documentation style guide | 80 | 52,5% | **52,5%** | 0 | 0 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **473** | **143** | **126** | **120** | **88** |
+| **Total** | **553** | **185** | **168** | **120** | **88** |
 
-Cuatro de las siete no son libros, y estan para probar hasta donde llega el metodo.
+Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
 habla de personas, habla de codigo— pero **describir una API no es prescribir
 una tecnica**, y por eso casi la mitad cae en pila C por definicion del genero.
@@ -48,6 +49,35 @@ Su corpus es el mas chico —16 titulos— y no por muestreo: cada factor es una
 pagina con titulo, bajada y sin subsecciones, comprobado pagina por pagina. Con
 n=16 cada item vale 6,3 puntos, asi que el porcentaje es real pero la precision
 implicita no.
+
+**La guia de estilo de Google entro para aislar una variable, y me equivoque.**
+PEP 8 dio el numero mas alto y la explicacion que el grafo daba era el genero.
+Pero PEP 8 cambia dos cosas a la vez respecto de un libro: el genero **y** el
+tipo de propiedad, que en su caso es forma superficial de un archivo. Esta
+fuente deja el genero fijo —es otra guia de estilo—, deja el artefacto al
+alcance —texto plano, tan legible como un `.py`— y cambia solo el dominio: aca
+se prescribe sobre prosa. La prediccion escrita antes de triajar fue **entre 20%
+y 45%**. Dio **52,5%**, arriba de Codigo Limpio.
+
+Lo que explica el fallo esta adentro de la propia fuente, sin necesidad de
+comparar con ninguna otra:
+
+| Seccion de la guia de Google | `instrumented` |
+|---|---|
+| Formato y organizacion | 75,0% |
+| Puntuacion | 72,7% |
+| Enlaces | 66,7% |
+| Interfaces de computadora | 57,1% |
+| Lengua y gramatica | 46,7% |
+| Principios generales | 36,4% |
+| Introduccion | 0% |
+
+La guia se parte sola: **lo tipografico y lo lexico arriba, lo semantico abajo**.
+Coma serial, raya sin espacios, cero "and/or", cero "(s)", segunda persona,
+encabezados en minuscula, unidades separadas del numero — todo eso se cuenta.
+"Voz y tono", "audiencia global", "evitar el antropomorfismo", "parrafos cortos"
+— nada de eso se cuenta. El genero no era el motor: era un correlato, porque las
+guias de estilo tienden a prescribir propiedades lexicas.
 
 **PEP 8 entro con dos predicciones y la segunda se equivoco**, que es lo que la
 hace valer la pena. La primera: una guia de estilo escrita para que la revise una
@@ -72,10 +102,10 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 175 en pila B (tecnica real sin propiedad medible)
-y 155 en pila C (conocimiento). 34 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 198 en pila B (tecnica real sin propiedad medible)
+y 170 en pila C (conocimiento). 38 enlaces cruzan de una fuente a otra.
 
-Hay 143 tecnicas en pila A y 88 ejercicios, y la diferencia no es un pendiente:
+Hay 185 tecnicas en pila A y 88 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -113,9 +143,9 @@ no solo aca.
 
 ### 1. La distribucion es bimodal, no un gradiente
 
-Nueve fuentes medidas (las siete del grafo, mas Proyectos Agiles con Scrum y
-Habitos Atomicos) dan 69%, 62,5%, 48%, 45%, 14%, 11,5%, 10%, 3,4% y 0% de
-`instrumented`. Pero el 14,4% de Scrum y XP **no es un valor intermedio**: es
+Diez fuentes medidas (las ocho del grafo, mas Proyectos Agiles con Scrum y
+Habitos Atomicos) dan 69%, 62,5%, 52,5%, 48%, 45%, 14%, 11,5%, 10%, 3,4% y 0%
+de `instrumented`. Pero el 14,4% de Scrum y XP **no es un valor intermedio**: es
 el promedio ponderado de dos poblaciones.
 
 | Seccion de Scrum y XP | `instrumented` |
@@ -132,18 +162,29 @@ por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
 el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
 Limpio.
 
-La quinta fuente agrego un modo arriba, en 62,5%, y la septima otro en 69%. Con
-eso el eje se lee mejor: lo que ordena la distribucion **no es el dominio sino el
-genero**, y mas precisamente **cuanto se parece el autor a estar escribiendo un
-verificador**. Arriba de todo una guia de estilo pensada para que la revise una
-herramienta; despues un manifiesto (prescripcion pura), despues un libro de
-codigo (prescripcion mas explicacion), despues un libro de proceso (prescripcion
-mas personas), y abajo documentacion de referencia (descripcion de una API). El dominio de los doce factores es infraestructura, tan lejos del AST como
-Scrum, y sin embargo es el mas contractable de las seis.
+Durante cinco fuentes el eje parecio ser el **genero**: manifiesto arriba, libro
+de codigo, libro de proceso, referencia de API abajo. La octava lo desarmo, y de
+la manera mas util — dejando el genero fijo. La guia de estilo de Google es del
+mismo genero que PEP 8 y su artefacto es igual de legible, y aun asi dio 52,5%
+contra 69%. Lo unico que cambio fue **sobre que se prescribe**.
 
-La sexta cae en 11,5%, entre Scrum y htmx, y no encaja en ese eje: WCAG no es ni
-descripcion ni prescripcion con relleno, es una **norma**. Lo que la baja es
-otra cosa, y esta en el hallazgo 2.
+Y la propia guia de Google lo muestra sin salir de ella: su seccion de puntuacion
+da 72,7% y la de formato 75,0%, mientras que la de principios generales da 36,4%
+y la introduccion 0%. **Lo tipografico y lo lexico arriba, lo semantico abajo**,
+adentro de un solo documento y de un solo autor.
+
+Asi que el eje no es el genero ni el dominio ni el artefacto: es **la naturaleza
+de la propiedad**. Lexica o estructural se mide; semantica no. El genero era un
+correlato —una guia de estilo tiende a prescribir sobre tipografia, un libro de
+proceso sobre personas— y por eso ordenaba bien hasta que aparecio un caso que
+separaba las dos cosas.
+
+Con eso los numeros raros dejan de serlo. WCAG da 11,5% no por ser norma sino
+porque casi todos sus criterios piden juzgar sentido —una alternativa
+"equivalente", un titulo que "describe el tema"—. Los doce factores dan 62,5% con
+un dominio de infraestructura, tan lejos del AST como Scrum, porque lo que
+prescriben es estructural: hay un manifiesto, hay un manejador de SIGTERM, hay
+una linea de `Vary`.
 
 ### 2. La contractabilidad la decide si el autor operacionalizo la tecnica, y ademas si el umbral compara algo que esta en el artefacto
 
@@ -320,13 +361,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **243 de las 473**, y el reparto no es casual:
+Lo tienen **287 de las 553**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **143 de 143** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 97 de 175 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 155 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **185 de 185** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 99 de 198 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 170 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -349,7 +390,7 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 473 tecnicas, 94 instrumentos
+python memoria.py exportar          # -> memoria.json: 553 tecnicas, 94 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
@@ -717,15 +758,14 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
+| guia de Google sin instrumento | 42 | la fuente entro recien. Sus 42 medibles leen prosa, un artefacto que ninguna de las once familias toca todavia: haria falta una `prosa_checks` |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `pep8_checks --rule modulo` sin ejercicio | 1 regla | el arreglo es **renombrar el archivo**, y `touch_only` cubre el contenido de un archivo y no su nombre. Es el mismo limite que las de git, encontrado en otra familia |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna es un instrumento que falte ni un ejercicio pendiente.** Las 143
-tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
-ejercicio lo tiene. Las tres filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Solo la primera es un instrumento que falte.** Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
