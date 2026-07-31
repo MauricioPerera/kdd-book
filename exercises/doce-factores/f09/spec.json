@@ -1,0 +1,49 @@
+{
+  "id": "f09-manejar-sigterm",
+  "node": "f09",
+  "title": "Enterarse de que estan apagando el proceso",
+  "description": "Instalar el manejador de SIGTERM que hoy no existe.",
+  "intent": "Instalar un manejador de SIGTERM.",
+  "signature": "signal.signal(signal.SIGTERM, _apagar)",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "sigterm"
+    ],
+    "threshold": "el proceso instala un manejador de sigterm"
+  },
+  "invariants": [
+    "Lo que el consumidor hace con los trabajos no cambia: el oraculo pasa igual antes y despues.",
+    "Sigue tomando trabajos mientras no se este apagando, y ninguno cuando si.",
+    "El proceso instala un manejador de SIGTERM."
+  ],
+  "examples": [
+    "Un consumidor sin `signal.signal(signal.SIGTERM, ...)` -> lo matan y los trabajos en curso se pierden, en rojo.",
+    "El mismo consumidor con el manejador instalado -> en verde.",
+    "`signal.signal(signal.SIGINT, ...)` no alcanza: SIGINT es Ctrl-C, no lo que manda el gestor al apagar."
+  ],
+  "do": [
+    "Instalar el manejador de SIGTERM en la preparacion del proceso.",
+    "Hacer que el manejador deje de tomar trabajo nuevo."
+  ],
+  "dont": [
+    "Salir de una en el manejador: el apagado ordenado deja terminar lo que esta en curso."
+  ],
+  "stop_if": [
+    "el proceso no es de larga vida y no hay apagado que ordenar"
+  ]
+}

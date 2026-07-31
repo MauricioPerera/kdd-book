@@ -1,0 +1,52 @@
+{
+  "id": "f10-paridad-de-despliegues",
+  "node": "f10",
+  "title": "Igualar la version del servicio entre desarrollo y produccion",
+  "description": "Alinear el despliegue de produccion con el de desarrollo.",
+  "intent": "Usar la misma version de cada servicio en los dos despliegues.",
+  "signature": "image: postgres:16",
+  "target": "proyecto/prod.yml",
+  "oracle": "oracle_test.py",
+  "seed": "seed_prod.yml",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "paridad",
+      "--despliegue",
+      "dev=dev.yml",
+      "--despliegue",
+      "prod=prod.yml"
+    ],
+    "threshold": "cero diferencias de tipo o version entre despliegues"
+  },
+  "invariants": [
+    "El despliegue de produccion sigue declarando los mismos servicios: el oraculo pasa igual antes y despues.",
+    "Produccion sigue publicando su puerto.",
+    "Los dos despliegues usan el mismo tipo y version de cada servicio."
+  ],
+  "examples": [
+    "`postgres:14` en desarrollo y `postgres:16` en produccion -> lo que pasa las pruebas puede fallar en produccion, en rojo.",
+    "La misma version en los dos -> en verde.",
+    "Con un solo despliegue declarado el instrumento sale con exit 2: la paridad es una relacion y no hay con que comparar."
+  ],
+  "do": [
+    "Alinear la version del servicio que discrepa."
+  ],
+  "dont": [
+    "Borrar el servicio de un despliegue para que coincidan: eso no es paridad, es sacar la mitad de la comparacion."
+  ],
+  "stop_if": [
+    "solo hay un despliegue declarado y no hay con que comparar"
+  ]
+}

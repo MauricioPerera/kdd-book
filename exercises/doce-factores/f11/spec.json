@@ -1,0 +1,49 @@
+{
+  "id": "f11-logs-a-stdout",
+  "node": "f11",
+  "title": "Escribir el flujo de eventos a stdout",
+  "description": "Sacar el logfile que la app administra y escribir a la salida estandar.",
+  "intent": "Escribir los logs a stdout en vez de a un archivo.",
+  "signature": "logging.basicConfig(stream=sys.stdout, format=FORMATO)",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "logs"
+    ],
+    "threshold": "cero handlers de logging que escriban a archivo"
+  },
+  "invariants": [
+    "Lo que la app registra no cambia: el oraculo pasa igual antes y despues.",
+    "El mensaje y el formato siguen siendo los mismos.",
+    "Cero handlers de logging que escriban a archivo."
+  ],
+  "examples": [
+    "`logging.basicConfig(filename=\"pedidos.log\")` -> la app se ocupa del almacenamiento de su salida, en rojo.",
+    "`logging.FileHandler(\"pedidos.log\")` -> lo mismo por la otra puerta, en rojo.",
+    "`logging.basicConfig(stream=sys.stdout)` -> en verde: del ruteo y el archivado se ocupa el entorno."
+  ],
+  "do": [
+    "Mandar el flujo de eventos a stdout.",
+    "Dejar igual el formato y el mensaje."
+  ],
+  "dont": [
+    "Rotar el archivo en vez de sacarlo: rotar es administrar el almacenamiento, que es justo lo que el factor saca de la app."
+  ],
+  "stop_if": [
+    "el destino de los logs lo fija un framework que la app no controla"
+  ]
+}

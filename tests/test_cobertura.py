@@ -42,36 +42,12 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {
-    ('entorno_checks.py', 'config'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'un proyecto con credenciales y su version leyendo el entorno'),
-    ('entorno_checks.py', 'daemonizar'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'un proceso que se daemoniza y su version administrada desde afuera'),
-    ('entorno_checks.py', 'dependencias'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'un proyecto con una dependencia implicita y su manifiesto completo'),
-    ('entorno_checks.py', 'logs'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'una app que escribe un logfile y su version escribiendo a stdout'),
-    ('entorno_checks.py', 'paridad'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'dos archivos de despliegue que discrepan en la version de un servicio'),
-    ('entorno_checks.py', 'puerto'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'una app que espera un servidor inyectado y su version que ata el puerto'),
-    ('entorno_checks.py', 'servicios'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'un locator escrito en el codigo y su version leida de la config'),
-    ('entorno_checks.py', 'sigterm'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'un proceso que no se entera del apagado y su version que lo maneja'),
-}
+PENDIENTE = {}
 
 
 def _alias_de(script):

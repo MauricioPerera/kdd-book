@@ -1,0 +1,49 @@
+{
+  "id": "f08-no-daemonizar",
+  "node": "f08",
+  "title": "Dejar que el gestor del sistema administre el proceso",
+  "description": "Sacar la daemonizacion y el archivo PID que la app se hace a mano.",
+  "intent": "Correr en primer plano y dejar la administracion afuera.",
+  "signature": "def arrancar(cola):",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "daemonizar"
+    ],
+    "threshold": "cero daemonizaciones y cero archivos pid"
+  },
+  "invariants": [
+    "Lo que el worker hace con la cola no cambia: el oraculo pasa igual antes y despues.",
+    "Sigue procesando todos los pedidos y en el mismo orden.",
+    "Cero daemonizaciones y cero archivos PID."
+  ],
+  "examples": [
+    "`os.fork()` seguido de `os.setsid()` -> la app se administra sola, en rojo.",
+    "`open(\"/var/run/worker.pid\", \"w\")` -> escribir el PID es la otra mitad de lo mismo, en rojo.",
+    "El mismo worker sin nada de eso -> en verde: de reiniciarlo se ocupa el gestor del sistema."
+  ],
+  "do": [
+    "Sacar el fork, el setsid y el archivo PID.",
+    "Dejar el worker corriendo en primer plano."
+  ],
+  "dont": [
+    "Mover la daemonizacion a otro archivo del proyecto: el instrumento lee todo el proyecto, y sobre todo la tecnica es no hacerlo."
+  ],
+  "stop_if": [
+    "el proceso necesita desprenderse de la terminal por una razon que el gestor no cubre"
+  ]
+}

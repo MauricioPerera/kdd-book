@@ -324,8 +324,8 @@ def check_paridad(fuentes, opts):
                 out.append((nombre, 0, '{} corre {} y {} no lo tiene'
                             .format(nombre, servicio, base_nombre)))
             elif aca != alla:
-                out.append((nombre, 0, '{}: {} contra {} en {}'
-                            .format(servicio, alla, aca, base_nombre)))
+                out.append((nombre, 0, '{}: {} usa {} y {} usa {}'
+                            .format(servicio, base_nombre, alla, nombre, aca)))
     return out
 
 

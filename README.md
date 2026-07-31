@@ -16,18 +16,18 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cinco fuentes, 327 nodos, 44 contratos ejecutables, 55 instrumentos en nueve
+Cinco fuentes, 327 nodos, 52 contratos ejecutables, 55 instrumentos en nueve
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 138 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
-| The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 0 |
+| The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **327** | **102** | **85** | **79** | **44** |
+| **Total** | **327** | **102** | **85** | **79** | **52** |
 
 Dos de las cinco no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -457,6 +457,24 @@ diferencia aparece solo con contenido hostil, o sea justo con el caso que
 ninguna prueba escrita con datos de ejemplo va a cubrir. El oraculo esta ciego
 por construccion y el instrumento es lo unico que discrimina.
 
+Los ocho de entorno mueven el oraculo **fuera** de `proyecto/`, y no es un
+detalle de organizacion: `entorno_checks` mide todos los `.py` del proyecto, asi
+que un oraculo adentro seria medido como si fuera codigo de la app. En varias
+reglas eso alcanza para cambiar el resultado — un `bind` en el oraculo pondria
+`puerto` en verde sin que nadie ate un puerto.
+
+Dos de ellos muestran hasta donde llega el oraculo. En el de config, la prueba
+pone la clave en el entorno antes de importar y por eso pasa igual sobre el seed
+y sobre la solucion: **dada la misma configuracion, el comportamiento es el
+mismo**; lo que cambia es de donde sale la clave, y eso ningun test lo ve. En el
+de daemonizar, el oraculo directamente **no llama a la ruta de arranque** — la
+primera version si la llamaba y estaba mal de dos maneras: en POSIX habria
+forkeado de verdad durante la prueba, y en Windows `os.fork` no existe y el
+oraculo se ponia rojo sobre el seed. Lo detecto `test_exercises`, que compara el
+oraculo contra el `kind` declarado. Que la ruta de arranque no se ejecute en
+ninguna prueba es lo normal, y es exactamente por lo que hace falta un
+instrumento que lea el codigo entero.
+
 Los de HTTP necesitaron un paso mas, declarado en el spec como `preparar`: se
 edita la app y se miden **las respuestas que produce**, asi que las capturas se
 regeneran desde el target en cada corrida. No es un atajo: si el target fueran
@@ -478,21 +496,22 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
-| `entorno_checks` sin ejercicio | 8 reglas | los instrumentos estan escritos y probados; faltan los ejercicios. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Solo la primera es un instrumento que falte.** Las seis tecnicas
-medibles de htmx —las tres de HTML, las dos de HTTP y la de plantillas— tienen
-instrumento y ejercicio, y las diez de los doce factores ya tienen instrumento:
-ocho esperan ejercicio y dos no lo admiten, por el mismo motivo que las de git. Las otras tres filas son limites, no deudas: un artefacto que este
+**Ninguna de las tres es un instrumento que falte, ni un ejercicio pendiente.**
+Las seis medibles de htmx y las diez de los doce factores tienen instrumento, y
+todas las que admiten la forma de ejercicio lo tienen. Lo que queda son limites
+declarados: un artefacto que este repositorio no tiene, una forma de contrato
+que no aplica, una prohibicion del proyecto y un consejo que en Python no se
+puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
 proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
 
-Ninguna razon es "no se puede medir". La tentacion con las de git seria darle al
+La tentacion con las de git seria darle al
 ejercicio un script que fabrique el historial y poner **ese** script como target:
 seria enseñar a fabricar un historial que se vea bien, o sea lo contrario de la
 tecnica.
@@ -504,7 +523,7 @@ Doce suites, 138 pruebas, y cada suite existe por un error concreto que ya paso.
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 44 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 52 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

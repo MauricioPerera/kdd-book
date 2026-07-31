@@ -1,0 +1,49 @@
+{
+  "id": "f07-atar-el-puerto",
+  "node": "f07",
+  "title": "Exportar el servicio atando un puerto propio",
+  "description": "Agregar el punto de entrada que ata el puerto en vez de esperar un servidor inyectado.",
+  "intent": "Atar el puerto desde la propia app.",
+  "signature": "def servir(puerto):",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "puerto"
+    ],
+    "threshold": "la app ata su propio puerto"
+  },
+  "invariants": [
+    "Lo que la app responde no cambia: el oraculo pasa igual antes y despues.",
+    "/salud sigue devolviendo 200 y una ruta desconocida sigue devolviendo 404.",
+    "La app ata su propio puerto."
+  ],
+  "examples": [
+    "Solo un `application(environ, start_response)` -> sin un servidor externo que la monte, la app no escucha nada, en rojo.",
+    "La misma app con un `servir(puerto)` que llama a `serve_forever()` -> en verde.",
+    "La regla mide la mitad afirmativa. Que NO haya ademas un servidor externo es una ausencia sobre un artefacto que no esta en el repositorio."
+  ],
+  "do": [
+    "Agregar el punto de entrada que ata el puerto y sirve.",
+    "Dejar intacta la funcion que decide la respuesta."
+  ],
+  "dont": [
+    "Atar el puerto al importar el modulo: importar no puede ser arrancar."
+  ],
+  "stop_if": [
+    "la app no es un servicio de red y no tiene nada que exportar"
+  ]
+}

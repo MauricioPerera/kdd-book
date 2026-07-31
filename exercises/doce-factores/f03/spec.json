@@ -1,0 +1,49 @@
+{
+  "id": "f03-config-en-el-entorno",
+  "node": "f03",
+  "title": "Sacar la credencial del codigo y leerla del entorno",
+  "description": "Reemplazar la constante con la credencial por una lectura del entorno.",
+  "intent": "Leer la credencial del entorno en vez de escribirla en el codigo.",
+  "signature": "API_KEY = os.environ[\"API_KEY\"]",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "config"
+    ],
+    "threshold": "ninguna credencial queda escrita en el codigo"
+  },
+  "invariants": [
+    "Con la misma configuracion la app manda lo mismo: el oraculo pasa igual antes y despues.",
+    "La cabecera de autorizacion sigue teniendo el mismo formato.",
+    "Ninguna credencial queda escrita en el codigo."
+  ],
+  "examples": [
+    "`API_KEY = \"sk-live-9f3a2b\"` -> el repositorio no se puede abrir sin filtrar la clave, en rojo.",
+    "`API_KEY = os.environ[\"API_KEY\"]` -> en verde.",
+    "`TOKEN = \"\"` no se marca: un string vacio es justo lo que deja quien ya saco la clave."
+  ],
+  "do": [
+    "Leer la credencial del entorno.",
+    "Dejar igual el formato de la cabecera: la tecnica es de donde viene el dato, no que se hace con el."
+  ],
+  "dont": [
+    "Mover la constante a otro archivo del repositorio: sigue estando en el codigo."
+  ],
+  "stop_if": [
+    "la clave no tiene ningun nombre de la convencion y el instrumento no la puede ver"
+  ]
+}

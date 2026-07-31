@@ -1,0 +1,50 @@
+{
+  "id": "f02-declarar-las-dependencias",
+  "node": "f02",
+  "title": "Declarar la dependencia que hoy se asume instalada",
+  "description": "Agregar al manifiesto el paquete que el codigo importa y nadie declara.",
+  "intent": "Declarar en el manifiesto la dependencia que el codigo usa.",
+  "signature": "peticiones>=1.0",
+  "target": "proyecto/requirements.txt",
+  "oracle": "oracle_test.py",
+  "seed": "seed_requirements.txt",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "dependencias",
+      "--manifiesto",
+      "requirements.txt"
+    ],
+    "threshold": "cero dependencias implicitas del sistema"
+  },
+  "invariants": [
+    "Lo que la app arma no cambia: el oraculo pasa igual antes y despues.",
+    "El codigo sigue importando el mismo cliente.",
+    "Todo import de terceros esta en el manifiesto."
+  ],
+  "examples": [
+    "Un `import peticiones` sin entrada en `requirements.txt` -> la app anda en la maquina de quien ya lo tiene instalado y no en la de nadie mas, en rojo.",
+    "El mismo import con `peticiones>=1.0` declarado -> en verde.",
+    "Un import de la stdlib o de un modulo del propio proyecto no se pide: no es una dependencia externa."
+  ],
+  "do": [
+    "Declarar en el manifiesto el paquete que el codigo importa."
+  ],
+  "dont": [
+    "Borrar el import para que el instrumento calle: eso saca la funcionalidad, no la declara."
+  ],
+  "stop_if": [
+    "el proyecto no dice cual de sus archivos es el manifiesto y el instrumento sale con exit 2"
+  ]
+}

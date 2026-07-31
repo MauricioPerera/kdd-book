@@ -1,0 +1,48 @@
+{
+  "id": "f04-locator-en-la-config",
+  "node": "f04",
+  "title": "Sacar del codigo el locator del servicio",
+  "description": "Reemplazar la URL del servicio escrita en el codigo por una lectura de la config.",
+  "intent": "Leer el locator del servicio desde la config.",
+  "signature": "DESTINO = os.environ[\"DATABASE_URL\"]",
+  "target": "proyecto/app.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_app.py",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "entorno_checks.py",
+    "args": [
+      "--rule",
+      "servicios"
+    ],
+    "threshold": "ningun locator de servicio queda escrito en el codigo"
+  },
+  "invariants": [
+    "Con la misma config la app habla con el mismo servicio: el oraculo pasa igual antes y despues.",
+    "La app sigue derivando el esquema del locator.",
+    "Ningun locator de servicio queda escrito en el codigo."
+  ],
+  "examples": [
+    "`DESTINO = \"postgres://app@db.interno:5432/tienda\"` -> cambiar ese Postgres por uno gestionado pide tocar codigo, en rojo.",
+    "`DESTINO = os.environ[\"DATABASE_URL\"]` -> en verde: el recurso adjunto se cambia en la config.",
+    "La regla mira la FORMA del valor y no el nombre de la variable: es lo que la separa de `config`."
+  ],
+  "do": [
+    "Leer el locator de la config."
+  ],
+  "dont": [
+    "Partir la URL en pedazos para que no matchee: el locator sigue en el codigo."
+  ],
+  "stop_if": [
+    "el servicio se direcciona con un formato que no es una URL con esquema"
+  ]
+}
