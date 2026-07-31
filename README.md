@@ -114,9 +114,9 @@ reglas que habia servia: todas parsean AST de Python o corren comandos.
 
 El triaje, el criterio de pila, la regla de ruteo por seccion y la forma del
 contrato funcionaron igual. Lo que no transfiere es **la capa de medicion, que
-esta atada al lenguaje del artefacto**. De ahi salieron `html_checks` y
-`http_checks`, y queda una sin instrumento porque lee plantillas y el marcador
-cambia con cada motor.
+esta atada al lenguaje del artefacto**. De ahi salieron tres familias nuevas
+—`html_checks`, `http_checks` y `template_checks`— y con ellas las seis quedaron
+cubiertas.
 
 Era parcialmente visible con J1 y J2, que quedaron afuera por ser de Java. Aca
 el efecto fue total, porque cambio el artefacto entero.
@@ -325,6 +325,7 @@ que preguntan lo mismo.
 | `git_checks.py` | 3 | el historial | cadencia de entregas, ramas sin integrar |
 | `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `http_checks.py` | 2 | respuestas capturadas | `Vary: HX-Request`, politica de seguridad |
+| `template_checks.py` | 1 | plantillas sin renderizar | interpolacion sin escapar |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -338,7 +339,7 @@ Tres decisiones que conviene tener a la vista:
   historial conserva el **orden**, no el haber visto el test en rojo, y el
   instrumento no pretende que sea lo mismo.
 - **`html_checks` existe porque el metodo transferia y los instrumentos no.**
-  Al triajar la documentacion de htmx (56 titulos, 10,7% medible) las seis
+  Al triajar la documentacion de htmx (59 titulos, 10,2% medible) las seis
   tecnicas medibles resultaron leer HTML, HTTP o plantillas, y **ninguna de las
   39 reglas que habia servia**: todas parsean AST de Python o corren comandos.
   El criterio de pila, la regla por seccion y la forma del contrato funcionaron
@@ -353,6 +354,21 @@ Tres decisiones que conviene tener a la vista:
   `vary` no adivina si la respuesta varia: **lo demuestra** comparando dos
   capturas de la misma ruta, una con `HX-Request` y otra sin el. Con una sola no
   hay nada que comparar y sale con exit 2, que es mas honesto que dar verde.
+- **`template_checks` fue el ultimo, y el motivo es el mas instructivo.** El
+  marcador de interpolacion sin escapar **cambia con cada motor**: en handlebars
+  el escape se decide por interpolacion (`{{x}}` escapa, `{{{x}}}` no), pero en
+  jinja2 y django se decide en la aplicacion y **desde la plantilla es
+  invisible**. La misma plantilla es segura o no segun un dato que no esta
+  escrita en ella. Asi que se pide: `--motor`, y `--autoescape` para los motores
+  con estado global. Es la tercera vez que aparece la misma forma —las capas de
+  `arch_checks`, las capturas de `http_checks`— y siempre por lo mismo: **cuando
+  el dato que decide la medicion vive fuera del artefacto, se pide, no se
+  supone.** Un instrumento que lo adivinara diria "limpio" sobre una plantilla
+  que inyecta.
+  Su docstring dice tambien lo que **no** mide: escapar para HTML no protege
+  dentro de un `<script>` ni en un atributo sin comillas. Eso es escapado
+  sensible al contexto y es otra tecnica; queda declarado para que el verde no
+  se lea como mas de lo que es.
 - **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
@@ -407,12 +423,12 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Diez suites de prueba, y cada una existe por un error concreto que ya paso.
+Once suites de prueba, y cada una existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_exercises` | coherencia de los 43 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

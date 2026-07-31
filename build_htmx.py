@@ -66,7 +66,9 @@ SECCIONES = [
 
 # Pila A: (instrumento, umbral). Las seis son `instrumented` — leen HTML, HTTP
 # o plantillas, o sea el artefacto del que trata la tecnica. Ninguna depende de
-# un registro que llene una persona.
+# un registro que llene una persona. Las seis tienen instrumento escrito, en
+# tres familias que esta fuente obligo a inventar: html_checks, http_checks y
+# template_checks.
 A_NODES = {
     10: ('html_checks.py --rule indicador',
          'todo emisor de peticion con indicador en alcance'),
@@ -74,8 +76,7 @@ A_NODES = {
          'todo emisor funciona sin javascript'),
     51: ('http_checks.py --rule vary',
          'Vary: HX-Request cuando la respuesta varia por esa cabecera'),
-    53: ('plantillas: interpolacion sin escapar (sin implementar: el marcador '
-         'depende del motor y el proyecto tendria que declararlo)',
+    53: ('template_checks.py --rule escapado',
          'cero interpolaciones sin escapar'),
     55: ('http_checks.py --rule csp',
          'politica presente con las directivas declaradas'),
@@ -148,10 +149,15 @@ NOTA_CRUZADA = {
          'sin tocar el nucleo. Caules lo deja medible porque lo operacionaliza '
          'como "agregar una funcionalidad no debe obligar a tocar el '
          'controlador"; htmx describe el mecanismo pero no da con que medirlo.'),
-    53: ('Es la unica de las seis medibles que todavia no tiene instrumento. Lee '
-         'plantillas, y el marcador de interpolacion sin escapar cambia con cada '
-         'motor, asi que el proyecto tendria que declarar cual usa — igual que '
-         'declara sus capas para `arch_checks`.'),
+    53: ('Fue la ultima de las seis en tener instrumento, y el motivo dejo una '
+         'forma reusable. Lee plantillas, y el marcador de interpolacion sin '
+         'escapar cambia con cada motor: en handlebars el escape se decide por '
+         'interpolacion (`{{x}}` escapa, `{{{x}}}` no), en jinja2 y django se '
+         'decide en la aplicacion y **desde la plantilla es invisible**. Asi que '
+         '`template_checks` pide la declaracion —`--motor`, y `--autoescape` para '
+         'los motores con estado global— igual que `arch_checks` pide las capas: '
+         'cuando el dato que decide la medicion vive fuera del artefacto, se pide, '
+         'no se supone. Sin el, exit 2.'),
 }
 
 _LINEA = re.compile(r'^\s*(\d+)\|\s*H(\d)\s*\|\s*p(\d+)\s*\|\s*(.+?)\s*$')

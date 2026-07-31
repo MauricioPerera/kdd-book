@@ -39,13 +39,15 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
-# Vacio hoy: las cinco de htmx que estaban aca ya tienen ejercicio. Se conserva
-# el diccionario porque la distincion es el valor de la prueba. `SIN_EJERCICIO`
-# dice "no se puede" y no se vacia nunca: describe un limite de la forma de
-# contrato. Esto dice "no esta hecho" y se vacia trabajando. Mezclarlos
-# convertiria el inventario en una lista donde lo imposible y lo pendiente se
-# ven igual.
-PENDIENTE = {}
+# `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
+# la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
+# Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
+# pendiente se ven igual.
+PENDIENTE = {
+    ('template_checks.py', 'escapado'): (
+        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
+        'ademas elegir el motor de plantillas del enunciado'),
+}
 
 
 def _alias_de(script):
@@ -243,8 +245,12 @@ class CoberturaTest(unittest.TestCase):
         import sys
         sys.path.insert(0, os.path.join(RAIZ, 'instruments'))
         registros = {}
+        # Estan los siete a proposito. Las tres familias nuevas —html, http,
+        # plantillas— faltaban, y con eso sus ejercicios pasaban por esta prueba
+        # sin que nadie comprobara que la regla que nombran existe.
         for modulo in ('checks', 'repo_checks', 'git_checks', 'arch_checks',
-                       'mutation_checks'):
+                       'mutation_checks', 'html_checks', 'http_checks',
+                       'template_checks'):
             registros[modulo + '.py'] = __import__(modulo)
         for script, regla in sorted(_instrumentos_ejercitados()):
             if not regla or script not in registros:

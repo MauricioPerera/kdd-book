@@ -962,9 +962,9 @@
         "XSS"
       ],
       "links": [],
-      "instrument": "plantillas: interpolacion sin escapar (sin implementar: el marcador depende del motor y el proyecto tendria que declararlo)",
+      "instrument": "template_checks.py --rule escapado",
       "threshold": "cero interpolaciones sin escapar",
-      "body": "Es la unica de las seis medibles que todavia no tiene instrumento. Lee plantillas, y el marcador de interpolacion sin escapar cambia con cada motor, asi que el proyecto tendria que declarar cual usa — igual que declara sus capas para `arch_checks`."
+      "body": "Fue la ultima de las seis en tener instrumento, y el motivo dejo una forma reusable. Lee plantillas, y el marcador de interpolacion sin escapar cambia con cada motor: en handlebars el escape se decide por interpolacion (`{{x}}` escapa, `{{{x}}}` no), en jinja2 y django se decide en la aplicacion y **desde la plantilla es invisible**. Asi que `template_checks` pide la declaracion —`--motor`, y `--autoescape` para los motores con estado global— igual que `arch_checks` pide las capas: cuando el dato que decide la medicion vive fuera del artefacto, se pide, no se supone. Sin el, exit 2."
     },
     {
       "id": "54",
