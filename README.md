@@ -16,25 +16,39 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cuatro fuentes, 311 nodos, 44 contratos ejecutables, 45 instrumentos en ocho
+Cinco fuentes, 327 nodos, 44 contratos ejecutables, 45 instrumentos en ocho
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 107 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
+| The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 0 | 0 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **311** | **92** | **75** | **69** | **44** |
+| **Total** | **327** | **102** | **85** | **69** | **44** |
 
-La cuarta no es un libro: es **documentacion de referencia**, y esta para probar
-hasta donde llega el metodo. Cae al 10,2% por una razon distinta a la de Scrum —
-no habla de personas, habla de codigo— pero **describir una API no es prescribir
+Dos de las cinco no son libros, y estan para probar hasta donde llega el metodo.
+La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
+habla de personas, habla de codigo— pero **describir una API no es prescribir
 una tecnica**, y por eso casi la mitad cae en pila C por definicion del genero.
 
-Ademas: 17 tecnicas `proxy`, 95 en pila B (tecnica real sin propiedad medible)
-y 124 en pila C (conocimiento). 19 enlaces cruzan de una fuente a otra.
+Los doce factores van al otro extremo por el motivo simetrico: **un manifiesto
+es prescripcion pura**, sin una linea de relleno, y da el porcentaje mas alto de
+las cinco. Se sumo con una prediccion hecha antes de triajar y escrita en el
+script de build: si la contractabilidad la decide que el autor haya
+operacionalizado la tecnica, un documento asi tiene que quedar por encima de los
+libros de codigo. Quedo. Sobre los doce factores solos, sin el preambulo, es
+**10 de 12**.
+
+Su corpus es el mas chico —16 titulos— y no por muestreo: cada factor es una
+pagina con titulo, bajada y sin subsecciones, comprobado pagina por pagina. Con
+n=16 cada item vale 6,3 puntos, asi que el porcentaje es real pero la precision
+implicita no.
+
+Ademas: 17 tecnicas `proxy`, 97 en pila B (tecnica real sin propiedad medible)
+y 128 en pila C (conocimiento). 23 enlaces cruzan de una fuente a otra.
 
 **La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
 diferencia es si el instrumento lee el artefacto del que trata la tecnica
@@ -66,10 +80,10 @@ no solo aca.
 
 ### 1. La distribucion es bimodal, no un gradiente
 
-Cinco libros medidos (los tres del grafo, mas Proyectos Agiles con Scrum y
-Habitos Atomicos) dan 48%, 45%, 14%, 3,4% y 0% de `instrumented`. Pero el 14,4%
-de Scrum y XP **no es un valor intermedio**: es el promedio ponderado de dos
-poblaciones.
+Siete fuentes medidas (las cinco del grafo, mas Proyectos Agiles con Scrum y
+Habitos Atomicos) dan 62,5%, 48%, 45%, 14%, 10%, 3,4% y 0% de `instrumented`.
+Pero el 14,4% de Scrum y XP **no es un valor intermedio**: es el promedio
+ponderado de dos poblaciones.
 
 | Seccion de Scrum y XP | `instrumented` |
 |---|---|
@@ -84,6 +98,14 @@ Ninguna seccion cae en el medio. Por eso **el ruteo se decide por seccion, no
 por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
 el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
 Limpio.
+
+La quinta fuente agrego un modo arriba, en 62,5%, y con eso el eje se lee mejor:
+lo que ordena la distribucion **no es el dominio sino el genero**. Un manifiesto
+(prescripcion pura) queda arriba de un libro de codigo (prescripcion mas
+explicacion), que queda arriba de un libro de proceso (prescripcion mas
+personas), que queda arriba de documentacion de referencia (descripcion de una
+API). El dominio de los doce factores es infraestructura, tan lejos del AST como
+Scrum, y sin embargo es el mas contractable de los cinco.
 
 ### 2. La contractabilidad la decide si el autor operacionalizo la tecnica
 
@@ -105,8 +127,16 @@ Que el caso aparezca dos veces en sentidos opuestos es lo que lo vuelve un
 patron y no una anecdota. Y solo se puede afirmar con los dos nodos a la vista:
 **por eso el grafo tiene enlaces entre libros y no es una tabla por libro**.
 
-DRY aparece en los tres libros y los tres autores la operacionalizan: los tres
-nodos son contractables y comparten instrumento.
+La quinta fuente sumo un tercer caso, y esta vez con un umbral que no admite
+interpretacion: `doce-factores/f03` (guardar la config en el entorno) contra
+`codigo-limpio/g35` (mantener los datos configurables en los niveles
+superiores). **Misma idea, pilas distintas otra vez.** Martin la deja en pila B
+porque que dato conviene subir es un juicio; Wiggins fija cual es el nivel
+superior —el entorno— y da el umbral con un test que se puede correr: *si el
+repositorio no se pudiera abrir hoy sin filtrar credenciales, esta en rojo*.
+
+DRY aparece en los tres libros de codigo y los tres autores la operacionalizan:
+los tres nodos son contractables y comparten instrumento.
 
 ### 3. El metodo transfiere; los instrumentos no
 
@@ -172,13 +202,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **176 de las 311**, y el reparto no es casual:
+Lo tienen **188 de las 327**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **92 de 92** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 81 de 95 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 124 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **102 de 102** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 83 de 97 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 128 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 14 de pila B que quedan afuera son subsecciones sin nombre propio: nueve de
 Scrum y XP —tres titulos repetidos "Funciones y responsabilidades", dos
@@ -197,14 +227,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 311 tecnicas, 46 instrumentos
+python memoria.py exportar          # -> memoria.json: 327 tecnicas, 46 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **294 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **305 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
@@ -230,7 +260,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 377 entradas -> 311 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 393 entradas -> 327 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -245,8 +275,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 311 + 66 | **311 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 311 + 66 | 377 tecnicas | 0 |
+| ids estables (`g36`) | 327 + 66 | **327 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 327 + 66 | 393 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -430,16 +460,18 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
+| doce factores sin instrumento | 10 | la fuente entro recien; sus tecnicas leen el manifiesto de dependencias, el historial de releases y los archivos de despliegue, y esos instrumentos todavia no estan escritos. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 3 reglas | el arreglo es integrar una rama o marcar una entrega: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna de las cuatro es un instrumento que falte.** Las seis tecnicas
+**Solo la primera es un instrumento que falte.** Las seis tecnicas
 medibles de htmx —las tres de HTML, las dos de HTTP y la de plantillas— tienen
-instrumento y ejercicio; lo que queda son limites declarados: un artefacto que
-este repositorio no tiene, una forma de contrato que no aplica, una prohibicion
-del proyecto y un consejo que en Python no se puede seguir sin tergiversar al
+instrumento y ejercicio; las diez de los doce factores estan declaradas y sin
+escribir. Las otras tres filas son limites, no deudas: un artefacto que este
+repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
+proyecto y un consejo que en Python no se puede seguir sin tergiversar al
 autor.
 
 Ninguna razon es "no se puede medir". La tentacion con las de git seria darle al

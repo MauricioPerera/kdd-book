@@ -18,7 +18,8 @@ import unittest
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx')
+LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
+          'doce-factores')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #

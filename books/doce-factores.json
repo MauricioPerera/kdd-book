@@ -1,0 +1,373 @@
+{
+  "source": {
+    "slug": "doce-factores",
+    "title": "The Twelve-Factor App",
+    "author": "Adam Wiggins y colaboradores",
+    "file": "12factor.net (sitio, 13 paginas)",
+    "pages": 13,
+    "extracted_with": "titulos del sitio, verificados pagina por pagina",
+    "tags": [
+      "fuente",
+      "manifiesto",
+      "doce-factores"
+    ],
+    "corpus": "Los 16 titulos del documento: cuatro de preambulo y los doce factores. CORPUS MAS CHICO DE LAS CINCO FUENTES, pero no es una muestra: cada factor es una pagina con titulo y bajada y sin subsecciones, comprobado pagina por pagina, asi que 16 es el documento entero. Con n=16 cada item vale 6,3 puntos: el porcentaje es real, la precision implicita no."
+  },
+  "nodes": [
+    {
+      "id": "s01",
+      "title": "Introduction",
+      "description": "Introduction (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "preambulo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "12factor.net/",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s02",
+      "title": "Background",
+      "description": "Background (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "preambulo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "12factor.net/",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s03",
+      "title": "Who should read this document?",
+      "description": "Who should read this document? (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "preambulo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "12factor.net/",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s04",
+      "title": "The Twelve Factors",
+      "description": "The Twelve Factors (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "preambulo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "12factor.net/",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "f01",
+      "title": "I. Codebase - One codebase tracked in revision control, many deploys",
+      "description": "I. Codebase - One codebase tracked in revision control, many deploys (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/codebase",
+      "alias": [
+        "un codebase por aplicacion",
+        "one codebase",
+        "codebase"
+      ],
+      "links": [
+        "scrum-xp/122"
+      ],
+      "instrument": "repo_checks: el codigo esta bajo control de versiones y el proyecto declara una sola aplicacion (sin implementar)",
+      "threshold": "un codebase bajo control de versiones por aplicacion",
+      "body": "Vecino de \"Unificacion del codigo en Repositorios\" de Scrum y XP, y conviene no confundirlos: Bahit mide **ramas sin integrar** y este factor mide **cuantos codebases hay por aplicacion**. Son dos propiedades distintas del mismo repositorio, y por eso comparten vecindad pero no instrumento."
+    },
+    {
+      "id": "f02",
+      "title": "II. Dependencies - Explicitly declare and isolate dependencies",
+      "description": "II. Dependencies - Explicitly declare and isolate dependencies (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/dependencies",
+      "alias": [
+        "declaracion explicita de dependencias",
+        "explicit dependencies",
+        "dependency manifest"
+      ],
+      "links": [],
+      "instrument": "repo_checks: todo import de primer nivel resuelve a un paquete declarado en el manifiesto (sin implementar)",
+      "threshold": "cero dependencias implicitas del sistema"
+    },
+    {
+      "id": "f03",
+      "title": "III. Config - Store config in the environment",
+      "description": "III. Config - Store config in the environment (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/config",
+      "alias": [
+        "configuracion en el entorno",
+        "config in the environment",
+        "variables de entorno",
+        "env vars"
+      ],
+      "links": [
+        "codigo-limpio/g35",
+        "f04"
+      ],
+      "instrument": "repo_checks: constantes de configuracion y credenciales en el codigo (sin implementar)",
+      "threshold": "cero: el repositorio se podria abrir hoy sin filtrar credenciales",
+      "body": "Es G35 de Codigo Limpio —\"mantener los datos configurables en los niveles superiores\"— llevado hasta el final y, sobre todo, **medible**. Martin lo deja en pila B porque que dato conviene subir es un juicio; aca el autor fija el nivel superior (el entorno) y da el umbral con un test que no admite interpretacion: si el repositorio no se puede abrir hoy sin filtrar credenciales, esta en rojo. Es el mismo par que G19 y 142, o que G30 y SRP: la misma idea, y la contractabilidad la decide cual de los dos autores la operacionalizo."
+    },
+    {
+      "id": "f04",
+      "title": "IV. Backing services - Treat backing services as attached resources",
+      "description": "IV. Backing services - Treat backing services as attached resources (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/backing-services",
+      "alias": [
+        "servicios de respaldo como recursos adjuntos",
+        "backing services",
+        "attached resources"
+      ],
+      "links": [
+        "arquitectura-java/19"
+      ],
+      "instrument": "repo_checks: locators de servicio escritos en el codigo en vez de leidos de la config (sin implementar)",
+      "threshold": "cero locators en el codigo",
+      "body": "El \"cambiar MySQL local por RDS sin tocar el codigo\" es inversion de control aplicada a los recursos, o sea el principio 19 de Arquitectura Java visto desde operaciones. Caules lo mide sobre instanciacion en el codigo; aca se mide sobre donde vive el locator."
+    },
+    {
+      "id": "f05",
+      "title": "V. Build, release, run - Strictly separate build and run stages",
+      "description": "V. Build, release, run - Strictly separate build and run stages (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/build-release-run",
+      "alias": [
+        "separar build, release y run",
+        "build release run",
+        "release id"
+      ],
+      "links": [
+        "f01"
+      ],
+      "instrument": "git_checks: todo release tiene identificador unico (sin implementar)",
+      "threshold": "cero releases sin identificador propio"
+    },
+    {
+      "id": "f06",
+      "title": "VI. Processes - Execute the app as one or more stateless processes",
+      "description": "VI. Processes - Execute the app as one or more stateless processes (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "12factor.net/processes",
+      "alias": [
+        "procesos sin estado",
+        "stateless processes",
+        "share-nothing"
+      ],
+      "links": [],
+      "why_not": "la ausencia de estado compartido no se decide leyendo el proyecto. Lo que si seria medible —escrituras a disco— tiene usos que el propio texto autoriza (\"a brief, single-transaction cache\"), asi que el umbral no puede ser cero y no hay otro que el autor haya fijado"
+    },
+    {
+      "id": "f07",
+      "title": "VII. Port binding - Export services via port binding",
+      "description": "VII. Port binding - Export services via port binding (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/port-binding",
+      "alias": [
+        "port binding",
+        "exportar por puerto",
+        "self-contained server"
+      ],
+      "links": [],
+      "instrument": "repo_checks: el punto de entrada abre su propio puerto y el servidor esta en el manifiesto (sin implementar)",
+      "threshold": "la app exporta su servicio sin servidor inyectado"
+    },
+    {
+      "id": "f08",
+      "title": "VIII. Concurrency - Scale out via the process model",
+      "description": "VIII. Concurrency - Scale out via the process model (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/concurrency",
+      "alias": [
+        "escalar por el modelo de procesos",
+        "concurrency",
+        "process model",
+        "no daemonizar"
+      ],
+      "links": [],
+      "instrument": "checks: llamadas a daemonize y escrituras de PID file (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "f09",
+      "title": "IX. Disposability - Maximize robustness with fast startup and graceful shutdown",
+      "description": "IX. Disposability - Maximize robustness with fast startup and graceful shutdown (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/disposability",
+      "alias": [
+        "desechabilidad",
+        "disposability",
+        "graceful shutdown",
+        "SIGTERM"
+      ],
+      "links": [],
+      "instrument": "checks: el proceso instala un manejador de SIGTERM (sin implementar)",
+      "threshold": "un manejador de SIGTERM por proceso de larga vida"
+    },
+    {
+      "id": "f10",
+      "title": "X. Dev/prod parity - Keep development, staging, and production as similar as possible",
+      "description": "X. Dev/prod parity - Keep development, staging, and production as similar as possible (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/dev-prod-parity",
+      "alias": [
+        "paridad dev/prod",
+        "dev prod parity"
+      ],
+      "links": [
+        "f04"
+      ],
+      "instrument": "repo_checks: los despliegues declarados usan el mismo tipo y version de cada servicio de respaldo (sin implementar)",
+      "threshold": "cero diferencias de tipo o version entre despliegues"
+    },
+    {
+      "id": "f11",
+      "title": "XI. Logs - Treat logs as event streams",
+      "description": "XI. Logs - Treat logs as event streams (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "12factor.net/logs",
+      "alias": [
+        "logs como flujo de eventos",
+        "logs to stdout",
+        "event streams"
+      ],
+      "links": [
+        "arquitectura-java/07"
+      ],
+      "instrument": "checks: handlers de logging que escriben a archivo (sin implementar)",
+      "threshold": "cero: el proceso escribe a stdout",
+      "body": "Caules dedica una seccion a Log4J, que es la herramienta; este factor prescribe el destino, que es lo medible. La distincion se repite en todo el grafo: la tecnologia cae en pila C y la prescripcion sobre ella puede caer en A."
+    },
+    {
+      "id": "f12",
+      "title": "XII. Admin processes - Run admin/management tasks as one-off processes",
+      "description": "XII. Admin processes - Run admin/management tasks as one-off processes (seccion: los doce factores).",
+      "type": "Concept",
+      "tags": [
+        "doce-factores",
+        "los-doce-factores",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "12factor.net/admin-processes",
+      "alias": [
+        "procesos de administracion",
+        "admin processes",
+        "one-off processes"
+      ],
+      "links": [],
+      "why_not": "\"el codigo de administracion viaja con el de la aplicacion\" es medible solo si alguien declara cuales de los archivos son de administracion, y esa clasificacion es el juicio, no la medicion. Lo demas que pide el factor —correr contra el mismo release— pasa en la ejecucion, no en el artefacto"
+    }
+  ]
+}

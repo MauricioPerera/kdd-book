@@ -1,0 +1,29 @@
+# Volcado de titulos de The Twelve-Factor App (12factor.net).
+#
+# Corpus del autor, literal. No hay PDF: el documento es un sitio, y cada
+# factor es una pagina con titulo y bajada y SIN subsecciones —comprobado
+# pagina por pagina—. Por eso el corpus son 16 titulos y no mas: es el
+# documento entero, no una muestra.
+#
+# Formato:  <indice>| H<nivel> | <ruta> | <titulo>
+#
+# El locator es la ruta del sitio, no un numero de pagina. Es lo que permite
+# ir a leer la tecnica, que es para lo unico que el locator existe.
+
+  1| H2 | /               | Introduction
+  2| H2 | /               | Background
+  3| H2 | /               | Who should read this document?
+  4| H2 | /               | The Twelve Factors
+
+  5| H2 | /codebase          | I. Codebase - One codebase tracked in revision control, many deploys
+  6| H2 | /dependencies      | II. Dependencies - Explicitly declare and isolate dependencies
+  7| H2 | /config            | III. Config - Store config in the environment
+  8| H2 | /backing-services  | IV. Backing services - Treat backing services as attached resources
+  9| H2 | /build-release-run | V. Build, release, run - Strictly separate build and run stages
+ 10| H2 | /processes         | VI. Processes - Execute the app as one or more stateless processes
+ 11| H2 | /port-binding      | VII. Port binding - Export services via port binding
+ 12| H2 | /concurrency       | VIII. Concurrency - Scale out via the process model
+ 13| H2 | /disposability     | IX. Disposability - Maximize robustness with fast startup and graceful shutdown
+ 14| H2 | /dev-prod-parity   | X. Dev/prod parity - Keep development, staging, and production as similar as possible
+ 15| H2 | /logs              | XI. Logs - Treat logs as event streams
+ 16| H2 | /admin-processes   | XII. Admin processes - Run admin/management tasks as one-off processes
