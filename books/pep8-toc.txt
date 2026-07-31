@@ -1,0 +1,52 @@
+# Volcado de titulos de PEP 8 -- Style Guide for Python Code (peps.python.org/pep-0008).
+#
+# Corpus del autor, literal: los 42 titulos de seccion del documento, con su
+# nivel de anidacion.
+#
+# Formato:  <indice>| H<nivel> | <ancla> | <titulo>
+#
+# El locator es el ancla de la seccion en el documento, que es lo que permite
+# ir a leerla.
+
+  1| H1 | introduction | Introduction
+  2| H1 | a-foolish-consistency-is-the-hobgoblin-of-little-minds | A Foolish Consistency is the Hobgoblin of Little Minds
+  3| H1 | code-lay-out | Code Lay-out
+  4| H2 | indentation | Indentation
+  5| H2 | tabs-or-spaces | Tabs or Spaces?
+  6| H2 | maximum-line-length | Maximum Line Length
+  7| H2 | should-a-line-break-before-or-after-a-binary-operator | Should a Line Break Before or After a Binary Operator?
+  8| H2 | blank-lines | Blank Lines
+  9| H2 | source-file-encoding | Source File Encoding
+ 10| H2 | imports | Imports
+ 11| H2 | module-level-dunder-names | Module Level Dunder Names
+ 12| H1 | string-quotes | String Quotes
+ 13| H1 | whitespace-in-expressions-and-statements | Whitespace in Expressions and Statements
+ 14| H2 | pet-peeves | Pet Peeves
+ 15| H2 | other-recommendations | Other Recommendations
+ 16| H1 | when-to-use-trailing-commas | When to Use Trailing Commas
+ 17| H1 | comments | Comments
+ 18| H2 | block-comments | Block Comments
+ 19| H2 | inline-comments | Inline Comments
+ 20| H2 | documentation-strings | Documentation Strings
+ 21| H1 | naming-conventions | Naming Conventions
+ 22| H2 | overriding-principle | Overriding Principle
+ 23| H2 | descriptive-naming-styles | Descriptive: Naming Styles
+ 24| H2 | prescriptive-naming-conventions | Prescriptive: Naming Conventions
+ 25| H3 | names-to-avoid | Names to Avoid
+ 26| H3 | ascii-compatibility | ASCII Compatibility
+ 27| H3 | package-and-module-names | Package and Module Names
+ 28| H3 | class-names | Class Names
+ 29| H3 | type-variable-names | Type Variable Names
+ 30| H3 | exception-names | Exception Names
+ 31| H3 | global-variable-names | Global Variable Names
+ 32| H3 | function-and-variable-names | Function and Variable Names
+ 33| H3 | function-and-method-arguments | Function and Method Arguments
+ 34| H3 | method-names-and-instance-variables | Method Names and Instance Variables
+ 35| H3 | constants | Constants
+ 36| H3 | designing-for-inheritance | Designing for Inheritance
+ 37| H2 | public-and-internal-interfaces | Public and Internal Interfaces
+ 38| H1 | programming-recommendations | Programming Recommendations
+ 39| H2 | function-annotations | Function Annotations
+ 40| H2 | variable-annotations | Variable Annotations
+ 41| H1 | references | References
+ 42| H1 | copyright | Copyright

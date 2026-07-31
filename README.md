@@ -16,21 +16,22 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Seis fuentes, 431 nodos, 62 contratos ejecutables, 65 instrumentos en diez
+Siete fuentes, 473 nodos, 62 contratos ejecutables, 65 instrumentos en diez
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 `validate_test_commands` y las 175 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
+| PEP 8 (G. van Rossum et al.) | 42 | 69,0% | **69,0%** | 2 | 0 |
 | The Twelve-Factor App (A. Wiggins) | 16 | 62,5% | **62,5%** | 10 | 8 |
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **431** | **114** | **97** | **91** | **62** |
+| **Total** | **473** | **143** | **126** | **93** | **62** |
 
-Tres de las seis no son libros, y estan para probar hasta donde llega el metodo.
+Cuatro de las siete no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
 habla de personas, habla de codigo— pero **describir una API no es prescribir
 una tecnica**, y por eso casi la mitad cae en pila C por definicion del genero.
@@ -48,6 +49,20 @@ pagina con titulo, bajada y sin subsecciones, comprobado pagina por pagina. Con
 n=16 cada item vale 6,3 puntos, asi que el porcentaje es real pero la precision
 implicita no.
 
+**PEP 8 entro con dos predicciones y la segunda se equivoco**, que es lo que la
+hace valer la pena. La primera: una guia de estilo escrita para que la revise una
+herramienta tenia que quedar arriba de los libros de codigo. Quedo — **69,0%, el
+mas alto de las siete**. La segunda: iba a ser la primera fuente con reuso alto
+de instrumentos, porque habla del mismo artefacto que Codigo Limpio y hay 22
+reglas ya escritas esperando. **De sus 29 tecnicas medibles, dos reusan una regla
+existente.** Que pasa con eso esta en el hallazgo 3.
+
+Su corpus subestima, al reves que los otros seis: "Programming Recommendations"
+es un solo titulo que adentro trae quince reglas concretas y medibles —comparar
+con `is None`, no usar `except` pelado, `isinstance` en vez de comparar tipos— y
+cuenta como un nodo, en pila B, porque una seccion cajon no tiene un umbral. Con
+un corpus por regla en vez de por titulo, el 69% seria mas alto.
+
 **WCAG entro para refutar, no para confirmar**, y es la fuente que corrigio el
 hallazgo 2. Sus criterios se llaman literalmente *"testable success criteria"*:
 estan operacionalizados al maximo por diseno, con umbrales numericos explicitos
@@ -57,10 +72,10 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 171 en pila B (tecnica real sin propiedad medible)
-y 146 en pila C (conocimiento). 25 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 175 en pila B (tecnica real sin propiedad medible)
+y 155 en pila C (conocimiento). 34 enlaces cruzan de una fuente a otra.
 
-Hay 114 tecnicas en pila A y 62 ejercicios, y la diferencia no es un pendiente:
+Hay 143 tecnicas en pila A y 62 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -98,10 +113,10 @@ no solo aca.
 
 ### 1. La distribucion es bimodal, no un gradiente
 
-Siete fuentes medidas (las cinco del grafo, mas Proyectos Agiles con Scrum y
-Habitos Atomicos) dan 62,5%, 48%, 45%, 14%, 10%, 3,4% y 0% de `instrumented`.
-Pero el 14,4% de Scrum y XP **no es un valor intermedio**: es el promedio
-ponderado de dos poblaciones.
+Nueve fuentes medidas (las siete del grafo, mas Proyectos Agiles con Scrum y
+Habitos Atomicos) dan 69%, 62,5%, 48%, 45%, 14%, 11,5%, 10%, 3,4% y 0% de
+`instrumented`. Pero el 14,4% de Scrum y XP **no es un valor intermedio**: es
+el promedio ponderado de dos poblaciones.
 
 | Seccion de Scrum y XP | `instrumented` |
 |---|---|
@@ -117,12 +132,13 @@ por libro**: un numero a nivel libro mandaria todo a "solo grafo OKF" y tiraria
 el capitulo de Refactoring, que da contratos tan buenos como los de Codigo
 Limpio.
 
-La quinta fuente agrego un modo arriba, en 62,5%, y con eso el eje se lee mejor:
-lo que ordena la distribucion **no es el dominio sino el genero**. Un manifiesto
-(prescripcion pura) queda arriba de un libro de codigo (prescripcion mas
-explicacion), que queda arriba de un libro de proceso (prescripcion mas
-personas), que queda arriba de documentacion de referencia (descripcion de una
-API). El dominio de los doce factores es infraestructura, tan lejos del AST como
+La quinta fuente agrego un modo arriba, en 62,5%, y la septima otro en 69%. Con
+eso el eje se lee mejor: lo que ordena la distribucion **no es el dominio sino el
+genero**, y mas precisamente **cuanto se parece el autor a estar escribiendo un
+verificador**. Arriba de todo una guia de estilo pensada para que la revise una
+herramienta; despues un manifiesto (prescripcion pura), despues un libro de
+codigo (prescripcion mas explicacion), despues un libro de proceso (prescripcion
+mas personas), y abajo documentacion de referencia (descripcion de una API). El dominio de los doce factores es infraestructura, tan lejos del AST como
 Scrum, y sin embargo es el mas contractable de las seis.
 
 La sexta cae en 11,5%, entre Scrum y htmx, y no encaja en ese eje: WCAG no es ni
@@ -185,6 +201,16 @@ sin javascript ni se puede operar con el teclado. htmx pide un `<a href>` o un
 funcionalidad sea operable por teclado" —un resultado, y esta en pila B—. No es
 que un criterio sea mejor: **el que nombra el mecanismo se puede instrumentar**.
 
+La septima sumo algo que el grafo no tenia todavia: **dos autores que se
+contradicen**. J1 de Codigo Limpio aconseja usar imports con comodin para evitar
+listas largas; PEP 8 los prohibe porque borran que nombres entran al espacio de
+nombres. J1 estaba en el grafo sin instrumento y con su motivo declarado —
+implementarla invirtiendo el consejo seria tergiversar al autor—. Con PEP 8
+adentro la contradiccion deja de ser una nota al pie y pasa a ser un enlace: dos
+nodos, dos autores, umbrales opuestos sobre el mismo artefacto, y el grafo los
+sostiene **sin elegir**. Es la misma politica que la fusion de memorias, donde un
+desacuerdo de triaje se reporta y no se resuelve.
+
 La quinta fuente sumo un tercer caso, y esta vez con un umbral que no admite
 interpretacion: `doce-factores/f03` (guardar la config en el entorno) contra
 `codigo-limpio/g35` (mantener los datos configurables en los niveles
@@ -220,6 +246,28 @@ servia tampoco**: hubo que escribir ocho en una familia nueva, `entorno_checks`,
 y dos mas en `git_checks`, que tenia el artefacto correcto pero no las
 propiedades. La conclusion se afina: lo que no transfiere no es la capa de
 medicion **por idioma** sino **por artefacto**.
+
+**Y la septima corrigio tambien eso.** PEP 8 entro con la prediccion de que iba a
+ser la primera fuente con reuso alto: habla del **mismo artefacto** que Codigo
+Limpio —el AST y el texto de un archivo Python— y habia 22 reglas escritas
+esperandola. De sus 29 tecnicas medibles, **dos** reusan una regla existente.
+
+El motivo se ve poniendo las dos listas al lado: `checks.py` mide duplicacion,
+numeros magicos, codigo muerto, envidia de caracteristicas —habla de
+**estructura y significado**—; PEP 8 mide sangria, lineas en blanco, orden de
+imports, CapWords —habla de **forma superficial**—. Mismo lenguaje, mismo
+artefacto, misma clase de prescripcion, y los instrumentos no se tocan.
+
+Asi que la conclusion se afina una vez mas: lo que no transfiere no es el idioma
+ni el artefacto, es **la propiedad que se mide**. Compartir artefacto no es
+compartir medicion, y es la razon por la que diez familias de instrumentos no
+son diez formas de hacer lo mismo.
+
+La unica coincidencia real es instructiva por si sola: G24 de Codigo Limpio se
+llama "seguir las convenciones estandar" y su instrumento ya media largo de
+linea, tabuladores y espacios al final. **G24 ya era un pedazo de PEP 8 sin
+decirlo**: Martin nombra la convencion y delega en el equipo cual es; PEP 8 es
+esa convencion escrita.
 
 ### 4. Los principios de arquitectura son tan medibles como las heuristicas de codigo
 
@@ -270,13 +318,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **211 de las 431**, y el reparto no es casual:
+Lo tienen **243 de las 473**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **114 de 114** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 94 de 171 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 146 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **143 de 143** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 97 de 175 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 155 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -299,14 +347,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 431 tecnicas, 67 instrumentos
+python memoria.py exportar          # -> memoria.json: 473 tecnicas, 67 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **407 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **433 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
@@ -332,7 +380,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 497 entradas -> 431 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 539 entradas -> 473 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -347,8 +395,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 431 + 66 | **431 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 431 + 66 | 497 tecnicas | 0 |
+| ids estables (`g36`) | 473 + 66 | **473 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 473 + 66 | 539 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -609,15 +657,15 @@ ya no hace falta.
 
 | Que | n | Por que |
 |---|---|---|
+| PEP 8 sin instrumento | 27 | la fuente entro recien y solo dos de sus 29 medibles reusan una regla existente. Es lo unico de esta lista que se arregla trabajando |
 | tecnicas `proxy` | 17 | leen un tablero o un calendario, artefactos que este repositorio no tiene |
 | `git_checks` sin ejercicio | 5 reglas | el arreglo es integrar una rama, marcar una entrega o poner el proyecto bajo control de versiones: `touch_only` cubre archivos, no commits |
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna es un instrumento que falte ni un ejercicio pendiente.** Las seis
-medibles de htmx, las diez de los doce factores y las doce de WCAG tienen
-instrumento, y toda regla que admite la forma de ejercicio lo tiene. Las tres
-filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
+**Solo la primera es un instrumento que falte.** Las seis medibles de htmx, las
+diez de los doce factores y las doce de WCAG tienen instrumento, y toda regla que
+admite la forma de ejercicio lo tiene. Las otras filas son limites: un artefacto que este repositorio no tiene, una forma de contrato
 que no aplica, una prohibicion del proyecto y un consejo que en Python no se
 puede seguir sin tergiversar al autor. Las otras tres filas son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del

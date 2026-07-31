@@ -1,0 +1,908 @@
+{
+  "source": {
+    "slug": "pep8",
+    "title": "PEP 8 - Style Guide for Python Code",
+    "author": "Guido van Rossum, Barry Warsaw y Alyssa Coghlan",
+    "file": "peps.python.org/pep-0008",
+    "pages": 0,
+    "extracted_with": "titulos del documento, verificados contra la fuente",
+    "tags": [
+      "fuente",
+      "guia-de-estilo",
+      "python"
+    ],
+    "corpus": "Los 42 titulos de seccion del documento, con su nivel de anidacion. EL CORPUS SUBESTIMA A ESTA FUENTE, al reves que en las otras seis: \"Programming Recommendations\" es un solo titulo que adentro trae quince reglas concretas y medibles, y cuenta como un nodo. Con un corpus por regla en vez de por titulo, el porcentaje seria mas alto."
+  },
+  "nodes": [
+    {
+      "id": "s01",
+      "title": "Introduction",
+      "description": "Introduction (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "preambulo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #introduction",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s02",
+      "title": "A Foolish Consistency is the Hobgoblin of Little Minds",
+      "description": "A Foolish Consistency is the Hobgoblin of Little Minds (seccion: preambulo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "preambulo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "PEP 8, #a-foolish-consistency-is-the-hobgoblin-of-little-minds",
+      "alias": [
+        "consistencia insensata",
+        "foolish consistency"
+      ],
+      "links": [],
+      "why_not": "es la seccion que dice cuando NO seguir la guia: \"saber cuando ser inconsistente\". Es una instruccion sobre el juicio, y una regla que midiera el juicio se contradeciria a si misma"
+    },
+    {
+      "id": "s03",
+      "title": "Code Lay-out",
+      "description": "Code Lay-out (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #code-lay-out",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s04",
+      "title": "Indentation",
+      "description": "Indentation (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #indentation",
+      "alias": [
+        "sangria",
+        "indentation",
+        "cuatro espacios"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: sangria multiplo de cuatro espacios (sin implementar)",
+      "threshold": "cuatro espacios por nivel"
+    },
+    {
+      "id": "s05",
+      "title": "Tabs or Spaces?",
+      "description": "Tabs or Spaces? (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #tabs-or-spaces",
+      "alias": [
+        "tabuladores o espacios",
+        "tabs or spaces"
+      ],
+      "links": [
+        "codigo-limpio/g24"
+      ],
+      "instrument": "repo_checks.py --rule g24",
+      "threshold": "cero tabuladores de indentacion"
+    },
+    {
+      "id": "s06",
+      "title": "Maximum Line Length",
+      "description": "Maximum Line Length (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #maximum-line-length",
+      "alias": [
+        "largo de linea",
+        "maximum line length",
+        "79 caracteres"
+      ],
+      "links": [
+        "codigo-limpio/g24"
+      ],
+      "instrument": "repo_checks.py --rule g24 --max-line 79",
+      "threshold": "79 caracteres, 72 para comentarios y docstrings",
+      "body": "G24 de Codigo Limpio se llama \"seguir las convenciones estandar\", y su instrumento ya media largo de linea, tabuladores y espacios al final. O sea que G24 **ya era un pedazo de PEP 8 sin decirlo**: Martin nombra la convencion y delega en el equipo cual es; PEP 8 es esa convencion escrita. Es la unica regla que las dos fuentes comparten de verdad."
+    },
+    {
+      "id": "s07",
+      "title": "Should a Line Break Before or After a Binary Operator?",
+      "description": "Should a Line Break Before or After a Binary Operator? (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #should-a-line-break-before-or-after-a-binary-operator",
+      "alias": [
+        "corte antes del operador",
+        "line break binary operator"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: el corte de linea cae ANTES del operador binario (sin implementar)",
+      "threshold": "cero cortes despues del operador"
+    },
+    {
+      "id": "s08",
+      "title": "Blank Lines",
+      "description": "Blank Lines (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #blank-lines",
+      "alias": [
+        "lineas en blanco",
+        "blank lines"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: lineas en blanco entre definiciones (sin implementar)",
+      "threshold": "dos entre definiciones de nivel superior, una entre metodos"
+    },
+    {
+      "id": "s09",
+      "title": "Source File Encoding",
+      "description": "Source File Encoding (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #source-file-encoding",
+      "alias": [
+        "codificacion del archivo",
+        "source file encoding",
+        "utf-8"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: el archivo decodifica como UTF-8 y no repite la declaracion de codificacion (sin implementar)",
+      "threshold": "UTF-8 sin cookie redundante"
+    },
+    {
+      "id": "s10",
+      "title": "Imports",
+      "description": "Imports (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #imports",
+      "alias": [
+        "orden de imports",
+        "imports",
+        "import comodin"
+      ],
+      "links": [
+        "codigo-limpio/j1",
+        "codigo-limpio/g12"
+      ],
+      "instrument": "pep8_checks: un import por linea, agrupados por origen, sin comodines (sin implementar)",
+      "threshold": "cero imports con comodin y cero grupos fuera de orden",
+      "body": "Aca los dos autores se contradicen, y el grafo lo sostiene sin elegir. J1 de Codigo Limpio aconseja **usar imports con comodin** para evitar listas largas; PEP 8 los prohibe porque borran que nombres entran al espacio de nombres. J1 esta en el grafo sin instrumento por ese motivo: implementarla invirtiendo el consejo seria tergiversar al autor. Con esta fuente adentro, la contradiccion deja de ser una nota al pie y pasa a ser un enlace: dos nodos, dos autores, umbrales opuestos sobre el mismo artefacto."
+    },
+    {
+      "id": "s11",
+      "title": "Module Level Dunder Names",
+      "description": "Module Level Dunder Names (seccion: disposicion del codigo).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "disposicion-del-codigo",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #module-level-dunder-names",
+      "alias": [
+        "dunder de modulo",
+        "module level dunder names"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: los dunder de modulo van despues del docstring y antes de los imports (sin implementar)",
+      "threshold": "cero dunder fuera de lugar"
+    },
+    {
+      "id": "s12",
+      "title": "String Quotes",
+      "description": "String Quotes (seccion: espacios y comas).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "espacios-y-comas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #string-quotes",
+      "alias": [
+        "comillas",
+        "string quotes"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: cadenas que escapan una comilla pudiendo usar la otra (sin implementar)",
+      "threshold": "cero escapes evitables"
+    },
+    {
+      "id": "s13",
+      "title": "Whitespace in Expressions and Statements",
+      "description": "Whitespace in Expressions and Statements (seccion: espacios y comas).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "espacios-y-comas",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #whitespace-in-expressions-and-statements",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s14",
+      "title": "Pet Peeves",
+      "description": "Pet Peeves (seccion: espacios y comas).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "espacios-y-comas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #pet-peeves",
+      "alias": [
+        "espacios sobrantes",
+        "pet peeves",
+        "whitespace"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: espacios sobrantes dentro de parentesis y antes de coma o dos puntos (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "s15",
+      "title": "Other Recommendations",
+      "description": "Other Recommendations (seccion: espacios y comas).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "espacios-y-comas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #other-recommendations",
+      "alias": [
+        "espacios alrededor de operadores",
+        "other recommendations"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: un espacio a cada lado de los operadores, ninguno alrededor del `=` de un argumento con nombre (sin implementar)",
+      "threshold": "cero desviaciones"
+    },
+    {
+      "id": "s16",
+      "title": "When to Use Trailing Commas",
+      "description": "When to Use Trailing Commas (seccion: espacios y comas).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "espacios-y-comas",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #when-to-use-trailing-commas",
+      "alias": [
+        "coma final",
+        "trailing commas"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: coma final en los literales que cierran en su propia linea (sin implementar)",
+      "threshold": "cero literales multilinea sin coma final"
+    },
+    {
+      "id": "s17",
+      "title": "Comments",
+      "description": "Comments (seccion: comentarios).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "comentarios",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #comments",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s18",
+      "title": "Block Comments",
+      "description": "Block Comments (seccion: comentarios).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "comentarios",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #block-comments",
+      "alias": [
+        "comentarios de bloque",
+        "block comments"
+      ],
+      "links": [
+        "s19",
+        "s20"
+      ],
+      "instrument": "pep8_checks: los comentarios de bloque empiezan con `# ` y se sangran al nivel del codigo (sin implementar)",
+      "threshold": "cero comentarios mal formados"
+    },
+    {
+      "id": "s19",
+      "title": "Inline Comments",
+      "description": "Inline Comments (seccion: comentarios).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "comentarios",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #inline-comments",
+      "alias": [
+        "comentarios en linea",
+        "inline comments"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: dos espacios antes del `#` de un comentario en linea (sin implementar)",
+      "threshold": "cero comentarios en linea pegados al codigo"
+    },
+    {
+      "id": "s20",
+      "title": "Documentation Strings",
+      "description": "Documentation Strings (seccion: comentarios).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "comentarios",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #documentation-strings",
+      "alias": [
+        "docstrings",
+        "documentation strings"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: toda API publica tiene docstring y las multilinea cierran en su propia linea (sin implementar)",
+      "threshold": "cero publicas sin docstring"
+    },
+    {
+      "id": "s21",
+      "title": "Naming Conventions",
+      "description": "Naming Conventions (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #naming-conventions",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s22",
+      "title": "Overriding Principle",
+      "description": "Overriding Principle (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "PEP 8, #overriding-principle",
+      "alias": [
+        "principio superior de nombres",
+        "overriding principle"
+      ],
+      "links": [
+        "codigo-limpio/n1",
+        "codigo-limpio/n2"
+      ],
+      "why_not": "\"los nombres visibles como parte publica deben reflejar el uso y no la implementacion\" es exactamente el juicio que N1 y N2 de Codigo Limpio tampoco pueden medir"
+    },
+    {
+      "id": "s23",
+      "title": "Descriptive: Naming Styles",
+      "description": "Descriptive: Naming Styles (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #descriptive-naming-styles",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s24",
+      "title": "Prescriptive: Naming Conventions",
+      "description": "Prescriptive: Naming Conventions (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #prescriptive-naming-conventions",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s25",
+      "title": "Names to Avoid",
+      "description": "Names to Avoid (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #names-to-avoid",
+      "alias": [
+        "nombres a evitar",
+        "names to avoid"
+      ],
+      "links": [
+        "codigo-limpio/n6"
+      ],
+      "instrument": "pep8_checks: identificadores de un solo caracter `l`, `O` o `I` (sin implementar)",
+      "threshold": "cero",
+      "body": "N6 de Codigo Limpio (\"evitar codificaciones\") y esta son la misma familia de defecto —un nombre que no se puede leer— por dos motivos distintos: Martin habla de prefijos que codifican el tipo, PEP 8 de caracteres que se confunden con digitos en la pantalla. Las dos son medibles y necesitan instrumentos distintos."
+    },
+    {
+      "id": "s26",
+      "title": "ASCII Compatibility",
+      "description": "ASCII Compatibility (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #ascii-compatibility",
+      "alias": [
+        "compatibilidad ascii",
+        "ascii compatibility"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: identificadores fuera de ASCII (sin implementar)",
+      "threshold": "cero"
+    },
+    {
+      "id": "s27",
+      "title": "Package and Module Names",
+      "description": "Package and Module Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #package-and-module-names",
+      "alias": [
+        "nombres de modulo",
+        "package and module names"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: modulos en minusculas (sin implementar)",
+      "threshold": "cero nombres de modulo fuera de convencion"
+    },
+    {
+      "id": "s28",
+      "title": "Class Names",
+      "description": "Class Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #class-names",
+      "alias": [
+        "nombres de clase",
+        "class names",
+        "CapWords"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: clases en CapWords (sin implementar)",
+      "threshold": "cero clases fuera de convencion"
+    },
+    {
+      "id": "s29",
+      "title": "Type Variable Names",
+      "description": "Type Variable Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #type-variable-names",
+      "alias": [
+        "variables de tipo",
+        "type variable names"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: variables de tipo en CapWords, con sufijo de varianza cuando corresponde (sin implementar)",
+      "threshold": "cero variables de tipo fuera de convencion"
+    },
+    {
+      "id": "s30",
+      "title": "Exception Names",
+      "description": "Exception Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #exception-names",
+      "alias": [
+        "nombres de excepcion",
+        "exception names"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: las excepciones son clases en CapWords y terminan en \"Error\" (sin implementar)",
+      "threshold": "cero excepciones fuera de convencion"
+    },
+    {
+      "id": "s31",
+      "title": "Global Variable Names",
+      "description": "Global Variable Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #global-variable-names",
+      "alias": [
+        "nombres de globales",
+        "global variable names"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: globales en minusculas con guion bajo (sin implementar)",
+      "threshold": "cero globales fuera de convencion"
+    },
+    {
+      "id": "s32",
+      "title": "Function and Variable Names",
+      "description": "Function and Variable Names (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #function-and-variable-names",
+      "alias": [
+        "nombres de funcion",
+        "function and variable names",
+        "snake_case"
+      ],
+      "links": [
+        "codigo-limpio/n5"
+      ],
+      "instrument": "pep8_checks: funciones y variables en minusculas con guion bajo (sin implementar)",
+      "threshold": "cero nombres fuera de convencion"
+    },
+    {
+      "id": "s33",
+      "title": "Function and Method Arguments",
+      "description": "Function and Method Arguments (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #function-and-method-arguments",
+      "alias": [
+        "argumentos de metodo",
+        "self y cls"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: `self` en los metodos de instancia y `cls` en los de clase (sin implementar)",
+      "threshold": "cero primeros argumentos mal nombrados"
+    },
+    {
+      "id": "s34",
+      "title": "Method Names and Instance Variables",
+      "description": "Method Names and Instance Variables (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #method-names-and-instance-variables",
+      "alias": [
+        "nombres de metodo",
+        "method names and instance variables"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: metodos y atributos en minusculas, con un guion bajo inicial los no publicos (sin implementar)",
+      "threshold": "cero fuera de convencion"
+    },
+    {
+      "id": "s35",
+      "title": "Constants",
+      "description": "Constants (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #constants",
+      "alias": [
+        "constantes",
+        "constants"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: constantes de modulo en mayusculas (sin implementar)",
+      "threshold": "cero constantes fuera de convencion"
+    },
+    {
+      "id": "s36",
+      "title": "Designing for Inheritance",
+      "description": "Designing for Inheritance (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "PEP 8, #designing-for-inheritance",
+      "alias": [
+        "disenar para la herencia",
+        "designing for inheritance"
+      ],
+      "links": [],
+      "why_not": "decidir que atributos son publicos y cuales no es diseno, no forma. La convencion de nombres que se sigue DESPUES de decidirlo si se mide, y esa es la 34"
+    },
+    {
+      "id": "s37",
+      "title": "Public and Internal Interfaces",
+      "description": "Public and Internal Interfaces (seccion: nombres).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "nombres",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #public-and-internal-interfaces",
+      "alias": [
+        "superficie publica",
+        "public and internal interfaces",
+        "__all__"
+      ],
+      "links": [
+        "codigo-limpio/g8"
+      ],
+      "instrument": "pep8_checks: el modulo declara su superficie publica y prefija con guion bajo lo interno (sin implementar)",
+      "threshold": "toda API publica declarada",
+      "body": "G8 de Codigo Limpio mide el exceso de superficie publica y esta pide que la superficie **este declarada**. Son complementarias y las dos terminan mirando `__all__`, que es tambien lo que `check_g9` exige antes de hablar de codigo muerto: sin saber que es publico, no se puede decir que sobra."
+    },
+    {
+      "id": "s38",
+      "title": "Programming Recommendations",
+      "description": "Programming Recommendations (seccion: recomendaciones).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "recomendaciones",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "PEP 8, #programming-recommendations",
+      "alias": [],
+      "links": [],
+      "why_not": "es un titulo cajon: adentro trae quince reglas concretas y medibles —comparar con `is None`, no usar `except` pelado, `isinstance` en vez de comparar tipos— y ninguna es \"la seccion\". Medirla como un solo nodo no significa nada, y es el lugar donde el corpus por titulo subestima a esta fuente"
+    },
+    {
+      "id": "s39",
+      "title": "Function Annotations",
+      "description": "Function Annotations (seccion: recomendaciones).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "recomendaciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #function-annotations",
+      "alias": [
+        "anotaciones de funcion",
+        "function annotations"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: espacios alrededor de `->` y en los dos puntos de anotacion (sin implementar)",
+      "threshold": "cero anotaciones mal espaciadas"
+    },
+    {
+      "id": "s40",
+      "title": "Variable Annotations",
+      "description": "Variable Annotations (seccion: recomendaciones).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "recomendaciones",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "PEP 8, #variable-annotations",
+      "alias": [
+        "anotaciones de variable",
+        "variable annotations"
+      ],
+      "links": [],
+      "instrument": "pep8_checks: espacios en la anotacion de una asignacion (sin implementar)",
+      "threshold": "cero anotaciones mal espaciadas"
+    },
+    {
+      "id": "s41",
+      "title": "References",
+      "description": "References (seccion: cierre).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "cierre",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #references",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "s42",
+      "title": "Copyright",
+      "description": "Copyright (seccion: cierre).",
+      "type": "Concept",
+      "tags": [
+        "pep8",
+        "cierre",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "PEP 8, #copyright",
+      "alias": [],
+      "links": []
+    }
+  ]
+}
