@@ -289,15 +289,16 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-39 reglas en cinco familias. Que varias tecnicas compartan una no es un atajo: es
+42 reglas en seis familias. Que varias tecnicas compartan una no es un atajo: es
 que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
 |---|---|---|---|
-| `checks.py` | 22 | el AST de un archivo | duplicacion, numeros magicos, ley de Demeter |
+| `checks.py` | 22 | el AST de un archivo Python | duplicacion, numeros magicos, ley de Demeter |
 | `repo_checks.py` | 7 | el proyecto entero | un comando para probar, cobertura, tiempo de suite |
 | `arch_checks.py` | 6 | relaciones entre modulos | capas, instanciacion, ISP |
 | `git_checks.py` | 3 | el historial | cadencia de entregas, ramas sin integrar |
+| `html_checks.py` | 3 | el DOM | mejora progresiva, token CSRF, indicador de request |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -310,6 +311,14 @@ Tres decisiones que conviene tener a la vista:
   contenido escrito por personas. Sobre `tddorden` conviene ser preciso: el
   historial conserva el **orden**, no el haber visto el test en rojo, y el
   instrumento no pretende que sea lo mismo.
+- **`html_checks` existe porque el metodo transferia y los instrumentos no.**
+  Al triajar la documentacion de htmx (56 titulos, 10,7% medible) las seis
+  tecnicas medibles resultaron leer HTML, HTTP o plantillas, y **ninguna de las
+  39 reglas que habia servia**: todas parsean AST de Python o corren comandos.
+  El criterio de pila, la regla por seccion y la forma del contrato funcionaron
+  igual; lo que no transfiere es la capa de medicion, que esta atada al lenguaje
+  del artefacto. `html.parser` no devuelve un arbol, asi que se construye uno:
+  las tres reglas preguntan por ancestros y sin arbol ninguna se puede escribir.
 - **`mutation_checks` escribe sobre el archivo que mide**, asi que tiene dos
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
@@ -351,11 +360,11 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Ocho suites de prueba, y cada una existe por un error concreto que ya paso.
+Nueve suites de prueba, y cada una existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 38 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
@@ -377,6 +386,12 @@ Los errores que las hicieron nacer:
 - **Los dos emisores tenian el mismo bug de indice**: un bloque compartido, asi
   que emitir un segundo libro dejaba huerfanos los nodos del primero. Comprobado
   antes de arreglarlo: 67 ORPHAN.
+- **Un test que decia cubrir los elementos vacios de HTML no tenia dientes.**
+  Miraba si un `<button>` conservaba su ancestro, y como `handle_endtag`
+  recupera subiendo hasta el tag que cierra, sacar el manejo de void elements
+  cambia la forma del arbol pero no la alcanzabilidad de los ancestros. Ahora
+  comprueba lo que la guarda de verdad garantiza: que un `<img>` no se quede con
+  sus hermanos como hijos.
 - **Los ids de nodo dependian del idioma del libro**, y eso hacia la memoria no
   fusionable. Es el defecto que menos se veia de todos: cada grafo validaba
   perfecto por separado, y el problema solo aparecia al intentar juntar dos.
