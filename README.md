@@ -50,6 +50,14 @@ implicita no.
 Ademas: 17 tecnicas `proxy`, 97 en pila B (tecnica real sin propiedad medible)
 y 128 en pila C (conocimiento). 23 enlaces cruzan de una fuente a otra.
 
+Hay 102 tecnicas en pila A y 52 ejercicios, y la diferencia no es un pendiente:
+**la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
+mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
+las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
+cuyo instrumento admite la forma de ejercicio lo tiene**, y eso no se afirma de
+memoria: `test_cobertura` compara el conjunto exacto y falla tanto si falta un
+ejercicio como si sobra una excepcion declarada.
+
 **La fraccion que decide el ruteo es `instrumented`, no la contractable.** La
 diferencia es si el instrumento lee el artefacto del que trata la tecnica
 —codigo, build, historial— o un registro que llena una persona —un tablero, un
@@ -153,6 +161,16 @@ cubiertas.
 Era parcialmente visible con J1 y J2, que quedaron afuera por ser de Java. Aca
 el efecto fue total, porque cambio el artefacto entero.
 
+La quinta fuente lo confirmo desde otro angulo y sumo una cuarta familia. Los
+doce factores tambien hablan de proyectos en Python, asi que el lenguaje no era
+el problema: **cambio el artefacto**. Sus reglas no leen el AST de un archivo ni
+ejecutan el proyecto, leen su forma —el manifiesto, el punto de entrada, los
+archivos de despliegue— y por eso **ninguna de las 45 reglas que ya habia
+servia tampoco**: hubo que escribir ocho en una familia nueva, `entorno_checks`,
+y dos mas en `git_checks`, que tenia el artefacto correcto pero no las
+propiedades. La conclusion se afina: lo que no transfiere no es la capa de
+medicion **por idioma** sino **por artefacto**.
+
 ### 4. Los principios de arquitectura son tan medibles como las heuristicas de codigo
 
 Prediccion razonable para Arquitectura Java: mismo artefacto que Codigo Limpio
@@ -227,14 +245,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 327 tecnicas, 46 instrumentos
+python memoria.py exportar          # -> memoria.json: 327 tecnicas, 48 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **305 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **329 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
@@ -297,6 +315,7 @@ Que hace la fusion con cada campo:
 
 ```bash
 python build_codigo_limpio.py <texto-extraido.txt>       # -> books/codigo-limpio.json
+python build_doce_factores.py                           # el volcado de titulos ya esta versionado
 python okf_emit.py books/codigo-limpio.json --out out/knowledge
 python contract_emit.py exercises --out out --book codigo-limpio
 
@@ -306,7 +325,8 @@ python <KDD>/scripts/validate_test_commands.py out/knowledge/contracts out
 ```
 
 `out/` no se versiona: se regenera entero desde `books/` y `exercises/`, sin
-necesidad del PDF.
+necesidad del PDF. Tres de las cinco fuentes ni siquiera lo necesitan para
+reconstruirse: su volcado de titulos esta versionado.
 
 ## Piezas
 
@@ -435,7 +455,7 @@ formas, y solo una deja el oraculo en rojo:
 
 | Forma | Target | Oraculo sobre el seed |
 |---|---|---|
-| refactor | una funcion o una pagina | verde: no cambia el comportamiento |
+| refactor | una funcion, una pagina, una plantilla, un archivo de despliegue | verde: no cambia el comportamiento |
 | cambio de interfaz | una firma | **rojo**: la tecnica cambia la firma |
 | nivel repo | el punto de entrada del proyecto | verde: la funcionalidad esta intacta |
 | multi-modulo | el archivo que cruza una capa | verde: la estructura no cambia el resultado |
