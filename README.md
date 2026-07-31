@@ -616,6 +616,21 @@ Tres decisiones que conviene tener a la vista:
   obligaciones extra con test propio: restaurarlo siempre, y salir con exit 2 si
   la suite ya venia en rojo — con la suite rota no se puede saber si mata
   mutantes o si falla sola.
+- **`prosa_checks` es la primera familia que lee prosa en vez de codigo**, y la
+  mas grande: 42 reglas, mas que las 27 de `pep8_checks`. Existe porque la
+  octava fuente demostro que la naturaleza de la propiedad no depende del
+  artefacto — lo lexico y lo tipografico se miden sobre un `.md` igual que
+  sobre un `.py`, y lo semantico no se mide en ninguno de los dos. Seis reglas
+  —terminos desaconsejados, nombres de producto, lenguaje inclusivo, jerga,
+  posesivo sobre un producto, tipos de aviso— necesitan que el proyecto declare
+  su vocabulario, la misma forma que `arch_checks` con las capas: la guia da el
+  mecanismo, la lista es del proyecto.
+  Blanquea bloques de codigo e inline code antes de medir, por el mismo motivo
+  que `html_checks` blanquea `<script>`: un "e.g." dentro de un ejemplo de
+  codigo no es una violacion de prosa, y un regex sin ese blanqueo no lo sabe.
+  Saboteados los 42 mecanismos, los 42 tienen dientes. Corrida contra el propio
+  repositorio via `pep8_checks`, la unica marca real fueron seis identificadores
+  `l` en comprensiones — renombrados.
 
 ## Los ejercicios
 
@@ -783,7 +798,7 @@ Catorce suites, 209 pruebas, y cada suite existe por un error concreto que ya pa
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 88 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |

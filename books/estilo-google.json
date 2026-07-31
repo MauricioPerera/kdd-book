@@ -130,7 +130,7 @@
         "terminologia"
       ],
       "links": [],
-      "instrument": "prosa_checks: terminos fuera de la lista de palabras declarada (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule lista-palabras",
       "threshold": "cero terminos desaconsejados"
     },
     {
@@ -152,7 +152,7 @@
         "product names"
       ],
       "links": [],
-      "instrument": "prosa_checks: nombres de producto escritos como los declara el proyecto (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule nombres-producto",
       "threshold": "cero nombres de producto mal escritos"
     },
     {
@@ -228,7 +228,7 @@
         "just"
       ],
       "links": [],
-      "instrument": "prosa_checks: adjetivos que minimizan el esfuerzo (\"simply\", \"just\", \"easy\") (sin implementar)",
+      "instrument": "prosa_checks.py --rule minimizadores",
       "threshold": "cero"
     },
     {
@@ -283,7 +283,7 @@
         "inclusive language"
       ],
       "links": [],
-      "instrument": "prosa_checks: terminos no inclusivos de la lista declarada (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule inclusivo",
       "threshold": "cero"
     },
     {
@@ -305,7 +305,7 @@
         "jargon"
       ],
       "links": [],
-      "instrument": "prosa_checks: jerga de la lista declarada (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule jerga",
       "threshold": "cero"
     },
     {
@@ -359,7 +359,7 @@
         "timeless documentation"
       ],
       "links": [],
-      "instrument": "prosa_checks: marcas de tiempo relativas (\"currently\", \"new\", \"soon\") (sin implementar)",
+      "instrument": "prosa_checks.py --rule tiempo-relativo",
       "threshold": "cero"
     },
     {
@@ -413,7 +413,7 @@
         "abbreviations"
       ],
       "links": [],
-      "instrument": "prosa_checks: abreviaturas latinas (\"e.g.\", \"i.e.\", \"etc.\") (sin implementar)",
+      "instrument": "prosa_checks.py --rule abreviaturas-latinas",
       "threshold": "cero"
     },
     {
@@ -492,7 +492,7 @@
       "links": [
         "e52"
       ],
-      "instrument": "prosa_checks: encabezados y titulos en minuscula de oracion (sin implementar)",
+      "instrument": "prosa_checks.py --rule encabezados-caja",
       "threshold": "cero encabezados fuera de convencion"
     },
     {
@@ -531,7 +531,7 @@
         "pluralization"
       ],
       "links": [],
-      "instrument": "prosa_checks: plurales escritos \"(s)\" (sin implementar)",
+      "instrument": "prosa_checks.py --rule plural-parentesis",
       "threshold": "cero"
     },
     {
@@ -553,7 +553,7 @@
         "possessives"
       ],
       "links": [],
-      "instrument": "prosa_checks: posesivo sobre un nombre de producto (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule posesivo-producto",
       "threshold": "cero"
     },
     {
@@ -592,7 +592,7 @@
         "present tense"
       ],
       "links": [],
-      "instrument": "prosa_checks: tiempo futuro (\"will\") fuera de las excepciones (sin implementar)",
+      "instrument": "prosa_checks.py --rule tiempo-futuro",
       "threshold": "cero"
     },
     {
@@ -614,7 +614,7 @@
         "pronouns"
       ],
       "links": [],
-      "instrument": "prosa_checks: pronombres de genero (\"he\", \"she\", \"his\", \"her\") (sin implementar)",
+      "instrument": "prosa_checks.py --rule pronombres-genero",
       "threshold": "cero"
     },
     {
@@ -636,7 +636,7 @@
         "second person"
       ],
       "links": [],
-      "instrument": "prosa_checks: primera persona (\"we\", \"our\", \"us\") en instrucciones (sin implementar)",
+      "instrument": "prosa_checks.py --rule primera-persona",
       "threshold": "cero"
     },
     {
@@ -708,7 +708,7 @@
         "colons"
       ],
       "links": [],
-      "instrument": "prosa_checks: mayuscula despues de dos puntos solo si sigue una oracion completa (sin implementar)",
+      "instrument": "prosa_checks.py --rule mayuscula-dos-puntos",
       "threshold": "cero desviaciones"
     },
     {
@@ -731,7 +731,7 @@
         "oxford comma"
       ],
       "links": [],
-      "instrument": "prosa_checks: coma serial en toda enumeracion de tres o mas (sin implementar)",
+      "instrument": "prosa_checks.py --rule coma-serial",
       "threshold": "cero enumeraciones sin coma serial"
     },
     {
@@ -755,7 +755,7 @@
         "em dash"
       ],
       "links": [],
-      "instrument": "prosa_checks: raya larga sin espacios alrededor (sin implementar)",
+      "instrument": "prosa_checks.py --rule raya",
       "threshold": "cero rayas mal espaciadas"
     },
     {
@@ -777,7 +777,7 @@
         "ellipses"
       ],
       "links": [],
-      "instrument": "prosa_checks: puntos suspensivos escritos con tres puntos sueltos (sin implementar)",
+      "instrument": "prosa_checks.py --rule puntos-suspensivos",
       "threshold": "cero"
     },
     {
@@ -816,7 +816,7 @@
         "parentheses"
       ],
       "links": [],
-      "instrument": "prosa_checks: parentesis anidados (sin implementar)",
+      "instrument": "prosa_checks.py --rule parentesis-anidados",
       "threshold": "cero"
     },
     {
@@ -839,7 +839,7 @@
         "end punctuation"
       ],
       "links": [],
-      "instrument": "prosa_checks: un espacio despues del punto y cero puntos al final de un encabezado (sin implementar)",
+      "instrument": "prosa_checks.py --rule punto-final",
       "threshold": "cero desviaciones"
     },
     {
@@ -861,7 +861,7 @@
         "quotation marks"
       ],
       "links": [],
-      "instrument": "prosa_checks: coma y punto adentro de las comillas (sin implementar)",
+      "instrument": "prosa_checks.py --rule comillas-puntuacion",
       "threshold": "cero desviaciones"
     },
     {
@@ -901,7 +901,7 @@
         "slashes"
       ],
       "links": [],
-      "instrument": "prosa_checks: \"and/or\" y la barra usada como \"o\" (sin implementar)",
+      "instrument": "prosa_checks.py --rule and-or",
       "threshold": "cero"
     },
     {
@@ -939,7 +939,7 @@
         "dates and times"
       ],
       "links": [],
-      "instrument": "prosa_checks: fechas en el formato declarado y sin ordinales (sin implementar)",
+      "instrument": "prosa_checks.py --rule fechas",
       "threshold": "cero fechas fuera de formato"
     },
     {
@@ -981,7 +981,7 @@
       "links": [
         "wcag/sc1-1-1"
       ],
-      "instrument": "prosa_checks: toda imagen tiene texto alternativo (sin implementar)",
+      "instrument": "prosa_checks.py --rule alt-texto",
       "threshold": "cero imagenes sin alt",
       "body": "El mismo `alt` en dos fuentes y en dos pilas. WCAG 1.1.1 pide una alternativa textual que cumpla **el proposito equivalente**, y la equivalencia no la decide ninguna medicion: por eso esta en pila B. Google pide que la imagen **tenga** texto alternativo, que es presencia y se cuenta. No es que una guia sea mejor: la que nombra el mecanismo se puede instrumentar, y la que nombra la cualidad no. Es el mismo par que htmx/20 con el criterio de teclado."
     },
@@ -1004,7 +1004,7 @@
         "footnotes"
       ],
       "links": [],
-      "instrument": "prosa_checks: notas al pie (sin implementar)",
+      "instrument": "prosa_checks.py --rule notas-pie",
       "threshold": "cero"
     },
     {
@@ -1026,7 +1026,7 @@
         "headings and titles"
       ],
       "links": [],
-      "instrument": "prosa_checks: encabezados unicos, en minuscula de oracion y sin punto final (sin implementar)",
+      "instrument": "prosa_checks.py --rule encabezados-unicos",
       "threshold": "cero encabezados fuera de convencion"
     },
     {
@@ -1065,7 +1065,7 @@
         "lists"
       ],
       "links": [],
-      "instrument": "prosa_checks: items de lista con mayuscula inicial y puntuacion coherente (sin implementar)",
+      "instrument": "prosa_checks.py --rule items-lista",
       "threshold": "cero listas incoherentes"
     },
     {
@@ -1087,7 +1087,7 @@
         "mathematical notation"
       ],
       "links": [],
-      "instrument": "prosa_checks: notacion matematica en el formato declarado (sin implementar)",
+      "instrument": "prosa_checks.py --rule notacion-matematica",
       "threshold": "cero expresiones fuera de formato"
     },
     {
@@ -1110,7 +1110,7 @@
         "callouts"
       ],
       "links": [],
-      "instrument": "prosa_checks: los avisos usan uno de los tipos declarados (sin implementar, lista declarada)",
+      "instrument": "prosa_checks.py --rule avisos-tipo",
       "threshold": "cero avisos de tipo inventado"
     },
     {
@@ -1132,7 +1132,7 @@
         "numbers"
       ],
       "links": [],
-      "instrument": "prosa_checks: numeros menores a diez escritos con letra fuera de medidas (sin implementar)",
+      "instrument": "prosa_checks.py --rule numeros-chicos",
       "threshold": "cero numeros fuera de convencion"
     },
     {
@@ -1171,7 +1171,7 @@
         "phone numbers"
       ],
       "links": [],
-      "instrument": "prosa_checks: telefonos de ejemplo del rango reservado (sin implementar)",
+      "instrument": "prosa_checks.py --rule telefonos",
       "threshold": "cero telefonos reales"
     },
     {
@@ -1194,7 +1194,7 @@
         "pasos numerados"
       ],
       "links": [],
-      "instrument": "prosa_checks: los procedimientos son listas numeradas y cada paso empieza con un verbo (sin implementar)",
+      "instrument": "prosa_checks.py --rule procedimientos",
       "threshold": "cero pasos que no empiecen con verbo"
     },
     {
@@ -1216,7 +1216,7 @@
         "tables"
       ],
       "links": [],
-      "instrument": "prosa_checks: toda tabla tiene fila de encabezado (sin implementar)",
+      "instrument": "prosa_checks.py --rule tablas-encabezado",
       "threshold": "cero tablas sin encabezado"
     },
     {
@@ -1238,7 +1238,7 @@
         "units of measurement"
       ],
       "links": [],
-      "instrument": "prosa_checks: espacio entre el numero y la unidad (sin implementar)",
+      "instrument": "prosa_checks.py --rule unidades",
       "threshold": "cero unidades pegadas"
     },
     {
@@ -1277,7 +1277,7 @@
         "click here"
       ],
       "links": [],
-      "instrument": "prosa_checks: texto de enlace descriptivo, cero \"click here\" y cero URL desnudas (sin implementar)",
+      "instrument": "prosa_checks.py --rule texto-enlace",
       "threshold": "cero enlaces sin texto util"
     },
     {
@@ -1299,7 +1299,7 @@
         "headings as link targets"
       ],
       "links": [],
-      "instrument": "prosa_checks: todo enlace interno apunta a un encabezado que existe (sin implementar)",
+      "instrument": "prosa_checks.py --rule anclas",
       "threshold": "cero anclas rotas"
     },
     {
@@ -1373,7 +1373,7 @@
       "links": [
         "pep8/s06"
       ],
-      "instrument": "prosa_checks: largo de linea de los bloques de codigo y cero elisiones con puntos suspensivos (sin implementar)",
+      "instrument": "prosa_checks.py --rule bloques-codigo",
       "threshold": "cero lineas de codigo fuera de largo",
       "body": "El largo de linea de un bloque de codigo dentro de la documentacion es el mismo umbral que PEP 8 pone sobre el archivo, y lo mide el mismo tipo de instrumento. Cambia el envase, no la medicion — que es la excepcion que confirma el hallazgo 3: aca la propiedad SI es la misma."
     },
@@ -1396,7 +1396,7 @@
         "command-line syntax"
       ],
       "links": [],
-      "instrument": "prosa_checks: la sintaxis de linea de comandos usa la convencion declarada para opcional y repetible (sin implementar)",
+      "instrument": "prosa_checks.py --rule sintaxis-cli",
       "threshold": "cero desviaciones"
     },
     {
@@ -1418,7 +1418,7 @@
         "placeholder formatting"
       ],
       "links": [],
-      "instrument": "prosa_checks: los marcadores de posicion usan el formato declarado (sin implementar)",
+      "instrument": "prosa_checks.py --rule marcadores",
       "threshold": "cero marcadores fuera de formato"
     },
     {
@@ -1441,7 +1441,7 @@
         "click on"
       ],
       "links": [],
-      "instrument": "prosa_checks: verbos de interaccion prohibidos (\"click on\", \"hit\", \"press\") (sin implementar)",
+      "instrument": "prosa_checks.py --rule verbos-interaccion",
       "threshold": "cero"
     },
     {
@@ -1515,7 +1515,7 @@
         "markdown versus html"
       ],
       "links": [],
-      "instrument": "prosa_checks: HTML crudo dentro de un documento Markdown (sin implementar)",
+      "instrument": "prosa_checks.py --rule html-en-markdown",
       "threshold": "cero"
     },
     {
@@ -1553,7 +1553,7 @@
         "example domains"
       ],
       "links": [],
-      "instrument": "prosa_checks: dominios y nombres de ejemplo del rango reservado (sin implementar)",
+      "instrument": "prosa_checks.py --rule dominios",
       "threshold": "cero ejemplos con dominios reales"
     },
     {
@@ -1577,7 +1577,7 @@
       "links": [
         "pep8/s27"
       ],
-      "instrument": "prosa_checks: nombres de archivo en minusculas y con guiones (sin implementar)",
+      "instrument": "prosa_checks.py --rule nombres-archivo",
       "threshold": "cero nombres fuera de convencion",
       "body": "Minusculas y guiones para nombrar un archivo, dicho por dos autores sobre dos clases de archivo. Las dos son medibles por el mismo motivo: el nombre esta a la vista y la convencion es cerrada."
     },

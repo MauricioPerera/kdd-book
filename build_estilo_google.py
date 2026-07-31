@@ -62,128 +62,96 @@ SECCIONES = [
 
 # Pila A: (instrumento, umbral). 42 de 80.
 #
-# Todas leen el mismo artefacto —el texto del documento— y ninguna esta escrita
-# todavia: se nombra el instrumento que haria falta, como con htmx antes de
-# `template_checks`. Las que dicen "(lista declarada)" necesitan que el proyecto
-# declare su vocabulario, igual que `arch_checks` pide las capas: la guia trae
-# la suya, pero cada proyecto tiene la propia.
+# Las 42 viven en `prosa_checks`, familia nueva y primera del repositorio que
+# lee prosa en vez de codigo. Seis necesitan que el proyecto declare su
+# vocabulario —terminos, nombres de producto, lenguaje inclusivo, jerga, tipos
+# de aviso— igual que `arch_checks` pide las capas: la guia da el mecanismo,
+# el vocabulario es del proyecto.
 A_NODES = {
-    7: ('prosa_checks: terminos fuera de la lista de palabras declarada '
-        '(sin implementar, lista declarada)',
+    7: ('prosa_checks.py --rule lista-palabras',
         'cero terminos desaconsejados'),
-    8: ('prosa_checks: nombres de producto escritos como los declara el proyecto '
-        '(sin implementar, lista declarada)',
+    8: ('prosa_checks.py --rule nombres-producto',
         'cero nombres de producto mal escritos'),
-    12: ('prosa_checks: adjetivos que minimizan el esfuerzo ("simply", "just", '
-         '"easy") (sin implementar)',
-         'cero'),
-    15: ('prosa_checks: terminos no inclusivos de la lista declarada '
-         '(sin implementar, lista declarada)',
-         'cero'),
-    16: ('prosa_checks: jerga de la lista declarada (sin implementar, lista declarada)',
-         'cero'),
-    19: ('prosa_checks: marcas de tiempo relativas ("currently", "new", "soon") '
-         '(sin implementar)',
-         'cero'),
-    22: ('prosa_checks: abreviaturas latinas ("e.g.", "i.e.", "etc.") '
-         '(sin implementar)',
-         'cero'),
-    26: ('prosa_checks: encabezados y titulos en minuscula de oracion '
-         '(sin implementar)',
-         'cero encabezados fuera de convencion'),
-    28: ('prosa_checks: plurales escritos "(s)" (sin implementar)',
-         'cero'),
-    29: ('prosa_checks: posesivo sobre un nombre de producto '
-         '(sin implementar, lista declarada)',
-         'cero'),
-    31: ('prosa_checks: tiempo futuro ("will") fuera de las excepciones '
-         '(sin implementar)',
-         'cero'),
-    32: ('prosa_checks: pronombres de genero ("he", "she", "his", "her") '
-         '(sin implementar)',
-         'cero'),
-    33: ('prosa_checks: primera persona ("we", "our", "us") en instrucciones '
-         '(sin implementar)',
-         'cero'),
-    37: ('prosa_checks: mayuscula despues de dos puntos solo si sigue una oracion '
-         'completa (sin implementar)',
-         'cero desviaciones'),
-    38: ('prosa_checks: coma serial en toda enumeracion de tres o mas '
-         '(sin implementar)',
-         'cero enumeraciones sin coma serial'),
-    39: ('prosa_checks: raya larga sin espacios alrededor (sin implementar)',
-         'cero rayas mal espaciadas'),
-    40: ('prosa_checks: puntos suspensivos escritos con tres puntos sueltos '
-         '(sin implementar)',
-         'cero'),
-    42: ('prosa_checks: parentesis anidados (sin implementar)',
-         'cero'),
-    43: ('prosa_checks: un espacio despues del punto y cero puntos al final de un '
-         'encabezado (sin implementar)',
-         'cero desviaciones'),
-    44: ('prosa_checks: coma y punto adentro de las comillas (sin implementar)',
-         'cero desviaciones'),
-    46: ('prosa_checks: "and/or" y la barra usada como "o" (sin implementar)',
-         'cero'),
-    48: ('prosa_checks: fechas en el formato declarado y sin ordinales '
-         '(sin implementar)',
-         'cero fechas fuera de formato'),
-    50: ('prosa_checks: toda imagen tiene texto alternativo (sin implementar)',
-         'cero imagenes sin alt'),
-    51: ('prosa_checks: notas al pie (sin implementar)',
-         'cero'),
-    52: ('prosa_checks: encabezados unicos, en minuscula de oracion y sin punto '
-         'final (sin implementar)',
-         'cero encabezados fuera de convencion'),
-    54: ('prosa_checks: items de lista con mayuscula inicial y puntuacion '
-         'coherente (sin implementar)',
-         'cero listas incoherentes'),
-    55: ('prosa_checks: notacion matematica en el formato declarado '
-         '(sin implementar)',
-         'cero expresiones fuera de formato'),
-    56: ('prosa_checks: los avisos usan uno de los tipos declarados '
-         '(sin implementar, lista declarada)',
-         'cero avisos de tipo inventado'),
-    57: ('prosa_checks: numeros menores a diez escritos con letra fuera de '
-         'medidas (sin implementar)',
-         'cero numeros fuera de convencion'),
-    59: ('prosa_checks: telefonos de ejemplo del rango reservado '
-         '(sin implementar)',
-         'cero telefonos reales'),
-    60: ('prosa_checks: los procedimientos son listas numeradas y cada paso '
-         'empieza con un verbo (sin implementar)',
-         'cero pasos que no empiecen con verbo'),
-    61: ('prosa_checks: toda tabla tiene fila de encabezado (sin implementar)',
-         'cero tablas sin encabezado'),
-    62: ('prosa_checks: espacio entre el numero y la unidad (sin implementar)',
-         'cero unidades pegadas'),
-    64: ('prosa_checks: texto de enlace descriptivo, cero "click here" y cero URL '
-         'desnudas (sin implementar)',
-         'cero enlaces sin texto util'),
-    65: ('prosa_checks: todo enlace interno apunta a un encabezado que existe '
-         '(sin implementar)',
-         'cero anclas rotas'),
-    69: ('prosa_checks: largo de linea de los bloques de codigo y cero elisiones '
-         'con puntos suspensivos (sin implementar)',
-         'cero lineas de codigo fuera de largo'),
-    70: ('prosa_checks: la sintaxis de linea de comandos usa la convencion '
-         'declarada para opcional y repetible (sin implementar)',
-         'cero desviaciones'),
-    71: ('prosa_checks: los marcadores de posicion usan el formato declarado '
-         '(sin implementar)',
-         'cero marcadores fuera de formato'),
-    72: ('prosa_checks: verbos de interaccion prohibidos ("click on", "hit", '
-         '"press") (sin implementar)',
-         'cero'),
-    76: ('prosa_checks: HTML crudo dentro de un documento Markdown '
-         '(sin implementar)',
-         'cero'),
-    78: ('prosa_checks: dominios y nombres de ejemplo del rango reservado '
-         '(sin implementar)',
-         'cero ejemplos con dominios reales'),
-    79: ('prosa_checks: nombres de archivo en minusculas y con guiones '
-         '(sin implementar)',
-         'cero nombres fuera de convencion'),
+    12: ('prosa_checks.py --rule minimizadores',
+        'cero'),
+    15: ('prosa_checks.py --rule inclusivo',
+        'cero'),
+    16: ('prosa_checks.py --rule jerga',
+        'cero'),
+    19: ('prosa_checks.py --rule tiempo-relativo',
+        'cero'),
+    22: ('prosa_checks.py --rule abreviaturas-latinas',
+        'cero'),
+    26: ('prosa_checks.py --rule encabezados-caja',
+        'cero encabezados fuera de convencion'),
+    28: ('prosa_checks.py --rule plural-parentesis',
+        'cero'),
+    29: ('prosa_checks.py --rule posesivo-producto',
+        'cero'),
+    31: ('prosa_checks.py --rule tiempo-futuro',
+        'cero'),
+    32: ('prosa_checks.py --rule pronombres-genero',
+        'cero'),
+    33: ('prosa_checks.py --rule primera-persona',
+        'cero'),
+    37: ('prosa_checks.py --rule mayuscula-dos-puntos',
+        'cero desviaciones'),
+    38: ('prosa_checks.py --rule coma-serial',
+        'cero enumeraciones sin coma serial'),
+    39: ('prosa_checks.py --rule raya',
+        'cero rayas mal espaciadas'),
+    40: ('prosa_checks.py --rule puntos-suspensivos',
+        'cero'),
+    42: ('prosa_checks.py --rule parentesis-anidados',
+        'cero'),
+    43: ('prosa_checks.py --rule punto-final',
+        'cero desviaciones'),
+    44: ('prosa_checks.py --rule comillas-puntuacion',
+        'cero desviaciones'),
+    46: ('prosa_checks.py --rule and-or',
+        'cero'),
+    48: ('prosa_checks.py --rule fechas',
+        'cero fechas fuera de formato'),
+    50: ('prosa_checks.py --rule alt-texto',
+        'cero imagenes sin alt'),
+    51: ('prosa_checks.py --rule notas-pie',
+        'cero'),
+    52: ('prosa_checks.py --rule encabezados-unicos',
+        'cero encabezados fuera de convencion'),
+    54: ('prosa_checks.py --rule items-lista',
+        'cero listas incoherentes'),
+    55: ('prosa_checks.py --rule notacion-matematica',
+        'cero expresiones fuera de formato'),
+    56: ('prosa_checks.py --rule avisos-tipo',
+        'cero avisos de tipo inventado'),
+    57: ('prosa_checks.py --rule numeros-chicos',
+        'cero numeros fuera de convencion'),
+    59: ('prosa_checks.py --rule telefonos',
+        'cero telefonos reales'),
+    60: ('prosa_checks.py --rule procedimientos',
+        'cero pasos que no empiecen con verbo'),
+    61: ('prosa_checks.py --rule tablas-encabezado',
+        'cero tablas sin encabezado'),
+    62: ('prosa_checks.py --rule unidades',
+        'cero unidades pegadas'),
+    64: ('prosa_checks.py --rule texto-enlace',
+        'cero enlaces sin texto util'),
+    65: ('prosa_checks.py --rule anclas',
+        'cero anclas rotas'),
+    69: ('prosa_checks.py --rule bloques-codigo',
+        'cero lineas de codigo fuera de largo'),
+    70: ('prosa_checks.py --rule sintaxis-cli',
+        'cero desviaciones'),
+    71: ('prosa_checks.py --rule marcadores',
+        'cero marcadores fuera de formato'),
+    72: ('prosa_checks.py --rule verbos-interaccion',
+        'cero'),
+    76: ('prosa_checks.py --rule html-en-markdown',
+        'cero'),
+    78: ('prosa_checks.py --rule dominios',
+        'cero ejemplos con dominios reales'),
+    79: ('prosa_checks.py --rule nombres-archivo',
+        'cero nombres fuera de convencion'),
 }
 
 # Pila C: titulos de grupo y paginas sobre la guia misma.
