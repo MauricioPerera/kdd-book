@@ -1,0 +1,43 @@
+{
+  "id": "sv02-formato",
+  "node": "sv02",
+  "title": "Que el string __version__ cumpla el formato X.Y.Z",
+  "description": "Reescribir __version__ para que tome el formato X.Y.Z (tres enteros no negativos, sin ceros iniciales, sin sufijo pre-release ni build).",
+  "intent": "El formato de la version publicada es la primera cosa que un consumidor verifica; una version `1.2` rompe ese contrato implicito.",
+  "task": "sv02_formato",
+  "target": "proyecto/version.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_version.py",
+  "kind": "refactor",
+  "signature": "__version__ = \"1.2.0\"",
+  "signature_seed": "__version__ = \"1.2\"",
+  "instrument": {
+    "script": "semver_checks.py",
+    "args": ["--rule", "formato"],
+    "threshold": "ningun string de version que no cumpla el formato X.Y.Z"
+  },
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "invariants": [
+    "El modulo sigue exponiendo __version__ como string literal: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`__version__ = \"1.2\"` carece del componente patch y queda en rojo.",
+    "`__version__ = \"1.2.0\"` cumple X.Y.Z y queda en verde.",
+    "`__version__ = \"1.0.0-alpha\"` tiene sufijo pre-release: es la regla pre-release, no esta regla de formato."
+  ],
+  "do": [
+    "Completar el componente patch a X.Y.Z sin ceros iniciales."
+  ],
+  "dont": [
+    "Cambiar el nombre de la variable: el artefacto es el string, no el binding."
+  ],
+  "stop_if": [
+    "el proyecto no declara __version__ como string literal"
+  ]
+}

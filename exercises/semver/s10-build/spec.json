@@ -1,0 +1,43 @@
+{
+  "id": "sv10-build",
+  "node": "sv10",
+  "title": "Que los identificadores de build metadata sean validos",
+  "description": "Reescribir __version__ para que, si lleva build metadata, cada identificador contenga solo `[0-9A-Za-z-]` (p. ej. `1.0.0+20130313144700`, no `1.0.0+bad id`).",
+  "intent": "Los identificadores de build con espacios o caracteres no alfanumericos rompen el parsing canonical y la comparacion de precedencia.",
+  "task": "sv10_build",
+  "target": "proyecto/version.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_version.py",
+  "kind": "refactor",
+  "signature": "__version__ = \"1.0.0+20130313144700\"",
+  "signature_seed": "__version__ = \"1.0.0+bad id\"",
+  "instrument": {
+    "script": "semver_checks.py",
+    "args": ["--rule", "build"],
+    "threshold": "ningun identificador de build metadata con caracteres invalidos"
+  },
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "invariants": [
+    "El modulo sigue exponiendo __version__ como string literal: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`1.0.0+bad id` tiene un espacio dentro de un identificador de build: rojo.",
+    "`1.0.0+20130313144700` es valido: cada identificador contiene solo `[0-9A-Za-z-]`: verde.",
+    "`1.0.0+001` (con cero inicial numerico) tambien es valido: el build metadata no restringe ceros iniciales."
+  ],
+  "do": [
+    "Reemplazar el identificador de build invalido por uno alfanumerico sin espacios."
+  ],
+  "dont": [
+    "Eliminar el build metadata: es parte del artefacto, no un error a suprimir."
+  ],
+  "stop_if": [
+    "el proyecto no declara __version__ como string literal con build metadata"
+  ]
+}

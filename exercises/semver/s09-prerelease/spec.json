@@ -1,0 +1,43 @@
+{
+  "id": "sv09-prerelease",
+  "node": "sv09",
+  "title": "Que los identificadores pre-release no tengan ceros iniciales",
+  "description": "Reescribir __version__ para que, si lleva un sufijo pre-release, cada identificador numerico sea positivo sin ceros iniciales (p. ej. `1.0.0-alpha.1`, no `1.0.0-alpha.01`).",
+  "intent": "Los numeros con cero inicial comparan lexicograficamente por detras de los positivos (`01` > `1`), lo que invierte la precedencia declarada por SemVer 2.0.0.",
+  "task": "sv09_prerelease",
+  "target": "proyecto/version.py",
+  "oracle": "oracle_test.py",
+  "seed": "seed_version.py",
+  "kind": "refactor",
+  "signature": "__version__ = \"1.0.0-alpha.1\"",
+  "signature_seed": "__version__ = \"1.0.0-alpha.01\"",
+  "instrument": {
+    "script": "semver_checks.py",
+    "args": ["--rule", "prerelease"],
+    "threshold": "ningun identificador de pre-release con leading zero o caracteres invalidos"
+  },
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": ["network", "subprocess"],
+  "invariants": [
+    "El modulo sigue exponiendo __version__ como string literal: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`1.0.0-alpha.01` tiene un cero inicial en el identificador numerico `01`: rojo.",
+    "`1.0.0-alpha.1` es valido: cada identificador numerico es positivo sin ceros iniciales: verde.",
+    "`1.0.0-alpha` (identificador alfanumerico) tambien es valido y no entra en esta regla."
+  ],
+  "do": [
+    "Eliminar el cero inicial del identificador numerico pre-release."
+  ],
+  "dont": [
+    "Reemplazar el pre-release por un numero de build: cambian la semantica, no el artefacto."
+  ],
+  "stop_if": [
+    "el proyecto no declara __version__ como string literal con sufijo pre-release"
+  ]
+}
