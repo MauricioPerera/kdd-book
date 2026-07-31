@@ -1,0 +1,10 @@
+<!-- Solucion: todo valor sale por la interpolacion que escapa. -->
+<ul id="comentarios">
+  {{#comentarios}}
+  <li class="comentario">
+    <b class="autor">{{ autor }}</b>
+    <p class="texto">{{ texto }}</p>
+  </li>
+  {{/comentarios}}
+</ul>
+<p class="pie">{{ total }} comentario(s)</p>

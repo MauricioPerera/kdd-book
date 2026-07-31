@@ -1,0 +1,11 @@
+<!-- El fragmento que htmx inserta en #comentarios despues de cada envio.
+     El autor y el texto los escribe cualquiera que visite la pagina. -->
+<ul id="comentarios">
+  {{#comentarios}}
+  <li class="comentario">
+    <b class="autor">{{{ autor }}}</b>
+    <p class="texto">{{& texto }}</p>
+  </li>
+  {{/comentarios}}
+</ul>
+<p class="pie">{{ total }} comentario(s)</p>

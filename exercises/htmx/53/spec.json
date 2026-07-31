@@ -1,0 +1,53 @@
+{
+  "id": "53-escapar-contenido-de-usuario",
+  "node": "53",
+  "title": "Escapar todo el contenido de usuario en la plantilla",
+  "description": "Sacar de la plantilla las interpolaciones que insertan sin escapar.",
+  "intent": "Interpolar todo valor por la forma que escapa.",
+  "signature": "<b class=\"autor\">{{ autor }}</b>",
+  "target": "proyecto/plantilla.mustache",
+  "oracle": "proyecto/oracle_test.py",
+  "seed": "seed_plantilla.mustache",
+  "kind": "refactor",
+  "budget": {
+    "cyclomatic_max": 4,
+    "nesting_max": 2,
+    "lines_max": 40,
+    "params_max": 3
+  },
+  "forbids": [
+    "network"
+  ],
+  "instrument": {
+    "script": "template_checks.py",
+    "args": [
+      "--rule",
+      "escapado",
+      "--motor",
+      "mustache"
+    ],
+    "threshold": "cero interpolaciones sin escapar"
+  },
+  "invariants": [
+    "Lo que la plantilla renderiza con datos benignos no cambia: el oraculo pasa igual antes y despues.",
+    "Sigue habiendo una entrada por comentario, con su autor y su texto en el mismo lugar.",
+    "El fragmento conserva el id que htmx reemplaza."
+  ],
+  "examples": [
+    "`{{{ autor }}}` -> el triple stache no escapa: un autor llamado `<script>alert(1)</script>` se ejecuta, en rojo.",
+    "`{{& texto }}` -> el ampersand tampoco escapa, en rojo.",
+    "`{{ autor }}` -> en verde: es la forma que escapa en mustache.",
+    "Con datos benignos las tres renderizan EXACTAMENTE lo mismo. Por eso el oraculo esta ciego y hace falta el instrumento."
+  ],
+  "do": [
+    "Interpolar cada valor por la forma que escapa.",
+    "Dejar las secciones como estan: `{{#comentarios}}` no interpola nada."
+  ],
+  "dont": [
+    "Sanear el dato antes de guardarlo y dejar la plantilla cruda: el escapado depende del lugar donde se inserta, no del origen.",
+    "Tocar el motor: `render.py` es el fixture del proyecto, no el ejercicio."
+  ],
+  "stop_if": [
+    "el enunciado no dice con que motor renderiza el proyecto: el marcador de interpolacion sin escapar cambia con cada uno y el instrumento sale con exit 2"
+  ]
+}

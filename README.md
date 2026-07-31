@@ -16,15 +16,15 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Cuatro fuentes, 315 nodos, 43 contratos ejecutables.
+Cuatro fuentes, 315 nodos, 44 contratos ejecutables.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
 | Codigo Limpio (R. C. Martin) | 66 | 48,5% | **48,5%** | 31 | 28 |
 | Arquitectura Java solida (C. Alvarez Caules) | 33 | 45,5% | **45,5%** | 15 | 6 |
 | Scrum y eXtreme Programming (E. Bahit) | 153 | 25,5% | **14,4%** | 17 | 4 |
-| htmx ~ Documentation | 59 | 10,2% | **10,2%** | 5 | 5 |
-| **Total** | **311** | **92** | **75** | **68** | **43** |
+| htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
+| **Total** | **311** | **92** | **75** | **68** | **44** |
 
 La cuarta no es un libro: es **documentacion de referencia**, y esta para probar
 hasta donde llega el metodo. Cae al 10,2% por una razon distinta a la de Scrum —
@@ -390,6 +390,19 @@ Los que agregan pruebas (cobertura, limites, anatomia) reparten distinto: **el
 oraculo esta sellado y el `target` es OTRO archivo de pruebas**, el unico que se
 puede tocar. Sin eso el contrato pediria editar lo que el mismo congela.
 
+El de plantillas necesito una pieza mas: **el proyecto trae su motor**, un
+mustache minimo de 40 lineas. El comportamiento observable de una plantilla es
+lo que renderiza, y sin motor el oraculo no tendria nada que fijar. Es el mismo
+reparto que en los de HTTP —el proyecto declara con que produce el artefacto— y
+el motor es independiente de `template_checks` a proposito: si compartieran
+codigo, un error de escapado los haria coincidir a los dos.
+
+Ese ejercicio muestra el punto entero del reparto mejor que ninguno. Con datos
+benignos, `{{{autor}}}` y `{{autor}}` renderizan **exactamente lo mismo**: la
+diferencia aparece solo con contenido hostil, o sea justo con el caso que
+ninguna prueba escrita con datos de ejemplo va a cubrir. El oraculo esta ciego
+por construccion y el instrumento es lo unico que discrimina.
+
 Los de HTTP necesitaron un paso mas, declarado en el spec como `preparar`: se
 edita la app y se miden **las respuestas que produce**, asi que las capturas se
 regeneran desde el target en cada corrida. No es un atajo: si el target fueran
@@ -428,7 +441,7 @@ Once suites de prueba, y cada una existe por un error concreto que ya paso.
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 43 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_exercises` | coherencia de los 44 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 

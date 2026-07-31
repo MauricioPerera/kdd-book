@@ -39,15 +39,12 @@ SIN_EJERCICIO = {
 
 # Instrumentos que SI admiten la forma de ejercicio y todavia no lo tienen.
 #
+# Vacio hoy. Se conserva porque la distincion es el valor de la prueba:
 # `SIN_EJERCICIO` dice "no se puede" y no se vacia nunca: describe un limite de
 # la forma de contrato. Esto dice "no esta hecho" y se vacia trabajando.
 # Mezclarlos convertiria el inventario en una lista donde lo imposible y lo
 # pendiente se ven igual.
-PENDIENTE = {
-    ('template_checks.py', 'escapado'): (
-        'el instrumento esta escrito y probado; falta el ejercicio, que necesita '
-        'ademas elegir el motor de plantillas del enunciado'),
-}
+PENDIENTE = {}
 
 
 def _alias_de(script):
