@@ -18,7 +18,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 Seis fuentes, 431 nodos, 62 contratos ejecutables, 65 instrumentos en diez
 familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 173 pruebas propias.
+`validate_test_commands` y las 175 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -299,14 +299,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 431 tecnicas, 48 instrumentos
+python memoria.py exportar          # -> memoria.json: 431 tecnicas, 67 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **379 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **407 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **26 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno
@@ -631,13 +631,13 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Trece suites, 173 pruebas, y cada suite existe por un error concreto que ya paso.
+Trece suites, 175 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
 | `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
 | `test_exercises` | coherencia de los 62 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
-| `test_memoria` | exportar, consultar y fusionar; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
+| `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias de instrumentos, porque la lista escrita a mano quedo vieja tres veces y el bundle salia veinte reglas mas corto sin que nada fallara; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
 Los errores que las hicieron nacer:

@@ -127,3 +127,39 @@ class ConsultaTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class InventarioDeInstrumentosTest(unittest.TestCase):
+    """La memoria exporta TODAS las familias, no las que alguien recordo listar.
+
+    Existe por un defecto que estuvo en el repositorio tres incorporaciones
+    seguidas. `_reglas_disponibles` tenia la lista de familias escrita a mano, y
+    `template_checks`, `entorno_checks` y `a11y_checks` se agregaron sin entrar
+    en ella: la memoria portable salia con **veinte reglas menos** y nada
+    fallaba. El bundle se exportaba bien, solo que incompleto, y la unica senal
+    era un numero que nadie miraba.
+
+    Es el mismo defecto que ya habia aparecido con `check_g29` —escrito, probado
+    y sin registrar— y la respuesta es la misma: comparar contra el disco en vez
+    de contra una lista.
+    """
+
+    def test_toda_familia_del_repositorio_esta_en_la_memoria(self):
+        import glob
+        en_disco = set()
+        for ruta in glob.glob(os.path.join(RAIZ, 'instruments', '*_checks.py')):
+            en_disco.add(os.path.basename(ruta))
+        exportadas = {i['script'] for i in M._reglas_disponibles()}
+        self.assertEqual(en_disco - exportadas, set(),
+                         'hay familias de instrumentos que la memoria no exporta: '
+                         'el bundle sale incompleto y no falla nada')
+
+    def test_toda_regla_de_cada_familia_esta_en_la_memoria(self):
+        exportadas = {(i['script'], i['regla']) for i in M._reglas_disponibles()}
+        sys.path.insert(0, os.path.join(RAIZ, 'instruments'))
+        import glob
+        for ruta in sorted(glob.glob(os.path.join(RAIZ, 'instruments', '*_checks.py'))):
+            modulo = __import__(os.path.basename(ruta)[:-3])
+            for regla in getattr(modulo, 'RULES', {}):
+                with self.subTest(script=os.path.basename(ruta), regla=regla):
+                    self.assertIn((os.path.basename(ruta), regla), exportadas)

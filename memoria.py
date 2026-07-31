@@ -69,14 +69,26 @@ def _contratos_por_nodo():
 
 
 def _reglas_disponibles():
-    """[{familia, script, regla, descripcion}] de cada instrumento registrado."""
+    """[{familia, script, regla, descripcion}] de cada instrumento registrado.
+
+    La lista de familias se **descubre en disco** y no se escribe a mano. Estuvo
+    escrita a mano y quedo vieja tres veces seguidas: `template_checks`,
+    `entorno_checks` y `a11y_checks` se agregaron al repositorio y ninguna entro
+    aca, asi que la memoria portable salio veinte reglas mas corta sin que nada
+    fallara. Es el defecto peor de todos los que aparecieron en este proyecto,
+    porque **el bundle seguia exportandose bien** —solo que incompleto— y la
+    unica senal era un numero que nadie estaba mirando.
+    """
     sys.path.insert(0, INSTRUMENTOS)
     out = []
-    for modulo in ('checks', 'repo_checks', 'arch_checks', 'git_checks',
-                   'html_checks', 'http_checks', 'mutation_checks'):
+    familias = sorted(os.path.splitext(os.path.basename(r))[0]
+                      for r in glob.glob(os.path.join(INSTRUMENTOS, '*_checks.py')))
+    for modulo in ['checks'] + [f for f in familias if f != 'checks']:
         try:
             mod = __import__(modulo)
         except ImportError:
+            continue
+        if not hasattr(mod, 'RULES'):
             continue
         for regla, datos in sorted(mod.RULES.items()):
             out.append({'script': modulo + '.py', 'regla': regla,
