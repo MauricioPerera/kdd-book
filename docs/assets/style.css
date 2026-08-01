@@ -1,0 +1,503 @@
+/* kdd-book presentation site — style derived from the Mintlify DESIGN.md
+   spec in voltagent/awesome-design-md. Palette, type scale and component
+   rules are taken from that spec; layout/copy are original to this site. */
+
+:root {
+  --mint: #00d4a4;
+  --mint-deep: #00b48a;
+  --mint-soft: #7cebcb;
+  --tag-blue: #3772cf;
+  --orange: #f55a3c;
+  --red: #d45656;
+
+  --canvas: #ffffff;
+  --surface: #f7f7f7;
+  --surface-code: #1c1c1e;
+  --hairline: #e5e5e5;
+  --ink: #0a0a0a;
+  --steel: #5a5a5c;
+  --muted: #a8a8aa;
+
+  --hero-from: #87a8c8;
+  --hero-to: #f5e9d8;
+
+  --radius-xs: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  --space-section: 64px;
+  --space-section-lg: 96px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0a0a0a;
+    --surface: #131314;
+    --surface-code: #1c1c1e;
+    --hairline: #232325;
+    --ink: #f5f5f6;
+    --steel: #b8b8ba;
+    --muted: #7a7a7d;
+    --hero-from: #1a3d4a;
+    --hero-to: #2d5a4f;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+a { color: inherit; }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* ---------------------------------------------------------------- nav */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--canvas) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.nav-brand .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--mint);
+  flex: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.lang-switch a {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--steel);
+}
+
+.lang-switch a.active {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  background: var(--ink);
+  color: var(--canvas);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+}
+
+.button-accent {
+  background: var(--mint);
+  color: #04241c;
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.hero {
+  background: linear-gradient(160deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  padding: var(--space-section-lg) 0 var(--space-section);
+  text-align: center;
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--canvas) 75%, transparent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: var(--space-xl);
+}
+
+.hero h1 {
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 0 0 var(--space-md);
+  color: var(--ink);
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero p.lead {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--ink);
+  opacity: 0.82;
+  max-width: 620px;
+  margin: 0 auto var(--space-xxl);
+}
+
+.hero .cta-row {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------ sections */
+
+section {
+  padding: var(--space-section) 0;
+}
+
+section.tight { padding: var(--space-xxl) 0; }
+
+.section-head {
+  max-width: 640px;
+  margin: 0 auto var(--space-xxl);
+  text-align: center;
+}
+
+.section-head .kicker {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mint-deep);
+  margin-bottom: var(--space-sm);
+}
+
+.section-head h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-sm);
+  font-weight: 600;
+}
+
+.section-head p {
+  color: var(--steel);
+  font-size: 17px;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- cards */
+
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 860px) {
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+
+.card {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--canvas);
+}
+
+.card .num {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mint-deep);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 var(--space-sm);
+}
+
+.card p {
+  color: var(--steel);
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.card.on-surface {
+  background: var(--surface);
+  border-color: transparent;
+}
+
+/* -------------------------------------------------------------- stats */
+
+/* Fixed dark band, deliberately independent of the light/dark theme
+   variables: it must stay a dark surface with light text in both modes,
+   not flip when --ink/--canvas swap. */
+.stats-band {
+  background: #0a0a0a;
+  color: #f5f5f6;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xxl);
+}
+
+.stats-band .kicker { color: var(--mint); }
+.stats-band .section-head h2 { color: #f5f5f6; }
+.stats-band .section-head p { color: rgba(245, 245, 246, 0.72); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.stat .value {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  color: var(--mint);
+  display: block;
+  letter-spacing: -0.02em;
+}
+
+.stat .label {
+  font-size: 13px;
+  color: rgba(245, 245, 246, 0.68);
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------- steps */
+
+.steps {
+  counter-reset: step;
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
+.step {
+  position: relative;
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.step .step-num {
+  counter-increment: step;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--mint);
+  color: #04241c;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: var(--space-md);
+}
+
+.step .step-num::before { content: counter(step); }
+
+.step h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.step p {
+  margin: 0;
+  color: var(--steel);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------- pile examples */
+
+.pile-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 760px) {
+  .pile-row { grid-template-columns: 1fr; }
+}
+
+.pile {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--hairline);
+}
+
+.pile .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-md);
+}
+
+.pile.a .tag { background: color-mix(in srgb, var(--mint) 20%, transparent); color: var(--mint-deep); }
+.pile.b .tag { background: color-mix(in srgb, var(--tag-blue) 16%, transparent); color: var(--tag-blue); }
+.pile.c .tag { background: var(--surface); color: var(--steel); }
+
+.pile h4 {
+  margin: 0 0 var(--space-xs);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pile p {
+  margin: 0;
+  color: var(--steel);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------ testimonial-ish */
+
+.callout {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xxl);
+  background: var(--orange);
+  color: #fff5f1;
+}
+
+.callout h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.callout p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* ----------------------------------------------------------------- footer */
+
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: var(--space-section) 0 var(--space-xxl);
+}
+
+footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+footer .links {
+  display: flex;
+  gap: var(--space-xl);
+  font-size: 14px;
+}
+
+footer .links a { text-decoration: none; color: var(--steel); }
+footer .links a:hover { color: var(--ink); }
+
+code.pill {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 13px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xs);
+  padding: 2px 6px;
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kdd-book — Turn a technical book into verifiable knowledge</title>
+<meta name="description" content="kdd-book extracts the knowledge from a book or technical guide and turns it into a verifiable graph: what can be checked automatically, and what is just judgment.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%2300d4a4%22/></svg>">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top">
+      <span class="dot"></span>
+      kdd-book
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <a href="../es/">ES</a>
+        <a href="../en/" class="active">EN</a>
+        <a href="../pt/">PT</a>
+      </div>
+      <a class="button-primary" href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Knowledge-Driven Development</span>
+    <h1>A technical book gives you advice. This project turns it into something you can check.</h1>
+    <p class="lead">
+      kdd-book reads a book or a technical guide and sorts every piece of advice into three honest
+      buckets: what a computer can verify automatically, what is a real technique that still needs
+      human judgment, and what is just background knowledge. For every piece that's verifiable, it
+      then builds an automatic checker and a hands-on exercise with a solution.
+    </p>
+    <div class="cta-row">
+      <a class="button-primary button-accent" href="#how-it-works">How it works</a>
+      <a class="button-primary button-ghost" href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">Explore the repository</a>
+    </div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The problem</span>
+      <h2>Reading a technical book doesn't mean you applied it correctly</h2>
+      <p>
+        A best-practices book tells you what to do. But nobody tells you, while you're writing code,
+        whether you're actually following it — not until someone else reviews your work, or the bug
+        is already in production.
+      </p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>The advice is just text</h3>
+        <p>"Name your variables clearly." "Don't repeat yourself." These are correct ideas, but no computer understands them as written.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>Not everything is measurable</h3>
+        <p>Some advice has a clear, checkable rule behind it. Some depends on context and a developer's judgment. Treating them the same is the most common mistake.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>Nobody practices with real feedback</h3>
+        <p>Without an automatic check, "practicing" a book is just re-reading it. kdd-book builds the exercise and the checker for every technique that's genuinely testable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works" class="tight">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Three steps, no shortcuts</h2>
+      <p>The same method has been applied, so far, to 15 different sources — from style guides to technical specs to purely philosophical texts.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Extract the graph</h3>
+        <p>Every idea in the book becomes a knowledge node: a title, a description, and where it came from. Nothing is invented — everything traces back to the original text.</p>
+      </div>
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Triage it honestly</h3>
+        <p>Every node gets one of three labels: <strong>measurable</strong> (there's a clear rule), <strong>judgment</strong> (it's real, but has no binary threshold), or <strong>knowledge</strong> (context, not a technique).</p>
+      </div>
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Actually verify it</h3>
+        <p>For every measurable technique, an instrument checks it in seconds, plus an exercise with a broken version and a correct one — proving the instrument tells them apart.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="piles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The three categories</span>
+      <h2>Not every piece of advice is the same, and saying so is part of the method</h2>
+      <p>One real example of each category, taken from the sources already processed.</p>
+    </div>
+    <div class="pile-row">
+      <div class="pile a">
+        <span class="tag">MEASURABLE</span>
+        <h4>"Two blank lines between functions"</h4>
+        <p>PEP 8, Python's style guide. An exact rule: it can be counted and checked in any file.</p>
+      </div>
+      <div class="pile b">
+        <span class="tag">JUDGMENT</span>
+        <h4>"Choose names that reveal intent"</h4>
+        <p>Clean Code, by Robert C. Martin. A real, valuable piece of advice — but there's no threshold separating a good name from a bad one.</p>
+      </div>
+      <div class="pile c">
+        <span class="tag">KNOWLEDGE</span>
+        <h4>"Namespaces are one honking great idea"</h4>
+        <p>The Zen of Python. It's design wisdom, not a technique with a property to check.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numbers" class="tight">
+  <div class="wrap">
+    <div class="stats-band">
+      <div class="section-head" style="margin-bottom: var(--space-xl);">
+        <span class="kicker">By the numbers</span>
+        <h2>The project's current state, re-measured from scratch every time</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="value">15</span>
+          <span class="label">sources processed</span>
+        </div>
+        <div class="stat">
+          <span class="value">727</span>
+          <span class="label">techniques identified</span>
+        </div>
+        <div class="stat">
+          <span class="value">151</span>
+          <span class="label">verifiable exercises</span>
+        </div>
+        <div class="stat">
+          <span class="value">304</span>
+          <span class="label">own tests, all passing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="honesty">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Two honest answers</span>
+      <h2>Sometimes the correct result is "almost nothing here is measurable"</h2>
+      <p>Neither source below "failed." Each one measured exactly what there was to measure.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card on-surface">
+        <span class="num">PEP 8 — Python's style guide</span>
+        <h3>69% of its techniques are measurable</h3>
+        <p>A style guide designed to be enforced by a tool. Almost everything it says has an exact rule behind it.</p>
+      </div>
+      <div class="card on-surface">
+        <span class="num">The Zen of Python</span>
+        <h3>0% of its techniques are measurable</h3>
+        <p>19 lines of design wisdom ("simple is better than complex"). None of them has a binary threshold — and forcing one would misrepresent what the text actually says.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agents" class="tight">
+  <div class="wrap">
+    <div class="callout">
+      <h3>Built by one AI agent. Verified by hand, twice, by another.</h3>
+      <p>
+        Several of the newest sources were built by an external AI agent, unsupervised during triage.
+        Every result was re-run from scratch, every rule was deliberately sabotaged to confirm it
+        genuinely catches the mistake it claims to catch, and every forbidden shortcut was manually
+        reconstructed to prove the checker blocks it. Across two separate rounds, that verification
+        found real defects — once, incomplete coverage; once, a test that didn't actually block the
+        shortcut it claimed to block — and both were fixed before the result was accepted. No claim is
+        accepted just because the agent said it worked.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      kdd-book is an open-source project. The knowledge graph, the verification instruments, and the
+      exercises are generated from each source's text, without reproducing the original book's
+      copyrighted content.
+    </p>
+    <div class="links">
+      <a href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">Repository</a>
+      <a href="https://github.com/MauricioPerera/kdd-book/blob/master/README.md" target="_blank" rel="noopener">Technical documentation</a>
+      <a href="../es/">Español</a>
+      <a href="../pt/">Português</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

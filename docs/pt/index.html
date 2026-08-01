@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kdd-book — Transforme um livro técnico em conhecimento verificável</title>
+<meta name="description" content="kdd-book extrai o conhecimento de um livro ou guia técnico e o transforma em um grafo verificável: o que pode ser conferido automaticamente, e o que é apenas critério.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%2300d4a4%22/></svg>">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top">
+      <span class="dot"></span>
+      kdd-book
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <a href="../es/">ES</a>
+        <a href="../en/">EN</a>
+        <a href="../pt/" class="active">PT</a>
+      </div>
+      <a class="button-primary" href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">Ver no GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Desenvolvimento Guiado por Conhecimento</span>
+    <h1>Um livro técnico te dá conselhos. Este projeto os transforma em algo que pode ser conferido.</h1>
+    <p class="lead">
+      kdd-book lê um livro ou um guia técnico e separa cada conselho em três categorias honestas:
+      o que um computador pode verificar automaticamente, o que é uma técnica real mas exige
+      critério humano, e o que é apenas conhecimento de contexto. Depois constrói, para cada
+      trecho verificável, uma checagem automática e um exercício prático com solução.
+    </p>
+    <div class="cta-row">
+      <a class="button-primary button-accent" href="#como-funciona">Como funciona</a>
+      <a class="button-primary button-ghost" href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">Explorar o repositório</a>
+    </div>
+  </div>
+</header>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">O problema</span>
+      <h2>Ler um livro técnico não significa que você aplicou certo</h2>
+      <p>
+        Um livro de boas práticas diz o que fazer. Mas ninguém te avisa, enquanto você escreve
+        código, se está realmente cumprindo aquilo — até que alguém revise seu trabalho, ou até
+        o erro já estar em produção.
+      </p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>O conselho é só texto</h3>
+        <p>"Nomeie suas variáveis com clareza." "Não repita código." São ideias corretas, mas nenhum computador as entende do jeito que estão escritas.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>Nem tudo é mensurável</h3>
+        <p>Alguns conselhos têm uma regra clara e verificável. Outros dependem do contexto e do critério de quem programa. Tratá-los da mesma forma é o erro mais comum.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>Ninguém pratica com retorno real</h3>
+        <p>Sem uma checagem automática, "praticar" um livro é só reler. kdd-book constrói o exercício e o corretor para cada técnica que pode ser realmente verificada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="tight">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Como funciona</span>
+      <h2>Três passos, sem atalhos</h2>
+      <p>O mesmo método já foi aplicado a 15 fontes diferentes — de guias de estilo a especificações técnicas e até textos puramente filosóficos.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Extrair o grafo</h3>
+        <p>Cada ideia do livro vira um nó de conhecimento: um título, uma descrição e a origem exata. Nada é inventado — tudo pode ser rastreado até o texto original.</p>
+      </div>
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Classificar com honestidade</h3>
+        <p>Cada nó recebe um de três rótulos: <strong>mensurável</strong> (existe uma regra clara), <strong>critério</strong> (é real, mas não tem um limiar binário) ou <strong>conhecimento</strong> (contexto, não uma técnica).</p>
+      </div>
+      <div class="step">
+        <span class="step-num"></span>
+        <h3>Verificar de verdade</h3>
+        <p>Para cada técnica mensurável, um instrumento a verifica em segundos, além de um exercício com uma versão quebrada e uma correta — provando que o instrumento distingue as duas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="piles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">As três categorias</span>
+      <h2>Nem todo conselho é igual, e dizer isso faz parte do método</h2>
+      <p>Um exemplo real de cada categoria, tirado das fontes já processadas.</p>
+    </div>
+    <div class="pile-row">
+      <div class="pile a">
+        <span class="tag">MENSURÁVEL</span>
+        <h4>"Duas linhas em branco entre funções"</h4>
+        <p>PEP 8, o guia de estilo do Python. Uma regra exata: pode ser contada e verificada em qualquer arquivo.</p>
+      </div>
+      <div class="pile b">
+        <span class="tag">CRITÉRIO</span>
+        <h4>"Escolha nomes que revelem a intenção"</h4>
+        <p>Código Limpo, de Robert C. Martin. É um conselho real e valioso, mas não há um limiar que separe um bom nome de um ruim.</p>
+      </div>
+      <div class="pile c">
+        <span class="tag">CONHECIMENTO</span>
+        <h4>"Namespaces are one honking great idea"</h4>
+        <p>O Zen do Python. É sabedoria de design, não uma técnica com uma propriedade a verificar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros" class="tight">
+  <div class="wrap">
+    <div class="stats-band">
+      <div class="section-head" style="margin-bottom: var(--space-xl);">
+        <span class="kicker">Em números</span>
+        <h2>O estado atual do projeto, remedido do zero a cada vez</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="value">15</span>
+          <span class="label">fontes processadas</span>
+        </div>
+        <div class="stat">
+          <span class="value">727</span>
+          <span class="label">técnicas identificadas</span>
+        </div>
+        <div class="stat">
+          <span class="value">151</span>
+          <span class="label">exercícios verificáveis</span>
+        </div>
+        <div class="stat">
+          <span class="value">304</span>
+          <span class="label">testes próprios, todos passando</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="honestidade">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Duas respostas honestas</span>
+      <h2>Às vezes o resultado correto é "quase nada aqui é mensurável"</h2>
+      <p>Nenhuma das duas fontes abaixo "falhou". Cada uma mediu exatamente o que havia para medir.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card on-surface">
+        <span class="num">PEP 8 — guia de estilo do Python</span>
+        <h3>69% de suas técnicas são mensuráveis</h3>
+        <p>Um guia de estilo pensado para ser aplicado por uma ferramenta automática. Quase tudo que ele diz tem uma regra exata por trás.</p>
+      </div>
+      <div class="card on-surface">
+        <span class="num">O Zen do Python</span>
+        <h3>0% de suas técnicas são mensuráveis</h3>
+        <p>19 frases de sabedoria de design ("simples é melhor que complexo"). Nenhuma tem um limiar binário — e forçar uma seria distorcer o que o texto realmente diz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agentes" class="tight">
+  <div class="wrap">
+    <div class="callout">
+      <h3>Construído por um agente de IA. Verificado à mão, duas vezes, por outro.</h3>
+      <p>
+        Várias das fontes mais recentes foram construídas por um agente de IA externo, sem
+        supervisão durante a triagem. Cada resultado foi rodado de novo do zero, cada regra sofreu
+        "sabotagem" deliberada para confirmar que realmente detecta o erro que diz detectar, e os
+        atalhos proibidos foram reconstruídos à mão para comprovar que o corretor os bloqueia. Em
+        duas rodadas distintas, essa verificação encontrou defeitos reais — uma vez, cobertura
+        incompleta; outra vez, um teste que não bloqueava de fato o atalho que dizia bloquear — e
+        ambos foram corrigidos antes de aceitar o resultado. Nenhuma afirmação é aceita só porque o
+        agente disse que funcionou.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      kdd-book é um projeto de código aberto. O grafo de conhecimento, os instrumentos de
+      verificação e os exercícios são gerados a partir do texto de cada fonte, sem reproduzir o
+      conteúdo protegido por direitos autorais do livro original.
+    </p>
+    <div class="links">
+      <a href="https://github.com/MauricioPerera/kdd-book" target="_blank" rel="noopener">Repositório</a>
+      <a href="https://github.com/MauricioPerera/kdd-book/blob/master/README.md" target="_blank" rel="noopener">Documentação técnica</a>
+      <a href="../es/">Español</a>
+      <a href="../en/">English</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
