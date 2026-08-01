@@ -1,0 +1,39 @@
+{
+  "id": "c08-common-traits",
+  "node": "c08",
+  "title": "Derive Debug en el tipo publico Foo",
+  "description": "Agrega #[derive(Debug)] al struct publico Foo, que hoy carece de toda implementacion de trait comun.",
+  "intent": "C-COMMON-TRAITS exige que los tipos publicos implementen Debug (entre otros traits). El derive es la forma idiomatica de Debug para un struct unitario; sin el, el tipo no satisface la regla y los clientes no pueden inspeccionarlo.",
+  "task": "c08_common_traits",
+  "target": "proyecto/lib.rs",
+  "seed": "seed_lib.rs",
+  "signature": "#[derive(Debug)] pub struct Foo;",
+  "signature_seed": "pub struct Foo;",
+  "instrument": {
+    "script": "rust_api_checks.py",
+    "args": ["--rule", "common-traits"],
+    "threshold": "todo pub struct/pub enum implementa Debug"
+  },
+  "budget": {
+    "cyclomatic_max": 1,
+    "nesting_max": 1,
+    "lines_max": 20,
+    "params_max": 1
+  },
+  "invariants": [
+    "El struct Foo sigue existiendo y sigue siendo publico: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`pub struct Foo;` sin derive: rojo.",
+    "`#[derive(Debug)] pub struct Foo;`: verde."
+  ],
+  "do": [
+    "Agregar #[derive(Debug)] encima del struct publico Foo."
+  ],
+  "dont": [
+    "Soltar la palabra clave pub del struct: cambia la visibilidad (un artefacto observable), no la implementacion de Debug."
+  ],
+  "stop_if": [
+    "el proyecto no declara un struct Foo publico"
+  ]
+}

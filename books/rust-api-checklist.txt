@@ -1,0 +1,54 @@
+1| H2 | C-CASE | Casing conforms to RFC 430.
+2| H2 | C-CONV | Ad-hoc conversions follow the as_, to_, into_ conventions.
+3| H2 | C-GETTER | Getter names follow Rust convention.
+4| H2 | C-ITER | Methods on collections that produce iterators follow iter, iter_mut, into_iter.
+5| H2 | C-ITER-TY | Iterator type names match the methods that produce them.
+6| H2 | C-FEATURE | Feature names are free of placeholder words.
+7| H2 | C-WORD-ORDER | Names use a consistent word order.
+8| H2 | C-COMMON-TRAITS | Types eagerly implement common traits: Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Display, Default.
+9| H2 | C-CONV-TRAITS | Conversions use the standard traits From, AsRef, AsMut.
+10| H2 | C-COLLECT | Collections implement FromIterator and Extend.
+11| H2 | C-SERDE | Data structures implement Serde Serialize and Deserialize.
+12| H2 | C-SEND-SYNC | Types are Send and Sync where possible.
+13| H2 | C-GOOD-ERR | Error types are meaningful and well-behaved.
+14| H2 | C-NUM-FMT | Binary number types provide Hex, Octal, Binary formatting.
+15| H2 | C-RW-VALUE | Generic reader/writer functions take R: Read and W: Write by value.
+16| H2 | C-EVOCATIVE | Input syntax is evocative of the output.
+17| H2 | C-MACRO-ATTR | Macros compose well with attributes.
+18| H2 | C-ANYWHERE | Item macros work anywhere that items are allowed.
+19| H2 | C-MACRO-VIS | Item macros support visibility specifiers.
+20| H2 | C-MACRO-TY | Type fragments are flexible.
+21| H2 | C-CRATE-DOC | Crate level docs are thorough and include examples.
+22| H2 | C-EXAMPLE | All items have a rustdoc example.
+23| H2 | C-QUESTION-MARK | Examples use ?, not try!, not unwrap.
+24| H2 | C-FAILURE | Function docs include error, panic, and safety considerations.
+25| H2 | C-LINK | Prose contains hyperlinks to relevant things.
+26| H2 | C-METADATA | Cargo.toml includes all common metadata: authors, description, license, homepage, documentation, repository, keywords, categories.
+27| H2 | C-RELNOTES | Release notes document all significant changes.
+28| H2 | C-HIDDEN | Rustdoc does not show unhelpful implementation details.
+29| H2 | C-SMART-PTR | Smart pointers do not add inherent methods.
+30| H2 | C-CONV-SPECIFIC | Conversions live on the most specific type involved.
+31| H2 | C-METHOD | Functions with a clear receiver are methods.
+32| H2 | C-NO-OUT | Functions do not take out-parameters.
+33| H2 | C-OVERLOAD | Operator overloads are unsurprising.
+34| H2 | C-DEREF | Only smart pointers implement Deref and DerefMut.
+35| H2 | C-CTOR | Constructors are static, inherent methods.
+36| H2 | C-INTERMEDIATE | Functions expose intermediate results to avoid duplicate work.
+37| H2 | C-CALLER-CONTROL | Caller decides where to copy and place data.
+38| H2 | C-GENERIC | Functions minimize assumptions about parameters by using generics.
+39| H2 | C-OBJECT | Traits are object-safe if they may be useful as a trait object.
+40| H2 | C-NEWTYPE | Newtypes provide static distinctions.
+41| H2 | C-CUSTOM-TYPE | Arguments convey meaning through types, not bool or Option.
+42| H2 | C-BITFLAG | Types for a set of flags are bitflags, not enums.
+43| H2 | C-BUILDER | Builders enable construction of complex values.
+44| H2 | C-VALIDATE | Functions validate their arguments.
+45| H2 | C-DTOR-FAIL | Destructors never fail.
+46| H2 | C-DTOR-BLOCK | Destructors that may block have alternatives.
+47| H2 | C-DEBUG | All public types implement Debug.
+48| H2 | C-DEBUG-NONEMPTY | Debug representation is never empty.
+49| H2 | C-SEALED | Sealed traits protect against downstream implementations.
+50| H2 | C-STRUCT-PRIVATE | Structs have private fields.
+51| H2 | C-NEWTYPE-HIDE | Newtypes encapsulate implementation details.
+52| H2 | C-STRUCT-BOUNDS | Data structures do not duplicate derived trait bounds.
+53| H2 | C-STABLE | Public dependencies of a stable crate are stable.
+54| H2 | C-PERMISSIVE | Crate and its dependencies have a permissive license.

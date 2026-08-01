@@ -1,0 +1,910 @@
+{
+  "source": {
+    "slug": "rust-api",
+    "title": "Rust API Guidelines Checklist",
+    "author": "rust-lang/api-guidelines (Rust API Guidelines)",
+    "file": "rust-lang.github.io/api-guidelines",
+    "pages": 1,
+    "extracted_with": "web_fetch (checklist.md, rust-lang.github.io/api-guidelines)",
+    "tags": [
+      "rust",
+      "api",
+      "coding-standards",
+      "guidelines"
+    ],
+    "corpus": "rust-api"
+  },
+  "nodes": [
+    {
+      "id": "c01",
+      "title": "C-CASE",
+      "description": "Casing conforms to RFC 430.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-CASE: nombrar con convencion de mayusculas/minusculas exige analisislexico de identificadores Rust (CamelCase, snake_case, SCREAMING_SNAKE_CASE) y heurísticas de contexto; el instrumento actual no puede decidir con seguridad sin un parseo lexico y una base de datos de convenciones, por lo que cualquier proxy seria demasiado frágil."
+    },
+    {
+      "id": "c02",
+      "title": "C-CONV",
+      "description": "Ad-hoc conversions follow the as_, to_, into_ conventions.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c03",
+      "title": "C-GETTER",
+      "description": "Getter names follow Rust convention.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [
+        "getter"
+      ],
+      "links": [],
+      "instrument": "rust_api_checks.py --rule getter",
+      "threshold": {
+        "max_violations": 0
+      }
+    },
+    {
+      "id": "c04",
+      "title": "C-ITER",
+      "description": "Methods on collections that produce iterators follow iter, iter_mut, into_iter.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c05",
+      "title": "C-ITER-TY",
+      "description": "Iterator type names match the methods that produce them.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c06",
+      "title": "C-FEATURE",
+      "description": "Feature names are free of placeholder words.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c07",
+      "title": "C-WORD-ORDER",
+      "description": "Names use a consistent word order.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c08",
+      "title": "C-COMMON-TRAITS",
+      "description": "Types eagerly implement common traits: Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Display, Default.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [
+        "common-traits"
+      ],
+      "links": [],
+      "instrument": "rust_api_checks.py --rule common-traits",
+      "threshold": {
+        "max_violations": 0
+      }
+    },
+    {
+      "id": "c09",
+      "title": "C-CONV-TRAITS",
+      "description": "Conversions use the standard traits From, AsRef, AsMut.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c10",
+      "title": "C-COLLECT",
+      "description": "Collections implement FromIterator and Extend.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c11",
+      "title": "C-SERDE",
+      "description": "Data structures implement Serde Serialize and Deserialize.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c12",
+      "title": "C-SEND-SYNC",
+      "description": "Types are Send and Sync where possible.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c13",
+      "title": "C-GOOD-ERR",
+      "description": "Error types are meaningful and well-behaved.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-GOOD-ERR: juzgar que un tipo de error es \"significante y bien comportado\" implica inspeccionar mensajes, variantes, impls de Error/std::error::Error y Send+Sync; una heurística de texto no puede verificar la semantica de los errores con la rigidez que merece."
+    },
+    {
+      "id": "c14",
+      "title": "C-NUM-FMT",
+      "description": "Binary number types provide Hex, Octal, Binary formatting.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c15",
+      "title": "C-RW-VALUE",
+      "description": "Generic reader/writer functions take R: Read and W: Write by value.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c16",
+      "title": "C-EVOCATIVE",
+      "description": "Input syntax is evocative of the output.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c17",
+      "title": "C-MACRO-ATTR",
+      "description": "Macros compose well with attributes.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c18",
+      "title": "C-ANYWHERE",
+      "description": "Item macros work anywhere that items are allowed.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c19",
+      "title": "C-MACRO-VIS",
+      "description": "Item macros support visibility specifiers.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c20",
+      "title": "C-MACRO-TY",
+      "description": "Type fragments are flexible.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c21",
+      "title": "C-CRATE-DOC",
+      "description": "Crate level docs are thorough and include examples.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c22",
+      "title": "C-EXAMPLE",
+      "description": "All items have a rustdoc example.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c23",
+      "title": "C-QUESTION-MARK",
+      "description": "Examples use ?, not try!, not unwrap.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [
+        "question-mark"
+      ],
+      "links": [],
+      "instrument": "rust_api_checks.py --rule question-mark",
+      "threshold": {
+        "max_violations": 0
+      }
+    },
+    {
+      "id": "c24",
+      "title": "C-FAILURE",
+      "description": "Function docs include error, panic, and safety considerations.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c25",
+      "title": "C-LINK",
+      "description": "Prose contains hyperlinks to relevant things.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c26",
+      "title": "C-METADATA",
+      "description": "Cargo.toml includes all common metadata: authors, description, license, homepage, documentation, repository, keywords, categories.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-METADATA: requiere parsear Cargo.toml como TOML y validar presencia/ausencia de autores, description, license (con expresión SPDX), homepage/documentation/repository (URIs), keywords y categories. Un proxy de presencia de claves es demasiado frágil y no valida SPDX ni URIs."
+    },
+    {
+      "id": "c27",
+      "title": "C-RELNOTES",
+      "description": "Release notes document all significant changes.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-RELNOTES: la existencia de notas de version depende de archivos CHANGELOG.md/RELEASES.md y de su contenido (enlazar cada cambio  significativo). No hay un artefacto de texto unico sobre el cual aplicar un regex fiable."
+    },
+    {
+      "id": "c28",
+      "title": "C-HIDDEN",
+      "description": "Rustdoc does not show unhelpful implementation details.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c29",
+      "title": "C-SMART-PTR",
+      "description": "Smart pointers do not add inherent methods.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c30",
+      "title": "C-CONV-SPECIFIC",
+      "description": "Conversions live on the most specific type involved.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c31",
+      "title": "C-METHOD",
+      "description": "Functions with a clear receiver are methods.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c32",
+      "title": "C-NO-OUT",
+      "description": "Functions do not take out-parameters.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c33",
+      "title": "C-OVERLOAD",
+      "description": "Operator overloads are unsurprising.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c34",
+      "title": "C-DEREF",
+      "description": "Only smart pointers implement Deref and DerefMut.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c35",
+      "title": "C-CTOR",
+      "description": "Constructors are static, inherent methods.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c36",
+      "title": "C-INTERMEDIATE",
+      "description": "Functions expose intermediate results to avoid duplicate work.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c37",
+      "title": "C-CALLER-CONTROL",
+      "description": "Caller decides where to copy and place data.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c38",
+      "title": "C-GENERIC",
+      "description": "Functions minimize assumptions about parameters by using generics.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c39",
+      "title": "C-OBJECT",
+      "description": "Traits are object-safe if they may be useful as a trait object.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c40",
+      "title": "C-NEWTYPE",
+      "description": "Newtypes provide static distinctions.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c41",
+      "title": "C-CUSTOM-TYPE",
+      "description": "Arguments convey meaning through types, not bool or Option.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c42",
+      "title": "C-BITFLAG",
+      "description": "Types for a set of flags are bitflags, not enums.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c43",
+      "title": "C-BUILDER",
+      "description": "Builders enable construction of complex values.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c44",
+      "title": "C-VALIDATE",
+      "description": "Functions validate their arguments.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c45",
+      "title": "C-DTOR-FAIL",
+      "description": "Destructors never fail.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c46",
+      "title": "C-DTOR-BLOCK",
+      "description": "Destructors that may block have alternatives.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c47",
+      "title": "C-DEBUG",
+      "description": "All public types implement Debug.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c48",
+      "title": "C-DEBUG-NONEMPTY",
+      "description": "Debug representation is never empty.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c49",
+      "title": "C-SEALED",
+      "description": "Sealed traits protect against downstream implementations.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c50",
+      "title": "C-STRUCT-PRIVATE",
+      "description": "Structs have private fields.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c51",
+      "title": "C-NEWTYPE-HIDE",
+      "description": "Newtypes encapsulate implementation details.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c52",
+      "title": "C-STRUCT-BOUNDS",
+      "description": "Data structures do not duplicate derived trait bounds.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "c53",
+      "title": "C-STABLE",
+      "description": "Public dependencies of a stable crate are stable.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-STABLE: determinar la estabilidad de las dependencias publicas de un crate estable implica inspeccionar la version y el estado de estabilidad de cada dependencia transitiva; una heuristica de texto sobre `Cargo.toml` no puede inferirlo."
+    },
+    {
+      "id": "c54",
+      "title": "C-PERMISSIVE",
+      "description": "Crate and its dependencies have a permissive license.",
+      "type": "Concept",
+      "tags": [
+        "rust-api",
+        "api",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "rust-lang.github.io/api-guidelines",
+      "alias": [],
+      "links": [],
+      "why_not": "C-PERMISSIVE: validar que el crate y sus dependencias tengan una licencia permansiva implica resolver SPDX de cada dependencia transitiva y comparar contra la familia de licencias permisivas; un proxy de texto sobre `license` es frágil."
+    }
+  ]
+}

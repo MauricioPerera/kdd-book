@@ -1,0 +1,39 @@
+{
+  "id": "c23-question-mark",
+  "node": "c23",
+  "title": "Usar el operador ? en el ejemplo rustdoc de double",
+  "description": "Reescribe el ejemplo rustdoc de double para usar el operador ? en vez de .unwrap() o try!().",
+  "intent": "C-QUESTION-MARK exige que los ejemplos rustdoc usen el operador ? de manejo de errores, no la macro try!() ni .unwrap(). El ? comunica el manejo de error y evita panics inesperados en el ejemplo.",
+  "task": "c23_question_mark",
+  "target": "proyecto/lib.rs",
+  "seed": "seed_lib.rs",
+  "signature": "/// let r = double(2)?;",
+  "signature_seed": "/// let r = double(2).unwrap();",
+  "instrument": {
+    "script": "rust_api_checks.py",
+    "args": ["--rule", "question-mark"],
+    "threshold": "ningun ejemplo rustdoc usa .unwrap() ni try!()"
+  },
+  "budget": {
+    "cyclomatic_max": 2,
+    "nesting_max": 1,
+    "lines_max": 40,
+    "params_max": 2
+  },
+  "invariants": [
+    "La funcion double sigue existiendo y mantiene su doc de ejemplo: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`/// let r = double(2).unwrap();` dentro de un fence: rojo.",
+    "`/// let r = double(2)?;` dentro de un fence: verde."
+  ],
+  "do": [
+    "Reemplazar .unwrap() (o try!()) por el operador ? en el ejemplo rustdoc."
+  ],
+  "dont": [
+    "Borrar el ejemplo rustdoc: elimina la violacion del instrumento pero borra el artefacto observable (el fence de documento)."
+  ],
+  "stop_if": [
+    "el proyecto no expone pub fn double"
+  ]
+}

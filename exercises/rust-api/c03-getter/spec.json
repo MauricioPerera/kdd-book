@@ -1,0 +1,39 @@
+{
+  "id": "c03-getter",
+  "node": "c03",
+  "title": "Renombrar el getter por valor sin el prefijo get_",
+  "description": "Reescribe el metodo get_count para que devuelva u32 por valor sin el prefijo get_, renombrandolo count (los getters por referencia conservan get_).",
+  "intent": "La convencion Rust usa el prefijo get_ exclusivamente para getters por referencia. Un getter que devuelve por valor debe llamarse sin el prefijo: asi el nombre comunica el costo de la copia y no sugiere acceso a un campo interno.",
+  "task": "c03_getter",
+  "target": "proyecto/lib.rs",
+  "seed": "seed_lib.rs",
+  "signature": "pub fn count(&self) -> u32",
+  "signature_seed": "pub fn get_count(&self) -> u32",
+  "instrument": {
+    "script": "rust_api_checks.py",
+    "args": ["--rule", "getter"],
+    "threshold": "ningun getter con prefijo get_ que devuelva por valor"
+  },
+  "budget": {
+    "cyclomatic_max": 2,
+    "nesting_max": 1,
+    "lines_max": 30,
+    "params_max": 1
+  },
+  "invariants": [
+    "El struct Contador sigue existiendo: el oraculo pasa igual antes y despues."
+  ],
+  "examples": [
+    "`pub fn get_count(&self) -> u32 { 0 }` devuelve por valor con prefijo get_: rojo.",
+    "`pub fn count(&self) -> u32 { 0 }` renombra sin prefijo: verde."
+  ],
+  "do": [
+    "Eliminar el prefijo get_ del getter que devuelve por valor."
+  ],
+  "dont": [
+    "Eliminar el getter borrando el impl: cambia el artefacto observable (la API), no solo el nombre."
+  ],
+  "stop_if": [
+    "el proyecto no declara pub struct Contador"
+  ]
+}
