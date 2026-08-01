@@ -7,6 +7,8 @@ ejecutar).
 Verificado contra los validadores reales del repo
 [KDD](https://github.com/MauricioPerera/KDD), no contra una imitacion.
 
+**Sitio de presentacion (no tecnico, es/en/pt):** https://mauricioperera.github.io/kdd-book/
+
 ```
 extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
                                     \
