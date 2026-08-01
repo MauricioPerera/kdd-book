@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Trece fuentes, 691 nodos, 151 contratos ejecutables, 155 instrumentos en
+Catorce fuentes, 710 nodos, 151 contratos ejecutables, 155 instrumentos en
 diecisiete familias. Los cuatro gates en verde: `validate_okf`,
 `validate_contracts`, `validate_test_commands` y las 304 pruebas propias.
 
@@ -35,7 +35,8 @@ diecisiete familias. Los cuatro gates en verde: `validate_okf`,
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
 | Effective Go\*\*\*\*\* | 45 | 6,7% | **6,7%** | 3 | 3 |
 | Rust API Guidelines Checklist\*\*\*\* | 54 | 5,6% | **5,6%** | 3 | 3 |
-| **Total** | **691** | **206** | **189** | **183** | **151** |
+| The Zen of Python (PEP 20)\*\*\*\*\*\* | 19 | 0,0% | **0,0%** | 0 | 0 |
+| **Total** | **710** | **206** | **189** | **183** | **151** |
 
 \* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
 otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
@@ -73,6 +74,15 @@ no era exhaustiva- y se le pidio expandir el grafo al documento completo antes
 de aceptarla. Varias convenciones quedan en pila C por un motivo nuevo para
 este repositorio: `gofmt` ya las hace cumplir, asi que no hay nada que el
 codigo pueda violar de forma persistente. El detalle esta mas abajo.
+
+\*\*\*\*\*\* The Zen of Python es la contraparte deliberada de las cuatro
+fuentes anteriores: 0,0% instrumentado, y **eso es el resultado correcto, no
+un fracaso del triaje**. Sus 19 aforismos son juicio estetico de diseno, no
+umbrales binarios. Cuarta fuente construida por Poolside, y la primera donde
+tuvo que decidir **no** instrumentar nada -incluido rechazar explicitamente
+reusar un instrumento existente (`arch_checks.excepciones`) por generar
+falsos positivos que tergiversarian al autor-. Sin pila A, los gates 2-4 no
+aplican: solo corre `okf_emit`/`validate_okf`. El detalle esta mas abajo.
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -144,8 +154,8 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 219 en pila B (tecnica real sin propiedad medible)
-y 266 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 226 en pila B (tecnica real sin propiedad medible)
+y 278 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
 Hay 206 tecnicas en pila A y 151 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
@@ -442,13 +452,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **323 de las 691**, y el reparto no es casual:
+Lo tienen **330 de las 710**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
 | A (medibles) | **206 de 206** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 114 de 219 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 266 | no aplica: son temas, tecnologias y pasos de tutorial |
+| B (no medibles) | 121 de 226 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 278 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -471,14 +481,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 691 tecnicas, 157 instrumentos
+python memoria.py exportar          # -> memoria.json: 710 tecnicas, 157 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **709 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **722 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -508,7 +518,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 757 entradas -> 691 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 776 entradas -> 710 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -523,8 +533,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 691 + 66 | **691 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 691 + 66 | 757 tecnicas | 0 |
+| ids estables (`g36`) | 710 + 66 | **710 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 710 + 66 | 776 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -803,6 +813,17 @@ Tres decisiones que conviene tener a la vista:
   que el codigo pueda violar de forma persistente sin que la propia
   herramienta lo corrija. Es una razon distinta a "no hay umbral" o
   "requiere juicio": es "la herramienta del lenguaje ya lo resuelve".
+- **The Zen of Python es la unica fuente sin familia propia, y es lo
+  correcto.** Sus 19 aforismos terminaron A=0/B=7/C=12: juicio estetico de
+  diseno, no umbrales. La decision mas interesante fue negativa: se evaluo
+  reusar `arch_checks.excepciones` para instrumentar "errors should never
+  pass silently", y se descarto porque esa regla marca cualquier
+  `except Exception` amplio -incluido uno que maneja el error de verdad, que
+  el aforismo permite-, asi que reusarla habria sido un generador sistematico
+  de falsos positivos, el mismo error que el precedente J1 ya nombra:
+  tergiversar al autor para forzar una instrumentacion que no le corresponde.
+  Sin pila A no hay `instruments/zen_checks.py`, no hay ejercicios, y los
+  gates 2-4 no aplican a esta fuente: solo corre `okf_emit`/`validate_okf`.
 
 ## Los ejercicios
 
