@@ -1,0 +1,390 @@
+{
+  "source": {
+    "slug": "zen-of-python",
+    "title": "The Zen of Python (PEP 20)",
+    "author": "Tim Peters",
+    "file": "peps.python.org/pep-0020",
+    "pages": 19,
+    "extracted_with": "triaje a mano de los 19 aforismos de PEP 20 (The Zen of Python, por Tim Peters), tomados verbatim de `python -c \"import this\"`. La cobertura instrumentada es 0% porque ningun aforismo operacionaliza una propiedad de texto con un umbral automatizado fiel.",
+    "tags": [
+      "fundamento",
+      "python",
+      "estilo"
+    ],
+    "corpus": "Lista cerrada de 19 aforismos del PEP 20 (The Zen of Python, por Tim Peters), tomados verbatim de `python -c \"import this\"`. Es un corpus finito y deliberado: cada aforismo es un juicio sobre estilo, legibilidad e intencionalidad. La fraccion instrumentada es 0%: el aforismo de excepciones silenciosas reusa el espacio de arquitectura-java, pero su instrumento (`arch_checks.excepciones`) es un superconjunto que produce falsas positivas sobre `except Exception as e: log(e)` —que Zen permite—, asi que no hay regla aislada fiel y no se inventa una nueva."
+  },
+  "nodes": [
+    {
+      "id": "zp01",
+      "title": "Belleza sobre fealdad",
+      "description": "Beautiful is better than ugly.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp02",
+      "title": "Explicito sobre implicito",
+      "description": "Explicit is better than implicit.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "explicito",
+        "implicito",
+        "explicit imports",
+        "no wildcard imports",
+        "sin import *"
+      ],
+      "links": [],
+      "why_not": "Ser explicito es un juicio sobre conducta visible del codigo —nombres, importaciones, efectos secundarios— y no una sola propiedad de texto. Un proxy como prohibir `import *` es debil: el aforismo prescribe explicitidad sobre el conjunto, asi que forzarlo en cada archivo inventaria una regla que el autor no operacionaliza con un umbral concreto."
+    },
+    {
+      "id": "zp03",
+      "title": "Simple sobre complejo",
+      "description": "Simple is better than complex.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp04",
+      "title": "Complejo sobre complicado",
+      "description": "Complex is better than complicated.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp05",
+      "title": "Plano sobre anidado",
+      "description": "Flat is better than nested.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "flat is better than nested",
+        "plano",
+        "anidado",
+        "nesting depth",
+        "profundidad"
+      ],
+      "links": [],
+      "why_not": "'Flat es better than nested' reduce a profundidad de anidamiento, pero el aforismo no fija un umbral numerico: decir cuanto nesting es demasiado exige un numero ajeno al texto. Sin artefacto que soporte el umbral (como el de ciclamaticidad de arquitectura), cualquier reuse forzaria un valor que Zen no decide, convirtiendo el proxy en regla inventada."
+    },
+    {
+      "id": "zp06",
+      "title": "Escaso sobre denso",
+      "description": "Sparse is better than dense.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp07",
+      "title": "La legibilidad cuenta",
+      "description": "Readability counts.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp08",
+      "title": "No romper reglas por casos especiales",
+      "description": "Special cases aren't special enough to break the rules.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp09",
+      "title": "Practicidad sobre pureza",
+      "description": "Although practicality beats purity.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp10",
+      "title": "Errores no silenciosos",
+      "description": "Errors should never pass silently.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "excepciones",
+        "except silencioso",
+        "mudos",
+        "silent except",
+        "errores silenciosos"
+      ],
+      "links": [],
+      "why_not": "El aforismo prohibe pasar errores silenciosamente, pero el instrumento relacionado `arch_checks.excepciones` mide para arquitectura-java la regla \"sin catch mudos ni demasiado amplios\", un superconjunto: su flag \"demasiado amplio\" dispara sobre `except Exception as e: log(e)` —un ancho captura que maneja el error— que Zen PERMITE por no ser silencioso, dando una falsa positica sistemica. Un umbral sobre artefacto no juzga la intencionalidad del cuerpo (log, reraise, return con efecto), asi que la propiedad definitoria no es automatizable fielmente aqui y la tecnica se registra en pila B."
+    },
+    {
+      "id": "zp11",
+      "title": "Salvo silencio explicito",
+      "description": "Unless explicitly silenced.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "silenciamiento explicito",
+        "explicitly silenced",
+        "handled exception",
+        "excepcion manejada",
+        "silencio explicito"
+      ],
+      "links": [],
+      "why_not": "'Unless explicitly silenced' es la excepcion al aforismo anterior: juzga intencionalidad, no texto. Decidir si un manejador silencia \"explicitamente\" necesita razonamiento de flujo sobre el cuerpo (log, reraise, return con efecto), no un umbral sobre el artefacto; por eso es human_rubric, no instrumented."
+    },
+    {
+      "id": "zp12",
+      "title": "Ante la ambiguidad, no adivinar",
+      "description": "In the face of ambiguity, refuse the temptation to guess.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp13",
+      "title": "Una sola via obvia",
+      "description": "There should be one-- and preferably only one --obvious way to do it.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "one obvious way",
+        "una sola via",
+        "obvious way",
+        "single canonical way",
+        "no mas de una forma"
+      ],
+      "links": [],
+      "why_not": "'One obvious way' apela a lo intuitivo: 'obvious' es un juicio de legibilidad, no una propiedad de texto. El proxy DRY (duplicacion de codigo) mide algo relacionado pero no identico: una linea repetida no implica que haya \"muchas formas de hacerlo\", asi que el proxy senalaria correcto aquello que el aforismo no prescribe."
+    },
+    {
+      "id": "zp14",
+      "title": "A la holandesa no le es obvio",
+      "description": "Although that way may not be obvious at first unless you're Dutch.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp15",
+      "title": "Ahora sobre nunca",
+      "description": "Now is better than never.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp16",
+      "title": "Nunca sobre prematuro",
+      "description": "Although never is often better than *right* now.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "zp17",
+      "title": "Si cuesta explicar: mala idea",
+      "description": "If the implementation is hard to explain, it's a bad idea.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "hard to explain",
+        "mala idea",
+        "bad idea",
+        "dificil de explicar",
+        "implementation hard to explain"
+      ],
+      "links": [],
+      "why_not": "'Hard to explain is a bad idea' —saber si una implementacion es explicable depende del lector y del contexto, no de una regla sobre el texto. Un umbral no decide \"es dificil de explicar\"; se trata de un juicio de revision humana, no de una invariante de artefacto."
+    },
+    {
+      "id": "zp18",
+      "title": "Si se explica facil: buena idea",
+      "description": "If the implementation is easy to explain, it may be a good idea.",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [
+        "easy to explain",
+        "buena idea",
+        "good idea",
+        "facil de explicar",
+        "implementation easy to explain"
+      ],
+      "links": [],
+      "why_not": "'Easy to explain may be a good idea' complementa al anterior: 'facil de explicar\" es juicio de comprensibilidad humana. No hay propiedad textual que lo determine; se revisa con razon humano, no con un instrumento sobre el artefacto."
+    },
+    {
+      "id": "zp19",
+      "title": "Namespaces: gran idea",
+      "description": "Namespaces are one honking great idea -- let's do more of those!",
+      "type": "Concept",
+      "tags": [
+        "zen",
+        "python",
+        "estilo",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "peps.python.org/pep-0020",
+      "alias": [],
+      "links": []
+    }
+  ]
+}

@@ -22,7 +22,8 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
           'doce-factores', 'wcag', 'pep8', 'estilo-google', 'tailwind', 'stripe',
-          'semver', 'rust-api', 'effective-go')
+          'semver', 'rust-api', 'effective-go',
+          'zen-of-python')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
