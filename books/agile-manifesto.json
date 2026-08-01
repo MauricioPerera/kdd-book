@@ -1,0 +1,352 @@
+{
+  "source": {
+    "slug": "agile-manifesto",
+    "title": "Manifesto for Agile Software Development",
+    "author": "Kent Beck, Mike Beedle, Arie van Bennekum, Alistair Cockburn, Ward Cunningham, Martin Fowler, James Grenning, Jim Highsmith, Andrew Hunt, Ron Jeffries, Jon Kern, Brian Marick, Robert C. Martin, Steve Mellor, Ken Schwaber, Jeff Sutherland, Dave Thomas",
+    "file": "agilemanifesto.org (agile-manifesto.html, agile-manifesto-principles.html)",
+    "pages": 2,
+    "extracted_with": "triaje a mano de los 17 items del manifesto agil (1 declaracion + 4 valores + 12 principios), tomados verbatim de agile-manifesto.html y agile-manifesto-principles.html. La cobertura instrumentada es 0% porque ningun item operacionaliza una propiedad de artefacto con un umbral automatizado fiel.",
+    "tags": [
+      "fundamento",
+      "agil",
+      "manifesto"
+    ],
+    "corpus": "Lista cerrada de 17 items del Manifesto Agil (1 declaracion, 4 valores, 12 principios), tomados verbatim de agilemanifesto.org. Cada item es un juicio sobre como trabaja un equipo, no una propiedad de artefacto que un instrumento pueda leer. La fraccion instrumentada es 0%: el candidato mas directo (cadencia de git_checks para P1/P3) mide solo el hueco entre tags de release, no \"entrega continua de software valioso\" ni \"software funcionando\", y devuelve NO-VERIFICABLE en repositorios sin .git."
+  },
+  "nodes": [
+    {
+      "id": "am01",
+      "title": "Declaracion del manifiesto agil",
+      "description": "We are uncovering better ways of developing software by doing it and helping others do it. Through this work we have come to value:",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am02",
+      "title": "Individuos e interacciones sobre procesos y herramientas",
+      "description": "Individuals and interactions over processes and tools",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am03",
+      "title": "Software funcionando sobre documentacion exhaustiva",
+      "description": "Working software over comprehensive documentation",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am04",
+      "title": "Colaboracion con el cliente sobre negociacion de contratos",
+      "description": "Customer collaboration over contract negotiation",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am05",
+      "title": "Responder al cambio sobre seguir un plan",
+      "description": "Responding to change over following a plan",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am06",
+      "title": "Entrega temprana y continua de software valioso",
+      "description": "Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "entrega temprana y continua",
+        "early and continuous delivery",
+        "satisfacer al cliente",
+        "satisfy the customer"
+      ],
+      "links": [],
+      "why_not": "La entrega temprana y continua de software valioso es la tecnica que scrum-xp operacionaliza en `git_checks.py --rule cadencia` (scrum-xp/024, pila A). Pero cadencia mide el hueco entre tags de release en el historial de git, y este checkout no tiene .git, asi que devuelve NO-VERIFICABLE (exit 2). Mas alla de ello, el umbral de cadencia verifica solo la frecuencia de marcaje, no 'satisfacer al cliente' ni 'software valioso': el valor lo juzga el cliente y la continuidad exige un ritmo sostenido que un tag cada <=60 dias no garantiza. El proxy es un subconjunto parcial sobre una propiedad que exige razonamiento de equipo, no un umbral de artefacto."
+    },
+    {
+      "id": "am07",
+      "title": "Bienvenidos requisitos cambiantes",
+      "description": "Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am08",
+      "title": "Entregar software funcionando frecuentemente",
+      "description": "Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "entregas frecuentes",
+        "frequent delivery",
+        "entregas cortas",
+        "short releases",
+        "couple of weeks"
+      ],
+      "links": [],
+      "why_not": "El candidato mas directo es `git_checks.py --rule cadencia` (scrum-xp/024), el unico instrumento que lee el historial de git para este principio. Tiene tres fallas: (1) devuelve NO-VERIFICABLE en este checkout (sin .git); (2) mide solo el hueco SUPERIOR entre tags, mientras el principio propone una ventana (2 semanas a 2 meses) con preferencia al minimo —un rango y una preferencia que cadencia no captura; (3) requiere 'software FUNCIONANDO' y cadencia no verifica tests en verde (eso es repo_checks e2, distinto). Reusar cadencia como unico umbral seria un subconjunto parcial: la tecnica es real, la propiedad definitoria no es medible con un solo instrumento sobre artefacto."
+    },
+    {
+      "id": "am09",
+      "title": "Trabajo diario entre personas y negocio",
+      "description": "Business people and developers must work together daily throughout the project.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am10",
+      "title": "Individuos motivados con entorno y soporte",
+      "description": "Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am11",
+      "title": "Conversacion cara a cara",
+      "description": "The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am12",
+      "title": "Software funcionando como medida de progreso",
+      "description": "Working software is the primary measure of progress.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "software funcionando como medida",
+        "working software is the measure",
+        "medida de progreso",
+        "primary measure of progress"
+      ],
+      "links": [],
+      "why_not": "El instrumento `repo_checks.py --rule e2` (scrum-xp/085, 108, 110) confirma 'software funcionando' corriendo la suite de tests en verde. Pero 'medida PRIMARIA de progreso' implica una priorizacion frente a otras medidas (historias completadas, funcionalidades, valor de negocio) —una decision de prioridad que ningun artefacto puede determinar. La propiedad medible es el subconjunto 'tests en verde'; el juicio de 'medida primaria' es razonamiento de equipo, no umbral de artefacto."
+    },
+    {
+      "id": "am13",
+      "title": "Ritmo sostenible e indefinido",
+      "description": "Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "ritmo sostenible",
+        "sustainable pace",
+        "semana de 40 horas",
+        "40 hour week",
+        "constant pace",
+        "sustainable development"
+      ],
+      "links": [],
+      "why_not": "scrum-xp/079 ('semana de 40 horas') clasifica el mismo concepto como pila B: aunque su titulo menciona 40 horas, la autora Bahit no fija un numero —habla de no exigir mas esfuerzo del humanamente disponible, que es un juicio sobre carga de trabajo. En el manifesto, 'desarrollo sostenible' y 'ritmo constante indefinidamente' son aspiraciones sobre bienestar del equipo; ningun artefacto de codigo o git puede leer 'sostenibilidad' ni 'ritmo'. No hay umbral artifactual fiel."
+    },
+    {
+      "id": "am14",
+      "title": "Excelencia tecnica y buen diseno",
+      "description": "Continuous attention to technical excellence and good design enhances agility.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "excelencia tecnica",
+        "technical excellence",
+        "buen diseno",
+        "good design"
+      ],
+      "links": [],
+      "why_not": "Existen instrumentos sobre propiedades individuales (repo_checks g24 sobre convenciones, checks metlineas/g5 sobre longitud y duplicacion), pero 'excelencia tecnica' o 'buen diseno' como conceptos holisticos no tienen un umbral: son juicios de calidad global. Cada instrumento mide una propiedad concreta que el autor de codigo puede cumplir sin que el resultado sea 'excelente' en sentido amplio. La propiedad definitoria no es automatizable fielmente."
+    },
+    {
+      "id": "am15",
+      "title": "Simplicidad",
+      "description": "Simplicity--the art of maximizing the amount of work not done--is essential.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "simplicidad",
+        "simplicity",
+        "maximize work not done",
+        "trabajo no realizado"
+      ],
+      "links": [],
+      "why_not": "Al igual que el aforismo zen 'Flat is better than nested' (zp05, pila B), 'simplicidad' es un juicio de diseno: decir cuanto codigo es 'demasiado' exige un numero ajeno al texto. scrum-xp/030 clasifica la misma idea como B. No hay una propiedad de artefacto que determine 'simple' —solo proxies debiles como lineas o metodos cortos, que el autor del manifesto no operacionaliza con un umbral concreto."
+    },
+    {
+      "id": "am16",
+      "title": "Equipos autoorganizados emergen",
+      "description": "The best architectures, requirements, and designs emerge from self-organizing teams.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "agilemanifesto.org",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "am17",
+      "title": "Reflexion y ajuste del equipo",
+      "description": "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.",
+      "type": "Concept",
+      "tags": [
+        "manifesto",
+        "agil",
+        "fundamento",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "human_rubric",
+      "locator": "agilemanifesto.org",
+      "alias": [
+        "retrospectiva",
+        "retrospective",
+        "inspeccionar y adaptar",
+        "inspect and adapt"
+      ],
+      "links": [],
+      "why_not": "scrum-xp/032 ('inspeccionar y adaptar') clasifica la retrospectiva como pila A con verificacion `proxy` (calendario: la retrospectiva ocurrio al cerrar el sprint) —un registro que llena una persona, no una propiedad de codigo. El manifesto exige 'reflexionar sobre como ser mas efectivo' y 'ajustar el comportamiento', lo cual es razonamiento humano sobre el proceso del equipo, no algo que un artefacto pueda leer. Incluso el proxy de calendario de scrum-xp no es un instrumento sobre codigo: confirmar que una reunion ocurrio no verifica que el equipo realice el ajuste."
+    }
+  ]
+}

@@ -23,7 +23,7 @@ RAIZ = os.path.dirname(AQUI)
 LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
           'doce-factores', 'wcag', 'pep8', 'estilo-google', 'tailwind', 'stripe',
           'semver', 'rust-api', 'effective-go',
-          'zen-of-python')
+          'zen-of-python', 'agile-manifesto')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
