@@ -1,0 +1,792 @@
+{
+  "source": {
+    "slug": "effective-go",
+    "title": "Effective Go",
+    "author": "The Go Authors (go.dev/doc/effective_go)",
+    "file": "go.dev/doc/effective_go",
+    "pages": 1,
+    "extracted_with": "triaje estructurado sobre las tecnicas de formato, nombrado, error y concurrencia de Effective Go, triadas a mano en pilas A (3, instrumented), B (6) y C (36). NO ES UN VOLCADO LITERAL del documento; es la interpretacion de cada tecnica como una invariante contractable o de conocimiento. El porcentaje de cobertura instrumentada es 3/45.",
+    "tags": [
+      "fuente",
+      "documentacion",
+      "go",
+      "effective-go"
+    ],
+    "corpus": "45 tecnicas de Effective Go triadas a mano en pilas A (3, instrumented), B (6, no-especificables con why_not) y C (36, conocimiento). Las 3 de pila A miden invariantes de texto en .go con regex (tabs no espacios, sin parentesis en control, llave en misma linea). Las 6 de pila B son convenciones con una propiedad proxy pero que requieren analisis semantico o de flujo de datos. Las 36 de pila C son politicas y convenciones del toolchain gofmt que no tienen invariante de texto localizable. NO ES UN VOLCADO LITERAL del documento; es la interpretacion de cada tecnica como invariante contractable o de conocimiento.",
+    "index": "La pagina de indice lista los 45 nodos de este libro. Cada nodo enlaza su invariante a la fuente (fuente.md) que lo documenta."
+  },
+  "nodes": [
+    {
+      "id": "eg01",
+      "title": "Indentacion: tabs no espacios",
+      "description": "gofmt usa tabulaciones para la sangria. Un archivo .go cuyas lineas interiorizadas empiecen con espacios en vez de un tabulador no cumple la convencion de formato que el toolchain gofmt aplica y revierte automaticamente; la sangria debe ser siempre un tab.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "tabs",
+        "tabulaciones",
+        "gofmt",
+        "sangria"
+      ],
+      "links": [],
+      "instrument": "effective_go_checks.py --rule indentation-tabs",
+      "threshold": "cero lineas de .go con sangria en espacios (gofmt usa tabulaciones exclusivamente)"
+    },
+    {
+      "id": "eg02",
+      "title": "Sin parentesis en estructuras de control",
+      "description": "Las estructuras de control de Go (if, for, switch) no llevan parentesis alrededor de la condicion. Escribir `if (x > 0)` o `for (i := 0; i < n; i++)` es valido sintacticamente pero no idiomatico: los parentesis son redundantes y la comunidad los rechaza. El cuerpo del if sigue en la misma linea que la condicion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "sin parentesis",
+        "control structures",
+        "no parentheses"
+      ],
+      "links": [],
+      "instrument": "effective_go_checks.py --rule no-paren-control",
+      "threshold": "cero parentesis alrededor de la condicion de if/for/switch (Go no usa parentesis en estructuras de control)"
+    },
+    {
+      "id": "eg03",
+      "title": "Llave de apertura en la misma linea",
+      "description": "La llave de apertura de un bloque va en la misma linea que la keyword (if, for, switch, func). Ponerla en la linea siguiente, el estilo de C/Java, rompe el formato que gofmt impone como regla unica: `if cond {\\n    ...\\n}` no `if cond\\n{`.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "contractable",
+        "instrumented"
+      ],
+      "pile": "A",
+      "verification": "instrumented",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "llave en misma linea",
+        "brace on same line",
+        "gofmt"
+      ],
+      "links": [],
+      "instrument": "effective_go_checks.py --rule brace-next-line",
+      "threshold": "cero llaves de apertura en linea separada de if/for/switch/func (el `{` va en la misma linea que la keyword)"
+    },
+    {
+      "id": "eg04",
+      "title": "Doc comment antes de la declaracion",
+      "description": "Todo identificador exportable (funciones, tipos, metodos, variables) debe tener un comentario de doc que empiece con su nombre. El comentario no es solo estilo: `go doc` lo muestra y `go vet` lo advierte. Un identificador exportado sin doc es un defecto de API.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "doc comment",
+        "documentacion",
+        "go doc"
+      ],
+      "links": [],
+      "why_not": "Verificar que un comentario de doc preceda a la declaracion y que el comentario comience con el nombre exacto del identificador exportado requiere asociar el texto del comentario al simbolo declarado. Un proxy de texto (presencia de `//` antes de `func`) no comprueba que el comentario mencione el nombre correcto: `func Foo()` documentado con `// Bar does stuff` pasaria el proxy pero falla la regla real. Requiere parseo de nombres simbolicos, no solo regex sobre lineas aisladas."
+    },
+    {
+      "id": "eg05",
+      "title": "Comma-ok en aserciones de tipo",
+      "description": "Cuando se convierte un valor a un tipo de interfaz conocido, usar el patron comma-ok (`v, ok := x.(T)`) para distinguir si la conversion es segura. Una conversion directa `x.(T)` que falla hace panic; el patron comma-ok evita el panic con una bandera booleana que indica si la conversion tuvo exito.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "comma-ok",
+        "type assertion",
+        "type-safe"
+      ],
+      "links": [],
+      "why_not": "La tecnica es el uso del patron comma-ok en aserciones de tipo (`v, ok := x.(T)`). Pero el codigo correcto tambien usa `x.(T)` (conversion directa, una sola vez) o en type-switch (`switch v := x.(type)`). Un instrumento de texto sobre `x.(T)` no distingue conversion segura con comma-ok de conversion directa intencional sin analizar el flujo de control y las intenciones del programador: es una decision de diseno, no una propiedad localizable en una linea aislada."
+    },
+    {
+      "id": "eg06",
+      "title": "Deferir Close tras abrir un recurso",
+      "description": "Cuando se abre un recurso (os.Open, os.Create, http.Get), el Close debe deferirse inmediatamente para garantizar que se libere incluso si ocurre un error intermedio. Es el patron 'abrir- deferir-cierre' del que Effective Go advierte: sin defer, un return intermedio puede saltar el Close y producir un leak de descriptor de archivo.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "defer close",
+        "resource leak",
+        "defer"
+      ],
+      "links": [],
+      "why_not": "Verificar que `os.Open` tiene un `defer ...Close()` correspondiente requiere rastrear el nombre de la variable devuelta hasta su uso en defer, saltando lineas intermedias y manejando shadowing. Un proxy regex `os.Open.*defer.*Close` es frágil: un Open sin Close intencional (paso de file descriptor a otra funcion) produce un falso positivo, y un defer sin el nombre exacto de la variable produce un falso negativo. Requiere analisis de flujo de datos, no solo regex sobre texto aislado."
+    },
+    {
+      "id": "eg07",
+      "title": "Error strings en minuscula",
+      "description": "Los strings de error no deben empezar con Mayuscula ni contener saltos de linea. La convencion de Go es que los errores son frases en minuscula inicial: 'file not found', no 'File not found'. Esto evita mayusculas dobles cuando el error se encadena en un mensaje mayor y evita confusion en la lectura del log.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "error string",
+        "lowercase",
+        "capitalization"
+      ],
+      "links": [],
+      "why_not": "Detectar si un error esta capitalizado implica identificar que un string literal es un error (no un mensaje arbitrario de log), rastrear el contexto `errors.New` o `fmt.Errorf`, y luego inspeccionar la capitalizacion. El mismo string literal podria ser un mensaje de log, un nombre de archivo o un error segun el contexto. Un proxy de texto sobre `errors.New(\"...\"`) con mayuscula inicial no distingue errores de otros strings, y no verifica el encadenamiento con `fmt.Errorf` que también debe empezar en minuscula. Requiere analisis semantico, no solo regex."
+    },
+    {
+      "id": "eg08",
+      "title": "Verificar valores de error devueltos",
+      "description": "En Go, las funciones devuelven un error como ultimo valor de retorno. El llamador debe comprobar `if err != nil` antes de usar el resto de los valores. Ignorar el error —por ejemplo con `_, err := foo()` sin comprobar, o simplemente `foo()`—puede ocultar fallos que se propagan silenciosamente. Effective Go insiste: 'el error es un valor mas' y siempre se comprueba.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "error handling",
+        "comprobar error",
+        "error return"
+      ],
+      "links": [],
+      "why_not": "Verificar que un valor de error devuelto es comprobado requiere conocer la firma de la funcion llamada (¿devuelve error?), rastrear el nombre de la variable asignada y comprobar que se usa en una condicion `if err != nil` o se propaga con `return err`. Un proxy de texto sobre `_ = foo()` captura el caso mas evidente, pero no detecta `foo()` cuyo error se ignora implicitamente (la llamada sin asignacion), ni distingue un `_` intencional (funcion que no devuelve error) de uno accidental. Requiere analisis de tipos y flujo de datos, no solo regex sobre texto aislado."
+    },
+    {
+      "id": "eg09",
+      "title": "Receiver con nombre consistente por tipo",
+      "description": "Los metodos de un tipo deben usar el mismo nombre de receiver. Si el tipo Account tiene metodos con receiver `r`, `a` y `self`, el codigo es inconsistente y confuso. Effective Go recomienda un nombre conciso y constante para todos los metodos de un tipo, evitando abreviaturas ambiguas.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "no-especificable"
+      ],
+      "pile": "B",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [
+        "receiver name",
+        "nombre de receiver",
+        "consistencia"
+      ],
+      "links": [],
+      "why_not": "Verificar consistencia de nombres de receiver requiere agrupar todos los metodos que operan sobre el mismo tipo, asociando cada declaracion `func (nombre Tipo) Metodo()` al tipo Tipo. Un proxy de texto sobre una sola linea no puede determinar que dos metodos pertenecen al mismo tipo sin parsear el identificador del tipo entre parentesis. Requiere analisis de simbolos globales, no solo regex sobre lineas aisladas."
+    },
+    {
+      "id": "eg10",
+      "title": "Nombres de paquete: minusculas sin guion bajo",
+      "description": "Los paquetes de Go usan solo letras minusculas, sin guiones ni guiones bajos. Un paquete 'user_auth' deberia ser 'userauth' o, mejor, dividido en paquetes 'auth' y 'user'. El nombre del paquete aparece en cada llamada calificada `pkg.Simbolo` y los guiones bajos lo ensucian visualmente.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg11",
+      "title": "Getters sin prefijo get",
+      "description": "Un metodo que devuelve un valor no usa el prefijo 'get': 'obj.Count()' en vez de 'obj.GetCount()'. El prefijo es redundante en Go. Para getters por referencia el prefijo puede usarse si evita conflitos, pero no es la convencion comun.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg12",
+      "title": "Interfaces con sufijo -er",
+      "description": "Por convencion, los tipos de interfaz se nombra con el sufijo del verbo que describe su metodo: 'Reader' para 'Read', 'Writer' para 'Write'. El patron se usa para interfaces de un solo metodo que forman parte del API de un paquete.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg13",
+      "title": "Identificadores MixedCaps (camelCase)",
+      "description": "Go usa MixedCaps (camelCase) para identificadores multi-palabra: 'localName' para locales, 'PublicName' para exportables. Los guiones bajos en nombres son no idiomaticos; MixedCaps es la convencion visual que el toolchain aplica consistentemente.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg14",
+      "title": "Sin limite de longitud de linea",
+      "description": "Go no impone un limite de longitud de linea. gofmt no envuelve lineas. Las lineas largas son aceptables; el lector y su editor manejan el desplazamiento horizontal. No hay ninguna regla de longitud maxima de linea en Effective Go ni en gofmt.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg15",
+      "title": "gofmt: formateo automatico con tabs",
+      "description": "gofmt formatea el codigo con tabulaciones para la sangria y espacios para la alineacion. Los desarrolladores deben correr gofmt (o `go fmt`) sobre su codigo: el formato es canonical, no es discutible, y todos los archivos de un proyecto deben seguirlo.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg16",
+      "title": "Insercion automatica de semicolons",
+      "description": "El lexer de Go inserta automaticamente semicolons al final de lineas que terminan en identificadores, literales, o en ')', ']' o '}'. Esto significa que la llave de apertura de un bloque debe ir en la misma linea que la keyword: un '{' en linea separada recibe un semicolon antes y genera un error de sintaxis.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg17",
+      "title": "Comentarios: linea y bloque",
+      "description": "Los comentarios de linea usan //; los de bloque usan /* */. Effective Go usa comentarios de bloque para textos grandes del paquete y comentarios de linea para anotaciones cortas. El paquete completo va documentado con /* Block */ al inicio del primer archivo.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg18",
+      "title": "Tres formas de for",
+      "description": "El bucle `for` es el unico bucle de Go y tiene tres formas: con clausula init/cond/post (como C), `for cond` (como while) y `for` sin condicion (infinito). Ademas `range var := range x` itera sobre arrays, slices, strings, maps y canales.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg19",
+      "title": "Switch sin fallthrough automatico",
+      "description": "A diferencia de C/Java, el switch de Go no hace fallthrough automatico. Cada caso termina implicitamente con break. Se usa `fallthrough` de forma explicita solo cuando se necesita continuar al siguiente caso sin cumplir otra condicion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg20",
+      "title": "Range sobre arrays, slices, maps, canales",
+      "description": "`range` itera sobre arrays, slices, strings (por bytes), maps (por key) y canales (por valor). Se puede obtener el indice y/o el valor; para descartar uno se usa el identificador en blanco: `for i, _ := range s` o `for _, v := range s`.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg21",
+      "title": "Multiples valores de retorno",
+      "description": "Go permite funciones con multiples valores de retorno. La convencion es devolver un error como ultimo valor: `value, err := Func()`. El llamador debe comprobar err. Esta capacidad simplifica muchos patrones comunes de manejo de errores y de datos parcialmente-calculados.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg22",
+      "title": "Resultados nombrados en return",
+      "description": "Los valores de retorno pueden nombrarse en la firma de la funcion. Un `return` sin operandos devuelve los valores nombrados actuales. Effective Go recomienda nombrar solo cuando ayuda la documentacion del comportamiento; no para todos los casos.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg23",
+      "title": "defer: ejecutar antes del return",
+      "description": "Una llamada `defer` se ejecuta justo antes de que la funcion devuelva. Las llamadas deferidas se apilan (LIFO): la ultima deferida es la primera en ejecutarse. Se usa para liberar recursos, cerrar archivos, desbloquear mutexes, etc.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg24",
+      "title": "new: memoria zeroada; make: inicializa slices/maps/channels",
+      "description": "`new(T)` asigna memoria zeroada y devuelve *T. `make(T)` crea slices, maps y channels con inicializacion interna y devuelve T (no *T). make solo aplica a estos tres tipos; new aplica a cualquier tipo. El resutado de new está inicializado a cero pero no configurado.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg25",
+      "title": "Literales compuestos: field: value",
+      "description": "Los literales compuestos inicializan structs, arrays, slices y maps: `T{field: value}`. Para structs, nombrar los campos es recomendado para mayor claridad. Los literales pueden anidarse y se pueden omitir los indices para arrays y slices.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg26",
+      "title": "Arrays son valores, no referencias",
+      "description": "Un array en Go es una copia completa: semántica por valor. Pasar un array a una funcion copia todos sus elementos. Para evitar copias caras, se pasa un slice (que es un descriptor ligero) o un puntero al array (&[N]T{...}).",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg27",
+      "title": "len y cap: longitud vs capacidad",
+      "description": "Un slice tiene longitud (len, elementos visibles) y capacidad (cap, elementos hasta el final del array subyacente). `append` crece el slice hasta cap; si la longitud supera la capacidad, se asigna un nuevo array y se copian los elementos.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg28",
+      "title": "Slices bidimensionales: slice-of-slices",
+      "description": "Las matrices 2D se implementan como slices de slices (`[][]T`). Cada fila puede tener longitud independiente. No se requiere que todas las filas tengan la misma longitud, lo que diferencia de los arrays 2D tradicionales.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg29",
+      "title": "Comma-ok para map keys: missing vs zero value",
+      "description": "Leer de un map devuelve siempre un valor (el zero value si la key no existe). Para distinguir key-ausente de valor-zero, usar el patron comma-ok: `v, ok := m[key]`. Si ok es false, la key no existe en el map.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg30",
+      "title": "delete() es seguro incluso si la key no existe",
+      "description": "`delete(m, key)` en un map es seguro: si la key no existe, no hace nada y no hay panic. No se necesita comprobar la existencia de la key antes de borrar. La funcion delete toma como argumentos el map y la key a eliminar.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg31",
+      "title": "Familia fmt: Print, Printf, Fprint, Sprint",
+      "description": "El paquete `fmt` tiene variantes para cada destino: `Print/Printf` (stdout), `Fprint/Fprintf` (io.Writer), `Sprint/Sprintf` (string). Cada grupo usa verbs como `%v`, `%+v`, `%#v` para formatear valores de forma legible y para depuracion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg32",
+      "title": "append devuelve el slice actualizado",
+      "description": "`append(slice, elementos...)` puede devolver un slice nuevo si la capacidad es insuficiente. Siempre se asigna el resultado: `s = append(s, x)`. Ignorar el retorno de append es un bug comun que conduce a datos perdidos.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg33",
+      "title": "init(): inicializacion antes de main",
+      "description": "Cada paquete puede tener funciones `init()` que se ejecutan automaticamente antes de `main()`. Se usan para validar o inicializar estado que no se puede expresar en una declaracion de variable. Puede haber varias funciones init por paquete y archivo.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg34",
+      "title": "Receiver por puntero para mutacion, por valor para lectura",
+      "description": "Un metodo puede tener receiver por valor (T) o por puntero (*T). Si el metodo muta el receiver o se quiere evitar copias caras, use *T. La regla: no mezclar receiver por valor y por puntero en los metodos del mismo tipo; elige uno y aplica consistentemente.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg35",
+      "title": "Interfaces: tipado estructural sin declaracion explicita",
+      "description": "Un tipo implementa una interfaz si satisface todos sus metodos. No se necesita `implements`. El tipado es estructural: si dos tipos tienen los mismos metodos, son equivalentes para esa interfaz. Esto permite interfaces pequeñas y reutilizables.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg36",
+      "title": "Conversiones entre tipos",
+      "description": "Las conversiones cambian el tipo de un valor: `T(v)`. Son seguras si el valor es compatible con T. No son lo mismo que las aserciones de tipo, que se aplican a interfaces y pueden fallar en tiempo de ejecucion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg37",
+      "title": "Type switch: switch v := x.(type)",
+      "description": "Un type switch es una construccion switch que descubre el tipo dinámico de una interfaz. `switch v := x.(type)` asigna v con el tipo de cada caso, simplificando cadenas de aserciones. Cada caso puede comparar contra un tipo concreto.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg38",
+      "title": "Identificador en blanco: descartar valores",
+      "description": "El identificador en blanco `_` descarta valores. Se usa en asignaciones multiples para ignorar valores no usados: `_, err := f()`. No se puede leer de `_`; su unico proposito es descartar. También se usa para asignaciones de longitud fija que deben servir de documentacion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg39",
+      "title": "_ para silenciar imports y variables no usados",
+      "description": "Si un paquete se importa solo por sus efectos secundarios o si una variable no se usa, usar `_` para silenciar el error de compilacion: `import _ \"pkg\"` o `var _ = valor`. El compilador exige que todo import y toda variable local sea usada; el identificador en blanco es la forma de deshacerse del requisito.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg40",
+      "title": "Import para efectos secundarios: import _",
+      "description": "Importar un paquete solo por sus efectos secundarios (registro de drivers, inicializacion de estado global): `import _ \"pkg\"`. El underscore suprime el error de 'imported and not used' y garantiza que se ejecute el paquete por sus efectos.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg41",
+      "title": "Checks de interfaz en tiempo de compilacion",
+      "description": "Para garantizar en tiempo de compilacion que un tipo implementa una interfaz, usar: `var _ Interface = (*Tipo)(nil)`. Si el tipo no implementa la interfaz, hay un error de compilacion. El identificador en blanco evita que la variable se use, pero el check sigue funcionando.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg42",
+      "title": "Embedding: tipos dentro de struct e interface",
+      "description": "Un struct puede contener un tipo como campo anonimo (embedding). Los metodos del tipo embebido se promueven al struct que lo contiene, como si fueran propios. Las interfaces tambien pueden embeber otras interfaces, combinando metodos.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg43",
+      "title": "Compartir por comunicacion (no por memoria)",
+      "description": "El mantra de Go: 'No comuniques compartiendo memoria; comparte memoria comunicate'. Los goroutines se comunican a traves de canales, no a traves de memoria compartida. Este enfoque evita condiciones de carrera y hace el comportamiento predecible.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg44",
+      "title": "Goroutines: concurrencia ligera",
+      "description": "Una goroutine es una funcion que corre concurrentemente con otras. `go f()` lanza una goroutine. Las goroutines se multiplexan sobre hilos del OS, son muy ligeras (memoria inicial pequena) y el runtime de Go gestiona su planificacion.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    },
+    {
+      "id": "eg45",
+      "title": "recover(): detener panic en deferred",
+      "description": "`recover()` detiene un panic y devuelve el valor del panic. Solo es util dentro de una funcion deferida: si se llama afuera de una defer, no hace nada. Se usa para convertir panics en errores devuelta, a menudo en servers que no deben caer.",
+      "type": "Concept",
+      "tags": [
+        "effective-go",
+        "go",
+        "conocimiento"
+      ],
+      "pile": "C",
+      "verification": "none",
+      "locator": "go.dev/doc/effective_go",
+      "alias": [],
+      "links": []
+    }
+  ]
+}

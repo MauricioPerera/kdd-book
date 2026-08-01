@@ -1,0 +1,42 @@
+{
+    "id": "eg02_no_paren_control",
+    "node": "eg02",
+    "title": "Elimina los parentesis de la condicion del if",
+    "description": "El archivo proyecto/main.go usa parentesis alrededor de la condicion del if (if (1 == 1)). Reescribe la condicion sin parentesis, cumpliendo la convencion de gofmt.",
+    "intent": "gofmt y la convencion de la comunidad Go prohíben parentesis redundantes alrededor de las condiciones de if, for y switch. Los parentesis son sintacticamente válidos pero estilísticamente incorrectos.",
+    "type": "Task Contract",
+    "target": "proyecto/main.go",
+    "oracle": "oracle_test.py",
+    "seed": "seed.go",
+    "kind": "refactor",
+    "signature": "if 1 == 1 {",
+    "signature_seed": "if (1 == 1) {",
+    "instrument": {
+        "script": "effective_go_checks.py",
+        "args": ["--rule", "no-paren-control"],
+        "threshold": "cero usos de parentesis alrededor de if/for/switch"
+    },
+    "budget": {
+        "cyclomatic_max": 4,
+        "nesting_max": 2,
+        "lines_max": 60,
+        "params_max": 3
+    },
+    "invariants": [
+        "El programa sigue imprimiendo hola: el oraculo pasa igual antes y despues."
+    ],
+    "examples": [
+        "El seed.go usa if (1 == 1); la solucion usa if 1 == 1 sin parentesis.",
+        "La tecnica aplica solo a if, for y switch, no a asignaciones con parentesis."
+    ],
+    "do": [
+        "Eliminar los parentesis que rodean la condicion del if para dejar if 1 == 1."
+    ],
+    "dont": [
+        "Cambiar fmt.Println por otro contenido: el oraculo verifica que el programa imprime el mensaje hola.",
+        "Reagregar parentesis a la condicion del if: el instrumento rojo detecta parentesis en if."
+    ],
+    "stop_if": [
+        "el archivo proyecto/main.go no declara package main"
+    ]
+}

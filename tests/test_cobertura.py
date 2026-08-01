@@ -22,7 +22,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 LIBROS = ('codigo-limpio', 'scrum-xp', 'arquitectura-java', 'htmx',
           'doce-factores', 'wcag', 'pep8', 'estilo-google', 'tailwind', 'stripe',
-          'semver', 'rust-api')
+          'semver', 'rust-api', 'effective-go')
 
 # Tecnicas con instrumento que a proposito NO tienen ejercicio, y por que.
 #
@@ -274,7 +274,8 @@ class CoberturaTest(unittest.TestCase):
                        'mutation_checks', 'html_checks', 'http_checks',
                        'template_checks', 'entorno_checks', 'a11y_checks',
                        'pep8_checks', 'prosa_checks', 'tailwind_checks',
-                       'stripe_checks', 'semver_checks', 'rust_api_checks'):
+                       'stripe_checks', 'semver_checks', 'rust_api_checks',
+                       'effective_go_checks'):
             registros[modulo + '.py'] = __import__(modulo)
         for script, regla in sorted(_instrumentos_ejercitados()):
             if not regla or script not in registros:

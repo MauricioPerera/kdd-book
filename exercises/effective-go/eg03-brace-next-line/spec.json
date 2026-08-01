@@ -1,0 +1,42 @@
+{
+    "id": "eg03_brace_next_line",
+    "node": "eg03",
+    "title": "Mueve la llave de apertura a la misma linea del if",
+    "description": "El archivo proyecto/main.go tiene la llave de apertura { en una linea separada despues del if. Reescribe para poner { en la misma linea que el if, cumpliendo la convencion de gofmt.",
+    "intent": "gofmt exige que la llave de apertura de un bloque (if, for, func) este en la misma linea que el encabezado. Poner la llave en una linea separada produce un estilo C/Java que gofmt rechaza y, en algunos casos, errores de compilacion en Go.",
+    "type": "Task Contract",
+    "target": "proyecto/main.go",
+    "oracle": "oracle_test.py",
+    "seed": "seed.go",
+    "kind": "refactor",
+    "signature": "if 1 == 1 {",
+    "signature_seed": "if 1 == 1",
+    "instrument": {
+        "script": "effective_go_checks.py",
+        "args": ["--rule", "brace-next-line"],
+        "threshold": "cero ocurrencias de if/for/switch seguido de { en linea separada"
+    },
+    "budget": {
+        "cyclomatic_max": 4,
+        "nesting_max": 2,
+        "lines_max": 60,
+        "params_max": 3
+    },
+    "invariants": [
+        "El programa sigue imprimiendo hola: el oraculo pasa igual antes y despues."
+    ],
+    "examples": [
+        "El seed.go pone { en linea separada; la solucion pone { en la misma linea que if.",
+        "La tecnica aplica a if, for y switch, no a llaves de func."
+    ],
+    "do": [
+        "Mover la llave de apertura { de la linea separada a la misma linea que el if."
+    ],
+    "dont": [
+        "Cambiar fmt.Println por otro contenido: el oraculo verifica que el programa imprime el mensaje hola.",
+        "Mover la llave de apertura a una linea separada: el instrumento rojo detecta { en linea separada tras if/for/switch."
+    ],
+    "stop_if": [
+        "el archivo proyecto/main.go no declara package main"
+    ]
+}

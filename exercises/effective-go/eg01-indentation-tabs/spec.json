@@ -1,0 +1,42 @@
+{
+    "id": "eg01_indentation_tabs",
+    "node": "eg01",
+    "title": "Reescribe la sangria de espacios a tabulaciones",
+    "description": "El archivo proyecto/main.go usa espacios (4) para sangrar las instrucciones dentro de func main. Reescribe la sangria para usar tabulaciones, cumpliendo la convencion de gofmt.",
+    "intent": "gofmt impone tabulaciones como el unico caracter de sangria aceptable. Un archivo con espacios compila igual, pero no pasa gofmt y rompe la convencion de formato de la comunidad Go.",
+    "type": "Task Contract",
+    "target": "proyecto/main.go",
+    "oracle": "oracle_test.py",
+    "seed": "seed.go",
+    "kind": "refactor",
+    "signature": "\tfmt.Println(\"hola\")",
+    "signature_seed": "    fmt.Println(\"hola\")",
+    "instrument": {
+        "script": "effective_go_checks.py",
+        "args": ["--rule", "indentation-tabs"],
+        "threshold": "cero lineas de .go con sangria en espacios"
+    },
+    "budget": {
+        "cyclomatic_max": 4,
+        "nesting_max": 2,
+        "lines_max": 60,
+        "params_max": 3
+    },
+    "invariants": [
+        "El programa sigue teniendo package main, func main y fmt.Println: el oraculo pasa igual antes y despues."
+    ],
+    "examples": [
+        "El seed.go usa 4 espacios; la solucion usa tabulaciones.",
+        "La tecnica aplica a toda la sangria del cuerpo, no solo a una linea."
+    ],
+    "do": [
+        "Reemplazar cada secuencia de 4 espacios iniciales por una tabulacion en las lineas del cuerpo de main."
+    ],
+    "dont": [
+        "Reemplazar fmt.Println por otro contenido: el oraculo verifica que el programa imprime el mensaje hola.",
+        "Revertir los tabs a espacios: el instrumento rojo detecta que la sangria no usa tabulaciones."
+    ],
+    "stop_if": [
+        "el archivo proyecto/main.go no declara package main"
+    ]
+}
