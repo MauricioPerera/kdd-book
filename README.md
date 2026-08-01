@@ -16,7 +16,7 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Catorce fuentes, 710 nodos, 151 contratos ejecutables, 155 instrumentos en
+Quince fuentes, 727 nodos, 151 contratos ejecutables, 155 instrumentos en
 diecisiete familias. Los cuatro gates en verde: `validate_okf`,
 `validate_contracts`, `validate_test_commands` y las 304 pruebas propias.
 
@@ -36,7 +36,8 @@ diecisiete familias. Los cuatro gates en verde: `validate_okf`,
 | Effective Go\*\*\*\*\* | 45 | 6,7% | **6,7%** | 3 | 3 |
 | Rust API Guidelines Checklist\*\*\*\* | 54 | 5,6% | **5,6%** | 3 | 3 |
 | The Zen of Python (PEP 20)\*\*\*\*\*\* | 19 | 0,0% | **0,0%** | 0 | 0 |
-| **Total** | **710** | **206** | **189** | **183** | **151** |
+| The Agile Manifesto\*\*\*\*\*\*\* | 17 | 0,0% | **0,0%** | 0 | 0 |
+| **Total** | **727** | **206** | **189** | **183** | **151** |
 
 \* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
 otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
@@ -83,6 +84,17 @@ tuvo que decidir **no** instrumentar nada -incluido rechazar explicitamente
 reusar un instrumento existente (`arch_checks.excepciones`) por generar
 falsos positivos que tergiversarian al autor-. Sin pila A, los gates 2-4 no
 aplican: solo corre `okf_emit`/`validate_okf`. El detalle esta mas abajo.
+
+\*\*\*\*\*\*\* The Agile Manifesto es la segunda fuente sin pila A, y de un
+genero distinto al Zen: 4 valores + 12 principios sobre **proceso de
+equipo**, no diseno de codigo. Quinta fuente construida por Poolside.
+Considero seriamente reusar `git_checks.py --rule cadencia` -que la fuente
+hermana Scrum y XP ya usa para una tecnica parecida- para los principios de
+entrega frecuente, y lo descarto con tres razones documentadas: sin `.git`
+el checkout da NO-VERIFICABLE, la regla mide solo el hueco entre tags (no
+la ventana de tiempo del principio ni "software funcionando"), y es un
+subconjunto parcial de una propiedad que exige juicio de equipo. El detalle
+esta mas abajo.
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -154,8 +166,8 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 226 en pila B (tecnica real sin propiedad medible)
-y 278 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 233 en pila B (tecnica real sin propiedad medible)
+y 288 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
 Hay 206 tecnicas en pila A y 151 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
@@ -452,13 +464,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **330 de las 710**, y el reparto no es casual:
+Lo tienen **337 de las 727**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
 | A (medibles) | **206 de 206** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 121 de 226 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 278 | no aplica: son temas, tecnologias y pasos de tutorial |
+| B (no medibles) | 128 de 233 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 288 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -481,14 +493,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 710 tecnicas, 157 instrumentos
+python memoria.py exportar          # -> memoria.json: 727 tecnicas, 157 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **722 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **735 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -518,7 +530,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 776 entradas -> 710 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 793 entradas -> 727 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -533,8 +545,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 710 + 66 | **710 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 710 + 66 | 776 tecnicas | 0 |
+| ids estables (`g36`) | 727 + 66 | **727 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 727 + 66 | 793 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -824,6 +836,24 @@ Tres decisiones que conviene tener a la vista:
   tergiversar al autor para forzar una instrumentacion que no le corresponde.
   Sin pila A no hay `instruments/zen_checks.py`, no hay ejercicios, y los
   gates 2-4 no aplican a esta fuente: solo corre `okf_emit`/`validate_okf`.
+- **The Agile Manifesto es la segunda fuente sin familia, y por un motivo
+  distinto al Zen.** El Zen es juicio estetico sobre codigo; el Manifiesto
+  Agil es juicio sobre como trabaja un equipo -colaboracion, ritmo,
+  auto-organizacion-, ni siquiera del mismo tipo de artefacto que un
+  instrumento pudiera leer. La decision mas interesante fue negativa otra
+  vez: `git_checks.py --rule cadencia` ya mide algo parecido para Scrum y XP
+  (fuente hermana, mismo tema), y se evaluo reusarla para "entrega temprana y
+  continua" y "entregar software funcionando frecuentemente". Se descarto
+  con tres razones documentadas en el `why_not`: sin `.git` en el checkout la
+  regla da NO-VERIFICABLE, mide solo el hueco entre tags -no si lo entregado
+  es realmente "software funcionando"-, y es un subconjunto parcial de una
+  propiedad que en el fondo pide juicio de equipo. A=0/B=7/C=10, sin
+  instrumento ni ejercicios, gates 2-4 no aplican.
+  Antes de mergear se encontro y corrigio un defecto real: el script
+  esperaba `agile-manifesto.txt` en la raiz del repositorio -el mismo lugar
+  que usa `build_zen_of_python.py`, que declaro seguir como precedente
+  explicito-, pero el archivo habia quedado escrito en `books/`. Se movio a
+  la raiz para que coincidiera con su propio valor por defecto.
 
 ## Los ejercicios
 
