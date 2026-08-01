@@ -16,9 +16,9 @@ extraccion -> build_<libro> -> okf_emit ------> validate_okf              exit 0
 
 ## Que produjo
 
-Once fuentes, 592 nodos, 145 contratos ejecutables, 149 instrumentos en quince
-familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
-`validate_test_commands` y las 276 pruebas propias.
+Doce fuentes, 646 nodos, 148 contratos ejecutables, 152 instrumentos en
+dieciseis familias. Los cuatro gates en verde: `validate_okf`,
+`validate_contracts`, `validate_test_commands` y las 291 pruebas propias.
 
 | Fuente | items | contractable | `instrumented` | con script | ejercicios |
 |---|---|---|---|---|---|
@@ -33,7 +33,8 @@ familias. Los cuatro gates en verde: `validate_okf`, `validate_contracts`,
 | Semantic Versioning 2.0.0 (seleccion curada)\*\*\* | 11 | 27,3% | **27,3%** | 3 | 3 |
 | WCAG 2.2 (W3C) | 104 | 11,5% | **11,5%** | 12 | 10 |
 | htmx ~ Documentation | 59 | 10,2% | **10,2%** | 6 | 6 |
-| **Total** | **592** | **200** | **183** | **177** | **145** |
+| Rust API Guidelines Checklist\*\*\*\* | 54 | 5,6% | **5,6%** | 3 | 3 |
+| **Total** | **646** | **203** | **186** | **180** | **148** |
 
 \* El numero de Tailwind **no es comparable** con el resto de la tabla. Las
 otras ocho son un volcado literal de titulos; Tailwind es una seleccion hecha a
@@ -54,6 +55,14 @@ corta y densa, no documentacion de referencia con paginas de relleno. Es
 ademas la primera fuente construida por un agente externo (Poolside) sin
 supervision de triaje, verificada de punta a punta despues. El detalle esta
 mas abajo.
+
+\*\*\*\* Rust API Guidelines Checklist es el numero mas bajo de la tabla, y es
+el resultado esperado y correcto, no un defecto: de sus 54 items, la mayoria
+pide entender semantica de Rust -si un trait object es object-safe, si un tipo
+es realmente un smart pointer- que ningun instrumento de texto puede verificar
+de verdad sin un compilador. Segunda fuente construida por Poolside, la
+primera sobre un artefacto que no es Python (codigo Rust) y 5 veces mas grande
+que SemVer. El detalle esta mas abajo.
 
 Cinco de las ocho no son libros, y estan para probar hasta donde llega el metodo.
 La documentacion de htmx cae al 10,2% por una razon distinta a la de Scrum —no
@@ -125,10 +134,10 @@ explicacion, tenia que dar altisimo. La prediccion escrita antes de triajar, en
 el script de build, fue que iba a dar **bajo**; si daba mas de 60%, el
 refinamiento estaba mal. Dio **11,5%**, y **13,8%** sobre los criterios solos.
 
-Ademas: 17 tecnicas `proxy`, 207 en pila B (tecnica real sin propiedad medible)
-y 185 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
+Ademas: 17 tecnicas `proxy`, 213 en pila B (tecnica real sin propiedad medible)
+y 230 en pila C (conocimiento). 39 enlaces cruzan de una fuente a otra.
 
-Hay 200 tecnicas en pila A y 145 ejercicios, y la diferencia no es un pendiente:
+Hay 203 tecnicas en pila A y 148 ejercicios, y la diferencia no es un pendiente:
 **la cobertura se cuenta por regla, no por nodo**, porque un instrumento no
 mejora por ejercitarse dos veces. DRY aparece en cinco nodos de tres fuentes y
 las cinco corren `checks.py --rule g5`: un ejercicio las cubre. **Toda regla
@@ -423,13 +432,13 @@ triaje y no del autor. Sin eso la memoria solo responde a las palabras que
 eligio el traductor: `buscar demeter` no encontraba a G36, que en esta edicion
 se llama "Evitar desplazamientos transitivos".
 
-Lo tienen **311 de las 592**, y el reparto no es casual:
+Lo tienen **314 de las 646**, y el reparto no es casual:
 
 | Pila | Con alias | Regla |
 |---|---|---|
-| A (medibles) | **200 de 200** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
-| B (no medibles) | 108 de 207 | se completan las que tienen nombre reconocido |
-| C (conocimiento) | 3 de 185 | no aplica: son temas, tecnologias y pasos de tutorial |
+| A (medibles) | **203 de 203** | exigido por prueba: son las que tienen instrumento y contrato, o sea las que un agente va a buscar |
+| B (no medibles) | 108 de 213 | se completan las que tienen nombre reconocido |
+| C (conocimiento) | 3 de 230 | no aplica: son temas, tecnologias y pasos de tutorial |
 
 Las 77 de pila B que quedan afuera son, en su mayoria, criterios de WCAG cuyo
 titulo **ya es el nombre canonico**: "Captions (Prerecorded)" o "Timing
@@ -452,14 +461,14 @@ consultable. Es lo que otro agente necesita para usar este conocimiento **sin
 tener los libros**.
 
 ```bash
-python memoria.py exportar          # -> memoria.json: 592 tecnicas, 151 instrumentos
+python memoria.py exportar          # -> memoria.json: 646 tecnicas, 154 instrumentos
 python memoria.py buscar DRY        # la misma tecnica en los tres libros
 python memoria.py medibles          # las que tienen instrumento, con su comando
 python memoria.py aplicar codigo.py # que de todo lo que se aplica a este codigo
 python memoria.py fusionar a.json b.json -o c.json
 ```
 
-El bundle son **640 KB**: `memoria.json` + `memoria.py` + `instruments/`.
+El bundle son **675 KB**: `memoria.json` + `memoria.py` + `instruments/`.
 Verificado: copiado a un directorio limpio, sin `books/`, sin `exercises/`, sin
 PDF y sin el repo, `aplicar` corre **53 instrumentos** sobre un archivo
 cualquiera y reporta los que estan en rojo con la tecnica que senala cada uno.
@@ -489,7 +498,7 @@ desacuerdo: para ella G30 ("hacer una sola cosa") **si** es medible.
 
 ```
 $ python memoria.py fusionar memoria.json otra-memoria.json -o fusionada.json
-2 memoria(s), 658 entradas -> 592 tecnicas (66 fusionadas) en fusionada.json
+2 memoria(s), 712 entradas -> 646 tecnicas (66 fusionadas) en fusionada.json
 
 2 conflicto(s) de triaje, sin resolver a proposito:
   codigo-limpio/g30          pila           'B' contra 'A'
@@ -504,8 +513,8 @@ alias, y el instrumento que solo una de las dos memorias tenia.
 
 | | entradas | resultado | conflictos |
 |---|---|---|---|
-| ids estables (`g36`) | 592 + 66 | **592 tecnicas** | **2 reportados** |
-| ids con slug (`g36-evitar-...`) | 592 + 66 | 658 tecnicas | 0 |
+| ids estables (`g36`) | 646 + 66 | **646 tecnicas** | **2 reportados** |
+| ids con slug (`g36-evitar-...`) | 646 + 66 | 712 tecnicas | 0 |
 
 Con slug no se fusiona nada: cada tecnica queda dos veces, una por edicion. Y
 lo peor no es la duplicacion — es que **el desacuerdo de triaje sobre G30 no lo
@@ -581,7 +590,7 @@ tests bastaran, no harian falta los instrumentos.
 
 ## Los instrumentos
 
-149 reglas en quince familias. Que varias tecnicas compartan una no es un atajo:
+152 reglas en dieciseis familias. Que varias tecnicas compartan una no es un atajo:
 es que preguntan lo mismo.
 
 | Familia | Reglas | Mide sobre | Ejemplo |
@@ -600,6 +609,7 @@ es que preguntan lo mismo.
 | `tailwind_checks.py` | 10 | HTML/JSX con clases de Tailwind y CSS con `@theme` | utilidades en conflicto, mobile-first, namespace de color |
 | `stripe_checks.py` | 2 | codigo Python que llama a la API de Stripe | claves embebidas en el codigo, Idempotency-Key en GET/DELETE |
 | `semver_checks.py` | 3 | codigo Python que declara `__version__` | formato X.Y.Z, identificadores de pre-release, de build metadata |
+| `rust_api_checks.py` | 3 | codigo Rust (.rs / Cargo.toml), leido como texto | getters por valor, `#[derive(Debug)]`, `?` en ejemplos rustdoc |
 | `mutation_checks.py` | 1 | mutantes de limite | si la suite nota que un limite se corrio |
 
 Tres decisiones que conviene tener a la vista:
@@ -741,6 +751,26 @@ Tres decisiones que conviene tener a la vista:
   lo notara. Es el mismo tipo de hallazgo que ya aparecio dentro de este
   repositorio (`daemonizar` marcandose a si mismo, el `g4`/`g12` que se
   contradecian): un gate en verde no es lo mismo que un gate completo.
+- **`rust_api_checks` es la primera familia sobre un artefacto que no es
+  Python.** El checklist de Rust API Guidelines trae 54 items en 11
+  categorias, y Poolside -la misma agente que hizo SemVer- lo triajo esta vez
+  sola con la advertencia explicita de no forzar pila A sin propiedad medible
+  de verdad. El resultado es honesto y bajo: A=3 (`C-GETTER`,
+  `C-COMMON-TRAITS`, `C-QUESTION-MARK`), B=6, C=45. Los 51 items que quedaron
+  afuera piden entender semantica de Rust -si un trait object es object-safe,
+  si un tipo es realmente un smart pointer- que ningun regex puede verificar
+  sin un compilador detras, y ese es justo el limite que se le pidio
+  respetar. Lee texto `.rs`/`Cargo.toml` sin ningun parser real, igual que
+  `tailwind_checks` o `html_checks` antes de tener un arbol.
+  El self-audit del repositorio encontro seis defectos reales en el
+  instrumento entregado -un import muerto, un numero magico por indexar un
+  grupo de regex sin nombre (`.group(3)`, corregido a `.group('retorno')`),
+  `__all__` y el docstring de `main` faltantes, una coma final- y se
+  corrigieron antes de aceptarlo, con el mismo criterio que se le aplica a
+  cualquier instrumento propio.
+  A diferencia de la ronda de SemVer, esta vez se le pidio explicitamente
+  reconstruir a mano cada atajo declarado en `dont` antes de reportar exito:
+  los tres quedaron bloqueados por el oraculo sin necesitar correccion.
 
 ## Los ejercicios
 
@@ -877,19 +907,27 @@ prohibe: mover la clave a `client.py` en vez de resolverla en `config.py`, y
 cambiar el GET por un POST en vez de sacar el header. Los dos ponen el oraculo
 en rojo.
 
-Los tres de SemVer son los unicos que un agente distinto escribio de punta a
-punta, y por eso su verificacion fue mas estricta: para cada uno se
-reconstruyo el atajo declarado en `dont` a mano, en vez de confiar en que el
-agente lo habia probado. Dos de los tres —`s09-prerelease`, `s10-build`—
-fallaron esa reconstruccion: el oraculo original solo pedia que `__version__`
-siguiera siendo un string no vacio, y un `1.0.0-alpha.1` reescrito como
-`1.0.0+alpha.1` (build metadata en vez de pre-release) pasaba esa unica
-asercion igual de bien que la solucion real, porque el instrumento tampoco
-objeta nada si el sufijo que mide no esta. Se corrigio agregando una segunda
-asercion —que el string siga conteniendo `-` (pre-release) o `+` (build)
-segun corresponda— y se reconfirmo que el atajo ahora sí pone el oraculo en
-rojo sin tocar la asercion sobre el formato del identificador, que es la
-tecnica que cada ejercicio mide.
+Los tres de SemVer y los tres de Rust API Guidelines son los unicos que un
+agente distinto escribio de punta a punta, y por eso su verificacion fue mas
+estricta: para cada uno se reconstruyo el atajo declarado en `dont` a mano, en
+vez de confiar en que el agente lo habia probado. Dos de los tres de SemVer
+—`s09-prerelease`, `s10-build`— fallaron esa reconstruccion: el oraculo
+original solo pedia que `__version__` siguiera siendo un string no vacio, y un
+`1.0.0-alpha.1` reescrito como `1.0.0+alpha.1` (build metadata en vez de
+pre-release) pasaba esa unica asercion igual de bien que la solucion real,
+porque el instrumento tampoco objeta nada si el sufijo que mide no esta. Se
+corrigio agregando una segunda asercion —que el string siga conteniendo `-`
+(pre-release) o `+` (build) segun corresponda— y se reconfirmo que el atajo
+ahora sí pone el oraculo en rojo sin tocar la asercion sobre el formato del
+identificador, que es la tecnica que cada ejercicio mide.
+
+Los tres de Rust API Guidelines pasaron la misma reconstruccion a mano sin
+necesitar arreglo: borrar el `impl` entero de un getter, sacar `pub` de un
+struct, o borrar el ejemplo rustdoc con `?` dejan el oraculo en rojo —cada uno
+afirma que el artefacto observable (la firma publica, la visibilidad, el
+ejemplo) sigue estando, sin juzgar la convencion que mide el instrumento—
+porque a esta segunda ronda se le pidio explicitamente reconstruir cada atajo
+antes de reportar exito, en vez de despues.
 
 ## El repositorio contra sus propios instrumentos
 
@@ -945,7 +983,7 @@ ya no hace falta.
 | Scrum y XP sin script | 5 | 88 necesita el historial del proveedor de CI, o sea red, que el proyecto prohibe; 118-121 son el mismo `test_command` con etiqueta distinta y envolverlos duplicaria `e2` |
 | J1 | 1 | su consejo es *usar imports con comodin*, que en Python el estilo prohibe. Implementarla invirtiendo el consejo seria tergiversar al autor |
 
-**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 200
+**Ninguna fila es un instrumento que falte ni un ejercicio pendiente.** Las 203
 tecnicas de pila A tienen instrumento, y toda regla que admite la forma de
 ejercicio lo tiene. El resto son limites, no deudas: un artefacto que este
 repositorio no tiene, una forma de contrato que no aplica, una prohibicion del
@@ -959,12 +997,12 @@ tecnica.
 
 ## Lo que evita que esto se pudra
 
-Dieciocho suites, 276 pruebas, y cada suite existe por un error concreto que ya paso.
+Diecinueve suites, 291 pruebas, y cada suite existe por un error concreto que ya paso.
 
 | Suite | Que sostiene |
 |---|---|
-| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` · `test_stripe_checks` · `test_semver_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
-| `test_exercises` | coherencia de los 145 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
+| `test_checks` · `test_repo_checks` · `test_arch_checks` · `test_git_checks` · `test_mutation_checks` · `test_html_checks` · `test_http_checks` · `test_template_checks` · `test_entorno_checks` · `test_a11y_checks` · `test_pep8_checks` · `test_prosa_checks` · `test_tailwind_checks` · `test_stripe_checks` · `test_semver_checks` · `test_rust_api_checks` | cada instrumento contra un caso rojo y uno verde. **Un instrumento que nunca dispara pasa todos los gates y no mide nada** |
+| `test_exercises` | coherencia de los 148 ejercicios: instrumento verde sobre la solucion, rojo sobre el seed, y oraculo acorde al `kind` declarado |
 | `test_memoria` | exportar, consultar y fusionar; comprueba contra el disco que la memoria exporte TODAS las familias y que cada una declare sobre que mide. Las dos existen por el mismo defecto repetido: una lista escrita a mano que queda vieja y deja el bundle incompleto sin que nada falle; incluye el contraste que justifica la identidad estable: con ids con prosa las dos ediciones no se fusionan y el desacuerdo pasa desapercibido |
 | `test_cobertura` | dos invariantes: que ningun id de nodo lleve prosa del titulo, y que toda tecnica con instrumento tenga ejercicio salvo excepciones declaradas con su motivo |
 
